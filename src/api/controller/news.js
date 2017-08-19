@@ -23,9 +23,13 @@ export default class extends Base {
 				    videos[i].creator_name = user[0].name;
 				    videos[i].creator_photo = user[0].photo_url;
 				}
+				videos[i].create_time = think.datetime(new Date(videos[i].create_time * 1000));
 			}
-			if (video.length > 0) {
-				news[itemKey].updateDescrip = videos[0].creator_name + '于' + videos[0].create_time + '更新了进展';
+			if (videos.length > 1) {
+				news[itemKey].updateDescrip = videos[0].creator_name + '于' + think.datetime(new Date(videos[0].create_time * 1000)) + '更新了进展';
+			}
+			else if (videos.length > 0) {
+				news[itemKey].updateDescrip = videos[0].creator_name + '于' + think.datetime(new Date(videos[0].create_time * 1000)) + '最先发布';
 			}
 			news[itemKey].video_list = videos;
 
@@ -36,7 +40,7 @@ export default class extends Base {
 			    news[itemKey].creatorDescrip = creatorList[0].name + '等' + creatorList.length + '人共同拍摄';
 			}
 			else {
-				news[itemKey].creatorDescrip = creatorList[0].name;
+				news[itemKey].creatorDescrip = '';
 			}
 			
 			news[itemKey].showVideo = false;
