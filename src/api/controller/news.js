@@ -24,6 +24,7 @@ export default class extends Base {
 				}
 			}
 			news[itemKey].video_list = videos;
+			news[itemKey].showVideo = false;
 			itemKey += 1;
 		}
 	}

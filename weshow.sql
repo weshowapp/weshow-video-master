@@ -40,7 +40,7 @@ CREATE TABLE `weshow_user` (
 -- Dumping data for table `weshow_user`
 --
 
-LOCK TABLES `weshow_user` WRITE;s
+LOCK TABLES `weshow_user` WRITE;
 /*!40000 ALTER TABLE `weshow_user` DISABLE KEYS */;
 INSERT INTO `weshow_user` 
 VALUES (1,1,'wx-1','Zhan1','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
@@ -63,8 +63,8 @@ CREATE TABLE `weshow_video` (
   `news_id` int(16) NOT NULL DEFAULT '1',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `upload_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `longitude` decimal(4,9) NOT NULL DEFAULT '0.00',
-  `latitude` decimal(4,9) NOT NULL DEFAULT '0.00',
+  `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
+  `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   `poster_url` varchar(255) NOT NULL DEFAULT '',
   `video_url` varchar(255) NOT NULL DEFAULT '',
   `like` int(4) NOT NULL DEFAULT '1',
@@ -104,8 +104,8 @@ CREATE TABLE `weshow_news` (
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `longitude` decimal(4,9) NOT NULL DEFAULT '0.00',
-  `latitude` decimal(4,9) NOT NULL DEFAULT '0.00',
+  `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
+  `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   `location` varchar(90) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
