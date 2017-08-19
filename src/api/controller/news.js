@@ -10,14 +10,26 @@ export default class extends Base {
    */
   async indexAction(){
 
-    let news = await this.model('news').limit(30).select();
-    let videos = await this.model('video').where({id: 1}).select();
-    let users = await this.model('user').where({id: 1}).select();
+    let newsQuery = this.model('news');
+    let news = await newsQuery.limit(30).select();
+	if (!think.isEmpty(news)) {
+	    let itemKey = 0;
+		for (let newsItem of news) {
+			let videos = await this.model('video').where({news_id: newsItem.id}).select();
+			for (let i = 0; i < videos.length; i++) {
+				let user = await this.model('user').where({id: videos[i].creator}).select();
+				if (!think.isEmpty(user)) {
+				    videos[i].creator_name = user[0].name;
+				    videos[i].creator_photo = user[0].photo_url;
+				}
+			}
+			news[itemKey].video_list = videos;
+			itemKey += 1;
+		}
+	}
 
     return this.success({
-        newsList: news,
-        videoList: videos,
-        userList: users
+        newsList: news
     });
     // return this.success(jsonData);
   }
