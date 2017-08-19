@@ -94,7 +94,7 @@ CREATE TABLE `weshow_news` (
   `update_time` int(11) unsigned NOT NULL DEFAULT '0',
   `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
