@@ -67,7 +67,9 @@ CREATE TABLE `weshow_video` (
   `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   `poster_url` varchar(255) NOT NULL DEFAULT '',
   `video_url` varchar(255) NOT NULL DEFAULT '',
-  `like` int(4) NOT NULL DEFAULT '1',
+  `comment` int(8) NOT NULL DEFAULT '1',
+  `like` int(11) NOT NULL DEFAULT '1',
+  `watch` int(16) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -87,7 +89,13 @@ VALUES (1,1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,150,20
 	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/5fc4184b9031868223117727478/vhpGtwf3HuUA.mp4',14),
    (3,3,'降雨致北京171处景区关闭13处积水断路',3,150,200,39.9181,116.3012,
        'http://ww2.sinaimg.cn/bmiddle/7f5092a4gw1f669izfr79j20hs091q39.jpg',
-	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/601f1f4b9031868223117778481/WMckAN7SaOQA.mp4',80);
+	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/601f1f4b9031868223117778481/WMckAN7SaOQA.mp4',80),
+   (4,3,'降雨致北京171处景区关闭13处积水断路',3,150,200,39.9181,116.3012,
+       'http://ww2.sinaimg.cn/bmiddle/7f5092a4gw1f669izfr79j20hs091q39.jpg',
+	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/601f2fd09031868223117778846/iM5SKRbaPsgA.mp4',67),
+   (5,1,'Snapchat AI视频拼接',2,150,200,39.9181,116.3012,
+       'http://img.mp.itc.cn/upload/20170816/92d8d9fb67b24fe2853c31a75afa98ce_th.jpg',
+	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/5fc4184b9031868223117727478/vhpGtwf3HuUA.mp4',18);
 /*!40000 ALTER TABLE `weshow_video` ENABLE KEYS */;
 UNLOCK TABLES;
 

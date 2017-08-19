@@ -15,7 +15,7 @@ export default class extends Base {
 	if (!think.isEmpty(news)) {
 	    let itemKey = 0;
 		for (let newsItem of news) {
-			let videos = await this.model('video').where({news_id: newsItem.id}).select();
+			let videos = await this.model('video').where({news_id: newsItem.id}).order({'create_time': 'asc'}).select();
 			for (let i = 0; i < videos.length; i++) {
 				let user = await this.model('user').where({id: videos[i].creator}).select();
 				if (!think.isEmpty(user)) {
@@ -25,6 +25,7 @@ export default class extends Base {
 			}
 			news[itemKey].video_list = videos;
 			news[itemKey].showVideo = false;
+			news[itemKey].curIndex = 0;
 			itemKey += 1;
 		}
 	}
