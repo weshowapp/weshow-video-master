@@ -45,7 +45,8 @@ LOCK TABLES `weshow_user` WRITE;
 INSERT INTO `weshow_user` 
 VALUES (1,1,'wx-1','Zhan1','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
   (2,1,'wx-2','Zhan2','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
-  (3,1,'wx-3','Zhan3','http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',0,1);
+  (3,1,'wx-3','Zhan3','http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',0,1),
+  (4,1,'wx-4','Zhan4','http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',0,1);
 /*!40000 ALTER TABLE `weshow_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +91,7 @@ VALUES (1,1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,150,20
    (3,3,'降雨致北京171处景区关闭13处积水断路',3,150,200,39.9181,116.3012,
        'http://ww2.sinaimg.cn/bmiddle/7f5092a4gw1f669izfr79j20hs091q39.jpg',
 	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/601f1f4b9031868223117778481/WMckAN7SaOQA.mp4',80,10,7),
-   (4,3,'降雨致北京171处景区关闭13处积水断路',3,150,200,39.9181,116.3012,
+   (4,3,'降雨致北京171处景区关闭13处积水断路',1,150,200,39.9181,116.3012,
        'http://ww2.sinaimg.cn/bmiddle/7f5092a4gw1f669izfr79j20hs091q39.jpg',
 	   'http://1254157576.vod2.myqcloud.com/7414dc4avodgzp1254157576/601f2fd09031868223117778846/iM5SKRbaPsgA.mp4',67,44,9),
    (5,4,'Snapchat AI视频拼接',4,150,200,39.9181,116.3012,
