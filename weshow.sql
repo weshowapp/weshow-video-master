@@ -61,8 +61,8 @@ CREATE TABLE `weshow_video` (
   `title` varchar(90) NOT NULL DEFAULT '',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `upload_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `longitude` decimal(4,9) NOT NULL DEFAULT '0.00',
-  `latitude` decimal(4,9) NOT NULL DEFAULT '0.00',
+  `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
+  `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   `desc` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -92,8 +92,8 @@ CREATE TABLE `weshow_news` (
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `longitude` decimal(4,9) NOT NULL DEFAULT '0.00',
-  `latitude` decimal(4,9) NOT NULL DEFAULT '0.00',
+  `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
+  `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
