@@ -42,9 +42,9 @@ CREATE TABLE `weshow_user` (
 
 LOCK TABLES `weshow_user` WRITE;
 /*!40000 ALTER TABLE `weshow_user` DISABLE KEYS */;
-INSERT INTO `weshow_user` VALUES (1,'wx-1','Zhan','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
-  (1,'wx-2','Zhan1','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
-  (1,'wx-3','Zhan2','http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',0,1);
+INSERT INTO `weshow_user` VALUES (1, 1,'wx-1','Zhan','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
+  (2, 1,'wx-2','Zhan1','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',0,1),
+  (3, 1,'wx-3','Zhan2','http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',0,1);
 /*!40000 ALTER TABLE `weshow_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,8 +74,8 @@ CREATE TABLE `weshow_video` (
 
 LOCK TABLES `weshow_video` WRITE;
 /*!40000 ALTER TABLE `weshow_video` DISABLE KEYS */;
-INSERT INTO `weshow_video` VALUES ('Zhan','西二旗大街路面塌陷，轿车陷大坑四轮朝天',150,200,39.9181,116.3012,''),
-  ('Zhan1','八达岭长城关闭游览致高速拥堵数公里',150,200,39.9181,116.3012,'');
+INSERT INTO `weshow_video` VALUES (1, 'Zhan','西二旗大街路面塌陷，轿车陷大坑四轮朝天',150,200,39.9181,116.3012,''),
+  (2, 'Zhan1','八达岭长城关闭游览致高速拥堵数公里',150,200,39.9181,116.3012,'');
 /*!40000 ALTER TABLE `weshow_video` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,8 +104,8 @@ CREATE TABLE `weshow_news` (
 
 LOCK TABLES `weshow_news` WRITE;
 /*!40000 ALTER TABLE `weshow_news` DISABLE KEYS */;
-INSERT INTO `weshow_news` VALUES ('西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,100,300,39.9181,116.3012),
-  ('八达岭长城关闭游览致高速拥堵数公里',1,100,300,39.9181,116.3012);
+INSERT INTO `weshow_news` VALUES (1, '西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,100,300,39.9181,116.3012),
+  (2, '八达岭长城关闭游览致高速拥堵数公里',1,100,300,39.9181,116.3012);
 /*!40000 ALTER TABLE `weshow_news` ENABLE KEYS */;
 UNLOCK TABLES;
 
