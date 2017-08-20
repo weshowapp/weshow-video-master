@@ -40,10 +40,10 @@ export default class extends think.controller.base {
     if (curTime - time < 3600) {
       out = (curTime - time) / 60 + '分钟前';
     }
-    else if (curTime - time < 3600 × 24) {
+    else if (curTime - time < 3600 * 24) {
       out = (curTime - time) / 3600 + '小时前';
     }
-    else if (curTime - time < 3600 × 24 × 7) {
+    else if (curTime - time < 3600 * 24 * 7) {
       out = (curTime - time) / 3600 / 24 + '天前';
     }
     else if (cur.getYear() == date.getYear()) {
