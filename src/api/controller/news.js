@@ -11,11 +11,11 @@ export default class extends Base {
   async indexAction(){
 
     let newsQuery = this.model('news');
-    let news = await newsQuery.order({'create_time': 'asc'}).limit(30).select();
+    let news = await newsQuery.order({'create_time': 'desc'}).limit(30).select();
 	if (!think.isEmpty(news)) {
 	    let itemKey = 0;
 		for (let newsItem of news) {
-			//let videos1 = await this.model('video').join('user ON video.creator=user.id').where({news_id: newsItem.id}).order({'create_time': 'asc'}).select();
+			/*//let videos1 = await this.model('video').join('user ON video.creator=user.id').where({news_id: newsItem.id}).order({'create_time': 'asc'}).select();
 			let videos = await this.model('video').where({news_id: newsItem.id}).order({'create_time': 'asc'}).select();
 			for (let i = 0; i < videos.length; i++) {
 				let user = await this.model('user').where({id: videos[i].creator}).select();
@@ -45,7 +45,8 @@ export default class extends Base {
 			}
 			
 			news[itemKey].showVideo = false;
-			news[itemKey].curIndex = 0;
+			news[itemKey].curIndex = 0;*/
+			news[itemKey] = await newsQuery.getNewsDetail(news[itemKey]);
 			itemKey += 1;
 		}
 	}

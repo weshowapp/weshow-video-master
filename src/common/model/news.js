@@ -49,7 +49,7 @@ export default class extends think.model.base {
    * @returns {Promise.<*>}
    */
   async getNewsDetail(news){
-    let videos = await this.model('video').where({news_id: news.id}).order({'create_time': 'asc'}).select();
+    let videos = await this.model('video').where({news_id: news.id}).select();
 	for (let i = 0; i < videos.length; i++) {
 		let user = await this.model('user').where({id: videos[i].creator}).select();
 		if (!think.isEmpty(user)) {
@@ -59,6 +59,13 @@ export default class extends think.model.base {
 		//videos[i].create_time = think.datetime(new Date(videos[i].create_time * 1000));
 		videos[i].create_time = this.formatDateTime(videos[i].create_time);
 		let comments = await this.model('comment').where({video_id: videos[i].id}).select();
+		for (let j = 0; j < comments.length; j++) {
+		  let user1 = await this.model('user').where({id: comments[j].creator}).select();
+		  if (!think.isEmpty(user1)) {
+		    comments[j].creator_name = user1[0].name;
+		    comments[j].creator_photo = user1[0].photo_url;
+		  }
+		}
 		videos[i].comments = comments;
 		videos[i].comment = comments.length;
 	}
