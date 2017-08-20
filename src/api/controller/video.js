@@ -2,6 +2,9 @@
 
 import Base from './base.js';
 
+var fs = require('fs');
+var path = require('path');
+
 export default class extends Base {
   /**
    * index action
@@ -25,7 +28,7 @@ export default class extends Base {
 	console.log(filepath);
 
     //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
-    var uploadPath = think.RESOURCE_PATH + '/upload';
+    var uploadPath = think.RESOURCE_PATH + '/static';
     think.mkdir(uploadPath);
     var basename = path.basename(filepath);
     fs.renameSync(filepath, uploadPath + '/' + basename);
