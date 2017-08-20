@@ -70,7 +70,7 @@ export default class extends Base {
 	}
 	//console.log(user);
 	
-	let news = await this.model('news').where({latitude: latitude, longitude: longitude}).find();
+	let news = await this.model('news').where({latitude: {'between': latitude-0.003, 'and': latitude+0.003}, longitude: {'between': longitude-0.003, 'and': longitude+0.003}).find();
 	if (think.isEmpty(news)) {
 	    let newsResult = await this.model('news').add({
             title: title,
@@ -80,7 +80,7 @@ export default class extends Base {
             location: address
         });
 	    console.log(newsResult);
-		news = await this.model('news').where({latitude: latitude, longitude: longitude}).find();
+		news = await this.model('news').where({{latitude: {'between': latitude-0.003, 'and': latitude+0.003}, longitude: {'between': longitude-0.003, 'and': longitude+0.003}).find();
 	}
 	//console.log(news);
 	
