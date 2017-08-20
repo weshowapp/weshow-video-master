@@ -30,18 +30,18 @@ export default class extends Base {
 				news[itemKey].updateDescrip = videos[0].creator_name + '于' + this.formatDateTime(videos[0].create_time) + '更新了进展';
 			}
 			else if (videos.length > 0) {
-				news[itemKey].updateDescrip = videos[0].creator_name + '于' + this.formatDateTime(videos[i].create_time) + '最先发布';
+				news[itemKey].updateDescrip = videos[0].creator_name + '于' + this.formatDateTime(videos[0].create_time) + '最先发布';
 			}
 			news[itemKey].video_list = videos;
 
 			let users = await this.model('video').where({news_id: newsItem.id}).getField('creator', 10);
-			let creatorList = await this.model('user').where({'id': {'in': users}}).select();
-			news[itemKey].creator_list = creatorList;
-			if (creatorList.length > 1) {
-			    news[itemKey].creatorDescrip = creatorList[0].name + '等' + creatorList.length + '人共同拍摄';
-			}
-			else {
-				news[itemKey].creatorDescrip = '';
+			news[itemKey].creatorDescrip = '';
+			if (!think.isEmpty(users)) {
+				let creatorList = await this.model('user').where({'id': {'in': users}}).select();
+				news[itemKey].creator_list = creatorList;
+				if (creatorList.length > 1) {
+					news[itemKey].creatorDescrip = creatorList[0].name + '等' + creatorList.length + '人共同拍摄';
+				}
 			}
 			
 			news[itemKey].showVideo = false;
