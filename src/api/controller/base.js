@@ -47,10 +47,10 @@ export default class extends think.controller.base {
       out = (cur.getDay() - date.getDay()) + '天前';
     }
     else if (cur.getYear() == date.getYear()) {
-      out = date.getMonth() + '月' + date.getDay() + '日';
+      out = date.getMonth() + '月' + (date.getDay()+1) + '日';
     }
     else {
-      out = date.getYear() + '/' + date.getMonth() + '/' + date.getDay();
+      out = date.getFullYear() + '/' + date.getMonth() + '/' + (date.getDay()+1);
     }
     return out;
   }
