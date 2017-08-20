@@ -69,8 +69,11 @@ export default class extends Base {
 		user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
 	}
 	//console.log(user);
-	
-	let news = await this.model('news').where({latitude: {'between': latitude-0.003, 'and': latitude+0.003}, longitude: {'between': longitude-0.003, 'and': longitude+0.003}).find();
+	var latBegin = latitude-0.003;
+	var latEnd = latitude+0.003;
+	var longBegin = longitude-0.003;
+	var longEnd = longitude+0.003;
+	let news = await this.model('news').where({latitude: {'between': latBegin, 'and': latEnd}, longitude: {'between': longBegin, 'and': longEnd}).find();
 	if (think.isEmpty(news)) {
 	    let newsResult = await this.model('news').add({
             title: title,
@@ -80,7 +83,7 @@ export default class extends Base {
             location: address
         });
 	    console.log(newsResult);
-		news = await this.model('news').where({{latitude: {'between': latitude-0.003, 'and': latitude+0.003}, longitude: {'between': longitude-0.003, 'and': longitude+0.003}).find();
+		news = await this.model('news').where({{latitude: {'between': latBegin, 'and': latEnd}, longitude: {'between': longBegin, 'and': longEnd}).find();
 	}
 	//console.log(news);
 	
