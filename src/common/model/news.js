@@ -65,6 +65,7 @@ export default class extends think.model.base {
 		    comments[j].creator_name = user1[0].name;
 		    comments[j].creator_photo = user1[0].photo_url;
 		  }
+		  comments[j].create_time = this.formatDateTime(comments[j].create_time);
 		}
 		videos[i].comments = comments;
 		videos[i].comment = comments.length;
