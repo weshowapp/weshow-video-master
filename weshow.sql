@@ -101,7 +101,7 @@ VALUES (1,1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,150318
        'https://wx2.sinaimg.cn/mw690/005FHEwGly1finjtkybjsj30qo0zijvd.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135553-10774036-hd.mp4',18,71,6),
    (6,6,'暴雨突袭甘肃会宁，山洪泥沙涌进城',2,1501481237,1501381237,39.9181,116.3012,
-       'https://wx4.sinaimg.cn/mw690/005FHEwGly1finjtj1iexj314a0qogre.jpg',
+       'https://dslb.cdn.krcom.cn/stream/lEZprg--N1Z~rhg9xlrHnmM0EJLaiqzSCzkX8g___32768.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135841-10775645-hd.mp4',18,71,6),
    (7,7,'Snapchat AI视频拼接',4,1501481237,1501381237,39.9181,116.3012,
        'https://dslb.cdn.krcom.cn/stream/u00yUKy1clwsQZpLvX-7ULWeC~zj3doPC2a2lw___32768.jpg',
@@ -109,7 +109,7 @@ VALUES (1,1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,150318
    (8,4,'Snapchat AI视频拼接',5,1501481237,1501381237,39.9181,116.3012,
        'https://dslb.cdn.krcom.cn/stream/zpUlK5EVJiDJIIrS1kfdgfIVaa4mkEuSjE6sZQ___32768.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135553-10774036-hd.mp4',18,71,6),
-   (8,6,'Snapchat AI视频拼接',6,1461481237,1501381237,39.9181,116.3012,
+   (9,6,'Snapchat AI视频拼接',6,1461481237,1501381237,39.9181,116.3012,
        'http://img.mp.itc.cn/upload/20170816/92d8d9fb67b24fe2853c31a75afa98ce_th.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135553-10774036-hd.mp4',18,71,6);
 /*!40000 ALTER TABLE `weshow_video` ENABLE KEYS */;
