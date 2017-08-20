@@ -38,19 +38,19 @@ export default class extends think.controller.base {
     let curTime = cur.getTime() / 1000;
 
     if (curTime - time < 3600) {
-      out = (curTime - time) / 60 + '分钟前';
+      out = Math.round((curTime - time) / 60) + '分钟前';
     }
     else if (curTime - time < 3600 * 24) {
-      out = (curTime - time) / 3600 + '小时前';
+      out = Math.round((curTime - time) / 3600) + '小时前';
     }
     else if (curTime - time < 3600 * 24 * 7) {
-      out = (curTime - time) / 3600 / 24 + '天前';
+      out = (cur.getDay() - date.getDay()) + '天前';
     }
     else if (cur.getYear() == date.getYear()) {
       out = date.getMonth() + '月' + date.getDay() + '日';
     }
     else {
-      out = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDay() + '日';
+      out = date.getYear() + '/' + date.getMonth() + '/' + date.getDay();
     }
     return out;
   }

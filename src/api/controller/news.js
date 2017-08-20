@@ -27,10 +27,10 @@ export default class extends Base {
 				videos[i].create_time = this.formatDateTime(videos[i].create_time);
 			}
 			if (videos.length > 1) {
-				news[itemKey].updateDescrip = videos[0].creator_name + '于' + this.formatDateTime(videos[0].create_time) + '更新了进展';
+				news[itemKey].updateDescrip = videos[0].creator_name + '于' + (videos[videos.length - 1].create_time) + '更新了进展';
 			}
 			else if (videos.length > 0) {
-				news[itemKey].updateDescrip = videos[0].creator_name + '于' + this.formatDateTime(videos[0].create_time) + '最先发布';
+				news[itemKey].updateDescrip = videos[0].creator_name + '于' + (videos[0].create_time) + '最先发布';
 			}
 			news[itemKey].video_list = videos;
 
