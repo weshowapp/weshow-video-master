@@ -54,6 +54,7 @@ export default class extends Base {
 	console.log(file.path);
 	
 	var fileUrl = "http://47.93.241.248/static/" + basename;
+	console.log(fileUrl);
 	
 	let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
 	if (think.isEmpty(user)) {
@@ -67,6 +68,7 @@ export default class extends Base {
 	    console.log(userResult);
 		user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
 	}
+	console.log(user);
 	
 	let news = await this.model('news').where({latitude: latitude, longitude: longitude}).find();
 	if (think.isEmpty(news)) {
@@ -80,15 +82,16 @@ export default class extends Base {
 	    console.log(newsResult);
 		news = await this.model('news').where({latitude: latitude, longitude: longitude}).find();
 	}
+	console.log(news);
 	
 	let videoResult = await this.model('user').add({
-        creator: user[0].id,
+        creator: user.id,
 		title: title,
-        news_id: news[0].id,
+        news_id: news.id,
         create_time: create_time,
         longitude: longitude,
         latitude: latitude,
-		poster_url: '',
+		poster_url: 'https://tva3.sinaimg.cn/crop.0.0.1125.1125.180/cc981db8jw8f1oifzwvxqj20v90v941q.jpg',
         video_url: fileUrl
     });
 	console.log(videoResult);
