@@ -54,7 +54,8 @@ export default class extends Base {
         newsList: news
     });
     // return this.success(jsonData);
-	
+  }
+  
   /**
    * 获取News Detail
    * @returns {Promise.<Promise|void|PreventPromise>}
@@ -65,7 +66,7 @@ export default class extends Base {
     let newsQuery = this.model('news');
     let news = await newsQuery.where({id: newsId}).select();
 	if (!think.isEmpty(news)) {
-		news = await model.getNewsDetail(news);
+		news = await newsQuery.getNewsDetail(news[0]);
 	    /*let videos = await this.model('video').where({news_id: news.id}).order({'create_time': 'asc'}).select();
 		for (let i = 0; i < videos.length; i++) {
 			let user = await this.model('user').where({id: videos[i].creator}).select();
