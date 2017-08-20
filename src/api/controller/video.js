@@ -33,7 +33,7 @@ export default class extends Base {
 	console.log(create_time);
 	
     var filepath = file.path;
-	console.log(file);
+	//console.log(file);
 	console.log(filepath);
 
     //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
@@ -68,7 +68,7 @@ export default class extends Base {
 	    console.log(userResult);
 		user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
 	}
-	console.log(user);
+	//console.log(user);
 	
 	let news = await this.model('news').where({latitude: latitude, longitude: longitude}).find();
 	if (think.isEmpty(news)) {
@@ -82,16 +82,17 @@ export default class extends Base {
 	    console.log(newsResult);
 		news = await this.model('news').where({latitude: latitude, longitude: longitude}).find();
 	}
-	console.log(news);
+	//console.log(news);
 	
-	let videoResult = await this.model('user').add({
+	let videoResult = await this.model('video').add({
         creator: user.id,
-		title: title,
+        title: title,
         news_id: news.id,
         create_time: create_time,
+		upload_time: parseInt(new Date().getTime() / 1000),
         longitude: longitude,
         latitude: latitude,
-		poster_url: 'https://tva3.sinaimg.cn/crop.0.0.1125.1125.180/cc981db8jw8f1oifzwvxqj20v90v941q.jpg',
+		poster_url: 'https://dslb.cdn.krcom.cn/stream/zpUlK5EVJiDJIIrS1kfdgfIVaa4mkEuSjE6sZQ___32768.jpg',
         video_url: fileUrl
     });
 	console.log(videoResult);
