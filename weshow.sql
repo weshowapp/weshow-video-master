@@ -71,8 +71,8 @@ CREATE TABLE `weshow_video` (
   `latitude` decimal(11,8) NOT NULL DEFAULT '0.00',
   `poster_url` varchar(255) NOT NULL DEFAULT '',
   `video_url` varchar(255) NOT NULL DEFAULT '',
-  `comment` int(8) NOT NULL DEFAULT '1',
-  `like` int(11) NOT NULL DEFAULT '1',
+  `comment` int(8) NOT NULL DEFAULT '0',
+  `like` int(11) NOT NULL DEFAULT '0',
   `watch` int(16) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -148,6 +148,44 @@ VALUES (1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,15031814
   (4,'房山大雨，路面积水',1,1501481237,1502381237,39.9181,116.3012,'房山良乡'),
   (5,'海淀田村整治散污乱',1,1481481237,1482381237,39.9181,116.3012,'田村'),
   (6,'林志炫0819北京演唱会',1,1401481237,1442381237,39.9181,116.3012,'五棵松');
+/*!40000 ALTER TABLE `weshow_news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `weshow_comment`
+--
+
+DROP TABLE IF EXISTS `weshow_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_comment` (
+  `id` int(18) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `creator` int(11) NOT NULL DEFAULT '1',
+  `video_id` int(16) NOT NULL DEFAULT '1',
+  `content` varchar(255) NOT NULL DEFAULT '',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `like` int(11) NOT NULL DEFAULT '0',
+  `unlike` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_comment`
+--
+
+LOCK TABLES `weshow_comment` WRITE;
+/*!40000 ALTER TABLE `weshow_comment` DISABLE KEYS */;
+INSERT INTO `weshow_comment` 
+VALUES (1,1,1,1,'突然塌陷了？还是大车压塌的？',1503181437,0,0),
+  (2,1,1,1,'人没事吧？车里几个人啊，坑里是啥？',1503182437,0,0),
+  (3,1,1,1,'刚刚路过，我说怎么堵了，以为是铺路呢，好危险啊',1503183437,0,0),
+  (4,1,1,1,'用啥方式把车弄出来啊？会不会周边继续塌啊？',1503184437,0,0),
+  (5,2,1,1,'语音评论',1503185437,0,0),
+  (6,1,1,1,'天塌啦地陷啦小花狗不见啦',1503186437,0,0),
+  (6,1,1,1,'驾驶员体重超标引起的吧？',1503186437,0,0),
+  (6,1,1,1,'这条路我早觉得要出问题',1503186437,0,0);
 /*!40000 ALTER TABLE `weshow_news` ENABLE KEYS */;
 UNLOCK TABLES;
 
