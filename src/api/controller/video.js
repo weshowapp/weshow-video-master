@@ -95,7 +95,7 @@ export default class extends Base {
 		upload_time: parseInt(new Date().getTime() / 1000),
         longitude: longitude,
         latitude: latitude,
-		poster_url: 'https://dslb.cdn.krcom.cn/stream/zpUlK5EVJiDJIIrS1kfdgfIVaa4mkEuSjE6sZQ___32768.jpg',
+		poster_url: 'http://hhvr3whp728i1txm4kv.exp.bcevod.com/mda-hhwx69cpbh8sqxn1/mda-hhwx69cpbh8sqxn1.jpg',
         video_url: fileUrl
     });
 	console.log(videoResult);
