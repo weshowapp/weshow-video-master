@@ -75,7 +75,7 @@ export default class extends think.model.base {
 		videos[i].comment = comments.length;
 	}
 	if (videos.length > 1) {
-		news.updateDescrip = videos[0].creator_name + '于' + (videos[videos.length - 1].create_time) + '更新了进展';
+		news.updateDescrip = videos[videos.length - 1].creator_name + '于' + (videos[videos.length - 1].create_time) + '更新了进展';
 	}
 	else if (videos.length > 0) {
 		news.updateDescrip = videos[0].creator_name + '于' + (videos[0].create_time) + '最先发布';

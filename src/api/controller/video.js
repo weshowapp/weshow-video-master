@@ -83,7 +83,7 @@ export default class extends Base {
             location: address
         });
 	    console.log(newsResult);
-		news = await this.model('news').where({{latitude: ['between',latBegin,latEnd], longitude: ['between',longBegin,longEnd]}).find();
+		news = await this.model('news').where({latitude: ['between',latBegin,latEnd], longitude: ['between',longBegin,longEnd]}).find();
 	}
 	//console.log(news);
 	
