@@ -60,7 +60,7 @@ export default class extends Base {
       });
 	}
 	
-	let addResult = await this.model('video').add({
+	let addResult = await this.model('comment').add({
       creator: user.id,
       video_id: video.id,
       content: content,
@@ -68,6 +68,9 @@ export default class extends Base {
     });
 	console.log(addResult);
 
-    this.display();
+    return this.success({
+      result: 'OK',
+	  errorCode: 0
+    });
   }
 }
