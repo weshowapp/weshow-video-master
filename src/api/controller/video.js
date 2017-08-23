@@ -79,7 +79,7 @@ export default class extends Base {
 	var longBegin = longitude-0.003;
 	var longEnd = longitude-1+1.003;
 	var startTime = create_time-7200;
-	var endTime = create_time+14400;
+	var endTime = create_time-3600+14400;
 	console.log(endTime);
 	let news = await this.model('news').where({latitude: ['between',latBegin,latEnd],
 	                                           longitude: ['between',longBegin,longEnd],
