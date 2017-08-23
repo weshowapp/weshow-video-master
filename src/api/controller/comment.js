@@ -27,6 +27,7 @@ export default class extends Base {
     let type = this.post('type');
     let content_url = this.post('content_url');
     let video_id = this.post('video_id');
+    let create_time = this.post('create_time');
     let creator_id = this.post('creator_id');
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
