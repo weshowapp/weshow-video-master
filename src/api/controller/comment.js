@@ -22,7 +22,7 @@ export default class extends Base {
    * @return {Promise} []
    */
   async addAction() {
-	console.log('addAction');
+	//console.log('addAction');
 	let content = this.post('content');
     let type = this.post('type');
     let content_url = this.post('content_url');
@@ -32,8 +32,8 @@ export default class extends Base {
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
-	console.log(creator_id);
-	console.log(content);
+	//console.log(creator_id);
+	//console.log(content);
 
     //let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
     let user = await this.model('user').where({openid: creator_id}).find();
@@ -49,7 +49,7 @@ export default class extends Base {
       console.log(userResult);
       user = await this.model('user').where({openid: creator_id}).find();
 	}
-    console.log(user);
+    //console.log(user);
 	
 	let video = await this.model('video').where({id: video_id}).find();
 	if (think.isEmpty(video)) {

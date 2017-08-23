@@ -78,8 +78,8 @@ export default class extends Base {
 	var latEnd = latitude-1+1.003;
 	var longBegin = longitude-0.003;
 	var longEnd = longitude-1+1.003;
-	var startTime = create_time-43200;
-	var endTime = create_time+43200;
+	//var startTime = create_time-43200;
+	//var endTime = create_time+43200;
 	let news = await this.model('news').where({latitude: ['between',latBegin,latEnd],
 	                                           longitude: ['between',longBegin,longEnd],
 	                                           start_time: ['<=',create_time],
@@ -88,8 +88,8 @@ export default class extends Base {
 	    let newsResult = await this.model('news').add({
             title: title,
             create_time: create_time,
-            start_time: create_time-3600,
-            end_time: create_time+86400,
+            start_time: (create_time-3600),
+            end_time: (create_time+7200),
             longitude: longitude,
             latitude: latitude,
             location: address
@@ -99,8 +99,14 @@ export default class extends Base {
 	                                           longitude: ['between',longBegin,longEnd],
 	                                           start_time: ['<=',create_time],
 	                                           end_time: ['>=',create_time]}).find();
+		if (think.isEmpty(news)) {
+			return this.success({
+                result: 'fail',
+	            errorCode: 1002
+            });
+		}
 	}
-	//console.log(news);
+	console.log(news);
 	
 	let videoResult = await this.model('video').add({
         creator: user.id,
@@ -115,6 +121,10 @@ export default class extends Base {
     });
 	console.log(videoResult);
 
-    this.display();
+    //this.display();
+	return this.success({
+      result: 'OK',
+	  errorCode: 0
+    });
   }
 }
