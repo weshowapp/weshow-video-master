@@ -32,8 +32,8 @@ export default class extends Base {
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
-	console.log(create_id);
-	console.log(create_account);
+	console.log(creator_id);
+	console.log(creator_account);
 	
     var filepath = file.path;
 	//console.log(file);

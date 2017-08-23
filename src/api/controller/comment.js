@@ -30,7 +30,7 @@ export default class extends Base {
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
-	console.log(create_id);
+	console.log(creator_id);
 
     //let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
     let user = await this.model('user').where({openid: creator_id}).find();
