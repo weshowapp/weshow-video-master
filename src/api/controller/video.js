@@ -27,10 +27,13 @@ export default class extends Base {
     let longitude = this.post('longitude');
     let latitude = this.post('latitude');
     let address = this.post('address');
+    let creator_id = this.post('creator_id');
+    let creator_account = this.post('creator_account');
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
-	console.log(create_time);
+	console.log(create_id);
+	console.log(create_account);
 	
     var filepath = file.path;
 	//console.log(file);
@@ -56,34 +59,46 @@ export default class extends Base {
 	var fileUrl = "http://47.93.241.248/static/" + basename;
 	console.log(fileUrl);
 	
-	let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
-	if (think.isEmpty(user)) {
-	    let userResult = await this.model('user').add({
-            gender: creator_gender,
-            account: 'Wx'+creator_name,
-            name: creator_name,
-            photo_url: creator_photo,
-            reg_time: parseInt(new Date().getTime() / 1000)
-        });
-	    console.log(userResult);
-		user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
+    //let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
+    let user = await this.model('user').where({openid: creator_id}).find();
+    if (think.isEmpty(user)) {
+      let userResult = await this.model('user').add({
+        gender: creator_gender,
+        openid: creator_id,
+        account: 'Wx'+creator_name,
+        name: creator_name,
+        photo_url: creator_photo,
+        reg_time: parseInt(new Date().getTime() / 1000)
+      });
+      console.log(userResult);
+      user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
 	}
 	//console.log(user);
 	var latBegin = latitude-0.003;
 	var latEnd = latitude-1+1.003;
 	var longBegin = longitude-0.003;
 	var longEnd = longitude-1+1.003;
-	let news = await this.model('news').where({latitude: ['between',latBegin,latEnd], longitude: ['between',longBegin,longEnd]}).find();
+	var startTime = create_time-43200;
+	var endTime = create_time+43200;
+	let news = await this.model('news').where({latitude: ['between',latBegin,latEnd],
+	                                           longitude: ['between',longBegin,longEnd],
+	                                           start_time: ['<=',create_time],
+	                                           end_time: ['>=',create_time]}).find();
 	if (think.isEmpty(news)) {
 	    let newsResult = await this.model('news').add({
             title: title,
             create_time: create_time,
+            start_time: create_time-3600,
+            end_time: create_time+86400,
             longitude: longitude,
             latitude: latitude,
             location: address
         });
 	    console.log(newsResult);
-		news = await this.model('news').where({latitude: ['between',latBegin,latEnd], longitude: ['between',longBegin,longEnd]}).find();
+		news = await this.model('news').where({latitude: ['between',latBegin,latEnd],
+	                                           longitude: ['between',longBegin,longEnd],
+	                                           start_time: ['<=',create_time],
+	                                           end_time: ['>=',create_time]}).find();
 	}
 	//console.log(news);
 	

@@ -25,6 +25,9 @@ export default class extends think.model.base {
     let out = "";
     let curTime = cur.getTime() / 1000;
 
+	if (isNaN(time)) {
+		return time;
+	}
     if (curTime - time < 3600) {
       out = Math.round((curTime - time) / 60) + '分钟前';
     }
