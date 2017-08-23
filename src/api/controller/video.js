@@ -83,7 +83,7 @@ export default class extends Base {
 	let news = await this.model('news').where({latitude: ['between',latBegin,latEnd],
 	                                           longitude: ['between',longBegin,longEnd],
 	                                           start_time: ['<=',create_time],
-	                                           end_time: ['>=',create_time]}).find();
+	                                           end_time: ['>=',create_time-100]}).find();
 	if (think.isEmpty(news)) {
 	    let newsResult = await this.model('news').add({
             title: title,
@@ -98,8 +98,9 @@ export default class extends Base {
 		news = await this.model('news').where({latitude: ['between',latBegin,latEnd],
 	                                           longitude: ['between',longBegin,longEnd],
 	                                           start_time: ['<=',create_time],
-	                                           end_time: ['>=',create_time]}).find();
+	                                           end_time: ['>=',create_time-100]}).find();
 		if (think.isEmpty(news)) {
+	        console.log('Empty');
 			return this.success({
                 result: 'fail',
 	            errorCode: 1002
