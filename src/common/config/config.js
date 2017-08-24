@@ -12,4 +12,9 @@ export default {
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         preflightContinue: false
     },
+	
+	remoting: {
+		json: {limit: '50mb'},
+		urlencoded: {limit: '50mb', extended: true}
+	}
 };

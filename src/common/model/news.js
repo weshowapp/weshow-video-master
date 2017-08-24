@@ -20,10 +20,10 @@ export default class extends think.model.base {
    * @returns {string}
    */
   formatDateTime(time){
-    let cur = new Date();
-    let date = new Date(time * 1000);
-    let out = "";
-    let curTime = cur.getTime() / 1000;
+    var cur = new Date();
+    var date = new Date(time * 1000);
+    var out = "";
+    var curTime = cur.getTime() / 1000;
 
 	if (isNaN(time)) {
 		return time;
@@ -53,7 +53,7 @@ export default class extends think.model.base {
    */
   async getNewsDetail(news){
     let videos = await this.model('video').where({news_id: news.id}).select();
-	for (let i = 0; i < videos.length; i++) {
+	for (var i = 0; i < videos.length; i++) {
 		let user = await this.model('user').where({id: videos[i].creator}).select();
 		if (!think.isEmpty(user)) {
 		    videos[i].creator_name = user[0].name;
@@ -62,7 +62,7 @@ export default class extends think.model.base {
 		//videos[i].create_time = think.datetime(new Date(videos[i].create_time * 1000));
 		videos[i].create_time = this.formatDateTime(videos[i].create_time);
 		let comments = await this.model('comment').where({video_id: videos[i].id}).select();
-		for (let j = 0; j < comments.length; j++) {
+		for (var j = 0; j < comments.length; j++) {
 		  let user1 = await this.model('user').where({id: comments[j].creator}).select();
 		  if (!think.isEmpty(user1)) {
 		    comments[j].creator_name = user1[0].name;
