@@ -6,6 +6,9 @@ const request = require("request");
 const fs = require('fs');
 const _ = require('lodash');
 
+var crypto = require('crypto');
+const secKey = '';
+
 export default class extends Base {
   /**
    * index action
@@ -13,11 +16,19 @@ export default class extends Base {
    */
   async indexAction() {
 
-    let avatar_path = think.RESOURCE_PATH + '/static/user/avatar/1.' + _.last(_.split('https://img6.bdstatic.com/img/image/smallpic/liutaoxiaotu.jpg', '.'));
-    //rp('https://img6.bdstatic.com/img/image/smallpic/liutaoxiaotu.jpg').pipe(fs.createWriteStream(avatar_path));
+    let avatar_path = think.RESOURCE_PATH + '/static/user/avatar/1.' + _.last(_.split('https://img6.xxx.com/img/image/smallpic/liutaoxiaotu.jpg', '.'));
     return this.success(avatar_path);
   }
 
+  async argsSigAction() {
+    let url = this.post('url');
+	var sign = crypto.createHmac('sha1', secKey).update(url),digest().toString('base64');
+	console.log(sign);
+	return this.success({
+      sign: sign
+	});
+  }
+  
   async loginByWeixinAction() {
 
     let code = this.post('code');
