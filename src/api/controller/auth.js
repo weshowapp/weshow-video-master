@@ -20,9 +20,9 @@ export default class extends Base {
     return this.success(avatar_path);
   }
 
-  async argsSigAction() {
+  async argsigAction() {
     let url = this.post('url');
-	var sign = crypto.createHmac('sha1', secKey).update(url),digest().toString('base64');
+	var sign = crypto.createHmac('sha1', secKey).update(url).digest().toString('base64');
 	console.log(sign);
 	return this.success({
       sign: sign
