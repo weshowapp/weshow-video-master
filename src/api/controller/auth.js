@@ -7,6 +7,8 @@ const fs = require('fs');
 const _ = require('lodash');
 
 var crypto = require('crypto');
+var querystring = require("querystring");
+const secId = 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M';
 const secKey = '';
 
 export default class extends Base {
@@ -28,7 +30,35 @@ export default class extends Base {
       sign: sign
 	});
   }
-  
+
+  async uploadsigAction() {
+	var current = parseInt((new Date()).getTime() / 1000)
+    var expired = current + 86400 * 3;  // 签名有效期：3天
+
+    // 向参数列表填入参数
+    var arg_list = {
+      secretId : secret_id,
+      currentTimeStamp : current,
+      expireTime : expired,
+      random : Math.round(Math.random() * Math.pow(2, 32))
+    }
+
+    // 计算签名
+    var orignal = querystring.stringify(arg_list);
+    var orignal_buffer = new Buffer(orignal, "utf8");
+
+    var hmac = crypto.createHmac("sha1", secret_key);
+    var hmac_buffer = hmac.update(orignal_buffer).digest();
+
+    var signature = Buffer.concat([hmac_buffer, orignal_buffer]).toString("base64");
+
+    console.log(signature);
+
+	return this.success({
+      sign: signature
+	});
+  }
+
   async loginByWeixinAction() {
 
     let code = this.post('code');

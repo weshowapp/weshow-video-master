@@ -11,7 +11,8 @@ export default {
     'news',
     'video',
     'user',
-	'comment',
+    'comment',
+    'auth',
   ],
 
   //可以公开访问的Action
