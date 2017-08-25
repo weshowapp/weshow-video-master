@@ -32,22 +32,23 @@ export default class extends Base {
   }
 
   async uploadsigAction() {
-	var current = parseInt((new Date()).getTime() / 1000)
+	var current = parseInt((new Date()).getTime() / 1000);
     var expired = current + 86400 * 3;  // 签名有效期：3天
+	var rand = Math.round(Math.random() * Math.pow(2, 32));
 
     // 向参数列表填入参数
     var arg_list = {
-      secretId : secret_id,
+      secretId : secId,
       currentTimeStamp : current,
       expireTime : expired,
-      random : Math.round(Math.random() * Math.pow(2, 32))
+      random : rand
     }
 
     // 计算签名
     var orignal = querystring.stringify(arg_list);
-    var orignal_buffer = new Buffer(orignal, "utf8");
+    var orignal_buffer = new Buffer(orignal, "utf8"); 
 
-    var hmac = crypto.createHmac("sha1", secret_key);
+    var hmac = crypto.createHmac("sha1", secKey);
     var hmac_buffer = hmac.update(orignal_buffer).digest();
 
     var signature = Buffer.concat([hmac_buffer, orignal_buffer]).toString("base64");
@@ -55,7 +56,10 @@ export default class extends Base {
     console.log(signature);
 
 	return this.success({
-      sign: signature
+      sign: signature,
+	  timestamp: current,
+	  expite: expired,
+	  random: rand
 	});
   }
 
