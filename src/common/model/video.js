@@ -1,11 +1,11 @@
 'use strict';
 
-/*var COS = require('cos-nodejs-sdk-v5');
+var COS = require('cos-nodejs-sdk-v5');
 var cos = new COS({
     AppId: '1254157576',
     SecretId: 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M',
     SecretKey: '',
-});*/
+});
 
 /**
  * model
@@ -84,12 +84,12 @@ export default class extends think.model.base {
 	return 0;
   }
   
-  async qcloudVideo() {
-	/*cos.sliceUploadFile({
-            Bucket: bucket,
-            Region: region,
+  async qcloudUploadVideo(filename, filepath) {
+	cos.sliceUploadFile({
+            Bucket: 'test1',
+            Region: 'cn-north',
             Key: filename,
-            FilePath: file.path,
+            FilePath: filepath,
             TaskReady: function (tid) {
 				console.log(tid);
                 //TaskId = tid;
@@ -101,8 +101,15 @@ export default class extends think.model.base {
                 console.log(JSON.stringify(progressData));
             },
         }, function (err, data) {
-            console.log(err || data);
-            fs.unlinkSync(file.path);
-        });*/
+          fs.unlinkSync(filepath);
+          if(err) {
+            console.log(err);
+          } else {
+            console.log(data);
+			return data.Location;
+          }
+        }
+	);
+	return '';
   }
 }

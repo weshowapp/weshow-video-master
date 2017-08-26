@@ -72,6 +72,9 @@ export default class extends Base {
 	var fileUrl = "http://47.93.241.248/static/" + basename;
 	console.log(fileUrl);
 
+    var url = await this.model('video').qcloudUploadVideo(basename, file.path);
+	console.log(url);
+
     //this.display();
 	return this.success({
 	  fileurl: fileUrl,
