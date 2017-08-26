@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var COS = require('cos-nodejs-sdk-v5');
 var cos = new COS({
     AppId: '1254157576',
@@ -86,30 +87,30 @@ export default class extends think.model.base {
   
   async qcloudUploadVideo(filename, filepath) {
 	cos.sliceUploadFile({
-            Bucket: 'test1',
-            Region: 'cn-north',
-            Key: filename,
-            FilePath: filepath,
-            TaskReady: function (tid) {
-				console.log(tid);
-                //TaskId = tid;
-            },
-            onHashProgress: function (progressData) {
-                console.log(JSON.stringify(progressData));
-            },
-            onProgress: function (progressData) {
-                console.log(JSON.stringify(progressData));
-            },
-        }, function (err, data) {
-          fs.unlinkSync(filepath);
-          if(err) {
-            console.log(err);
-          } else {
-            console.log(data);
-			return data.Location;
-          }
+        Bucket: 'test1',
+        Region: 'cn-north',
+        Key: filename,
+        FilePath: filepath,
+        TaskReady: function (tid) {
+        console.log(tid);
+          //TaskId = tid;
+        },
+        onHashProgress: function (progressData) {
+          console.log(JSON.stringify(progressData));
+        },
+        onProgress: function (progressData) {
+          console.log(JSON.stringify(progressData));
+        },
+      }, function (err, data) {
+        fs.unlinkSync(filepath);
+        if (err) {
+          console.log(err);
+          return '';
+        } else {
+          console.log(data);
+          return data.Location;
         }
+      }
 	);
-	return '';
   }
 }
