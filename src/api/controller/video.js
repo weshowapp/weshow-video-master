@@ -79,7 +79,7 @@ export default class extends Base {
 
     //this.display();
 	return this.success({
-	  fileurl: fileUrl,
+	  fileurl: url,
       result: 'OK',
 	  errorCode: 0
     });

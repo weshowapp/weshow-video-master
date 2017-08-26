@@ -86,13 +86,14 @@ export default class extends think.model.base {
   }
   
   async qcloudUploadVideo(filename, filepath) {
-	cos.sliceUploadFile({
+    return new Promise(function (resolve, reject) {
+      cos.sliceUploadFile({
         Bucket: 'test1',
         Region: 'cn-north',
         Key: filename,
         FilePath: filepath,
         TaskReady: function (tid) {
-        console.log(tid);
+          console.log(tid);
           //TaskId = tid;
         },
         onHashProgress: function (progressData) {
@@ -104,13 +105,12 @@ export default class extends think.model.base {
       }, function (err, data) {
         fs.unlinkSync(filepath);
         if (err) {
-          console.log(err);
-          return '';
+          reject(err);
         } else {
-          console.log(data);
-          return data.Location;
+          console.log(data.Lolcation);
+          resolve(data.Location);
         }
-      }
-	);
+      });
+    });
   }
 }
