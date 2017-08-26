@@ -1,73 +1,25 @@
 'use strict';
 
-import Base from './base.js';
+/*var COS = require('cos-nodejs-sdk-v5');
+var cos = new COS({
+    AppId: '1254157576',
+    SecretId: 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M',
+    SecretKey: '',
+});*/
 
-var fs = require('fs');
-var path = require('path');
+/**
+ * model
+ */
+export default class extends think.model.base {
 
+  // Add video record to tables
+  async addVideo(title, create_time, longitude, latitude, address, video_url, poster_url,
+      creator_id, creator_accout, creator_photo, creator_name, creator_gender) {
+    
+    console.log(creator_id);
+    console.log(video_url);
 
-export default class extends Base {
-  /**
-   * index action
-   * @return {Promise} []
-   */
-  async indexAction() {
-    let videos = await this.model('video').limit(10).select();
-
-    return this.success({
-      videoList: videos
-    });
-
-  }
-
-  async addAction() {
-    let title = this.post('title');
-    let create_time = this.post('create_time');
-    let longitude = this.post('longitude');
-    let latitude = this.post('latitude');
-    let address = this.post('address');
-    let video_url = this.post('video_url');
-    let poster_url = this.post('poster_url');
-    let creator_id = this.post('creator_id');
-    let creator_account = this.post('creator_account');
-    let creator_photo = this.post('creator_photo');
-    let creator_name = this.post('creator_name');
-    let creator_gender = this.post('creator_gender');
-	
-    console.log(creator_id
-
-    return await this.model('video').addVideo(title, create_time, longitude, latitude, address, video_url, poster_url,
-      creator_id, creator_accout, creator_photo, creator_name, creator_gender);
-  }
-
-  async uploadAction() {
-    //这里的 key 需要和 form 表单里的 name 值保持一致
-    var file = think.extend({}, this.file('video'));
-
-    var filepath = file.path;
-	console.log(filepath);
-
-    //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
-    var uploadPath = think.RESOURCE_PATH + '/static';
-    think.mkdir(uploadPath);
-    var basename = path.basename(filepath);
-    fs.renameSync(filepath, uploadPath + '/' + basename);
-
-    file.path = uploadPath + '/' + basename;
-
-    if(think.isFile(file.path)){
-      console.log('is file')
-    }else{
-      console.log('not exist')
-    }
-
-    this.assign('fileInfo', file);
-	console.log(file.path);
-	
-	var fileUrl = "http://47.93.241.248/static/" + basename;
-	console.log(fileUrl);
-	
-    /*/let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
+    //let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
     let user = await this.model('user').where({openid: creator_id}).find();
     if (think.isEmpty(user)) {
       let userResult = await this.model('user').add({
@@ -126,16 +78,37 @@ export default class extends Base {
 		upload_time: parseInt(new Date().getTime() / 1000),
         longitude: longitude,
         latitude: latitude,
-		poster_url: 'http://hhvr3whp728i1txm4kv.exp.bcevod.com/mda-hhwx69cpbh8sqxn1/mda-hhwx69cpbh8sqxn1.jpg',
-        video_url: fileUrl
+		poster_url:poster_url,
+        video_url: video_url
     });
-	console.log(videoResult);*/
+	console.log(videoResult);
 
     //this.display();
 	return this.success({
-	  fileurl: fileUrl,
       result: 'OK',
 	  errorCode: 0
     });
+  }
+  
+  async qcloudVideo() {
+	/*cos.sliceUploadFile({
+            Bucket: bucket,
+            Region: region,
+            Key: filename,
+            FilePath: file.path,
+            TaskReady: function (tid) {
+				console.log(tid);
+                //TaskId = tid;
+            },
+            onHashProgress: function (progressData) {
+                console.log(JSON.stringify(progressData));
+            },
+            onProgress: function (progressData) {
+                console.log(JSON.stringify(progressData));
+            },
+        }, function (err, data) {
+            console.log(err || data);
+            fs.unlinkSync(file.path);
+        });*/
   }
 }
