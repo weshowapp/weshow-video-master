@@ -62,10 +62,7 @@ export default class extends think.model.base {
 	                                           end_time: ['>=',create_time-100]}).find();
 		if (think.isEmpty(news)) {
 	        console.log('Empty');
-			return this.success({
-                result: 'fail',
-	            errorCode: 1002
-            });
+			return 1002;
 		}
 	}
 	console.log(news);
@@ -78,16 +75,13 @@ export default class extends think.model.base {
 		upload_time: parseInt(new Date().getTime() / 1000),
         longitude: longitude,
         latitude: latitude,
-		poster_url:poster_url,
+		poster_url: poster_url,
         video_url: video_url
     });
 	console.log(videoResult);
 
     //this.display();
-	return this.success({
-      result: 'OK',
-	  errorCode: 0
-    });
+	return 0;
   }
   
   async qcloudVideo() {
