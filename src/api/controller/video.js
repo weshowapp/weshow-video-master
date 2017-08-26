@@ -4,6 +4,12 @@ import Base from './base.js';
 
 var fs = require('fs');
 var path = require('path');
+var COS = require('cos-nodejs-sdk-v5');
+var cos = new COS({
+    AppId: '1254157576',
+    SecretId: 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M',
+    SecretKey: '',
+});
 
 export default class extends Base {
   /**
@@ -32,6 +38,9 @@ export default class extends Base {
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
+    let bucket = this.post('bucket');
+    let region = this.post('region');
+    let filename = this.post('filename');
 	console.log(creator_id);
 	console.log(creator_account);
 	
@@ -58,6 +67,26 @@ export default class extends Base {
 	
 	var fileUrl = "http://47.93.241.248/static/" + basename;
 	console.log(fileUrl);
+	
+	cos.sliceUploadFile({
+            Bucket: bucket, /* 必须 */
+            Region: region,
+            Key: filename, /* 必须 */
+            FilePath: file.path, /* 必须 */
+            TaskReady: function (tid) {
+				console.log(tid);
+                //TaskId = tid;
+            },
+            onHashProgress: function (progressData) {
+                console.log(JSON.stringify(progressData));
+            },
+            onProgress: function (progressData) {
+                console.log(JSON.stringify(progressData));
+            },
+        }, function (err, data) {
+            console.log(err || data);
+            fs.unlinkSync(file.path);
+        });
 	
     //let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
     let user = await this.model('user').where({openid: creator_id}).find();

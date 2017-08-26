@@ -58,7 +58,7 @@ export default class extends Base {
 	return this.success({
       sign: signature,
 	  timestamp: current,
-	  expite: expired,
+	  expire: expired,
 	  random: rand
 	});
   }
