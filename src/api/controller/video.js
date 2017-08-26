@@ -34,10 +34,10 @@ export default class extends Base {
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
 	
-    console.log(creator_id
+    console.log(creator_id);
 
     return await this.model('video').addVideo(title, create_time, longitude, latitude, address, video_url, poster_url,
-      creator_id, creator_accout, creator_photo, creator_name, creator_gender);
+      creator_id, creator_account, creator_photo, creator_name, creator_gender);
   }
 
   async uploadAction() {

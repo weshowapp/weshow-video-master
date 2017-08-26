@@ -14,7 +14,7 @@ export default class extends think.model.base {
 
   // Add video record to tables
   async addVideo(title, create_time, longitude, latitude, address, video_url, poster_url,
-      creator_id, creator_accout, creator_photo, creator_name, creator_gender) {
+      creator_id, creator_account, creator_photo, creator_name, creator_gender) {
     
     console.log(creator_id);
     console.log(video_url);
@@ -25,7 +25,7 @@ export default class extends think.model.base {
       let userResult = await this.model('user').add({
         gender: creator_gender,
         openid: creator_id,
-        account: 'Wx'+creator_name,
+        account: creator_account,
         name: creator_name,
         photo_url: creator_photo,
         reg_time: parseInt(new Date().getTime() / 1000)
