@@ -47,10 +47,10 @@ export default class extends Base {
     });
   }
   
-  async updateposter() {
-    var vid = this.post('vid');
-    let field_id = this.post('field_id');
-    let poster_url = this.post('poster_url');
+  async updateposterAction() {
+    //var vid = this.post('vid');
+    var field_id = this.post('field_id');
+    var poster_url = this.post('poster_url');
     console.log(vid);
     console.log(poster_url);
 
