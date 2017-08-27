@@ -51,7 +51,7 @@ export default class extends Base {
     //var vid = this.post('vid');
     var field_id = this.post('field_id');
     var poster_url = this.post('poster_url');
-    console.log(vid);
+    console.log(field_id);
     console.log(poster_url);
 
     await this.model('video').where({field_id: field_id}).update({
