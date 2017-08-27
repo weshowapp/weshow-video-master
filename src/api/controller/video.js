@@ -46,7 +46,7 @@ export default class extends Base {
       errorCode: result
     });
   }
-  
+
   async updateposterAction() {
     //var vid = this.post('vid');
     var field_id = this.post('field_id');
@@ -56,6 +56,23 @@ export default class extends Base {
 
     await this.model('video').where({field_id: field_id}).update({
       poster_url: poster_url
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
+
+  async updateUrlAction() {
+    //var vid = this.post('vid');
+    var field_id = this.post('field_id');
+    var video_url = this.post('video_url');
+    console.log(field_id);
+    console.log(video_url);
+
+    await this.model('video').where({field_id: field_id}).update({
+      video_url: video_url
     });
 
     return this.success({
