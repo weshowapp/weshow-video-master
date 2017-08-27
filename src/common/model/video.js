@@ -1,5 +1,9 @@
 'use strict';
 
+var https = require('https');
+var util = require('util');
+var path = require('path');
+
 var fs = require('fs');
 var COS = require('cos-nodejs-sdk-v5');
 var cos = new COS({
@@ -7,6 +11,8 @@ var cos = new COS({
     SecretId: 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M',
     SecretKey: '',
 });
+
+var BOUNDARYPREFIX = 'wxmebn';
 
 /**
  * model
@@ -85,7 +91,7 @@ export default class extends think.model.base {
 	return 0;
   }
   
-  async qcloudUploadVideo(filename, filepath) {
+  async qcloudUploadFiles(filename, filepath) {
     return new Promise(function (resolve, reject) {
       cos.sliceUploadFile({
         Bucket: 'test1',
@@ -113,5 +119,69 @@ export default class extends think.model.base {
         }
       });
     });
+  }
+
+  var mkfield = function (field, value) {
+    return util.format('Content-Disposition: form-data; name="%s"\r\n\r\n%s', field, value);
+  }
+
+  async qcloudUploadVideo(url, filepath, param) {
+	return new Promise(function (resolve, reject) {
+	fs.readFile(filepath, function (err, filedata) {
+      content = util.format('Content-Disposition: form-data; name="filecontent"; filename="%s"\r\n', filepath);
+      content += util.format('Content-Type: %s\r\n\r\n', 'multipart/form-data');
+      content += filedata;
+    
+	  var data = [content];
+	  for (var i in param) {
+        data.push(mkfield(i, param[i]));
+      }
+	  
+	  var max = 9007196154740990;
+      var dec = Math.random() * max;
+      var hex = dec.toString(36);
+      var boundary = BOUNDARYPREFIX + hex;
+
+      var body = util.format('Content-Type: multipart/form-data; boundary=%s\r\n\r\n', boundary)
+                 + util.format('--%s\r\n', boundary)
+                 + data.join(util.format('\r\n--%s\r\n', boundary))
+                 + util.format('\r\n--%s', boundary);
+
+      //console.log(body);
+
+      var parse_url = require('url').parse(url, true);
+      var options = {
+        host: parse_url.hostname,
+        port: 443,
+        path: parse_url.path,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Content-Length': body.length
+        }
+      };
+
+      https.request(options, function(resHttps) {
+        console.log("statusCode: ", resHttps.statusCode);
+        console.log("headers: ", resHttps.headers);
+
+        resHttps.setEncoding('utf8');
+
+        // write data to request body
+        reqHttps.write(body);
+        reqHttps.end();
+
+        resHttps.on('data', function(body1) {
+          console.log("data: " + body1);
+		  resolve(body1);
+        }
+
+        reqHttps.on('error', function(e) {
+          console.error("error:"+e);
+          reject(e);
+        });
+      };
+    });
+	});
   }
 }

@@ -48,6 +48,8 @@ export default class extends Base {
   async uploadAction() {
     //这里的 key 需要和 form 表单里的 name 值保持一致
     var file = think.extend({}, this.file('video'));
+    var uploadurl = this.post('uploadurl');
+	var sign = this.post('sign');
 
     var filepath = file.path;
 	console.log(filepath);
@@ -72,7 +74,12 @@ export default class extends Base {
 	var fileUrl = "http://47.93.241.248/static/" + basename;
 	console.log(fileUrl);
 
-    var url = await this.model('video').qcloudUploadVideo(basename, file.path);
+    var params = {
+      'op': 'upload',
+	  'Authorization': sign
+    };
+    //var url = await this.model('video').qcloudUploadFile(basename, file.path);
+	var url = await this.model('video').qcloudUploadVideo(uploadurl, file.path, params);
 	console.log('url');
 	console.log(url);
 	console.log('url');
