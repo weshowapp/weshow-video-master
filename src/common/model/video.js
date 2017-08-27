@@ -121,20 +121,20 @@ export default class extends think.model.base {
     });
   }
 
-  var mkfield = function (field, value) {
+  mkfield(field, value) {
     return util.format('Content-Disposition: form-data; name="%s"\r\n\r\n%s', field, value);
   }
 
   async qcloudUploadVideo(url, filepath, param) {
 	return new Promise(function (resolve, reject) {
 	fs.readFile(filepath, function (err, filedata) {
-      content = util.format('Content-Disposition: form-data; name="filecontent"; filename="%s"\r\n', filepath);
+      var content = util.format('Content-Disposition: form-data; name="filecontent"; filename="%s"\r\n', filepath);
       content += util.format('Content-Type: %s\r\n\r\n', 'multipart/form-data');
       content += filedata;
     
 	  var data = [content];
 	  for (var i in param) {
-        data.push(mkfield(i, param[i]));
+        data.push(util.format('Content-Disposition: form-data; name="%s"\r\n\r\n%s', i, param[i]));
       }
 	  
 	  var max = 9007196154740990;
@@ -174,13 +174,13 @@ export default class extends think.model.base {
         resHttps.on('data', function(body1) {
           console.log("data: " + body1);
 		  resolve(body1);
-        }
+        });
 
         reqHttps.on('error', function(e) {
           console.error("error:"+e);
           reject(e);
         });
-      };
+      });
     });
 	});
   }
