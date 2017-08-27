@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `weshow_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `gender` smallint(1) unsigned NOT NULL DEFAULT '0',
   `openid` varchar(32) NOT NULL DEFAULT '',
   `account` varchar(32) NOT NULL DEFAULT '',
@@ -63,10 +63,11 @@ DROP TABLE IF EXISTS `weshow_video`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_video` (
-  `id` int(16) unsigned NOT NULL AUTO_INCREMENT,
-  `creator` int(11) NOT NULL DEFAULT '1',
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator` int(20) NOT NULL DEFAULT '1',
   `title` varchar(90) NOT NULL DEFAULT '',
-  `news_id` int(16) NOT NULL DEFAULT '1',
+  `news_id` int(20) NOT NULL DEFAULT '1',
+  `field_id` int(20) NOT NULL DEFAULT '1',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `upload_time` int(11) unsigned NOT NULL DEFAULT '0',
   `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
@@ -76,7 +77,8 @@ CREATE TABLE `weshow_video` (
   `comment` int(8) NOT NULL DEFAULT '0',
   `like` int(11) NOT NULL DEFAULT '0',
   `watch` int(16) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `field_id` (`field_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -87,31 +89,31 @@ CREATE TABLE `weshow_video` (
 LOCK TABLES `weshow_video` WRITE;
 /*!40000 ALTER TABLE `weshow_video` DISABLE KEYS */;
 INSERT INTO `weshow_video` 
-VALUES (1,1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,1503181437,1503171637,39.9181,116.3012,
+VALUES (1,1,'西二旗大街路面塌陷，轿车陷大坑四轮朝天',1,1,1503181437,1503171637,39.9181,116.3012,
        'http://ww2.sinaimg.cn/bmiddle/652f5916gy1fhwl5bnikyj20zk0no0y9.jpg',
        'http://hhvr3whp728i1txm4kv.exp.bcevod.com/mda-hhvr7jstd050ryjc/mda-hhvr7jstd050ryjc.mp4',10,7,3),
-   (2,2,'八达岭长城关闭游览致高速拥堵数公里',2,1502481237,1502381237,39.9181,116.3012,
+   (2,2,'八达岭长城关闭游览致高速拥堵数公里',2,2,1502481237,1502381237,39.9181,116.3012,
        'http://ww4.sinaimg.cn/bmiddle/c268f966ly1fi5sxnjrrmj21hc0u0gwq.jpg',
 	   'http://hhvr3whp728i1txm4kv.exp.bcevod.com/mda-hhwx67mykh8fwbxr/mda-hhwx67mykh8fwbxr.m3u8',14,33,6),
-   (3,3,'降雨致北京171处景区关闭13处积水断路',3,1501481237,1501381237,39.9181,116.3012,
+   (3,3,'降雨致北京171处景区关闭13处积水断路',3,3,1501481237,1501381237,39.9181,116.3012,
        'http://ww2.sinaimg.cn/bmiddle/7f5092a4gw1f669izfr79j20hs091q39.jpg',
 	   'http://weshowvideo.oss-cn-beijing.aliyuncs.com/video/%E7%A7%92%E6%8B%8D4.mp4',80,10,7),
-   (4,4,'Snapchat AI视频拼接',1,1503181637,1501381237,39.9181,116.3012,
+   (4,4,'Snapchat AI视频拼接',1,4,1503181637,1501381237,39.9181,116.3012,
        'http://ww2.sinaimg.cn/bmiddle/7f5092a4gw1f669izfr79j20hs091q39.jpg',
 	   'http://hhvr3whp728i1txm4kv.exp.bcevod.com/mda-hhwwwebf2x1rhuft/mda-hhwwwebf2x1rhuft.m3u8',67,44,9),
-   (5,5,'蹦极坠落悬崖',1,1503181467,1501381237,39.9181,116.3012,
+   (5,5,'蹦极坠落悬崖',1,5,1503181467,1501381237,39.9181,116.3012,
        'https://wx2.sinaimg.cn/mw690/005FHEwGly1finjtkybjsj30qo0zijvd.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135553-10774036-hd.mp4',18,71,6),
-   (6,6,'暴雨突袭甘肃会宁，山洪泥沙涌进城',2,1501481237,1501381237,39.9181,116.3012,
+   (6,6,'暴雨突袭甘肃会宁，山洪泥沙涌进城',2,9,1501481237,1501381237,39.9181,116.3012,
        'https://dslb.cdn.krcom.cn/stream/lEZprg--N1Z~rhg9xlrHnmM0EJLaiqzSCzkX8g___32768.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135841-10775645-hd.mp4',18,71,6),
-   (7,7,'Snapchat AI视频拼接',4,1501481237,1501381237,39.9181,116.3012,
+   (7,7,'Snapchat AI视频拼接',4,6,1501481237,1501381237,39.9181,116.3012,
        'https://dslb.cdn.krcom.cn/stream/u00yUKy1clwsQZpLvX-7ULWeC~zj3doPC2a2lw___32768.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1131645-10752152-hd.mp4',18,71,6),
-   (8,4,'Snapchat AI视频拼接',5,1501481237,1501381237,39.9181,116.3012,
+   (8,4,'Snapchat AI视频拼接',5,7,1501481237,1501381237,39.9181,116.3012,
        'https://dslb.cdn.krcom.cn/stream/zpUlK5EVJiDJIIrS1kfdgfIVaa4mkEuSjE6sZQ___32768.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135553-10774036-hd.mp4',18,71,6),
-   (9,6,'Snapchat AI视频拼接',6,1461481237,1501381237,39.9181,116.3012,
+   (9,6,'Snapchat AI视频拼接',6,8,1461481237,1501381237,39.9181,116.3012,
        'http://img.mp.itc.cn/upload/20170816/92d8d9fb67b24fe2853c31a75afa98ce_th.jpg',
 	   'http://video.pearvideo.com/mp4/short/20170819/cont-1135553-10774036-hd.mp4',18,71,6);
 /*!40000 ALTER TABLE `weshow_video` ENABLE KEYS */;
@@ -125,7 +127,7 @@ DROP TABLE IF EXISTS `weshow_news`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_news` (
-  `id` int(16) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(90) NOT NULL DEFAULT '',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
@@ -163,10 +165,10 @@ DROP TABLE IF EXISTS `weshow_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_comment` (
-  `id` int(18) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `creator` int(11) NOT NULL DEFAULT '1',
-  `video_id` int(16) NOT NULL DEFAULT '1',
+  `creator` int(20) NOT NULL DEFAULT '1',
+  `video_id` int(20) NOT NULL DEFAULT '1',
   `content` varchar(255) NOT NULL DEFAULT '',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `like` int(11) NOT NULL DEFAULT '0',

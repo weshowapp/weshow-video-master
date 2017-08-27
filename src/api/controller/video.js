@@ -22,6 +22,7 @@ export default class extends Base {
 
   async addAction() {
     let title = this.post('title');
+    let field_id = this.post('field_id');
     let create_time = this.post('create_time');
     let longitude = this.post('longitude');
     let latitude = this.post('latitude');
@@ -36,12 +37,30 @@ export default class extends Base {
 	
     console.log(creator_id);
 
-    var result = await this.model('video').addVideo(title, create_time, longitude, latitude, address, video_url, poster_url,
+    var result = await this.model('video').addVideo(title, field_id, create_time, longitude, latitude, address, video_url, poster_url,
       creator_id, creator_account, creator_photo, creator_name, creator_gender);
 	  
     return this.success({
       result: 'OK',
+	  video_id: result,
       errorCode: result
+    });
+  }
+  
+  async updateposter() {
+    var vid = this.post('vid');
+    let field_id = this.post('field_id');
+    let poster_url = this.post('poster_url');
+    console.log(vid);
+    console.log(poster_url);
+
+    await this.model('video').where({field_id: field_id}).update({
+      poster_url: poster_url
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
     });
   }
 

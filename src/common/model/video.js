@@ -20,7 +20,7 @@ var BOUNDARYPREFIX = 'wxmebn';
 export default class extends think.model.base {
 
   // Add video record to tables
-  async addVideo(title, create_time, longitude, latitude, address, video_url, poster_url,
+  async addVideo(title, field_id, create_time, longitude, latitude, address, video_url, poster_url,
       creator_id, creator_account, creator_photo, creator_name, creator_gender) {
     
     console.log(creator_id);
@@ -78,6 +78,7 @@ export default class extends think.model.base {
         creator: user.id,
         title: title,
         news_id: news.id,
+		field_id: field_id,
         create_time: create_time,
 		upload_time: parseInt(new Date().getTime() / 1000),
         longitude: longitude,
@@ -88,10 +89,10 @@ export default class extends think.model.base {
 	console.log(videoResult);
 
     //this.display();
-	return 0;
+	return videoResult;
   }
   
-  async qcloudUploadFiles(filename, filepath) {
+  async qcloudUploadFile(filename, filepath) {
     return new Promise(function (resolve, reject) {
       cos.sliceUploadFile({
         Bucket: 'test1',
