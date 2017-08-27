@@ -47,6 +47,46 @@ export default class extends Base {
     });
   }
 
+  async deleteAction() {
+    var vid = this.post('vid');
+    console.log(field_id);
+	
+	var video = await this.model('video').where({id: vid}).find();
+	var news_id = video.news_id;
+
+    await this.model('video').where({id: vid}).delete();
+
+	var videoList = await this.model('video').where({news_id: news_id}).select();
+	if (think.isEmpty(videoList)) {
+	  var news = await this.model('news').where({id: news_id}).delete();
+	}
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
+
+  async deletefieldAction() {
+    var field_id = this.post('field_id');
+    console.log(field_id);
+	
+	var video = await this.model('video').where({field_id: field_id}).find();
+	var news_id = video.news_id;
+
+    await this.model('video').where({field_id: field_id}).delete();
+
+	var videoList = await this.model('video').where({news_id: news_id}).select();
+	if (think.isEmpty(videoList)) {
+	  var news = await this.model('news').where({id: news_id}).delete();
+	}
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
+
   async updateposterAction() {
     //var vid = this.post('vid');
     var field_id = this.post('field_id');
@@ -64,7 +104,7 @@ export default class extends Base {
     });
   }
 
-  async updateUrlAction() {
+  async updateurlAction() {
     //var vid = this.post('vid');
     var field_id = this.post('field_id');
     var video_url = this.post('video_url');
