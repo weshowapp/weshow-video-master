@@ -67,7 +67,7 @@ CREATE TABLE `weshow_video` (
   `creator` int(20) NOT NULL DEFAULT '1',
   `title` varchar(90) NOT NULL DEFAULT '',
   `news_id` int(20) NOT NULL DEFAULT '1',
-  `field_id` int(20) NOT NULL DEFAULT '1',
+  `field_id` int(23) NOT NULL DEFAULT '1',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `upload_time` int(11) unsigned NOT NULL DEFAULT '0',
   `longitude` decimal(11,8) NOT NULL DEFAULT '0.00',
