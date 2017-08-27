@@ -80,8 +80,8 @@ export default class extends Base {
       'op': 'upload',
 	  'Authorization': sign
     };
-    //var url = await this.model('video').qcloudUploadFile(basename, file.path);
-	var url = await this.model('video').qcloudUploadVideo(uploadurl, file.path, params);
+    var url = await this.model('video').qcloudUploadFile(basename, file.path);
+	//var url = await this.model('video').qcloudUploadVideo(uploadurl, file.path, params);
 	console.log('url');
 	console.log(url);
 	console.log('url');
