@@ -107,8 +107,9 @@ export default class extends think.model.base {
         if (err) {
           reject(err);
         } else {
-          console.log(data.Lolcation);
-          resolve(data.Location);
+          console.log(data.Location);
+          var url = 'http://' + data.Location;
+          resolve(url.replace('cn-north', 'costj'));
         }
       });
     });
