@@ -50,6 +50,8 @@ export default class extends Base {
     var file = think.extend({}, this.file('video'));
     var uploadurl = this.post('uploadurl');
 	var sign = this.post('sign');
+	console.log(uploadurl);
+	console.log(sign);
 
     var filepath = file.path;
 	console.log(filepath);

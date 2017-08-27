@@ -150,6 +150,8 @@ export default class extends think.model.base {
       //console.log(body);
 
       var parse_url = require('url').parse(url, true);
+	  console.log(parse_url.hostname););
+	  console.log(parse_url.path);
       var options = {
         host: parse_url.hostname,
         port: 443,
