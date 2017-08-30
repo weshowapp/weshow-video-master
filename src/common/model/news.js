@@ -76,6 +76,16 @@ export default class extends think.model.base {
 		}
 		videos[i].comments = comments;
 		videos[i].comment = comments.length;
+
+		let likes = await this.model('like').where({video_id: videos[i].id}).select();
+		videos[i].like = likes.length;
+
+	    if (i > 0) {
+		  videos[i].updateDescrip = videos[i].creator_name + '于' + (videos[i].create_time) + '跟进播报';
+	    }
+	    else if (i == 0) {
+		  videos[i].updateDescrip = videos[0].creator_name + '于' + (videos[0].create_time) + '最先播报';
+	    }
 	}
 	if (videos.length > 1) {
 		news.updateDescrip = videos[videos.length - 1].creator_name + '于' + (videos[videos.length - 1].create_time) + '更新了进展';

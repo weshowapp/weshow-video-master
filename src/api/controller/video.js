@@ -49,7 +49,7 @@ export default class extends Base {
 
   async deleteAction() {
     var vid = this.post('vid');
-    console.log(field_id);
+    console.log(vid);
 	
 	var video = await this.model('video').where({id: vid}).find();
 	var news_id = video.news_id;
@@ -118,6 +118,27 @@ export default class extends Base {
     return this.success({
       result: 'OK',
       errorCode: 0
+    });
+  }
+
+  async likeAction() {
+    var vid = this.post('vid');
+    var field_id = this.post('field_id');
+    var creator_id = this.post('creator_id');
+    var create_time = this.post('create_time');
+	
+    console.log(creator_id);
+
+    var result = await this.model('like').add({
+        creator: creator_id,
+        video_id: vid,
+        create_time: create_time
+    });
+
+    return this.success({
+      result: 'OK',
+	  video_id: result,
+      errorCode: result
     });
   }
 

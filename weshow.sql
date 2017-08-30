@@ -195,6 +195,41 @@ VALUES (1,1,1,1,'突然塌陷了？还是大车压塌的？',1503181437,0,0),
 /*!40000 ALTER TABLE `weshow_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Table structure for table `weshow_like`
+--
+
+DROP TABLE IF EXISTS `weshow_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_like` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator` int(20) NOT NULL DEFAULT '1',
+  `video_id` int(20) NOT NULL DEFAULT '1',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
+  KEY `creator_video` (`creator`, `video_id`),
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_like`
+--
+
+LOCK TABLES `weshow_like` WRITE;
+/*!40000 ALTER TABLE `weshow_like` DISABLE KEYS */;
+INSERT INTO `weshow_like` 
+VALUES (1,1,1,1503181437),
+  (2,2,1,1503182437),
+  (3,3,1,1503183437),
+  (4,4,2,1503184437),
+  (5,5,1,1503185437),
+  (6,6,3,1503186437),
+  (7,7,4,1503186437),
+  (8,1,1,1503186437);
+/*!40000 ALTER TABLE `weshow_like` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
