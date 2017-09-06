@@ -16,10 +16,17 @@ export default class extends Base {
   }
 
   async infoAction(){
-
-    let userInfo = await this.model('user').where({mobile: '15989389319'}).find();
+	let userid = this.get('userid');
+    let userInfo = await this.model('user').where({openid: userid}).find();
     delete userInfo.password;
     return this.json(userInfo);
+  }
+
+  async levelAction(){
+	let userid = this.get('userid');
+    let userInfo = await this.model('user').where({openid: userid}).find();
+    delete userInfo.password;
+    return this.json(userInfo.level);
   }
 
   /**

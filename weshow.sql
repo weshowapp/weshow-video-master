@@ -24,8 +24,10 @@ DROP TABLE IF EXISTS `weshow_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_user` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `level` smallint(3) unsigned NOT NULL DEFAULT '0',
   `gender` smallint(1) unsigned NOT NULL DEFAULT '0',
   `openid` varchar(32) NOT NULL DEFAULT '',
+  `mobile` varchar(16) NOT NULL DEFAULT '',
   `account` varchar(32) NOT NULL DEFAULT '',
   `name` varchar(60) NOT NULL DEFAULT '',
   `photo_url` text NOT NULL,
@@ -45,13 +47,13 @@ CREATE TABLE `weshow_user` (
 LOCK TABLES `weshow_user` WRITE;
 /*!40000 ALTER TABLE `weshow_user` DISABLE KEYS */;
 INSERT INTO `weshow_user` 
-VALUES (1,1,'1','wx-1','Zhan1','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',1503171637,1),
-  (2,1,'2','wx-2','Zhan2','https://tvax1.sinaimg.cn/crop.0.0.996.996.180/005WFisyly8fghoqxipmsj30ro0romzf.jpg',1503171637,1),
-  (3,1,'3','wx10000104','西居士','https://tva3.sinaimg.cn/crop.0.0.1125.1125.180/cc981db8jw8f1oifzwvxqj20v90v941q.jpg',1503171637,1),
-  (4,0,'4','wx147','筱沐羊','https://tva3.sinaimg.cn/crop.11.0.727.727.50/a26464c3jw8f907h6mn0aj20ku0k774w.jpg',1503171637,1),
-  (5,1,'5','wx6798','Malcolm','https://tva3.sinaimg.cn/crop.0.0.720.720.180/005vjZrTjw8edotcpsvndj30k00k040n.jpg',1503171637,1),
-  (6,0,'6','wx0014','Frieda小姐','https://tvax3.sinaimg.cn/crop.0.0.996.996.180/c33b59d9ly8fdftoeyeewj20ro0rp76n.jpg',1503171637,1),
-  (7,1,'7','wx00763','著名有钱人','https://tva3.sinaimg.cn/crop.0.0.180.180.180/4d114f3ejw1e8qgp5bmzyj2050050aa8.jpg',1503171637,1);
+VALUES (1,0,1,'1','1','wx-1','Zhan1','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',1503171637,1),
+  (2,0,1,'2','1','wx-2','Zhan2','https://tvax1.sinaimg.cn/crop.0.0.996.996.180/005WFisyly8fghoqxipmsj30ro0romzf.jpg',1503171637,1),
+  (3,0,1,'3','1','wx10000104','西居士','https://tva3.sinaimg.cn/crop.0.0.1125.1125.180/cc981db8jw8f1oifzwvxqj20v90v941q.jpg',1503171637,1),
+  (4,0,0,'4','1','wx147','筱沐羊','https://tva3.sinaimg.cn/crop.11.0.727.727.50/a26464c3jw8f907h6mn0aj20ku0k774w.jpg',1503171637,1),
+  (5,0,1,'5','1','wx6798','Malcolm','https://tva3.sinaimg.cn/crop.0.0.720.720.180/005vjZrTjw8edotcpsvndj30k00k040n.jpg',1503171637,1),
+  (6,0,0,'6','1','wx0014','Frieda小姐','https://tvax3.sinaimg.cn/crop.0.0.996.996.180/c33b59d9ly8fdftoeyeewj20ro0rp76n.jpg',1503171637,1),
+  (7,0,1,'7','1','wx00763','著名有钱人','https://tva3.sinaimg.cn/crop.0.0.180.180.180/4d114f3ejw1e8qgp5bmzyj2050050aa8.jpg',1503171637,1);
 /*!40000 ALTER TABLE `weshow_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
