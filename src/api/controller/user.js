@@ -12,9 +12,9 @@ export default class extends Base {
   async indexAction(){
     //auto render template file index_index.html
 
-    let userid = this.get('userid');
-    let userInfo = await this.model('user').select();
-    //delete userInfo.password;
+    let uid = this.get('uid');
+    let userInfo = await this.model('user').where({id: uid}).select();
+    delete userInfo.password;
     return this.json(userInfo);
   }
 
@@ -28,8 +28,17 @@ export default class extends Base {
   async levelAction(){
 	let userid = this.get('userid');
     let userInfo = await this.model('user').where({openid: userid}).find();
-    delete userInfo.password;
+    //delete userInfo.password;
     return this.json(userInfo.level);
+  }
+
+  async updlevelAction(){
+	let uid = this.get('uid');
+	let level = this.get('level');
+    let result = await this.model('user').where({id: uid}).update({
+      level: level
+    });
+    return this.json(result);
   }
 
   /**
