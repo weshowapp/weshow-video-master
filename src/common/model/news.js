@@ -103,6 +103,9 @@ export default class extends think.model.base {
 		if (creatorList.length > 1) {
 			news.creatorDescrip = creatorList[0].name + '等' + creatorList.length + '人共同拍摄';
 		}
+		else {
+			news.creatorDescrip = creatorList[0].name;
+		}
 	}
 		
 	news.showVideo = false;
