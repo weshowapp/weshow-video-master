@@ -95,7 +95,7 @@ export default class extends Base {
     console.log(poster_url);
 
     await this.model('video').where({field_id: field_id}).update({
-      poster_url: poster_url
+      poster_url: poster_url.replace('http://', 'https://')
     });
 
     return this.success({
@@ -112,7 +112,7 @@ export default class extends Base {
     console.log(video_url);
 
     await this.model('video').where({field_id: field_id}).update({
-      video_url: video_url
+      video_url: video_url.replace('http://', 'https://')
     });
 
     return this.success({
