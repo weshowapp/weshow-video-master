@@ -39,7 +39,7 @@ export default class extends Base {
 	
 	if (creator_level == 1 || creator_level == '1') {
       var rand = Math.round(Math.random() * 16);
-	  creator_id = '100';
+	  creator_id = '100' + rand;
 	  creator_photo = 'https://wx.ibobcat.com/static/user/avatar/photo' + rand + '.png';
 	  creator_name = '名' + rand;
 	}
