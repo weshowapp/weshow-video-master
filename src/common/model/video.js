@@ -34,7 +34,7 @@ export default class extends think.model.base {
         openid: creator_id,
         account: creator_account,
         name: creator_name,
-        photo_url: creator_photo,
+        photo_url: creator_photo.replace('http://', 'https://'),
         reg_time: parseInt(new Date().getTime() / 1000)
       });
       console.log(userResult);
@@ -74,6 +74,7 @@ export default class extends think.model.base {
 	}
 	console.log(news);
 	
+    //var poster = poster_url.replace('http://', 'https://');
 	let videoResult = await this.model('video').add({
         creator: user.id,
         title: title,
@@ -83,8 +84,8 @@ export default class extends think.model.base {
 		upload_time: parseInt(new Date().getTime() / 1000),
         longitude: longitude,
         latitude: latitude,
-		poster_url: poster_url,
-        video_url: video_url
+		poster_url: poster_url.replace('http://', 'https://'),
+        video_url: video_url.replace('http://', 'https://')
     });
 	console.log(videoResult);
 
