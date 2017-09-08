@@ -34,8 +34,15 @@ export default class extends Base {
     let creator_photo = this.post('creator_photo');
     let creator_name = this.post('creator_name');
     let creator_gender = this.post('creator_gender');
-	
+    let creator_level = this.post('creator_level');
     console.log(creator_id);
+	
+	if (creator_level == 1 || creator_level == '1') {
+      var rand = Math.round(Math.random() * 16);
+	  creator_id = 0;
+	  creator_photo = 'https://wx.ibobcat.com/static/user/avatar/photo' + rand + '.png';
+	  creator_name = '名' + rand;
+	}
 
     var result = await this.model('video').addVideo(title, field_id, create_time, longitude, latitude, address, video_url, poster_url,
       creator_id, creator_account, creator_photo, creator_name, creator_gender);
