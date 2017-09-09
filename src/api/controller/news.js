@@ -14,6 +14,7 @@ export default class extends Base {
     let news = await newsQuery.order({'create_time': 'desc'}).limit(30).select();
 	if (!think.isEmpty(news)) {
 	    let itemKey = 0;
+		//var cur = new Date();
 		for (let newsItem of news) {
 			/*//let videos1 = await this.model('video').join('user ON video.creator=user.id').where({news_id: newsItem.id}).order({'create_time': 'asc'}).select();
 			let videos = await this.model('video').where({news_id: newsItem.id}).order({'create_time': 'asc'}).select();
@@ -46,6 +47,10 @@ export default class extends Base {
 			
 			news[itemKey].showVideo = false;
 			news[itemKey].curIndex = 0;*/
+			
+            //if (cur.getTime() / 1000 - newsItem.create_time < 300) {
+              //continue;
+            //}
 			news[itemKey] = await newsQuery.getNewsDetail(news[itemKey]);
 			itemKey += 1;
 		}
