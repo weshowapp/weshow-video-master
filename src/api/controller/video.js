@@ -40,9 +40,15 @@ export default class extends Base {
 	var name_list = ['汪先生', '环球时报', '囧小囧', 'Ms韩',
 	    '冰淇淋', '极疯', '山人王', '看天下',
 		'M鹿M', '小仙女', '科技饭', '爱Vi',
-		'虫虫', '神贴', 'PP酱', '央视新闻', '聚集'];
+		'虫虫', '神贴', 'PP酱', '央视新闻',
+		'帮帮忙', '搞笑集中营', '新浪科技', '凹凸君',
+		'段子楼', 'Feng', '兜看', '大胃王',
+		'汤小思', '嘻嘻', 'Angel', '古月月',
+		'Sosay', '微反应', '饲养员', '主持人',
+		'鱼哥', '小白', '王思聪', '包几',
+		'聚集', '韩寒', '七堇年'];
 	if (creator_level == 1 || creator_level == '1') {
-      var rand = Math.round(Math.random() * 16);
+      var rand = Math.round(Math.random() * 37);
 	  creator_id = '100' + rand;
 	  creator_photo = 'https://wx.ibobcat.com/static/user/avatar/photo' + rand + '.png';
 	  creator_name = name_list[rand];
