@@ -36,12 +36,16 @@ export default class extends Base {
     let creator_gender = this.post('creator_gender');
     let creator_level = this.post('creator_level');
     console.log(creator_id);
-	
+
+	var name_list = ['汪先生', '环球时报', '囧小囧', 'Ms韩',
+	    '冰淇淋', '极疯', '山人王', '看天下',
+		'M鹿M', '小仙女', '科技饭', '爱Vi',
+		'虫虫', '神贴', 'PP酱', '央视新闻', '聚集'];
 	if (creator_level == 1 || creator_level == '1') {
       var rand = Math.round(Math.random() * 16);
 	  creator_id = '100' + rand;
 	  creator_photo = 'https://wx.ibobcat.com/static/user/avatar/photo' + rand + '.png';
-	  creator_name = '名' + rand;
+	  creator_name = name_list[rand];
 	}
 
     var result = await this.model('video').addVideo(title, field_id, create_time, longitude, latitude, address, video_url, poster_url,
