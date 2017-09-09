@@ -233,6 +233,35 @@ VALUES (1,1,1,1503181437),
 UNLOCK TABLES;
 
 
+--
+-- Table structure for table `weshow_feedback`
+--
+
+DROP TABLE IF EXISTS `weshow_feedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_feedback` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator` int(20) NOT NULL DEFAULT '1',
+  `creator_name` varchar(16) NOT NULL DEFAULT '',
+  `content` varchar(255) NOT NULL DEFAULT '',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_feedback`
+--
+
+LOCK TABLES `weshow_feedback` WRITE;
+/*!40000 ALTER TABLE `weshow_feedback` DISABLE KEYS */;
+INSERT INTO `weshow_feedback` 
+VALUES (1,1,'A1','很好，很有趣，很有用',1503481437);
+/*!40000 ALTER TABLE `weshow_feedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

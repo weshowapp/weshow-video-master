@@ -13,6 +13,8 @@ export default {
     'user',
     'comment',
     'auth',
+	'like',
+	'feedback',
   ],
 
   //可以公开访问的Action
