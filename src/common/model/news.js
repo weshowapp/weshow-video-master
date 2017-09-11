@@ -101,7 +101,7 @@ export default class extends think.model.base {
 		let creatorList = await this.model('user').where({'id': {'in': users}}).select();
 		news.creator_list = creatorList;
 		if (creatorList.length > 1) {
-			news.creatorDescrip = creatorList[0].name + ' 等' + creatorList.length + '人共同拍摄';
+			news.creatorDescrip = creatorList[0].name + ' 等' + creatorList.length + '人联合拍摄';
 		}
 		else {
 			news.creatorDescrip = creatorList[0].name;
