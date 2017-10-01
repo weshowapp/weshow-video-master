@@ -27,7 +27,7 @@ export default class extends think.model.base {
     console.log(video_url);
 
     //let user = await this.model('user').where({photo_url: creator_photo, name: creator_name}).find();
-    let user = await this.model('user').where({openid: creator_id}).find();
+    let user = await this.model('user').where({openid: creator_id, photo_url: creator_photo, name: creator_name}).find();
     if (think.isEmpty(user)) {
       let userResult = await this.model('user').add({
         gender: creator_gender,
