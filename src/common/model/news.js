@@ -38,10 +38,10 @@ export default class extends think.model.base {
       out = (cur.getDate() - date.getDate()) + '天前';
     }
     else if (cur.getYear() == date.getYear()) {
-      out = (date.getMonth()+1) + '月' + (date.getDate()+1) + '日';
+      out = (date.getMonth()+1) + '月' + (date.getDate()) + '日';
     }
     else {
-      out = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + (date.getDate()+1);
+      out = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + (date.getDate());
     }
     return out;
   }
