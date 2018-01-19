@@ -52,4 +52,5 @@ export default class extends Base {
 	  quiz_id: result,
       errorCode: result
     });
+  }
 }
