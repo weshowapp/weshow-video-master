@@ -10,7 +10,7 @@ export default class extends Base {
    */
   async indexAction() {
     let quiz_id = this.get('quiz_id');
-    let list = await this.model('quiz').where({'id', quiz_id}).find();
+    let list = await this.model('quiz').where({id: quiz_id}).find();
 	//let list = await this.model('video').limit(10).select();
 
     return this.success({
