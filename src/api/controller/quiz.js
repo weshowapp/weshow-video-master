@@ -10,7 +10,7 @@ export default class extends Base {
    */
   async indexAction() {
     let quiz_id = this.post('quiz_id');
-    let list = await this.model('quiz').where({id, quiz_id}).find();
+    let list = await this.model('video').where({id, quiz_id}).find();
 
     return this.success({
       quizList: list
