@@ -43,7 +43,7 @@ export default class extends Base {
             create_time: create_time,
             start_time: startTime,
 			questions: questList,
-			quest_count: quest_count;
+			quest_count: quest_count,
 			price: price
         });
 	
