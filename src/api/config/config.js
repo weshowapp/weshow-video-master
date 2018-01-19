@@ -15,6 +15,8 @@ export default {
     'auth',
 	'like',
 	'feedback',
+	'quiz',
+	'question',
   ],
 
   //可以公开访问的Action
