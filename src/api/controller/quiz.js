@@ -9,8 +9,9 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
-    let quiz_id = this.post('quiz_id');
-    let list = await this.model('video').where({id, quiz_id}).find();
+    //let quiz_id = this.post('quiz_id');
+    //let list = await this.model('video').where({id, quiz_id}).find();
+	let list = await this.model('video').limit(10).select();
 
     return this.success({
       quizList: list
