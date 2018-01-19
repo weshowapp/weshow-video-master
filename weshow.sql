@@ -32,7 +32,10 @@ CREATE TABLE `weshow_user` (
   `name` varchar(60) NOT NULL DEFAULT '',
   `photo_url` text NOT NULL,
   `reg_time` int(11) NOT NULL DEFAULT '0',
-  `enabled` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `enabled` tinyint(3) unsigned DEFAULT NULL,
+  `join_count` int(8) unsigned DEFAULT NULL,
+  `win_count` int(8) unsigned DEFAULT NULL,
+  `belance` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
   KEY `openid` (`openid`),
@@ -259,6 +262,86 @@ LOCK TABLES `weshow_feedback` WRITE;
 INSERT INTO `weshow_feedback` 
 VALUES (1,1,'A1','很好，很有趣，很有用',1503481437);
 /*!40000 ALTER TABLE `weshow_feedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `weshow_question`
+--
+
+DROP TABLE IF EXISTS `weshow_question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_question` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator` int(20) NOT NULL DEFAULT '1',
+  `creator_name` varchar(16) NOT NULL DEFAULT '',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `type` int(8) unsigned NOT NULL DEFAULT '0',
+  `level` int(4) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(32) NOT NULL DEFAULT '',
+  `content` varchar(255) NOT NULL DEFAULT '',
+  `item0` varchar(32) NOT NULL DEFAULT '',
+  `item1` varchar(32) NOT NULL DEFAULT '',
+  `item2` varchar(32) NOT NULL DEFAULT '',
+  `item3` varchar(32) NOT NULL DEFAULT '',
+  `item_count` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `answer` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `note` varchar(255) NOT NULL DEFAULT '',
+  `more` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_question`
+--
+
+LOCK TABLES `weshow_question` WRITE;
+/*!40000 ALTER TABLE `weshow_question` DISABLE KEYS */;
+INSERT INTO `weshow_question` 
+VALUES (1,1,'A1',1516199514,1,1,'','北京在古代曾经叫做?','蓟','京','燕','',3,0,'北京在秦代称作蓟',''),
+  (2,2,'A1',1516199514,1,1,'','以下哪种动物是哺乳动物？','鱼','燕子','恐龙','熊',4,3,'',''),
+  (3,3,'A1',1516199514,1,1,'','以下哪种动物不是哺乳动物？','豹子','虎鲸','恐龙','熊',4,2,'',''),
+  (4,4,'A1',1516199514,1,1,'','“采菊东篱下，悠然见南山。”出自以下哪位诗人之手？','李白','王维','陶渊明','',3,2,'',''),
+  (5,5,'A1',1516199514,1,1,'','大气压的单位是什么？','帕斯卡','培','码','',3,0,'',''),
+  (6,6,'A1',1516199514,1,1,'','家用电器所使用的电线，一般是以下哪种材料制成的？','铁','铜','铝','',3,1,'',''),
+  (30,30,'A1',1516199514,1,1,'','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'','');
+/*!40000 ALTER TABLE `weshow_question` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `weshow_quiz`
+--
+
+DROP TABLE IF EXISTS `weshow_quiz`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_quiz` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator` int(20) NOT NULL DEFAULT '1',
+  `creator_name` varchar(16) NOT NULL DEFAULT '',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(32) NOT NULL DEFAULT '',
+  `questions` varchar(255) NOT NULL DEFAULT '',
+  `quest_count` smallint(6) unsigned NOT NULL DEFAULT '1',
+  `level` int(4) unsigned NOT NULL DEFAULT '0',
+  `price` int(8) unsigned NOT NULL DEFAULT '0',
+  `start_time` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_quiz`
+--
+
+LOCK TABLES `weshow_quiz` WRITE;
+/*!40000 ALTER TABLE `weshow_quiz` DISABLE KEYS */;
+INSERT INTO `weshow_quiz` 
+VALUES (1,1,'A1',1516199514,'','1-3-6',3,1,1.0,1516219514);
+/*!40000 ALTER TABLE `weshow_quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
