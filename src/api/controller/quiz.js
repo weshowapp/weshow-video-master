@@ -17,7 +17,7 @@ export default class extends Base {
             //console.log(i);
 		    var questArr = [];
 			var arr = list.questions.split('-');
-		    for (var j = 0; j < arr.length; i++) {
+		    for (var j = 0; j < arr.length; j++) {
 				var quest_id = arr[j];
                 console.log(quest_id);
 				let questItem = await this.model('question').where({id: quest_id}).find();
