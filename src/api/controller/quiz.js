@@ -13,10 +13,10 @@ export default class extends Base {
     let list = await this.model('quiz').where({id: quiz_id}).find();
 	if (!think.isEmpty(list)) {
         console.log(list);
-		for (var i = 0; i < list.length; i++) {
-            console.log(i);
+		//for (var i = 0; i < list.length; i++) {
+            //console.log(i);
 		    var questArr = [];
-			var arr = list[i].questions.split('-');
+			var arr = list.questions.split('-');
 		    for (var j = 0; j < arr.length; i++) {
 				var quest_id = arr[j];
                 console.log(quest_id);
@@ -24,7 +24,7 @@ export default class extends Base {
 				questArr.push(questItem);
 			}
 			list.quest_array = questArr;
-		}
+		//}
 	}
 
     return this.success({
