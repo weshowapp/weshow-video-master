@@ -11,7 +11,19 @@ export default class extends Base {
   async indexAction() {
     let quiz_id = this.get('quiz_id');
     let list = await this.model('quiz').where({id: quiz_id}).find();
-	//let list = await this.model('video').limit(10).select();
+	if (!think.isEmpty(list)) {
+		for (var i = 0; i < list.length; i++) {
+		    var questArr = [];
+			var arr = list[i].questions.split('-');
+		    for (var j = 0; j < arr.length; i++) {
+				var quest_id = arr[j];
+                console.log(quest_id);
+				let questItem = await this.model('question').where({id: quest_id}).find();
+				questArr.push(questItem);
+			}
+			list.quest_array = questArr;
+		}
+	}
 
     return this.success({
       quizList: list
