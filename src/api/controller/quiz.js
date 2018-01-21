@@ -76,8 +76,8 @@ export default class extends Base {
 	
 	return this.success({
       result: 'OK',
-	  quiz_id: result,
-      errorCode: result
+	  quiz_id: quizResult,
+      errorCode: 0
     });
   }
 }
