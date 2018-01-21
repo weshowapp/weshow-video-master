@@ -52,7 +52,7 @@ export default class extends Base {
 	    + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
 		+ table + '))) ORDER BY id LIMIT 3;';
 	var list = await this.model('question').query(sql);
-    console.log(list);
+    console.log(list.length);
 	//var randId = maxid * random();
     //console.log(randId);
 	
@@ -62,12 +62,13 @@ export default class extends Base {
 	
 		let questList = '';
 		for (var i = 0; i < list.length; i++) {
+            console.log(list[i].id);
 			questList = questList + '-' + list[i].id;
 		}
 		let quizResult = await this.model('quiz').add({
             title: title,
             create_time: create_time,
-            start_time: startTime,
+            start_time: start_time,
 			questions: questList,
 			quest_count: quest_count,
 			price: price
