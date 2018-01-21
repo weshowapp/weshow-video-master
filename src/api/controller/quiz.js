@@ -52,7 +52,7 @@ export default class extends Base {
 	var randId = maxid * random();
     console.log(randId);
 	
-	let list = await this.model('question').where(id: randId).limit(quest_count).select();
+	let list = await this.model('question').where({id: randId}).limit(quest_count).select();
 	if (think.isEmpty(list)) {
 	}
 	
