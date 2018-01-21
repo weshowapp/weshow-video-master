@@ -38,16 +38,6 @@ export default class extends Base {
     console.log('addAction');
     console.log(quest_content);
 	
-		let questList = '';
-		for (var i = 0; i < list.length; i++) {
-            console.log(list[i].id);
-			if (i == 0) {
-				questList = list[i].id;
-			}
-			else {
-				questList = questList + '-' + list[i].id;
-			}
-		}
 		let questResult = await this.model('question').add({
             title: title,
             create_time: create_time,
