@@ -47,12 +47,15 @@ export default class extends Base {
     let start_time = this.post('start_time');
     console.log(quest_count);
 	
-	var maxid = await this.model('question').max('id').find();
-    console.log(maxid);
-	var randId = maxid * random();
-    console.log(randId);
+	var sql = 'SELECT * FROM ' + '\'question\'' + 'WHERE id >= (SELECT floor( RAND() * ((SELECT MAX(id) FROM '
+	    + '\'question\'' + ')-(SELECT MIN(id) FROM ' + '\'question\'' + ')) + (SELECT MIN(id) FROM '
+		+ '\'question\'' + '))) ORDER BY id LIMIT 1;';
+	var list = await this.model('question').query(sql);
+    console.log(list);
+	//var randId = maxid * random();
+    //console.log(randId);
 	
-	let list = await this.model('question').where({id: randId}).limit(quest_count).select();
+	//let list = await this.model('question').where({id: randId}).limit(quest_count).select();
 	if (think.isEmpty(list)) {
 	}
 	
