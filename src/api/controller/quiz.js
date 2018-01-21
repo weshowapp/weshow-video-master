@@ -47,12 +47,12 @@ export default class extends Base {
     let start_time = this.post('start_time');
     console.log(quest_count);
 	
-	var maxid = await this.model('question').max(id).find();
+	var maxid = await this.model('question').max('id').find();
     console.log(maxid);
 	var randId = maxid * random();
     console.log(randId);
 	
-	let list = await this.model('question').where(id, randId).limit(quest_count).select();
+	let list = await this.model('question').where(id: randId).limit(quest_count).select();
 	if (think.isEmpty(list)) {
 	}
 	
