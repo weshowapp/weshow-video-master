@@ -47,8 +47,8 @@ export default class extends Base {
     let start_time = this.post('start_time');
     console.log(quest_count);
 	
-	var sql = 'SELECT * FROM ' + '\'question\'' + ' WHERE id >= (SELECT floor( RAND() * ((SELECT MAX(id) FROM '
-	    + '\'question\'' + ')-(SELECT MIN(id) FROM ' + '\'question\'' + ')) + (SELECT MIN(id) FROM '
+	var sql = 'SELECT * FROM ' + '\'question\'' + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
+	    + '\'question\'' + ') - (SELECT MIN(id) FROM ' + '\'question\'' + ')) + (SELECT MIN(id) FROM '
 		+ '\'question\'' + '))) ORDER BY id LIMIT 1;';
 	var list = await this.model('question').query(sql);
     console.log(list);
