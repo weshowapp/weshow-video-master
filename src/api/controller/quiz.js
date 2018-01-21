@@ -21,6 +21,7 @@ export default class extends Base {
 				var quest_id = arr[j];
                 console.log(quest_id);
 				let questItem = await this.model('question').where({id: quest_id}).find();
+				questItem.answered = -1;
 				questArr.push(questItem);
 			}
 			list.quest_array = questArr;
@@ -39,8 +40,9 @@ export default class extends Base {
     let creator_id = this.post('creator_id');
     let creator_account = this.post('creator_account');
     let creator_level = this.post('creator_level');
-    let quest_level = this.post('quiz_level');
-    let quest_count = this.post('quest_count');
+    let quiz_level = this.post('quiz_level');
+    let quiz_category = this.post('quiz_category');
+    let quest_count = this.post('question_count');
     let price = this.post('price');
     let start_time = this.post('start_time');
     console.log(creator_id);
