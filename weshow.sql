@@ -338,7 +338,7 @@ CREATE TABLE `weshow_quiz` (
   `questions` varchar(255) NOT NULL DEFAULT '',
   `quest_count` smallint(6) unsigned NOT NULL DEFAULT '1',
   `level` int(4) unsigned NOT NULL DEFAULT '0',
-  `price` int(8) unsigned NOT NULL DEFAULT '0',
+  `price` float unsigned NOT NULL DEFAULT '0',
   `start_time` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
