@@ -48,8 +48,7 @@ export default class extends Base {
     let start_time = this.post('start_time');
     console.log('addAction');
     console.log(price);
-    console.log(quiz_level);
-    console.log(quiz_category);
+    console.log(quest_list);
     console.log(quest_count);
 	
 	var table = 'weshow_question';
@@ -66,6 +65,7 @@ export default class extends Base {
 	}
 	if (think.isEmpty(quest_list) || quest_list.length == 0) {
 		let quest_list = '';
+        console.log(quest_list);
 		for (var i = 0; i < list.length; i++) {
             console.log(list[i].id);
 			if (i == 0) {
@@ -75,12 +75,13 @@ export default class extends Base {
 				quest_list = quest_list + '-' + list[i].id;
 			}
 		}
+        console.log(quest_list);
 	}
 		let quizResult = await this.model('quiz').add({
             title: title,
             create_time: create_time,
             start_time: start_time,
-			questions: questList,
+			questions: quest_list,
 			quest_count: quest_count,
 			price: price
         });
