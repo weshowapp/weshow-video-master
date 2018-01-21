@@ -63,9 +63,9 @@ export default class extends Base {
 	//let list = await this.model('question').where({id: randId}).limit(quest_count).select();
 	if (think.isEmpty(list)) {
 	}
-	if (think.isEmpty(quest_list) || quest_list.length == 0) {
+	if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
 		let quest_list = '';
-        console.log(quest_list);
+        console.log('quest_list empty');
 		for (var i = 0; i < list.length; i++) {
             console.log(list[i].id);
 			if (i == 0) {
