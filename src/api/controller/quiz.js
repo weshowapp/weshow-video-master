@@ -45,12 +45,16 @@ export default class extends Base {
     let quest_count = this.post('question_count');
     let price = this.post('price');
     let start_time = this.post('start_time');
+    console.log('addAction');
+    console.log(price);
+    console.log(quiz_level);
+    console.log(quiz_category);
     console.log(quest_count);
 	
 	var table = 'weshow_question';
 	var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
 	    + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
-		+ table + '))) ORDER BY id LIMIT 3;';
+		+ table + '))) ORDER BY id LIMIT ' + quest_count + ';';
 	var list = await this.model('question').query(sql);
     console.log(list.length);
 	//var randId = maxid * random();
