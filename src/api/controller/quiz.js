@@ -47,7 +47,7 @@ export default class extends Base {
     let start_time = this.post('start_time');
     console.log(creator_id);
 	
-	let list = await this.model('question').orderby(rand()).limit(quest_count).select();
+	let list = await this.model('question').orderby(random()).limit(quest_count).select();
 	if (think.isEmpty(list)) {
 	}
 	
