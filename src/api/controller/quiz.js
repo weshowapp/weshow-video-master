@@ -63,7 +63,12 @@ export default class extends Base {
 		let questList = '';
 		for (var i = 0; i < list.length; i++) {
             console.log(list[i].id);
-			questList = questList + '-' + list[i].id;
+			if (i == 0) {
+				questList = list[i].id;
+			}
+			else {
+				questList = questList + '-' + list[i].id;
+			}
 		}
 		let quizResult = await this.model('quiz').add({
             title: title,
