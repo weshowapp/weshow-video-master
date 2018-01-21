@@ -41,7 +41,6 @@ export default class extends Base {
 		let questResult = await this.model('question').add({
             title: title,
             create_time: create_time,
-            start_time: start_time,
 			content: quest_content,
 			item_count: item_count,
 			item0: quest_item_a,
