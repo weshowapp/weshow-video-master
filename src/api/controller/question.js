@@ -32,7 +32,6 @@ export default class extends Base {
     let quest_item_b = this.post('quest_item_b');
     let quest_item_c = this.post('quest_item_c');
     let quest_item_d = this.post('quest_item_d');
-    let quest_item_d = this.post('quest_item_d');
     let item_count = this.post('item_count');
     let quest_answer = this.post('quest_answer');
     let note = this.post('note');
