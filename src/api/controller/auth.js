@@ -11,7 +11,7 @@ var querystring = require("querystring");
 const secId = 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M';
 const secKey = '';
 
-const appid = 'wxbd7f58ae73e01ea8';
+const appId = 'wxbd7f58ae73e01ea8';
 const sessionKey = '';
 var WXBizDataCrypt = require('./WXBizDataCrypt');
 
