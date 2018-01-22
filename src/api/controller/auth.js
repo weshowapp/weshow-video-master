@@ -11,6 +11,10 @@ var querystring = require("querystring");
 const secId = 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M';
 const secKey = '';
 
+const appid = 'wxbd7f58ae73e01ea8';
+const sessionKey = '';
+var WXBizDataCrypt = require('./WXBizDataCrypt');
+
 export default class extends Base {
   /**
    * index action
@@ -20,6 +24,17 @@ export default class extends Base {
 
     let avatar_path = think.RESOURCE_PATH + '/static/user/avatar/1.' + _.last(_.split('https://img6.xxx.com/img/image/smallpic/liutaoxiaotu.jpg', '.'));
     return this.success(avatar_path);
+  }
+
+  async decryptshareAction() {
+    let data = this.post('data');
+	let iv = this.post('iv');
+	var pc = new WXBizDataCrypt(appId, sessionKey);
+    var ddata = pc.decryptData(data, iv);
+	console.log(ddata);
+	return this.success({
+      dedata: ddata
+	});
   }
 
   async argsigAction() {
