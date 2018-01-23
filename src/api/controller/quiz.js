@@ -95,7 +95,7 @@ export default class extends Base {
   
   async updateshareAction() {
     var share_ticket = this.post('share_ticket');
-    var open_gid = this.post('open_gid');
+    var open_gid = this.post('gid');
     var qid = this.post('quiz_id');
     console.log(qid);
     console.log(open_gid);

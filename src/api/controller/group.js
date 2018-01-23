@@ -30,7 +30,7 @@ export default class extends Base {
   async addAction(){
     let add_id = this.post('add_id');
     let add_name = this.post('add_name');
-	let gid = this.get('open_gid');
+	let gid = this.get('gid');
 	let ticket = this.get('share_ticket');
 	let name = this.get('name');
     let add_time = this.post('add_time');

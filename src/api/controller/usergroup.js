@@ -34,13 +34,14 @@ export default class extends Base {
   }
 
   async addAction(){
-	let gid = this.get('open_gid');
-	let uid = this.get('openid');
+	let gid = this.get('gid');
+	let uid = this.get('userid');
 	let note = this.get('note');
     let check_time = this.post('check_time');
 	console.log('UserGroup.add');
 	console.log(uid);
 	console.log(gid);
+	console.log(check_time);
 	
     let addResult = await this.model('usergroup').add({
             check_time: check_time,
