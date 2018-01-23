@@ -340,6 +340,8 @@ CREATE TABLE `weshow_quiz` (
   `level` int(4) unsigned NOT NULL DEFAULT '0',
   `price` float unsigned NOT NULL DEFAULT '0',
   `start_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `share_ticket` varchar(64) NOT NULL DEFAULT '',
+  `open_gid` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -353,6 +355,68 @@ LOCK TABLES `weshow_quiz` WRITE;
 INSERT INTO `weshow_quiz` 
 VALUES (1,1,'A1',1516199514,'','1-3-6',3,1,1.0,1516219514);
 /*!40000 ALTER TABLE `weshow_quiz` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `weshow_group`
+--
+
+DROP TABLE IF EXISTS `weshow_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_group` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `add_id` int(20) NOT NULL DEFAULT '1',
+  `add_name` varchar(16) NOT NULL DEFAULT '',
+  `add_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(32) NOT NULL DEFAULT '',
+  `open_gid` varchar(64) NOT NULL DEFAULT '',
+  `share_ticket` varchar(64) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_group`
+--
+
+LOCK TABLES `weshow_group` WRITE;
+/*!40000 ALTER TABLE `weshow_group` DISABLE KEYS */;
+INSERT INTO `weshow_group` 
+VALUES (1,1,'A1',1516199514,'','1','1');
+/*!40000 ALTER TABLE `weshow_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `weshow_usergroup`
+--
+
+DROP TABLE IF EXISTS `weshow_usergroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_usergroup` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(20) NOT NULL DEFAULT '1',
+  `gid` int(20) NOT NULL DEFAULT '1',
+  `openid` varchar(32) NOT NULL DEFAULT '',
+  `open_gid` varchar(64) NOT NULL DEFAULT '',
+  `note` varchar(32) NOT NULL DEFAULT '',
+  `check_time` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_usergroup`
+--
+
+LOCK TABLES `weshow_usergroup` WRITE;
+/*!40000 ALTER TABLE `weshow_usergroup` DISABLE KEYS */;
+INSERT INTO `weshow_usergroup` 
+VALUES (1,1,1,'A1','A1','',1516199514);
+/*!40000 ALTER TABLE `weshow_usergroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

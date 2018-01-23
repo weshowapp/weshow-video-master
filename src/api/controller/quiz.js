@@ -92,4 +92,22 @@ export default class extends Base {
       errorCode: 0
     });
   }
+  
+  async updateshareAction() {
+    var share_ticket = this.post('share_ticket');
+    var open_gid = this.post('open_gid');
+    var qid = this.post('quiz_id');
+    console.log(qid);
+    console.log(open_gid);
+
+    await this.model('quiz').where({id: qid}).update({
+      open_gid: open_gid,
+	  share_ticket: share_ticket
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
 }

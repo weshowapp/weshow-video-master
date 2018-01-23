@@ -17,6 +17,8 @@ export default {
 	'feedback',
 	'quiz',
 	'question',
+	'group',
+	'usergroup',
   ],
 
   //可以公开访问的Action
