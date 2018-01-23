@@ -38,6 +38,9 @@ export default class extends Base {
 	let uid = this.get('openid');
 	let note = this.get('note');
     let check_time = this.post('check_time');
+	console.log('UserGroup.add');
+	console.log(uid);
+	console.log(gid);
 	
     let addResult = await this.model('usergroup').add({
             check_time: check_time,

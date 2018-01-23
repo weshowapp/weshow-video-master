@@ -34,6 +34,10 @@ export default class extends Base {
 	let ticket = this.get('share_ticket');
 	let name = this.get('name');
     let add_time = this.post('add_time');
+	console.log('Group.add');
+	console.log(add_id);
+	console.log(add_name);
+	console.log(gid);
 	
     let addResult = await this.model('group').add({
 		add_id: add_id,
