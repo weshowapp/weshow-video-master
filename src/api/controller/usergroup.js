@@ -34,9 +34,9 @@ export default class extends Base {
   }
 
   async addAction(){
-	let gid = this.get('gid');
-	let uid = this.get('userid');
-	let note = this.get('note');
+	let gid = this.post('gid');
+	let uid = this.post('userid');
+	let note = this.post('note');
     let check_time = this.post('check_time');
 	console.log('UserGroup.add');
 	console.log(uid);

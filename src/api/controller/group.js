@@ -30,9 +30,9 @@ export default class extends Base {
   async addAction(){
     let add_id = this.post('add_id');
     let add_name = this.post('add_name');
-	let gid = this.get('gid');
-	let ticket = this.get('share_ticket');
-	let name = this.get('name');
+	let gid = this.post('gid');
+	let ticket = this.post('share_ticket');
+	let name = this.post('name');
     let add_time = this.post('add_time');
 	console.log('Group.add');
 	console.log(add_id);
