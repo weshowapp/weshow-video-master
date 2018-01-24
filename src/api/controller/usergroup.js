@@ -11,25 +11,25 @@ export default class extends Base {
    */
   async getbygidAction(){
     let id = this.get('gid');
-    let info = await this.model('usergroup').where({id: id}).find();
+    let info = await this.model('usergroup').where({id: id}).select();
     return this.json(info);
   }
 
   async getbyopengidAction(){
 	let gid = this.get('open_gid');
-    let info = await this.model('usergroup').where({open_gid: gid}).find();
+    let info = await this.model('usergroup').where({open_gid: gid}).select();
     return this.json(info);
   }
 
   async getbyuidAction(){
 	let uid = this.get('uid');
-    let info = await this.model('usergroup').where({uid: uid}).find();
+    let info = await this.model('usergroup').where({uid: uid}).select();
     return this.json(info);
   }
 
   async getbyopenidAction(){
 	let uid = this.get('openid');
-    let info = await this.model('usergroup').where({openid: uid}).find();
+    let info = await this.model('usergroup').where({openid: uid}).select();
     return this.json(info);
   }
 

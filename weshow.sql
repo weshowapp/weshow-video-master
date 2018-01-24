@@ -425,6 +425,36 @@ VALUES (1,1,1,'A1','A1','',1516199514);
 UNLOCK TABLES;
 
 
+--
+-- Table structure for table `weshow_quizuser`
+--
+
+DROP TABLE IF EXISTS `weshow_quizuser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_quizuser` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(20) NOT NULL DEFAULT '1',
+  `quizid` int(20) NOT NULL DEFAULT '1',
+  `openid` varchar(32) NOT NULL DEFAULT '',
+  `note` varchar(32) NOT NULL DEFAULT '',
+  `add_time` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_quizuser`
+--
+
+LOCK TABLES `weshow_quizuser` WRITE;
+/*!40000 ALTER TABLE `weshow_quizuser` DISABLE KEYS */;
+INSERT INTO `weshow_quizuser` 
+VALUES (1,1,1,'A1','A1',1516199514);
+/*!40000 ALTER TABLE `weshow_quizuser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
