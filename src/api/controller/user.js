@@ -52,8 +52,8 @@ export default class extends Base {
         city: city,
 		gender: gender,
 		language: language,
-		avatarUrl: avatarUrl,
-        add_time: add_time,
+		photo_url: avatarUrl,
+        reg_time: add_time,
 		name: name
     });
 	

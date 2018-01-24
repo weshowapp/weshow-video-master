@@ -34,7 +34,7 @@ CREATE TABLE `weshow_user` (
   `province` varchar(32) NOT NULL DEFAULT '',
   `city` varchar(32) NOT NULL DEFAULT '',
   `language` varchar(32) NOT NULL DEFAULT '',
-  `photo_url` text NOT NULL,
+  `photo_url` text NOT NULL DEFAULT '',
   `reg_time` int(11) NOT NULL DEFAULT '0',
   `enabled` tinyint(3) unsigned DEFAULT NULL,
   `join_count` int(8) unsigned DEFAULT NULL,
