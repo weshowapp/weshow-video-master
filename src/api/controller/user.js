@@ -32,6 +32,38 @@ export default class extends Base {
     return this.json(userInfo.level);
   }
 
+  async addAction(){
+    let userid = this.post('userid');
+    let name = this.post('name');
+    let country = this.post('country');
+    let province = this.post('province');
+    let city = this.post('city');
+    let gender = this.post('gender');
+    let language = this.post('language');
+    let avatarUrl = this.post('avatarUrl');
+    let add_time = this.post('add_time');
+	console.log('User.add');
+	console.log(name);
+	
+    let addResult = await this.model('user').add({
+		openid: userid,
+		country: country,
+		province: province,
+        city: city,
+		gender: gender,
+		language: language,
+		avatarUrl: avatarUrl,
+        add_time: add_time,
+		name: name
+    });
+	
+	return this.success({
+      result: 'OK',
+	  uid: addResult,
+      errorCode: 0
+    });
+  }
+
   async updlevelAction(){
 	let uid = this.get('uid');
 	let level = this.get('level');

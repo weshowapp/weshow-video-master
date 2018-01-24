@@ -28,19 +28,22 @@ export default class extends Base {
   }
 
   async addAction(){
-    let add_id = this.post('add_id');
+    let uid = this.post('uid');
+    let add_uid = this.post('add_uid');
     let add_name = this.post('add_name');
 	let gid = this.post('gid');
 	let ticket = this.post('share_ticket');
 	let name = this.post('name');
     let add_time = this.post('add_time');
 	console.log('Group.add');
-	console.log(add_id);
+	console.log(uid);
+	console.log(add_uid);
 	console.log(add_name);
 	console.log(gid);
 	
     let addResult = await this.model('group').add({
-		add_id: add_id,
+		uid: uid,
+		add_uid: add_uid,
 		add_name: add_name,
         add_time: add_time,
         open_gid: gid,
