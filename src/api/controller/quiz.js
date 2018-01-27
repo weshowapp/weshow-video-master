@@ -38,9 +38,10 @@ export default class extends Base {
     let openid = this.get('openid');
     console.log(openid);
     let quizIdList = await this.model('quizuser').field("quizid").where({openid: openid}).select();
+	let list = null;
     console.log(quizIdList);
 	if (!think.isEmpty(quizIdList)) {
-        let list = await this.model('quiz').where({'quizid': ["IN", quizIdList]}).select();
+        list = await this.model('quiz').where({'quizid': ["IN", quizIdList]}).select();
 	    if (!think.isEmpty(list)) {
           console.log(list);
 		//for (var i = 0; i < list.length; i++) {
