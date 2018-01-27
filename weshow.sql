@@ -340,6 +340,7 @@ CREATE TABLE `weshow_quiz` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `creator` int(20) NOT NULL DEFAULT '1',
   `creator_name` varchar(16) NOT NULL DEFAULT '',
+  `creator_photo` text NOT NULL DEFAULT '',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `title` varchar(32) NOT NULL DEFAULT '',
   `questions` varchar(255) NOT NULL DEFAULT '',
