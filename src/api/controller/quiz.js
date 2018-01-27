@@ -33,6 +33,33 @@ export default class extends Base {
     });
 
   }
+  
+  async getbyuserAction() {
+    let openid = this.get('openid');
+    let quizIdList = await this.model('quizuser').where({openid: openid}).select();
+    let list = await this.model('quiz').where('id').in(quizIdList).select();
+	if (!think.isEmpty(list)) {
+        console.log(list);
+		//for (var i = 0; i < list.length; i++) {
+            //console.log(i);
+		    var questArr = [];
+			var arr = list.questions.split('-');
+		    for (var j = 0; j < arr.length; j++) {
+				var quest_id = arr[j];
+                console.log(quest_id);
+				let questItem = await this.model('question').where({id: quest_id}).find();
+				questItem.answered = -1;
+				questArr.push(questItem);
+			}
+			list.quest_array = questArr;
+		//}
+	}
+
+    return this.success({
+      quizList: list
+    });
+
+  }
 
   async addAction() {
     let title = this.post('title');
