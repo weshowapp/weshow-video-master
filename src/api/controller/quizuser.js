@@ -47,5 +47,24 @@ export default class extends Base {
       errorCode: 0
     });
   }
+  
+  async updatestatusAction() {
+    var gstatus = this.post('status');
+    var uid = this.post('uid');
+    var openid = this.post('openid');
+    var qid = this.post('quizid');
+    console.log(qid);
+    console.log(openid);
 
+    await this.model('quizuser').where({quizid: qid}).update({
+      openid: openid,
+	  uid: uid,
+	  game_status: gstatus
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
 }
