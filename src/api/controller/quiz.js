@@ -41,7 +41,12 @@ export default class extends Base {
 	let list = null;
     console.log(quizIdList);
 	if (!think.isEmpty(quizIdList)) {
-        list = await this.model('quiz').where({'quizid': ["IN", quizIdList]}).select();
+		var qidList = [];
+		for (var i = 0; i < quizIdList.length; i++) {
+			qidList.push(quizIdList[i].quizid);
+		}
+        console.log(qidList);
+        list = await this.model('quiz').where({'quizid': ["IN", qidList]}).select();
 	    if (!think.isEmpty(list)) {
           console.log(list);
 		//for (var i = 0; i < list.length; i++) {
