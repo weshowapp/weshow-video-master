@@ -52,13 +52,15 @@ export default class extends Base {
 		//for (var i = 0; i < list.length; i++) {
             //console.log(i);
 		    var questArr = [];
-			var arr = list.questions.split('-');
-		    for (var j = 0; j < arr.length; j++) {
-				var quest_id = arr[j];
-                console.log(quest_id);
-				let questItem = await this.model('question').where({id: quest_id}).find();
-				questItem.answered = -1;
-				questArr.push(questItem);
+			if (!think.isEmpty(list.questions)) {
+			    var arr = list.questions.split('-');
+		        for (var j = 0; j < arr.length; j++) {
+				    var quest_id = arr[j];
+                    console.log(quest_id);
+				    let questItem = await this.model('question').where({id: quest_id}).find();
+				    questItem.answered = -1;
+				    questArr.push(questItem);
+			    }
 			}
 			list.quest_array = questArr;
 		//}
