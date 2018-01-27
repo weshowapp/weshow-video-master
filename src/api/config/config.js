@@ -19,6 +19,7 @@ export default {
 	'question',
 	'group',
 	'usergroup',
+	'quizuser',
   ],
 
   //可以公开访问的Action
