@@ -70,6 +70,8 @@ export default class extends Base {
     let title = this.post('title');
     let create_time = this.post('create_time');
     let creator_id = this.post('creator_id');
+    let creator_name = this.post('creator_name');
+    let creator_photo = this.post('creator_photo');
     let creator_account = this.post('creator_account');
     let creator_level = this.post('creator_level');
     let quiz_level = this.post('quiz_level');
@@ -111,11 +113,16 @@ export default class extends Base {
 	}
 		let quizResult = await this.model('quiz').add({
             title: title,
+            creator: creator_id,
+            creator_name: creator_name,
+            creator_photo: creator_photo,
             create_time: create_time,
             start_time: start_time,
 			questions: quest_list,
 			quest_count: quest_count,
-			price: price
+			price: price,
+			level: quiz_level,
+			category: quiz_category
         });
 	
 	return this.success({
