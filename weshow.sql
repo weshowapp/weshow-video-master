@@ -362,7 +362,7 @@ CREATE TABLE `weshow_quiz` (
 LOCK TABLES `weshow_quiz` WRITE;
 /*!40000 ALTER TABLE `weshow_quiz` DISABLE KEYS */;
 INSERT INTO `weshow_quiz` 
-VALUES (1,1,'A1',1516199514,'','1-3-6',3,1,1.0,1,1516219514,'','');
+VALUES (1,1,'A1','',1516199514,'','1-3-6',3,1,1.0,1,1516219514,'','');
 /*!40000 ALTER TABLE `weshow_quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
