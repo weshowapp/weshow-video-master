@@ -36,8 +36,10 @@ export default class extends Base {
   
   async getbyuserAction() {
     let openid = this.get('openid');
-    let quizIdList = await this.model('quizuser').where({openid: openid}).select();
-    let list = await this.model('quiz').where('id').in(quizIdList).select();
+    console.log(openid);
+    let quizIdList = await this.model('quizuser').field("quizid").where({openid: openid}).select();
+    console.log(quizIdList);
+    let list = await this.model('quiz').where({quizid, ["IN", quizIdList]}).select();
 	if (!think.isEmpty(list)) {
         console.log(list);
 		//for (var i = 0; i < list.length; i++) {
