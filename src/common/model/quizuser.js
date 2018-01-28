@@ -32,12 +32,20 @@ export default class extends think.model.base {
 	    console.log('begin calculateGain');
 	    //全部回答完成
 		let winList = await this.model('quizuser').where({quizid: qid, game_status: 1}).select();
+	    console.log('winList');
+	    console.log(winList);
 		if (!think.isEmpty(winList)) {
 		    //let quiz = await this.model('quiz').where({id: qid}).find();
 			if (!think.isEmpty(quiz)) {
 				var winCount = winList.length;
 				var price = quiz.price / winCount;
+	            console.log('price');
+	            console.log(price);
+	            console.log('winCount');
+	            console.log(winCount);
 				for (var i = 0; i < winCount; i++) {
+	                console.log('winItem');
+	                console.log(winList[i]);
 				    await this.model('quizuser').where({quizid: qid, openid: winList[i].openid}).update({
 					    game_gain: price
 				    });
