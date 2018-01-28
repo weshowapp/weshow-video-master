@@ -47,7 +47,7 @@ export default class extends Base {
   async getansweredAction() {
 	let quizid = this.get('quizid');
 	let question_id = this.get('question_id');
-    let info = await this.model('quizuser').where({quizid: quizid, question_id: question_id}).select();k'j'y'f'y'hu
+    let info = await this.model('quizuser').where({quizid: quizid, question_id: question_id}).select();
 	if (!think.isEmpty(info)) {
 		for (var i = 0; i < info.length; i++) {
             let userInfo = await this.model('user').where({openid: info[i].openid}).find();
