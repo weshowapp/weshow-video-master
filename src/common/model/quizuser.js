@@ -11,8 +11,11 @@ export default class extends think.model.base {
    * @returns {Promise.<*>}
    */
   async calculateGain(qid){
-    
+	console.log('calculateGain');
+	console.log(qid);
+	
 	let quiz = await this.model('quiz').where({id: qid}).find();
+	console.log(quiz);
 	var quizEndTime = 0;
 	if (!think.isEmpty(quiz)) {
 		if (quiz.win_users >= 0) {
@@ -20,11 +23,13 @@ export default class extends think.model.base {
 		}
 		quizEndTime = quiz.start_time + quiz.quest_count * 15;
 	}
+	console.log(quizEndTime);
 	
     var cur = new Date();
     var curTime = cur.getTime() / 1000;
     let info = await this.model('quizuser').where({quizid: qid, game_status: 0}).select();
 	if (think.isEmpty(info) || (!think.isEmpty(quiz) && curTime > quizEndTime - 5)) {
+	    console.log('begin calculateGain');
 	    //全部回答完成
 		let winList = await this.model('quizuser').where({quizid: qid, game_status: 1}).select();
 		if (!think.isEmpty(winList)) {
