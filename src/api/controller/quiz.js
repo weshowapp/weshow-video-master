@@ -46,7 +46,7 @@ export default class extends Base {
 			qidList.push(quizIdList[i].quizid);
 		}
         console.log(qidList);
-        list = await this.model('quiz').where({'id': ["IN", qidList]}).select();
+        list = await this.model('quiz').where({'id': ["IN", qidList]}).order('start_time DESC').select();
 	    if (!think.isEmpty(list)) {
           console.log(list);
 		//for (var i = 0; i < list.length; i++) {
