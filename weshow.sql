@@ -449,7 +449,7 @@ CREATE TABLE `weshow_quizuser` (
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
   `add_time` int(16) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `account` (`openid`, `quizid`)
+  UNIQUE KEY `account` (`openid`, `quizid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
