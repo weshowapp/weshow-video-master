@@ -94,9 +94,7 @@ export default class extends Base {
     console.log(qid);
     console.log(gstatus);
 
-    await this.model('quizuser').where({quizid: qid}).update({
-      openid: openid,
-	  uid: uid,
+    await this.model('quizuser').where({quizid: qid, openid: openid}).update({
 	  game_status: gstatus
     });
 	
