@@ -97,28 +97,29 @@ export default class extends Base {
 	  game_status: gstatus
     });
 	
-    let info = await this.model('quizuser').where({quizid: qid, answer_status: 0}).select();
+    let info = await this.model('quizuser').where({quizid: qid, game_status: 0}).select();
 	if (think.isEmpty(info)) {
 	    //全部回答完成
-		let winList = await this.model('quizuser').where({quizid: qid, answer_status: 1}).select();
+		let winList = await this.model('quizuser').where({quizid: qid, game_status: 1}).select();
 		if (!think.isEmpty(winList)) {
 		    let quiz = await this.model('quiz').where({id: qid}).find();
 			if (!think.isEmpty(quiz)) {
 				var winCount = winList.length;
 				var price = quiz.price / winCount;
 				for (var i = 0; i < winCount; i++) {
+				    await this.model('quizuser').where({quizid: qid, openid: winList[i].openid}).update({
+					    game_gain: price
+				    });
+				
+				    var perUserPrice = price;
 				    let userInfo = await this.model('user').where({openid: winList[i].openid}).find();
     				if (!think.isEmpty(userInfo)) {
-	    				price = price + userInfo.win;
+	    				perUserPrice = perUserPrice + userInfo.win;
 		    		}
 			    	let result = await this.model('user').where({openid: winList[i].openid}).update({
-				    	win: price
+				    	win: perUserPrice
 				    });
 				}
-
-				await this.model('quizuser').where({quizid: qid}).update({
-					game_gain: price
-				});
 
 				await this.model('quiz').where({id: qid}).update({
 					win_users: winCount
