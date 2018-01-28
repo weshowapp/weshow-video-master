@@ -448,7 +448,8 @@ CREATE TABLE `weshow_quizuser` (
   `game_status` tinyint(3) NOT NULL DEFAULT '0',
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
   `add_time` int(16) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `account` (`openid`, `quizid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
