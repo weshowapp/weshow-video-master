@@ -9,22 +9,57 @@ export default class extends Base {
   async getbyquizidAction(){
 	let qid = this.get('quizid');
     let info = await this.model('quizuser').where({quizid: qid}).select();
+	if (!think.isEmpty(info)) {
+		for (var i = 0; i < info.length; i++) {
+            let userInfo = await this.model('user').where({openid: info[i].openid}).find();
+	        if (!think.isEmpty(userInfo)) {
+	          info[i].user_photo = userInfo.photo_url;
+	        }
+		}
+	}
     return this.json(info);
   }
   
-  async getbyuidAction(){
+  async getbyuidAction() {
 	let uid = this.get('uid');
     let info = await this.model('quizuser').where({uid: uid}).select();
+    let userInfo = await this.model('user').where({id: uid}).find();
+	if (!think.isEmpty(info) && !think.isEmpty(userInfo)) {
+		for (var i = 0; i < info.length; i++) {
+	        info[i].user_photo = userInfo.photo_url;
+		}
+	}
     return this.json(info);
   }
 
-  async getbyopenidAction(){
+  async getbyopenidAction() {
 	let uid = this.get('openid');
     let info = await this.model('quizuser').where({openid: uid}).select();
+    let userInfo = await this.model('user').where({openid: uid}).find();
+	if (!think.isEmpty(info) && !think.isEmpty(userInfo)) {
+		for (var i = 0; i < info.length; i++) {
+	        info[i].user_photo = userInfo.photo_url;
+		}
+	}
     return this.json(info);
   }
 
-  async addAction(){
+  async getansweredAction() {
+	let quizid = this.get('quizid');
+	let question_id = this.get('question_id');
+    let info = await this.model('quizuser').where({quizid: quizid, question_id: question_id}).select();k'j'y'f'y'hu
+	if (!think.isEmpty(info)) {
+		for (var i = 0; i < info.length; i++) {
+            let userInfo = await this.model('user').where({openid: info[i].openid}).find();
+	        if (!think.isEmpty(userInfo)) {
+	          info[i].user_photo = userInfo.photo_url;
+	        }
+		}
+	}
+    return this.json(info);
+  }
+
+  async addAction() {
 	let quizid = this.post('quizid');
 	let uid = this.post('userid');
 	let note = this.post('note');
@@ -42,7 +77,7 @@ export default class extends Base {
         });
 	
 	return this.success({
-      result: 'OK',
+      result: 'OK',谁打我8u'e'u'we
 	  rid: addResult,
       errorCode: 0
     });
