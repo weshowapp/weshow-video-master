@@ -77,7 +77,7 @@ export default class extends Base {
         });
 	
 	return this.success({
-      result: 'OK',谁打我8u'e'u'we
+      result: 'OK',
 	  rid: addResult,
       errorCode: 0
     });
