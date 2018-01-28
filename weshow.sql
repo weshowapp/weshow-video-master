@@ -446,6 +446,7 @@ CREATE TABLE `weshow_quizuser` (
   `note` varchar(32) NOT NULL DEFAULT '',
   `answer_status` int(20) NOT NULL DEFAULT '0',
   `game_status` tinyint(3) NOT NULL DEFAULT '0',
+  `game_gain` float NOT NULL DEFAULT '0',
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
   `add_time` int(16) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -460,7 +461,7 @@ CREATE TABLE `weshow_quizuser` (
 LOCK TABLES `weshow_quizuser` WRITE;
 /*!40000 ALTER TABLE `weshow_quizuser` DISABLE KEYS */;
 INSERT INTO `weshow_quizuser` 
-VALUES (1,1,1,'A1','A1',0,0,0,1516199514);
+VALUES (1,1,1,'A1','A1',0,0,0,0,1516199514);
 /*!40000 ALTER TABLE `weshow_quizuser` ENABLE KEYS */;
 UNLOCK TABLES;
 

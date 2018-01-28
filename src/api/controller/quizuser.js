@@ -89,13 +89,38 @@ export default class extends Base {
     var openid = this.post('openid');
     var qid = this.post('quizid');
     console.log(qid);
-    console.log(openid);
+    console.log(gstatus);
 
     await this.model('quizuser').where({quizid: qid}).update({
       openid: openid,
 	  uid: uid,
 	  game_status: gstatus
     });
+	
+    let info = await this.model('quizuser').where({quizid: qid, answer_status: 0}).select();
+	if (think.isEmpty(info)) {
+	    //全部回答完成
+		let winList = await this.model('quizuser').where({quizid: qid, answer_status: 1}).select();
+		if (!think.isEmpty(winList)) {
+		    let quiz = await this.model('quiz').where({id: qid}).find();
+			if (!think.isEmpty(quiz)) {
+				var price = quiz.price / winList.length;
+				for (var i = 0; i < winList.length; i++) {
+				    let userInfo = await this.model('user').where({openid: winList[i].openid}).find();
+    				if (!think.isEmpty(userInfo)) {
+	    				price = price + userInfo.win;
+		    		}
+			    	let result = await this.model('user').where({openid: winList[i].openid}).update({
+				    	win: price
+				    });
+				}
+
+				await this.model('quizuser').where({quizid: qid}).update({
+					game_gain: price
+				});
+			}
+		}
+	}
 
     return this.success({
       result: 'OK',
