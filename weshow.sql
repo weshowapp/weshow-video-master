@@ -349,7 +349,7 @@ CREATE TABLE `weshow_quiz` (
   `category` int(4) unsigned NOT NULL DEFAULT '0',
   `price` float unsigned NOT NULL DEFAULT '0',
   `min_user` int(8) unsigned NOT NULL DEFAULT '0',
-  `win_users` int(8) unsigned NOT NULL DEFAULT '0',
+  `win_users` int(8) NOT NULL DEFAULT '-1',
   `start_time` int(11) unsigned NOT NULL DEFAULT '0',
   `share_ticket` varchar(64) NOT NULL DEFAULT '',
   `open_gid` varchar(64) NOT NULL DEFAULT '',
