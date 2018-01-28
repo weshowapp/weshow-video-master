@@ -104,8 +104,9 @@ export default class extends Base {
 		if (!think.isEmpty(winList)) {
 		    let quiz = await this.model('quiz').where({id: qid}).find();
 			if (!think.isEmpty(quiz)) {
-				var price = quiz.price / winList.length;
-				for (var i = 0; i < winList.length; i++) {
+				var winCount = winList.length;
+				var price = quiz.price / winCount;
+				for (var i = 0; i < winCount; i++) {
 				    let userInfo = await this.model('user').where({openid: winList[i].openid}).find();
     				if (!think.isEmpty(userInfo)) {
 	    				price = price + userInfo.win;
@@ -117,6 +118,10 @@ export default class extends Base {
 
 				await this.model('quizuser').where({quizid: qid}).update({
 					game_gain: price
+				});
+
+				await this.model('quiz').where({id: qid}).update({
+					win_users: winCount
 				});
 			}
 		}
