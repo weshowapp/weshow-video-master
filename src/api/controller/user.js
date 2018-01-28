@@ -74,6 +74,48 @@ export default class extends Base {
     return this.json(result);
   }
 
+  async addpriceAction(){
+	let userid = this.get('openid');
+	let price = this.get('price');
+
+    let userInfo = await this.model('user').where({openid: userid}).find();
+	if (!think.isEmpty(userInfo)) {
+	  price = price + userInfo.win;
+	}
+    let result = await this.model('user').where({openid: userid}).update({
+      win: price
+    });
+    return this.json(result);
+  }
+
+  async addreliveAction(){
+	let userid = this.get('openid');
+	let relive = this.get('relive');
+
+    let userInfo = await this.model('user').where({openid: userid}).find();
+	if (!think.isEmpty(userInfo)) {
+	  relive = relive + userInfo.relive;
+	}
+    let result = await this.model('user').where({openid: userid}).update({
+      relive: relive
+    });
+    return this.json(result);
+  }
+
+  async addquestioncountAction(){
+	let userid = this.get('openid');
+	let question_count = this.get('question_count');
+
+    let userInfo = await this.model('user').where({openid: userid}).find();
+	if (!think.isEmpty(userInfo)) {
+	  question_count = question_count + userInfo.question_count;
+	}
+    let result = await this.model('user').where({openid: userid}).update({
+      question_count: question_count
+    });
+    return this.json(result);
+  }
+
   /**
    * 保存用户头像
    * @returns {Promise.<void>}

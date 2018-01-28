@@ -67,4 +67,23 @@ export default class extends Base {
       errorCode: 0
     });
   }
+  
+  async updateansweredAction() {
+    var userid = this.post('openid');
+    var question_id = this.post('question_id');
+    var qid = this.post('quizid');
+    let answer_time = this.post('answer_time');
+    console.log(qid);
+    console.log(question_id);
+
+    await this.model('quizuser').where({quizid: qid, openid: userid}).update({
+      answer_status: question_id,
+	  answer_time: answer_time
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
 }
