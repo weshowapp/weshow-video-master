@@ -37,7 +37,7 @@ export default class extends Base {
   async getbyuserAction() {
     let openid = this.get('openid');
     console.log(openid);
-    let quizIdList = await this.model('quizuser').field("quizid").where({openid: openid}).select();
+    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).select();
 	let list = null;
     console.log(quizIdList);
 	if (!think.isEmpty(quizIdList)) {
@@ -49,11 +49,11 @@ export default class extends Base {
         list = await this.model('quiz').where({'id': ["IN", qidList]}).order('start_time DESC').select();
 	    if (!think.isEmpty(list)) {
           console.log(list);
-		//for (var i = 0; i < list.length; i++) {
-            //console.log(i);
+		  for (var i = 0; i < list.length; i++) {
+            console.log(i);
 		    var questArr = [];
-			if (!think.isEmpty(list.questions)) {
-			    var arr = list.questions.split('-');
+			if (!think.isEmpty(list[i].questions)) {
+			    var arr = list[i].questions.split('-');
 		        for (var j = 0; j < arr.length; j++) {
 				    var quest_id = arr[j];
                     console.log(quest_id);
@@ -62,8 +62,17 @@ export default class extends Base {
 				    questArr.push(questItem);
 			    }
 			}
-			list.quest_array = questArr;
-		//}
+			list[i].quest_array = questArr;
+			
+			let quInfo = await this.model('quizuser').where({quizid: list[i].id, openid: list[i].openid}).find();
+			if (!think.isEmpty(quInfo)) {
+				let userInfo = await this.model('user').where({openid: quInfo.openid}).find();
+				if (!think.isEmpty(userInfo)) {
+					quInfo.user_photo = userInfo.photo_url;
+				}
+			}
+			list[i].userdata = quInfo;
+          }
 		}
 	}
 
