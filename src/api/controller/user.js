@@ -88,13 +88,19 @@ export default class extends Base {
     return this.json(result);
   }
 
-  async addreliveAction(){
+  async updatereliveAction(){
 	let userid = this.get('openid');
 	let relive = this.get('relive');
+	let add = this.get('add');
 
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
-	  relive = relive + userInfo.relive;
+		if (add == 1) {
+			relive = relive + userInfo.relive;
+		}
+		else {
+			relive = userInfo.relive - relive;
+		}
 	}
     let result = await this.model('user').where({openid: userid}).update({
       relive: relive
@@ -102,13 +108,19 @@ export default class extends Base {
     return this.json(result);
   }
 
-  async addquestioncountAction(){
+  async updatequestioncountAction(){
 	let userid = this.get('openid');
 	let question_count = this.get('question_count');
+	let add = this.get('add');
 
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
-	  question_count = question_count + userInfo.question_count;
+		if (add == 1) {
+			question_count = question_count + userInfo.question_count;
+		}
+		else {
+			question_count = userInfo.question_count - question_count;
+		}
 	}
     let result = await this.model('user').where({openid: userid}).update({
       question_count: question_count
