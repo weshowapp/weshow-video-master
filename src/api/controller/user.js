@@ -78,7 +78,7 @@ export default class extends Base {
 		let userInfo = await this.model('user').where({openid: inviter_id, invition_code: inviter_code, _logic: "OR"}).find();
 	    if (!think.isEmpty(userInfo)) {
 		    var relive = 1 + userInfo.relive;
-            let result = await this.model('user').where({openid: userid}).update({
+            let result = await this.model('user').where({openid: inviter_id}).update({
                 relive: relive
             });
 	    }

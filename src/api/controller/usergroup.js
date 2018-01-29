@@ -43,12 +43,21 @@ export default class extends Base {
 	console.log(gid);
 	console.log(check_time);
 	
-    let addResult = await this.model('usergroup').add({
-            check_time: check_time,
-            open_gid: gid,
-			openid: uid,
-			note: note
+	let existInfo = await this.model('usergroup').where({openid: uid, open_gid: gid}).find();
+	if (!think.isEmpty(existInfo)) {
+		return this.success({
+          result: 'ALREADY EXIST',
+	      rid: -1,
+          errorCode: 1
         });
+	}
+	
+    let addResult = await this.model('usergroup').add({
+        check_time: check_time,
+        open_gid: gid,
+		openid: uid,
+		note: note
+    });
 	
 	return this.success({
       result: 'OK',
