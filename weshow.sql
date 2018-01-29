@@ -338,7 +338,7 @@ DROP TABLE IF EXISTS `weshow_quiz`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_quiz` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `creator` int(20) NOT NULL DEFAULT '1',
+  `creator_id` varchar(64) NOT NULL DEFAULT '',
   `creator_name` varchar(16) NOT NULL DEFAULT '',
   `creator_photo` text NOT NULL DEFAULT '',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
@@ -364,7 +364,7 @@ CREATE TABLE `weshow_quiz` (
 LOCK TABLES `weshow_quiz` WRITE;
 /*!40000 ALTER TABLE `weshow_quiz` DISABLE KEYS */;
 INSERT INTO `weshow_quiz` 
-VALUES (1,1,'A1','',1516199514,'','1-3-6',3,1,0,1.0,1,0,1516219514,'','');
+VALUES (1,'1','A1','',1516199514,'','1-3-6',3,1,0,1.0,1,0,1516219514,'','');
 /*!40000 ALTER TABLE `weshow_quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 

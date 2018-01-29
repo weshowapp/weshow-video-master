@@ -120,7 +120,7 @@ export default class extends Base {
 	}
 		let quizResult = await this.model('quiz').add({
             title: title,
-            creator: creator_id,
+            creator_id: creator_id,
             creator_name: creator_name,
             creator_photo: creator_photo,
             create_time: create_time,
