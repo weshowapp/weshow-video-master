@@ -22,7 +22,7 @@ export default class extends Base {
 	let userid = this.get('userid');
     let userInfo = await this.model('user').where({openid: userid}).find();
     delete userInfo.password;
-	console.log(userInfo);
+	//console.log(userInfo);
     return this.json(userInfo);
   }
 

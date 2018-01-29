@@ -12,7 +12,7 @@ export default class extends Base {
     let quiz_id = this.get('quiz_id');
     let list = await this.model('quiz').where({id: quiz_id}).find();
 	if (!think.isEmpty(list)) {
-        console.log(list);
+        console.log(list.id);
 		//for (var i = 0; i < list.length; i++) {
             //console.log(i);
 		    var questArr = [];
