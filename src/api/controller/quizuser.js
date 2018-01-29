@@ -90,12 +90,20 @@ export default class extends Base {
 	console.log(quizid);
 	console.log(add_time);
 	
-    let addResult = await this.model('quizuser').add({
-            add_time: add_time,
-            quizid: quizid,
-			openid: uid,
-			note: note
+	let existInfo = await this.model('quizuser').where({openid: uid, quizid: quizid}).find();
+	if (!think.isEmpty(existInfo)) {
+		return this.success({
+          result: 'ALREADY EXIST',
+	      rid: -1,
+          errorCode: 1
         });
+	}
+    let addResult = await this.model('quizuser').add({
+        add_time: add_time,
+        quizid: quizid,
+		openid: uid,
+		note: note
+    });
 	
 	return this.success({
       result: 'OK',

@@ -50,6 +50,14 @@ export default class extends Base {
 	
 	var invition_code = this.model('user').randomString(6);
 	
+	let existInfo = await this.model('user').where({openid: userid}).find();
+	if (!think.isEmpty(existInfo)) {
+		return this.success({
+          result: 'ALREADY EXIST',
+	      uid: -1,
+          errorCode: 1
+        });
+	}
     let addResult = await this.model('user').add({
 		openid: userid,
 		country: country,
