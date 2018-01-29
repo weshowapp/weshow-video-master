@@ -64,7 +64,7 @@ export default class extends Base {
 			}
 			list[i].quest_array = questArr;
 			
-			let quInfo = await this.model('quizuser').where({quizid: list[i].id, creator_id: list[i].openid}).find();
+			let quInfo = await this.model('quizuser').where({quizid: list[i].id, openid: openid}).find();
 			if (!think.isEmpty(quInfo)) {
 				let userInfo = await this.model('user').where({openid: quInfo.openid}).find();
 				if (!think.isEmpty(userInfo)) {
