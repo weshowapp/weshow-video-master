@@ -33,7 +33,7 @@ export default class extends Base {
     return this.json(userInfo.level);
   }
 
-  async addAction(){
+  async addAction() {
     let userid = this.post('userid');
     let name = this.post('name');
     let country = this.post('country');
@@ -42,9 +42,13 @@ export default class extends Base {
     let gender = this.post('gender');
     let language = this.post('language');
     let avatarUrl = this.post('avatarUrl');
+    let inviter_id = this.post('inviter_id');
+    let inviter_code = this.post('inviter_code');
     let add_time = this.post('add_time');
 	console.log('User.add');
 	console.log(name);
+	
+	var invition_code = this.model('user').randomString(6);
 	
     let addResult = await this.model('user').add({
 		openid: userid,
@@ -54,9 +58,23 @@ export default class extends Base {
 		gender: gender,
 		language: language,
 		photo_url: avatarUrl,
+		inviter_id: inviter_id,
+		inviter_code: inviter_code,
+		invition_code: invition_code,
         reg_time: add_time,
 		name: name
     });
+	
+	console.log(addResult);
+	if (addResult >= 0) {
+		let userInfo = await this.model('user').where({openid: inviter_id, invition_code: inviter_code, _logic: "OR"}).find();
+	    if (!think.isEmpty(userInfo)) {
+		    var relive = 1 + userInfo.relive;
+            let result = await this.model('user').where({openid: userid}).update({
+                relive: relive
+            });
+	    }
+	}
 	
 	return this.success({
       result: 'OK',
@@ -78,13 +96,14 @@ export default class extends Base {
 	let userid = this.get('openid');
 	let price = this.get('price');
 
+	var result = -1;
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
 	  price = price + userInfo.win;
+      result = await this.model('user').where({openid: userid}).update({
+        win: price
+      });
 	}
-    let result = await this.model('user').where({openid: userid}).update({
-      win: price
-    });
     return this.json(result);
   }
 
@@ -93,6 +112,7 @@ export default class extends Base {
 	let relive = this.get('relive');
 	let add = this.get('add');
 
+	var result = -1;
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
 		if (add == 1) {
@@ -101,10 +121,10 @@ export default class extends Base {
 		else {
 			relive = userInfo.relive - relive;
 		}
+        result = await this.model('user').where({openid: userid}).update({
+          relive: relive
+        });
 	}
-    let result = await this.model('user').where({openid: userid}).update({
-      relive: relive
-    });
     return this.json(result);
   }
 
@@ -113,6 +133,7 @@ export default class extends Base {
 	let question_count = this.get('question_count');
 	let add = this.get('add');
 
+	var result = -1;
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
 		if (add == 1) {
@@ -121,10 +142,10 @@ export default class extends Base {
 		else {
 			question_count = userInfo.question_count - question_count;
 		}
+        result = await this.model('user').where({openid: userid}).update({
+          question_count: question_count
+        });
 	}
-    let result = await this.model('user').where({openid: userid}).update({
-      question_count: question_count
-    });
     return this.json(result);
   }
 

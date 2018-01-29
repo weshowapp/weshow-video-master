@@ -35,17 +35,20 @@ CREATE TABLE `weshow_user` (
   `city` varchar(32) NOT NULL DEFAULT '',
   `language` varchar(32) NOT NULL DEFAULT '',
   `photo_url` text NOT NULL DEFAULT '',
+  `inviter_id` varchar(32) NOT NULL DEFAULT '',
+  `inviter_code` varchar(32) NOT NULL DEFAULT '',
+  `invition_code` varchar(32) NOT NULL DEFAULT '',
   `reg_time` int(11) NOT NULL DEFAULT '0',
   `enabled` tinyint(3) unsigned DEFAULT NULL,
   `join_count` int(8) unsigned DEFAULT 0,
   `win_count` int(8) unsigned DEFAULT 0,
-  `relive` int(8) unsigned DEFAULT 0,
+  `relive` int(8) unsigned DEFAULT 1,
   `question_count` int(8) unsigned DEFAULT 0,
   `win` float DEFAULT 0.0,
-  `belance` float DEFAULT 0.0,
+  `belance` float DEFAULT 1.0,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
-  KEY `openid` (`openid`),
+  UNIQUE KEY `openid` (`openid`),
   KEY `enabled` (`enabled`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -57,13 +60,13 @@ CREATE TABLE `weshow_user` (
 LOCK TABLES `weshow_user` WRITE;
 /*!40000 ALTER TABLE `weshow_user` DISABLE KEYS */;
 INSERT INTO `weshow_user` 
-VALUES (1,0,1,'1','1','wx-1','Zhan1','','','','','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',1503171637,1,1,1,1,1,1,0),
-  (2,0,1,'2','1','wx-2','Zhan2','','','','','https://tvax1.sinaimg.cn/crop.0.0.996.996.180/005WFisyly8fghoqxipmsj30ro0romzf.jpg',1503171637,1,1,1,1,1,1,0),
-  (3,0,1,'3','1','wx10000104','西居士','','','','','https://tva3.sinaimg.cn/crop.0.0.1125.1125.180/cc981db8jw8f1oifzwvxqj20v90v941q.jpg',1503171637,1,1,1,1,1,1,0),
-  (4,0,0,'4','1','wx147','筱沐羊','','','','','https://tva3.sinaimg.cn/crop.11.0.727.727.50/a26464c3jw8f907h6mn0aj20ku0k774w.jpg',1503171637,1,1,1,1,1,1,0),
-  (5,0,1,'5','1','wx6798','Malcolm','','','','','https://tva3.sinaimg.cn/crop.0.0.720.720.180/005vjZrTjw8edotcpsvndj30k00k040n.jpg',1503171637,1,1,1,1,1,1,0),
-  (6,0,0,'6','1','wx0014','Frieda小姐','','','','','https://tvax3.sinaimg.cn/crop.0.0.996.996.180/c33b59d9ly8fdftoeyeewj20ro0rp76n.jpg',1503171637,1,1,1,1,1,1,0),
-  (7,0,1,'7','1','wx00763','著名有钱人','','','','','https://tva3.sinaimg.cn/crop.0.0.180.180.180/4d114f3ejw1e8qgp5bmzyj2050050aa8.jpg',1503171637,1,1,1,1,1,1,0);
+VALUES (1,0,1,'1','1','wx-1','Zhan1','','','','','','','','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',1503171637,1,1,1,1,1,1,0),
+  (2,0,1,'2','1','wx-2','Zhan2','','','','','','','','https://tvax1.sinaimg.cn/crop.0.0.996.996.180/005WFisyly8fghoqxipmsj30ro0romzf.jpg',1503171637,1,1,1,1,1,1,0),
+  (3,0,1,'3','1','wx10000104','西居士','','','','','','','','https://tva3.sinaimg.cn/crop.0.0.1125.1125.180/cc981db8jw8f1oifzwvxqj20v90v941q.jpg',1503171637,1,1,1,1,1,1,0),
+  (4,0,0,'4','1','wx147','筱沐羊','','','','','','','','https://tva3.sinaimg.cn/crop.11.0.727.727.50/a26464c3jw8f907h6mn0aj20ku0k774w.jpg',1503171637,1,1,1,1,1,1,0),
+  (5,0,1,'5','1','wx6798','Malcolm','','','','','','','','https://tva3.sinaimg.cn/crop.0.0.720.720.180/005vjZrTjw8edotcpsvndj30k00k040n.jpg',1503171637,1,1,1,1,1,1,0),
+  (6,0,0,'6','1','wx0014','Frieda小姐','','','','','','','','https://tvax3.sinaimg.cn/crop.0.0.996.996.180/c33b59d9ly8fdftoeyeewj20ro0rp76n.jpg',1503171637,1,1,1,1,1,1,0),
+  (7,0,1,'7','1','wx00763','著名有钱人','','','','','','','','https://tva3.sinaimg.cn/crop.0.0.180.180.180/4d114f3ejw1e8qgp5bmzyj2050050aa8.jpg',1503171637,1,1,1,1,1,1,0);
 /*!40000 ALTER TABLE `weshow_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
