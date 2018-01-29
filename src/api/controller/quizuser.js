@@ -23,6 +23,24 @@ export default class extends Base {
     return this.json(info);
   }
   
+  async getquizuserAction(){
+	let qid = this.get('quizid');
+	let uid = this.get('openid');
+	
+	await this.model('quizuser').calculateGain(qid);
+	
+    let info = await this.model('quizuser').where({quizid: qid, openid: uid}).select();
+	if (!think.isEmpty(info)) {
+		for (var i = 0; i < info.length; i++) {
+            let userInfo = await this.model('user').where({openid: info[i].openid}).find();
+	        if (!think.isEmpty(userInfo)) {
+	          info[i].user_photo = userInfo.photo_url;
+	        }
+		}
+	}
+    return this.json(info);
+  }
+  
   async getbyuidAction() {
 	let uid = this.get('uid');
     let info = await this.model('quizuser').where({uid: uid}).select();
