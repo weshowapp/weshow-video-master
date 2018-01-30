@@ -285,7 +285,7 @@ DROP TABLE IF EXISTS `weshow_question`;
 CREATE TABLE `weshow_question` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `creator_id` varchar(64) NOT NULL DEFAULT '',
-  `creator_name` varchar(16) NOT NULL DEFAULT '',
+  `creator_name` varchar(32) NOT NULL DEFAULT '',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `type` int(8) unsigned NOT NULL DEFAULT '0',
   `level` int(4) unsigned NOT NULL DEFAULT '0',

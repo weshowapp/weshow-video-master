@@ -22,7 +22,7 @@ export default class extends Base {
   }
   
   async getbyuserAction() {
-    let creator_id = this.post('creator_id');
+    let creator_id = this.get('creator_id');
     let list = await this.model('question').where({creator_id: creator_id}).select();
 	if (!think.isEmpty(list)) {
         console.log(list.length);
@@ -54,6 +54,7 @@ export default class extends Base {
     let title = this.post('title');
     let create_time = this.post('create_time');
     let creator_id = this.post('creator_id');
+    let creator_name = this.post('creator_name');
     let creator_account = this.post('creator_account');
     let creator_level = this.post('creator_level');
     let quest_content = this.post('quest_content');
@@ -69,6 +70,8 @@ export default class extends Base {
 	
 		let questResult = await this.model('question').add({
             title: title,
+			creator_id: creator_id,
+			creator_name: creator_name,
             create_time: create_time,
 			content: quest_content,
 			item_count: item_count,
