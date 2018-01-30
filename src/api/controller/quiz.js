@@ -48,7 +48,7 @@ export default class extends Base {
         console.log(qidList);
         list = await this.model('quiz').where({'id': ["IN", qidList]}).order('start_time DESC').select();
 	    if (!think.isEmpty(list)) {
-          console.log(list);
+          //console.log(list);
 		  for (var i = 0; i < list.length; i++) {
             console.log(i);
 		    var questArr = [];
