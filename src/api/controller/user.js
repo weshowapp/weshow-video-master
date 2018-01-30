@@ -117,21 +117,21 @@ export default class extends Base {
 
   async updatereliveAction(){
 	let userid = this.get('openid');
-	let relive = this.get('relive');
+	let rel = this.get('relive');
 	let add = this.get('add');
 
 	var result = -1;
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
 		if (add == 1) {
-			relive = relive + userInfo.relive;
+			result = await this.model('user').where({openid: userid}).increment(relive, rel);
 		}
 		else {
-			relive = userInfo.relive - relive;
+			result = await this.model('user').where({openid: userid}).decrement(relive, rel);
 		}
-        result = await this.model('user').where({openid: userid}).update({
-          relive: relive
-        });
+        //result = await this.model('user').where({openid: userid}).update({
+        //  relive: rel
+        //});
 	}
     return this.json(result);
   }
