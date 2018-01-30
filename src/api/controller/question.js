@@ -20,6 +20,22 @@ export default class extends Base {
     });
 
   }
+  
+  async getrandomAction() {
+    let count = this.get('count');
+    
+	var table = 'weshow_question';
+	var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
+	    + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
+		+ table + '))) ORDER BY id LIMIT ' + count + ';';
+	var list = await this.model('question').query(sql);
+    console.log(list.length);
+
+    return this.success({
+      questList: list
+    });
+
+  }
 
   async addAction() {
     let title = this.post('title');

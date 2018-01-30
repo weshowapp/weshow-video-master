@@ -94,6 +94,7 @@ export default class extends Base {
     let quiz_category = this.post('quiz_category');
     let quest_count = this.post('question_count');
     let quest_list = this.post('question_list');
+    let min_users = this.post('min_users');
     let price = this.post('price');
     let start_time = this.post('start_time');
     console.log('addAction');
@@ -136,6 +137,7 @@ export default class extends Base {
             start_time: start_time,
 			questions: quest_list,
 			quest_count: quest_count,
+			min_users: min_users,
 			price: price,
 			level: quiz_level,
 			category: quiz_category
