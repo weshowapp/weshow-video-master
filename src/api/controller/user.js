@@ -24,7 +24,7 @@ export default class extends Base {
     delete userInfo.password;
 	
     let count = await this.model('question').where({creator_id: userid}).select();
-	if (!think.isEmpty(list)) {
+	if (!think.isEmpty(count)) {
 	  console.log(count.length);
 	  userInfo.question_count = count.length;
 	}
