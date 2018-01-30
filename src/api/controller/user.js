@@ -128,10 +128,10 @@ export default class extends Base {
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
 		if (add == 1) {
-			result = await this.model('user').where({openid: userid}).increment(relive, rel);
+			result = await this.model('user').where({openid: userid}).increment('relive', rel);
 		}
 		else {
-			result = await this.model('user').where({openid: userid}).decrement(relive, rel);
+			result = await this.model('user').where({openid: userid}).decrement('relive', rel);
 		}
         //result = await this.model('user').where({openid: userid}).update({
         //  relive: rel
@@ -151,11 +151,11 @@ export default class extends Base {
     let userInfo = await this.model('user').where({openid: userid}).find();
 	if (!think.isEmpty(userInfo)) {
 		if (add == 1) {
-			result = await this.model('user').where({openid: userid}).increment(question_count, q_count);
+			result = await this.model('user').where({openid: userid}).increment('question_count', q_count);
 			//q_count = q_count + userInfo.question_count;
 		}
 		else {
-			result = await this.model('user').where({openid: userid}).decrement(question_count, q_count);
+			result = await this.model('user').where({openid: userid}).decrement('question_count', q_count);
 			//q_count = userInfo.question_count - q_count;
 		}
         //result = await this.model('user').where({openid: userid}).update({
