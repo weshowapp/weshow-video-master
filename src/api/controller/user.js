@@ -24,6 +24,7 @@ export default class extends Base {
     delete userInfo.password;
 	
     let count = await this.model('question').where({creator_id: userid}).count();
+	console.log(count);
 	userInfo.question_count = count;
 	//console.log(userInfo);
     return this.json(userInfo);
