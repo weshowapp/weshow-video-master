@@ -37,7 +37,7 @@ export default class extends Base {
   async getbyuserAction() {
     let openid = this.get('openid');
     console.log(openid);
-    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).select();
+    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).limit(30).select();
 	let list = null;
     console.log(quizIdList);
 	if (!think.isEmpty(quizIdList)) {

@@ -21,6 +21,19 @@ export default class extends Base {
 
   }
   
+  async getbyuserAction() {
+    let creator_id = this.post('creator_id');
+    let list = await this.model('question').where({creator_id: creator_id}).select();
+	if (!think.isEmpty(list)) {
+        console.log(list.length);
+	}
+
+    return this.success({
+      questList: list
+    });
+
+  }
+  
   async getrandomAction() {
     let count = this.get('count');
     
