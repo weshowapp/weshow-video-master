@@ -472,34 +472,34 @@ UNLOCK TABLES;
 
 
 --
--- Table structure for table `weshow_questionuser`
+-- Table structure for table `weshow_relive`
 --
 
-DROP TABLE IF EXISTS `weshow_questionuser`;
+DROP TABLE IF EXISTS `weshow_relive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `weshow_questionuser` (
+CREATE TABLE `weshow_relive` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(20) NOT NULL DEFAULT '1',
-  `quizid` int(20) NOT NULL DEFAULT '1',
   `openid` varchar(32) NOT NULL DEFAULT '',
-  `question_id` int(20) NOT NULL DEFAULT '1',
+  `quizid` int(20) NOT NULL DEFAULT '1',
+  `invitee_id` varchar(32) NOT NULL DEFAULT '',
   `note` varchar(32) NOT NULL DEFAULT '',
-  `game_status` tinyint(3) NOT NULL DEFAULT '0',
+  `increase` tinyint(3) NOT NULL DEFAULT '1',
   `add_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account` (`openid`, `quizid`, `invitee_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `weshow_questionuser`
+-- Dumping data for table `weshow_relive`
 --
 
-LOCK TABLES `weshow_questionuser` WRITE;
-/*!40000 ALTER TABLE `weshow_questionuser` DISABLE KEYS */;
-INSERT INTO `weshow_questionuser` 
-VALUES (1,1,1,'A1',1,'A1',0,1516199514);
-/*!40000 ALTER TABLE `weshow_questionuser` ENABLE KEYS */;
+LOCK TABLES `weshow_relive` WRITE;
+/*!40000 ALTER TABLE `weshow_relive` DISABLE KEYS */;
+INSERT INTO `weshow_relive` 
+VALUES (1,'A1',1,'A1','0',1,1516199514);
+/*!40000 ALTER TABLE `weshow_relive` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

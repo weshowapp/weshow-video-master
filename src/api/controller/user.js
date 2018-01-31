@@ -86,6 +86,7 @@ export default class extends Base {
 	if (addResult >= 0) {
 		let userInfo = await this.model('user').where({openid: inviter_id, invition_code: inviter_code, _logic: "OR"}).find();
 	    if (!think.isEmpty(userInfo)) {
+	        await this.model('user').updateRelive(inviter_id, 1, 1, '0', userid);
 		    var relive = 1 + userInfo.relive;
             let result = await this.model('user').where({openid: inviter_id}).update({
                 relive: relive
@@ -127,25 +128,15 @@ export default class extends Base {
   async updatereliveAction() {
 	console.log('updaterelive');
 	let userid = this.post('openid');
+	let quizid = this.post('quizid');
 	let rel = this.post('relive');
 	let add = this.post('add');
 	console.log(userid);
 	console.log(rel);
 	console.log(add);
 
-	var result = -1;
-    let userInfo = await this.model('user').where({openid: userid}).find();
-	if (!think.isEmpty(userInfo)) {
-		if (add == 1) {
-			result = await this.model('user').where({openid: userid}).increment('relive', rel);
-		}
-		else {
-			result = await this.model('user').where({openid: userid}).decrement('relive', rel);
-		}
-        //result = await this.model('user').where({openid: userid}).update({
-        //  relive: rel
-        //});
-	}
+	let result = await this.model('user').updateRelive(userid, add, rel, quizid, '0');
+
     return this.json(result);
   }
 

@@ -22,4 +22,26 @@ export default class extends think.model.base {
     return s;
   }
 
+  async updateRelive(userid, add, relive, quizid, invitee_id) {
+	console.log('updateRelive');
+    var result = -1;
+    let userInfo = await this.model('user').where({openid: userid}).find();
+    if (!think.isEmpty(userInfo)) {
+      if (add == 1) {
+        result = await this.model('user').where({openid: userid}).increment('relive', relive);
+      }
+      else {
+        result = await this.model('user').where({openid: userid}).decrement('relive', relive);
+      }
+	  var addTime = (new Date()).getTime() / 1000;
+      let addResult = await this.model('relive').add({
+        openid: userid,
+        quizid: quizid,
+        invitee_id: invitee_id,
+        increase: add,
+        add_time: addTime
+      });
+	}
+	return result;
+  }
 }

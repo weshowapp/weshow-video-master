@@ -10,7 +10,7 @@ export default class extends think.model.base {
    * @param newsId
    * @returns {Promise.<*>}
    */
-  async calculateGain(qid){
+  async calculateGain(qid) {
 	console.log('calculateGain');
 	console.log(qid);
 	

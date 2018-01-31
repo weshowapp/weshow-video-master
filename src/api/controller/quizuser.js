@@ -123,8 +123,9 @@ export default class extends Base {
     await this.model('quizuser').where({quizid: qid, openid: openid}).update({
 	  game_status: gstatus
     });
-	
+
 	await this.model('quizuser').calculateGain(qid);
+	await this.model('user').updateRelive(openid, 1, 1, qid, '0');
 	
     return this.success({
       result: 'OK',
