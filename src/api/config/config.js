@@ -20,6 +20,7 @@ export default {
 	'group',
 	'usergroup',
 	'quizuser',
+	'relive',
   ],
 
   //可以公开访问的Action
