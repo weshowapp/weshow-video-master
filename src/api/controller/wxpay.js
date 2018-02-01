@@ -100,6 +100,7 @@ export default class extends Base {
     formData += "<sign>" + sign + "</sign>"
     formData += "</xml>"
 
+	  var BOUNDARYPREFIX = 'wxmebn';
 	  var max = 9007196154740990;
       var dec = Math.random() * max;
       var hex = dec.toString(36);
