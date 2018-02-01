@@ -108,7 +108,7 @@ export default class extends Base {
 
       var body = util.format('Content-Type: multipart/form-data; boundary=%s\r\n\r\n', boundary)
         + util.format('--%s\r\n', boundary)
-        + formData.join(util.format('\r\n--%s\r\n', boundary))
+        + formData
         + util.format('\r\n--%s', boundary);
 
       //console.log(body);
