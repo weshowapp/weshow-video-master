@@ -37,7 +37,7 @@ export default class extends Base {
   async getbyuserAction() {
     let openid = this.get('openid');
     console.log(openid);
-    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).limit(30).select();
+    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid, pay_status: 1}).limit(30).select();
 	let list = null;
     console.log(quizIdList);
 	if (!think.isEmpty(quizIdList)) {
@@ -166,5 +166,15 @@ export default class extends Base {
       result: 'OK',
       errorCode: 0
     });
+  }
+
+  async updatepayAction(){
+	let openid = this.post('openid');
+	let payed = this.post('pay_status');
+    var qid = this.post('quiz_id');
+    let result = await this.model('quiz').where({id: qid, creator_id: openid}).update({
+      pay_status: payed
+    });
+    return this.json(result);
   }
 }
