@@ -300,6 +300,65 @@ VALUES (1,'A1',1,'A1','0',1,1516199514);
 UNLOCK TABLES;
 
 
+--
+-- Table structure for table `weshow_wxpay`
+--
+
+DROP TABLE IF EXISTS `weshow_wxpay`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_wxpay` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `openid` varchar(32) NOT NULL DEFAULT '',
+  `quizid` int(20) NOT NULL DEFAULT '0',
+  `notify` varchar(8096) NOT NULL DEFAULT '',
+  `note` varchar(1024) NOT NULL DEFAULT '',
+  `add_time` int(18) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_wxpay`
+--
+
+LOCK TABLES `weshow_wxpay` WRITE;
+/*!40000 ALTER TABLE `weshow_wxpay` DISABLE KEYS */;
+INSERT INTO `weshow_wxpay` 
+VALUES (1,'A1',0,'A1','0',1516199514);
+/*!40000 ALTER TABLE `weshow_wxpay` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `weshow_note`
+--
+
+DROP TABLE IF EXISTS `weshow_note`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_note` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` varchar(64) NOT NULL DEFAULT '',
+  `note` varchar(8096) NOT NULL DEFAULT '',
+  `more` varchar(1024) NOT NULL DEFAULT '',
+  `add_time` int(18) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_note`
+--
+
+LOCK TABLES `weshow_note` WRITE;
+/*!40000 ALTER TABLE `weshow_note` DISABLE KEYS */;
+INSERT INTO `weshow_note` 
+VALUES (1,'0','ABC','0',1516199514);
+/*!40000 ALTER TABLE `weshow_note` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
