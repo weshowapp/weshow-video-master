@@ -37,7 +37,7 @@ export default class extends Base {
   async getbyuserAction() {
     let openid = this.get('openid');
     console.log(openid);
-    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid, pay_status: 1}).limit(30).select();
+    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).limit(30).select();
 	let list = null;
     console.log(quizIdList);
 	if (!think.isEmpty(quizIdList)) {
@@ -46,7 +46,7 @@ export default class extends Base {
 			qidList.push(quizIdList[i].quizid);
 		}
         console.log(qidList);
-        list = await this.model('quiz').where({'id': ["IN", qidList]}).order('start_time DESC').select();
+        list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').select();
 	    if (!think.isEmpty(list)) {
           //console.log(list);
 		  for (var i = 0; i < list.length; i++) {
