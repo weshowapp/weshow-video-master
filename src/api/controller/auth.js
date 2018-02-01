@@ -41,7 +41,8 @@ export default class extends Base {
 
   async argsigAction() {
     let url = this.post('url');
-	var sign = crypto.createHmac('sha1', secKey).update(url).digest().toString('base64');
+    let ath = this.post('ath');
+	var sign = crypto.createHmac(ath, secKey).update(url).digest().toString('base64');
 	console.log(sign);
 	return this.success({
       sign: sign
