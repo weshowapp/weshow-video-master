@@ -21,6 +21,8 @@ export default {
 	'usergroup',
 	'quizuser',
 	'relive',
+	'wxpay',
+	'note',
   ],
 
   //可以公开访问的Action
