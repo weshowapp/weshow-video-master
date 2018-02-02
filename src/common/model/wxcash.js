@@ -26,10 +26,10 @@ export default class extends Base {
 	  var bal = userInfo.balance;
       console.log('bal ' + bal);
       if (draw_type == 1 || draw_type == 3) {
-		bal = bal + cash_val;
+		bal = bal + parseFloat(cash_val);
       }
       else {
-		bal = bal - cash_val;
+		bal = bal - parseFloat(cash_val);
       }
       console.log('bal new ' + bal);
       await this.model('user').where({openid: uid}).update({
