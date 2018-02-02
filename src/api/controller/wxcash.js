@@ -19,7 +19,7 @@ export default class extends Base {
   
   async getuserdrawAction() {
     let uid = this.get('openid');
-    let l = await this.model('wxcash').where({openid: uid, draw_type: 2}).max(add_time).select();
+    let l = await this.model('wxcash').where({openid: uid, draw_type: 2}).max("add_time").select();
 
     return this.success({
       list: l
