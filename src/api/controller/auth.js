@@ -112,7 +112,7 @@ export default class extends Base {
     //unifiedPayment = unifiedPayment + "&key=192006250b4c09247ec02edce69f6a2d";
     console.log(unifiedPayment);
     console.log('md5');
-    var sign = md5.hexMd5(unifiedPayment).toUpperCase();
+    var sign = md5.hexMD5(unifiedPayment).toUpperCase();
     console.log(sign);
 
     //封装统一支付xml参数  
