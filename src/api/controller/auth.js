@@ -12,7 +12,7 @@ const secId = 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M';
 const secKey = '';
 
 const appId = 'wxc906ef0ac5d12a4b';
-const sessionKey = '';
+const appKey = '';
 var WXBizDataCrypt = require('./WXBizDataCrypt');
 
 export default class extends Base {
@@ -85,6 +85,28 @@ export default class extends Base {
 	});
   }
 
+  //获取openid
+  async getwxsessionAction() {
+    let code = this.post('code');
+    let options = {
+      method: 'GET',
+      url: 'https://api.weixin.qq.com/sns/jscode2session',
+      qs: {
+        grant_type: 'authorization_code',
+        js_code: code,
+        secret: appKey,
+        appid: appId
+      }
+    };
+
+    let sessionData = await rp(options);
+    sessionData = JSON.parse(sessionData);
+    if (!sessionData.openid) {
+      return this.fail('登录失败');
+    }
+    return this.success({ session_key: sessionData.session_key, openid: sessionData.openid });
+  }
+  
   async loginByWeixinAction() {
 
     let code = this.post('code');
@@ -98,14 +120,12 @@ export default class extends Base {
       qs: {
         grant_type: 'authorization_code',
         js_code: code,
-        secret: '00a2749d6f15e1979194d80b777e6adf',
-        appid: 'wx262f4ac3b1c477dd'
+        secret: appKey,
+        appid: appId
       }
     };
 
     let sessionData = await rp(options);
-
-
     sessionData = JSON.parse(sessionData);
     if (!sessionData.openid) {
       return this.fail('登录失败');
