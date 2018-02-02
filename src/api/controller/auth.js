@@ -131,10 +131,13 @@ export default class extends Base {
     formData += "<sign>" + sign + "</sign>"
     formData += "</xml>"
 	
-	let options = {
+    let options = {
       method: 'POST',
       url: 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers',
-	  head: 'application/x-www-form-urlencoded',
+	  head: 'application/x-www-form-urlencoded; charset=UTF-8',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
 	  data: formData
     };
 
