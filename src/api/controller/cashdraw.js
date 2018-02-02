@@ -19,13 +19,15 @@ export default class extends Base {
 
   async addAction() {
     let uid = this.post('openid');
-    let note = this.post('note');
+    let name = this.post('username');
     let cash_val = this.post('cash_val');
     let draw_type = this.post('draw_type');
+    let note = this.post('note');
     let tm = this.post('add_time');
 	
 		let addResult = await this.model('cashdraw').add({
             openid: uid,
+			username: name,
 			cash_val: cash_val,
 			draw_type: draw_type,
 			note: note,

@@ -309,7 +309,8 @@ DROP TABLE IF EXISTS `weshow_cashdraw`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_cashdraw` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `openid` varchar(32) NOT NULL DEFAULT '',
+  `openid` varchar(64) NOT NULL DEFAULT '',
+  `username` varchar(32) NOT NULL DEFAULT '',
   `cash_val` int(11) NOT NULL DEFAULT '0',
   `draw_type` int(4) NOT NULL DEFAULT '0',
   `note` varchar(256) NOT NULL DEFAULT '',
@@ -325,7 +326,7 @@ CREATE TABLE `weshow_cashdraw` (
 LOCK TABLES `weshow_cashdraw` WRITE;
 /*!40000 ALTER TABLE `weshow_cashdraw` DISABLE KEYS */;
 INSERT INTO `weshow_cashdraw` 
-VALUES (1,'A1',0,0,'0',1516199514);
+VALUES (1,'00','A1',0,0,'0',1516199514);
 /*!40000 ALTER TABLE `weshow_cashdraw` ENABLE KEYS */;
 UNLOCK TABLES;
 
