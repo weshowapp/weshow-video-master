@@ -11,7 +11,7 @@ var querystring = require("querystring");
 const secId = 'AKIDd7NN7aukRr53lDOM3UhlaS6TdXBY8U3M';
 const secKey = '';
 
-const appId = 'wxbd7f58ae73e01ea8';
+const appId = 'wxc906ef0ac5d12a4b';
 const sessionKey = '';
 var WXBizDataCrypt = require('./WXBizDataCrypt');
 
@@ -31,6 +31,9 @@ export default class extends Base {
 	let iv = this.post('iv');
 	let app_id = this.post('appid');
 	let sessionKey = this.post('session_key');
+	if (think.isEmpty(app_id)) {
+		app_id = appId;
+	}
 	//console.log(data);
 	var pc = new WXBizDataCrypt(app_id, sessionKey);
     var ddata = pc.decryptData(data, iv);
