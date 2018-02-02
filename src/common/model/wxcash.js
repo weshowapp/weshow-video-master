@@ -20,7 +20,7 @@ export default class extends Base {
     let userInfo = await this.model('user').where({openid: uid}).find();
     if (!think.isEmpty(userInfo)) {
 	  var bal = userInfo.balance;
-      if (draw_type == 1 && draw_type == 3) {
+      if (draw_type == 1 || draw_type == 3) {
 		bal = bal + cash_val;
       }
       else {
