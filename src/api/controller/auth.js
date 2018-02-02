@@ -13,6 +13,10 @@ const secKey = '';
 
 const appId = 'wxc906ef0ac5d12a4b';
 const appKey = '';
+const mchId = '1497874882';
+const mchPayKey = '';
+const PayNotifyUrl = 'https://www.imcou.com/api/wxpay/notify'
+
 var WXBizDataCrypt = require('./WXBizDataCrypt');
 
 export default class extends Base {
@@ -85,6 +89,58 @@ export default class extends Base {
 	});
   }
 
+  async getwxpayunifiedAction() {
+    var fee = this.post('fee');
+    var pay_sn = this.post('pay_sn');
+	var appid = appId;
+    var body = 'QuestionPaltform';//商户名
+    var mch_id = mchId;//商户号
+    var nonce_str = this.post('nonce');
+    var notify_url = PayNotifyUrl;//通知地址
+    var openid = this.post('openid');
+    var sign_type = 'MD5';
+    var spbill_create_ip = this.ip();//ip
+    var trade_type = "JSAPI";
+    var key = mchPayKey;
+	
+    var unifiedPayment = 'appid=' + appid + '&body=' + body + '&mch_id=' + mch_id
+      + '&nonce_str=' + nonce_str + '&notify_url=' + notify_url + '&openid=' + openid
+      + '&out_trade_no=' + pay_sn + '&sign_type=' + sign_type + '&spbill_create_ip=' + spbill_create_ip
+      + '&total_fee=' + fee + '&trade_type=' + trade_type + '&key=' + key;
+    //unifiedPayment = "appid=wxd930ea5d5a258f4f&body=test&device_info=1000&mch_id=10000100&nonce_str=ibuaiVcKdpRxkhJA";
+    //unifiedPayment = unifiedPayment + "&key=192006250b4c09247ec02edce69f6a2d";
+    console.log(unifiedPayment);
+    console.log('md5');
+    var sign = md5.hexMd5(unifiedPayment).toUpperCase();
+    console.log(sign);
+
+    //封装统一支付xml参数  
+    var formData = "<xml>"
+    formData += "<appid>" + appid + "</appid>"
+    formData += "<body>" + body + "</body>"
+    formData += "<mch_id>" + mch_id + "</mch_id>"
+    formData += "<nonce_str>" + nonce_str + "</nonce_str>"
+    formData += "<notify_url>" + notify_url + "</notify_url>"
+    formData += "<openid>" + openid + "</openid>"
+    formData += "<out_trade_no>" + pay_sn + "</out_trade_no>"
+    formData += "<sign_type>" + sign_type + "</sign_type>"
+    formData += "<spbill_create_ip>" + spbill_create_ip + "</spbill_create_ip>"
+    formData += "<total_fee>" + fee + "</total_fee>"
+    formData += "<trade_type>" + trade_type + "</trade_type>"
+    formData += "<sign>" + sign + "</sign>"
+    formData += "</xml>"
+	
+	let options = {
+      method: 'POST',
+      url: 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers',
+	  head: 'application/x-www-form-urlencoded',
+	  data: formData
+    };
+
+    let resultData = await rp(options);
+    return this.success({ data: resultData });
+  }
+ 
   //获取openid
   async getwxsessionAction() {
     let code = this.post('code');
