@@ -172,9 +172,13 @@ export default class extends Base {
 	let openid = this.post('openid');
 	let payed = this.post('pay_status');
     var qid = this.post('quiz_id');
+	let cash_val = this.post('cash_val');
+	let username = this.post('username');
+	let add_time = this.post('add_time');
     let result = await this.model('quiz').where({id: qid, creator_id: openid}).update({
       pay_status: payed
     });
+	await this.model('wxcash').addOp(openid, username, cash_val, 1, 'pay', add_time);
     return this.json(result);
   }
 }

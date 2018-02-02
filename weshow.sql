@@ -45,7 +45,7 @@ CREATE TABLE `weshow_user` (
   `relive` int(8) unsigned DEFAULT 1,
   `question_count` int(8) unsigned DEFAULT 0,
   `win` float DEFAULT 0.0,
-  `belance` float DEFAULT 1.0,
+  `balance` float DEFAULT 1.0,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
   UNIQUE KEY `openid` (`openid`),
@@ -301,13 +301,13 @@ UNLOCK TABLES;
 
 
 --
--- Table structure for table `weshow_cashdraw`
+-- Table structure for table `weshow_wxcash`
 --
 
-DROP TABLE IF EXISTS `weshow_cashdraw`;
+DROP TABLE IF EXISTS `weshow_wxcash`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `weshow_cashdraw` (
+CREATE TABLE `weshow_wxcash` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(64) NOT NULL DEFAULT '',
   `username` varchar(32) NOT NULL DEFAULT '',
@@ -320,14 +320,14 @@ CREATE TABLE `weshow_cashdraw` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `weshow_cashdraw`
+-- Dumping data for table `weshow_wxcash`
 --
 
-LOCK TABLES `weshow_cashdraw` WRITE;
-/*!40000 ALTER TABLE `weshow_cashdraw` DISABLE KEYS */;
-INSERT INTO `weshow_cashdraw` 
+LOCK TABLES `weshow_wxcash` WRITE;
+/*!40000 ALTER TABLE `weshow_wxcash` DISABLE KEYS */;
+INSERT INTO `weshow_wxcash` 
 VALUES (1,'00','A1',0,0,'0',1516199514);
-/*!40000 ALTER TABLE `weshow_cashdraw` ENABLE KEYS */;
+/*!40000 ALTER TABLE `weshow_wxcash` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

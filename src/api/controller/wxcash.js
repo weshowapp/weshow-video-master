@@ -9,7 +9,17 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
-    let l = await this.model('cashdraw').limit(30).select();
+    let l = await this.model('wxcash').limit(30).select();
+
+    return this.success({
+      list: l
+    });
+
+  }
+  
+  async getuserdrawAction() {
+    let uid = this.get('openid');
+    let l = await this.model('wxcash').where(openid: uid, draw_type: 2).max(add_time).select();
 
     return this.success({
       list: l
@@ -25,7 +35,7 @@ export default class extends Base {
     let note = this.post('note');
     let tm = this.post('add_time');
 	
-		let addResult = await this.model('cashdraw').add({
+		let addResult = await this.model('wxcash').add({
             openid: uid,
 			username: name,
 			cash_val: cash_val,

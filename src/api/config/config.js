@@ -21,7 +21,7 @@ export default {
 	'usergroup',
 	'quizuser',
 	'relive',
-	'cashdraw',
+	'wxcash',
 	'wxpay',
 	'note',
   ],

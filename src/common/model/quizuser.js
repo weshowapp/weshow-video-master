@@ -58,6 +58,7 @@ export default class extends think.model.base {
 			    	let result = await this.model('user').where({openid: winList[i].openid}).update({
 				    	win: perUserPrice
 				    });
+	                await this.model('wxcash').addOp(winList[i].openid, userInfo.username, price, 3, 'win', add_time);
 				}
 
 				await this.model('quiz').where({id: qid}).update({
@@ -65,6 +66,7 @@ export default class extends think.model.base {
 				});
 			}
 		}
+	    await this.model('wxcash').addOp(quiz.creator_id, quiz.creator_name, quiz.price, 4, 'game', add_time);
 	}
 
 	return true;
