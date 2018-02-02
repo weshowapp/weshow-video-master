@@ -45,7 +45,7 @@ CREATE TABLE `weshow_user` (
   `relive` int(8) unsigned DEFAULT 1,
   `question_count` int(8) unsigned DEFAULT 0,
   `win` float DEFAULT 0.0,
-  `balance` float DEFAULT 1.0,
+  `balance` float DEFAULT 0.0,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
   UNIQUE KEY `openid` (`openid`),
