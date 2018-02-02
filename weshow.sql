@@ -301,6 +301,36 @@ UNLOCK TABLES;
 
 
 --
+-- Table structure for table `weshow_cashdraw`
+--
+
+DROP TABLE IF EXISTS `weshow_cashdraw`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshow_cashdraw` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `openid` varchar(32) NOT NULL DEFAULT '',
+  `cash_val` int(11) NOT NULL DEFAULT '0',
+  `draw_type` int(4) NOT NULL DEFAULT '0',
+  `note` varchar(256) NOT NULL DEFAULT '',
+  `add_time` int(18) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_cashdraw`
+--
+
+LOCK TABLES `weshow_cashdraw` WRITE;
+/*!40000 ALTER TABLE `weshow_cashdraw` DISABLE KEYS */;
+INSERT INTO `weshow_cashdraw` 
+VALUES (1,'A1',0,0,'0',1516199514);
+/*!40000 ALTER TABLE `weshow_cashdraw` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
 -- Table structure for table `weshow_wxpay`
 --
 
