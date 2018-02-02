@@ -125,7 +125,10 @@ export default class extends Base {
     });
 
 	await this.model('quizuser').calculateGain(qid);
-	await this.model('user').updateRelive(openid, 1, 1, qid, '0');
+	let quizInfo = await this.model('quiz').where({id: qid}).find();
+	if (!think.isEmpty(quizInfo)) {
+	  await this.model('user').updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
+	}
 	
     return this.success({
       result: 'OK',

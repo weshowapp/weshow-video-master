@@ -65,8 +65,8 @@ export default class extends think.model.base {
 					win_users: winCount
 				});
 			}
+	        await this.model('wxcash').addOp(quiz.creator_id, quiz.creator_name, quiz.price, 4, 'game', quizEndTime);
 		}
-	    await this.model('wxcash').addOp(quiz.creator_id, quiz.creator_name, quiz.price, 4, 'game', quizEndTime);
 	}
 
 	return true;
