@@ -175,6 +175,9 @@ export default class extends Base {
 	let cash_val = this.post('cash_val');
 	let username = this.post('username');
 	let add_time = this.post('add_time');
+    console.log('updatepayAction');
+    console.log(openid);
+    console.log(cash_val);
     let result = await this.model('quiz').where({id: qid, creator_id: openid}).update({
       pay_status: payed
     });
