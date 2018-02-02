@@ -17,6 +17,7 @@ const mchId = '1497874882';
 const mchPayKey = '';
 const PayNotifyUrl = 'https://www.imcou.com/api/wxpay/notify'
 
+var md5 = require('./md5');
 var WXBizDataCrypt = require('./WXBizDataCrypt');
 
 export default class extends Base {
