@@ -16,6 +16,20 @@ export default class extends Base {
 			add_time: tm
         });
 	
+
+    let userInfo = await this.model('user').where({openid: uid}).find();
+    if (!think.isEmpty(userInfo)) {
+	  var bal = userInfo.balance;
+      if (draw_type == 1 && draw_type == 3) {
+		bal = bal + cash_val;
+      }
+      else {
+		bal = bal - cash_val;
+      }
+      await this.model('user').where({openid: uid}).update({
+        balance: bal
+      });
+	}
 	return addResult;
   }
 
