@@ -29,9 +29,10 @@ export default class extends Base {
   async decryptshareAction() {
     let data = this.post('data');
 	let iv = this.post('iv');
+	let app_id = this.post('appid');
 	let sessionKey = this.post('session_key');
-	console.log(data);
-	var pc = new WXBizDataCrypt(appId, sessionKey);
+	//console.log(data);
+	var pc = new WXBizDataCrypt(app_id, sessionKey);
     var ddata = pc.decryptData(data, iv);
 	console.log(ddata);
 	return this.success({
