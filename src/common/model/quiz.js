@@ -13,7 +13,7 @@ const RELIVE_DECREASE = 0;
 export default class extends think.model.base {
 
   getCurrentSecond() {
-    Math.floor((new Date()).getTime() / 1000);
+    return Math.floor((new Date()).getTime() / 1000);
   }
 
   getHourMin(time) {
