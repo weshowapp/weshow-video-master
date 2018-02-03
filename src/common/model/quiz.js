@@ -62,6 +62,9 @@ export default class extends think.model.base {
    setQuizState(quiz, openid) {
     //console.log('setQuizResult');
     //console.log(quiz.id);
+    if (quiz == null) {
+      return quiz;
+    }
 
     var curTime = this.getCurrentSecond();
     quiz.current_time = curTime;
@@ -83,6 +86,19 @@ export default class extends think.model.base {
     else if (quiz.start_time > curTime) {
       quiz.join_status = 1;
     }
+
+    let quInfo = await this.model('quizuser').where({quizid: quiz.id, openid: openid}).find();
+    if (!think.isEmpty(quInfo)) {
+      let userInfo = await this.model('user').where({openid: openid}).find();
+      if (!think.isEmpty(userInfo)) {
+        quInfo.user_photo = userInfo.photo_url;
+      }
+    }
+    else {
+      return quiz;
+    }
+    quiz.userdata = quInfo;
+
     if (quiz.join_status == 0) {
       if (quiz.start_time > curTime) {
         quiz.result_text = quiz.format_start + '开始';
@@ -107,6 +123,7 @@ export default class extends think.model.base {
         quiz.result_text = '未胜出';
       }
     }
+    return quiz;
   }
 
 }
