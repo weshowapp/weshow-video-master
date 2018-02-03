@@ -11,12 +11,12 @@ export default class extends Base {
   async indexAction() {
     let quiz_id = this.get('quiz_id');
     let openid = this.get('openid');
-    let list = await this.model('quiz').where({id: quiz_id}).find();
+    let quiz = await this.model('quiz').where({id: quiz_id}).find();
     await this.model('quiz').setQuizQuestion(quiz, openid);
     await this.model('quiz').setQuizState(quiz, openid);
 
     return this.success({
-      quizList: list
+      quizList: quiz
     });
 
   }
