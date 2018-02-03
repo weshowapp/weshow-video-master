@@ -73,7 +73,7 @@ export default class extends think.model.base {
       quiz.is_completed = 1;
     }
     quiz.is_start = 0;
-    if (curTime < quiz.start_time) {
+    if (curTime > quiz.start_time) {
       quiz.is_start = 1;
     }
 
