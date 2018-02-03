@@ -11,7 +11,7 @@ export default class extends Base {
 	
 	await this.model('quizuser').calculateGain(qid);
 	
-    let info = await this.model('quizuser').where({quizid: qid}).select();
+    let info = await this.model('quizuser').where({quizid: qid}).limit(8).select();
 	if (!think.isEmpty(info)) {
 		for (var i = 0; i < info.length; i++) {
             let userInfo = await this.model('user').where({openid: info[i].openid}).find();
