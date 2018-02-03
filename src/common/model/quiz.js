@@ -63,7 +63,7 @@ export default class extends think.model.base {
     //console.log('setQuizResult');
     //console.log(quiz.id);
 
-    var curTime = getCurrentSecond();
+    var curTime = Math.floor((new Date()).getTime() / 1000);
     quiz.current_time = curTime;
     quiz.is_completed = 0;
     if (curTime < quiz.start_time + quiz.quest_count * 15) {
