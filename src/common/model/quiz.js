@@ -62,7 +62,7 @@ export default class extends think.model.base {
   async setQuizState(quiz, openid) {
     //console.log('setQuizResult');
     //console.log(quiz.id);
-    if (quiz == null) {
+    if (think.isEmpty(quiz)) {
       return quiz;
     }
 
