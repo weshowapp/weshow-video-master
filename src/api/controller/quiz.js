@@ -10,23 +10,10 @@ export default class extends Base {
    */
   async indexAction() {
     let quiz_id = this.get('quiz_id');
+    let openid = this.get('openid');
     let list = await this.model('quiz').where({id: quiz_id}).find();
-	if (!think.isEmpty(list)) {
-        console.log(list.id);
-		//for (var i = 0; i < list.length; i++) {
-            //console.log(i);
-		    var questArr = [];
-			var arr = list.questions.split('-');
-		    for (var j = 0; j < arr.length; j++) {
-				var quest_id = arr[j];
-                console.log(quest_id);
-				let questItem = await this.model('question').where({id: quest_id}).find();
-				questItem.answered = -1;
-				questArr.push(questItem);
-			}
-			list.quest_array = questArr;
-		//}
-	}
+    await this.model('quiz').setQuizQuestion(quiz, openid);
+    await this.model('quiz').setQuizState(quiz, openid);
 
     return this.success({
       quizList: list
@@ -51,18 +38,8 @@ export default class extends Base {
           console.log(list.length);
 		  for (var i = 0; i < list.length; i++) {
             console.log(i);
-		    var questArr = [];
-			if (!think.isEmpty(list[i].questions)) {
-			    var arr = list[i].questions.split('-');
-		        for (var j = 0; j < arr.length; j++) {
-				    var quest_id = arr[j];
-                    console.log(quest_id);
-				    let questItem = await this.model('question').where({id: quest_id}).find();
-				    questItem.answered = -1;
-				    questArr.push(questItem);
-			    }
-			}
-			list[i].quest_array = questArr;
+            await this.model('quiz').setQuizQuestion(list[i], openid);
+            await this.model('quiz').setQuizState(list[i], openid);
 			
 			let quInfo = await this.model('quizuser').where({quizid: list[i].id, openid: openid}).find();
 			if (!think.isEmpty(quInfo)) {
