@@ -63,7 +63,7 @@ export default class extends think.model.base {
     //console.log('setQuizResult');
     //console.log(quiz.id);
 
-    var curTime = Math.floor((new Date()).getTime() / 1000);
+    var curTime = this.getCurrentSecond();
     quiz.current_time = curTime;
     quiz.is_completed = 0;
     if (curTime < quiz.start_time + quiz.quest_count * 15) {
@@ -74,7 +74,7 @@ export default class extends think.model.base {
       quiz.is_start = 1;
     }
 
-    quiz.format_start = getHourMin(quiz.start_time);
+    quiz.format_start = this.getHourMin(quiz.start_time);
     quiz.join_status = 2;
 
     if (quiz.creator_id == openid) {
