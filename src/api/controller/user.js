@@ -32,6 +32,14 @@ export default class extends Base {
 	  userInfo.question_count = count;
 	}
 	//console.log(userInfo);
+
+    let sessionData = { user_id: userInfo.id, openid: userInfo.openid };
+    sessionData.seed = Math.floor((new Date()).getTime() / 1000);
+    let TokenSerivce = this.service('token');
+    let tokenObj = new TokenSerivce();
+    let sessionKey = await tokenObj.create(sessionData);
+    userInfo.wxtoken = sessionKey;
+
     return this.json(userInfo);
   }
 
