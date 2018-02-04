@@ -16,7 +16,7 @@ export default class extends think.model.base {
         }
       }
     }
-    return quiz;
+    return info;
   }
 
   async setUserInfo(info) {
@@ -29,7 +29,7 @@ export default class extends think.model.base {
         }
       }
     }
-    return quiz;
+    return info;
   }
 
   /**
