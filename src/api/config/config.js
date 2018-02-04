@@ -8,28 +8,23 @@ export default {
   //可以公开访问的Controller
   publicController: [
     //格式为controller
-    'news',
-    'video',
     'user',
-    'comment',
     'auth',
-	'like',
-	'feedback',
-	'quiz',
-	'question',
-	'group',
-	'usergroup',
-	'quizuser',
-	'relive',
-	'wxcash',
-	'wxpay',
-	'note',
+    'quiz',
+    'question',
+    'group',
+    'usergroup',
+    'relive',
+    //'quizuser',
+    //'wxcash',
+    'wxpay',
+    'note',
   ],
 
   //可以公开访问的Action
   publicAction: [
     //格式为： controller+action
-    'news/list',
-    'news/count',
+    'quizuser/getbyuid',
+    'wxcash/index',
   ]
 };
