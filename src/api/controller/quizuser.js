@@ -23,7 +23,7 @@ export default class extends Base {
 	await this.model('quizuser').calculateGain(qid);
 	
     let info = await this.model('quizuser').where({quizid: qid, openid: uid}).select();
-	await this.model('quizuser').setUserInfo(info);
+	await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
   
@@ -37,7 +37,7 @@ export default class extends Base {
   async getbyopenidAction() {
 	let uid = this.get('openid');
     let info = await this.model('quizuser').where({openid: uid}).select();
-	await this.model('quizuser').setUserInfo(info);
+	await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
 
