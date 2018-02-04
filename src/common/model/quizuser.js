@@ -5,6 +5,20 @@
  */
 export default class extends think.model.base {
 
+
+  async setUserInfo(info) {
+    if (!think.isEmpty(info)) {
+      let userInfo = await this.model('user').where({openid: info[i].openid}).find();
+      if (!think.isEmpty(info) && !think.isEmpty(userInfo)) {
+        for (var i = 0; i < info.length; i++) {
+          info[i].user_photo = userInfo.photo_url;
+          info[i].user_name = userInfo.name;
+        }
+      }
+    }
+    return quiz;
+  }
+
   /**
    * Calculate the gain
    * @param newsId
