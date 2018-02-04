@@ -18,13 +18,17 @@ export default class extends think.model.base {
     }
     while(s.length < len) {
       s += randomchar();
-	}
+    }
     return s;
   }
 
   async updateRelive(userid, add, relive, quizid, invitee_id) {
-	console.log('updateRelive');
+    console.log('updateRelive');
     var result = -1;
+    let existInfo = await this.model('relive').where({ openid: userid, quizid: quizid, invitee_id: invitee_id }).find();
+    if (!think.isEmpty(existInfo)) {
+      return result;
+    }
     let userInfo = await this.model('user').where({openid: userid}).find();
     if (!think.isEmpty(userInfo)) {
       if (add == 1) {
@@ -33,9 +37,8 @@ export default class extends think.model.base {
       else {
         result = await this.model('user').where({openid: userid}).decrement('relive', relive);
       }
-      let existInfo = await this.model('relive').where({openid: userid, quizid: quizid, invitee_id: invitee_id}).find();
       if (think.isEmpty(existInfo)) {
-	    var addTime = (new Date()).getTime() / 1000;
+        var addTime = (new Date()).getTime() / 1000;
         let addResult = await this.model('relive').add({
           openid: userid,
           quizid: quizid,
@@ -44,7 +47,7 @@ export default class extends think.model.base {
           add_time: addTime
         });
       }
-	}
-	return result;
+    }
+    return result;
   }
 }
