@@ -33,14 +33,17 @@ export default class extends think.model.base {
       else {
         result = await this.model('user').where({openid: userid}).decrement('relive', relive);
       }
-	  var addTime = (new Date()).getTime() / 1000;
-      let addResult = await this.model('relive').add({
-        openid: userid,
-        quizid: quizid,
-        invitee_id: invitee_id,
-        increase: add,
-        add_time: addTime
-      });
+      let existInfo = await this.model('relive').where({openid: userid, quizid: quizid, invitee_id: invitee_id}).find();
+      if (think.isEmpty(existInfo)) {
+	    var addTime = (new Date()).getTime() / 1000;
+        let addResult = await this.model('relive').add({
+          openid: userid,
+          quizid: quizid,
+          invitee_id: invitee_id,
+          increase: add,
+          add_time: addTime
+        });
+      }
 	}
 	return result;
   }
