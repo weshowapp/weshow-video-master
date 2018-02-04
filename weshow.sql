@@ -47,9 +47,7 @@ CREATE TABLE `weshow_user` (
   `win` float DEFAULT 0.0,
   `balance` float DEFAULT 0.0,
   PRIMARY KEY (`id`),
-  KEY `account` (`account`),
-  UNIQUE KEY `openid` (`openid`),
-  KEY `enabled` (`enabled`)
+  UNIQUE KEY `openid` (`openid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,7 +97,8 @@ CREATE TABLE `weshow_question` (
   `answer` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `note` varchar(255) NOT NULL DEFAULT '',
   `more` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `creator_id` (`creator_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -185,7 +184,9 @@ CREATE TABLE `weshow_group` (
   `name` varchar(32) NOT NULL DEFAULT '',
   `open_gid` varchar(64) NOT NULL DEFAULT '',
   `share_ticket` varchar(64) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `open_gid` (`open_gid`),
+  KEY `add_uid` (`add_uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -217,7 +218,9 @@ CREATE TABLE `weshow_usergroup` (
   `note` varchar(32) NOT NULL DEFAULT '',
   `check_time` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `account` (`openid`, `open_gid`)
+  KEY `openid` (`openid`),
+  KEY `open_gid` (`open_gid`),
+  UNIQUE KEY `usergroup_acc` (`openid`, `open_gid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -252,7 +255,9 @@ CREATE TABLE `weshow_quizuser` (
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
   `add_time` int(16) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `account` (`openid`, `quizid`)
+  KEY `quizid` (`quizid`),
+  KEY `openid` (`openid`),
+  UNIQUE KEY `quizuser_acc` (`openid`, `quizid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -277,14 +282,16 @@ DROP TABLE IF EXISTS `weshow_relive`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `weshow_relive` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `openid` varchar(32) NOT NULL DEFAULT '',
+  `openid` varchar(64) NOT NULL DEFAULT '',
   `quizid` int(20) NOT NULL DEFAULT '1',
-  `invitee_id` varchar(32) NOT NULL DEFAULT '',
+  `invitee_id` varchar(64) NOT NULL DEFAULT '',
   `note` varchar(32) NOT NULL DEFAULT '',
   `increase` tinyint(3) NOT NULL DEFAULT '1',
   `add_time` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `account` (`openid`, `quizid`, `invitee_id`)
+  KEY `quizid` (`quizid`),
+  KEY `openid` (`openid`),
+  UNIQUE KEY `relive_acc` (`openid`, `quizid`, `invitee_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -315,7 +322,8 @@ CREATE TABLE `weshow_wxcash` (
   `draw_type` int(4) NOT NULL DEFAULT '0',
   `note` varchar(256) NOT NULL DEFAULT '',
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `openid` (`openid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -345,7 +353,8 @@ CREATE TABLE `weshow_wxpay` (
   `notify` varchar(8096) NOT NULL DEFAULT '',
   `note` varchar(1024) NOT NULL DEFAULT '',
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `openid` (`openid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
