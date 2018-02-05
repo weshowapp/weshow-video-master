@@ -102,25 +102,24 @@ export default class extends Base {
     console.log('updategain');
 
 	var quizuserModel = this.model('quizuser');
-    return quizuserModel.transaction(function () {
-	  return await quizuserModel.calculateGain(qid).then(function (result) {
-        let quizInfo = await self.model('quiz').where({id: qid}).find();
+    var trResult = quizuserModel.transaction(function () {
+	  return quizuserModel.calculateGain(qid).then(function (result) {
+        let quizInfo = self.model('quiz').where({id: qid}).find();
         if (!think.isEmpty(quizInfo)) {
-          return await self.model('user').updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
+          return self.model('user').updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
         }
         return false;
       });
     }).then(function (result) {
-      return this.success({
-        result: 'OK',
-        errorCode: result
-      });
+      return result;
     }).catch(function (err) {
-      return this.success({
-        result: 'OK',
-        errorCode: err
-      });
+      return err;
     })
+
+    return this.success({
+      result: 'OK',
+      errorCode: trResult
+    });
   }
 
   async updateansweredAction() {

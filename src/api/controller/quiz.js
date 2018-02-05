@@ -94,6 +94,7 @@ export default class extends Base {
 	if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
 		quest_list = '';
         console.log('quest_list empty');
+        quest_count = list.length;
 		for (var i = 0; i < list.length; i++) {
             console.log(list[i].id);
 			if (i == 0) {
