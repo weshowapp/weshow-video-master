@@ -9,8 +9,6 @@ export default class extends Base {
   async getbyquizidAction(){
 	let qid = this.get('quizid');
 	
-	await this.model('quizuser').calculateGain(qid);
-	
     let info = await this.model('quizuser').where({quizid: qid}).limit(8).select();
 	await this.model('quizuser').setUserInfo(info);
     return this.json(info);
@@ -19,8 +17,6 @@ export default class extends Base {
   async getquizuserAction(){
 	let qid = this.get('quizid');
 	let uid = this.get('openid');
-	
-	await this.model('quizuser').calculateGain(qid);
 	
     let info = await this.model('quizuser').where({quizid: qid, openid: uid}).select();
 	await this.model('quizuser').setUserInfoWithUid(info, uid);
@@ -80,7 +76,7 @@ export default class extends Base {
       errorCode: 0
     });
   }
-  
+
   async updatestatusAction() {
     var gstatus = this.post('status');
     var uid = this.post('uid');
@@ -92,19 +88,41 @@ export default class extends Base {
     await this.model('quizuser').where({quizid: qid, openid: openid}).update({
 	  game_status: gstatus
     });
-
-	await this.model('quizuser').calculateGain(qid);
-	let quizInfo = await this.model('quiz').where({id: qid}).find();
-	if (!think.isEmpty(quizInfo)) {
-	  await this.model('user').updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
-	}
 	
     return this.success({
       result: 'OK',
       errorCode: 0
     });
   }
-  
+
+  async updategainAction() {
+    var openid = this.post('openid');
+    var qid = this.post('quizid');
+    console.log(qid);
+    console.log('updategain');
+
+	var quizuserModel = this.model('quizuser');
+    return quizuserModel.transaction(function () {
+	  return await quizuserModel.calculateGain(qid).then(function (result) {
+        let quizInfo = await self.model('quiz').where({id: qid}).find();
+        if (!think.isEmpty(quizInfo)) {
+          return await self.model('user').updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
+        }
+        return false;
+      });
+    }).then(function (result) {
+      return this.success({
+        result: 'OK',
+        errorCode: result
+      });
+    }).catch(function (err) {
+      return this.success({
+        result: 'OK',
+        errorCode: err
+      });
+    })
+  }
+
   async updateansweredAction() {
     var userid = this.post('openid');
     var question_id = this.post('question_id');
