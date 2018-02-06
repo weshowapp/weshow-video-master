@@ -24,7 +24,7 @@ export default class extends Base {
     let l = await this.model('wxcash').where({openid: uid}).order('add_time DESC').select();
     if (!think.isEmpty(l)) {
       l.open_gid = '0';
-      if (think.isEmpty(l.quizid) { l.quizid = 0; }
+      if (think.isEmpty(l.quizid)) { l.quizid = 0; }
 	  let quizInfo = await this.model('quiz').where({ id: l.quizid }).find();
       if (!think.isEmpty(quizInfo)) {
         l.str_time = this.formatDateTime(l.add_time);
