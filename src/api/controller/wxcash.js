@@ -31,6 +31,21 @@ export default class extends Base {
           l[i].str_time = this.formatDateTime(l[i].add_time);
           l[i].open_gid = quizInfo.open_gid;
         }
+        if (l[i].draw_type == 1) {
+          l[i].desc = '充入';
+        }
+        else if (l[i].draw_type == 2) {
+          l[i].desc = '提现';
+        }
+        else if (l[i].draw_type == 3) {
+          l[i].desc = '赢取';
+        }
+        else if (l[i].draw_type == 4) {
+          l[i].desc = '花费';
+        }
+        else {
+          l[i].desc = '其他操作';
+        }
       }
     }
 
