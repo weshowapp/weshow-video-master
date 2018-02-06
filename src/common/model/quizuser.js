@@ -103,10 +103,10 @@ export default class extends think.model.base {
           let result = await this.model('user').where({ openid: winList[i].openid }).update({
             win: perUserPrice
           });
-          await this.model('wxcash').addOp(winList[i].openid, userInfo.name, price, 3, 'win', quizEndTime);
+          await this.model('wxcash').addOp(winList[i].openid, quiz.id, price, 3, 'win', quizEndTime);
         }
       }
-      await this.model('wxcash').addOp(quiz.creator_id, quiz.creator_name, quiz.price, 4, 'game', quizEndTime);
+      await this.model('wxcash').addOp(quiz.creator_id, quiz.id, quiz.price, 4, 'game', quizEndTime);
     }
 
     return true;
@@ -168,14 +168,14 @@ async calculateGain1(qid) {
               let result = userModel.where({ openid: winList[i].openid }).update({
                 win: perUserPrice
               });
-              wxcashModel.addOp(winList[i].openid, userInfo.name, price, 3, 'win', quizEndTime);
+              wxcashModel.addOp(winList[i].openid, quiz.id, price, 3, 'win', quizEndTime);
             }
             console.log('#5');
             return quizModel.where({ id: qid }).update({
               win_users: winCount
             }).then(function (updateInfo) {
               console.log('#6');
-              return wxcashModel.addOp(quiz.creator_id, quiz.creator_name, quiz.price, 4, 'game', quizEndTime);
+              return wxcashModel.addOp(quiz.creator_id, quiz.id, quiz.price, 4, 'game', quizEndTime);
             });
           }
         }

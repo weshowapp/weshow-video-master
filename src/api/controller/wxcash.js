@@ -17,6 +17,27 @@ export default class extends Base {
 
   }
   
+  async getuserdetailAction() {
+    let uid = this.get('openid');
+    //let type = this.get('draw_type');
+
+    let l = await this.model('wxcash').where({openid: uid}).order('add_time DESC').select();
+    if (!think.isEmpty(l)) {
+      l.open_gid = '0';
+      if (think.isEmpty(l.quizid) { l.quizid = 0; }
+	  let quizInfo = await this.model('quiz').where({ id: l.quizid }).find();
+      if (!think.isEmpty(quizInfo)) {
+        l.str_time = this.formatDateTime(l.add_time);
+        l.open_gid = quizInfo.open_gid;
+      }
+    }
+
+    return this.success({
+      list: l
+    });
+
+  }
+  
   async getuserdrawAction() {
     let uid = this.get('openid');
     let l = await this.model('wxcash').where({openid: uid, draw_type: 2}).order('add_time DESC').select();
@@ -35,20 +56,23 @@ export default class extends Base {
     let cash_val = this.post('cash_val');
     let draw_type = this.post('draw_type');
     let note = this.post('note');
-    let tm = this.post('add_time');
+    //let tm = this.post('add_time');
+    var tm = Math.floor((new Date()).getTime() / 1000);
+
+    let addResult = await this.model('wxcash').add({
+      openid: uid,
+      username: name,
+      cash_val: cash_val,
+      draw_type: 2,
+      note: note,
+      add_time: tm
+    });
 	
-		let addResult = await this.model('wxcash').add({
-            openid: uid,
-			username: name,
-			cash_val: cash_val,
-			draw_type: draw_type,
-			note: note,
-			add_time: tm
-        });
-	
+    await this.model('wxcash').addOp(uid, '0', cash_val, 2, 'draw', tm);
+
 	return this.success({
       result: 'OK',
-	  note: addResult,
+	  wxcash: addResult,
       errorCode: 0
     });
   }

@@ -41,7 +41,7 @@ export default class extends Base {
       });
     }
 
-    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).select();
+    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).order('add_time DESC').select();
     await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
@@ -87,7 +87,7 @@ export default class extends Base {
     }
     let quizid = this.get('quizid');
     let question_id = this.get('question_id');
-    let info = await this.model('quizuser').where({ quizid: quizid, answer_status: question_id }).select();
+    let info = await this.model('quizuser').where({ quizid: quizid, answer_status: question_id }).order('answer_time DESC').select();
     await this.model('quizuser').setUserInfo(info);
     return this.json(info);
   }
@@ -96,7 +96,8 @@ export default class extends Base {
 	let quizid = this.post('quizid');
 	let uid = this.post('userid');
 	let note = this.post('note');
-    let add_time = this.post('add_time');
+    //let add_time = this.post('add_time');
+	var add_time = Math.round((new Date()).getTime() / 1000);
 	console.log('QuizUser.add');
 	console.log(uid);
 	console.log(quizid);
@@ -173,7 +174,8 @@ export default class extends Base {
     var userid = this.post('openid');
     var question_id = this.post('question_id');
     var qid = this.post('quizid');
-    let answer_time = this.post('answer_time');
+    //let answer_time = this.post('answer_time');
+	var answer_time = Math.round((new Date()).getTime() / 1000);
     console.log(qid);
     console.log(question_id);
 

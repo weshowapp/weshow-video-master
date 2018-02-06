@@ -5,15 +5,15 @@ import Base from './base.js';
 export default class extends Base {
 
 
-  async addOp(uid, name, cash_val, draw_type, note, tm) {
+  async addOp(uid, quizid, cash_val, draw_type, note, tm) {
 	
     console.log('addOp');
     console.log(uid);
-    console.log(name);
+    console.log(quizid);
     console.log(cash_val);
 		let addResult = await this.model('wxcash').add({
             openid: uid,
-			username: name,
+			quizid: quizid,
 			cash_val: cash_val,
 			draw_type: draw_type,
 			note: note,
