@@ -5,7 +5,15 @@
  */
 export default class extends think.model.base {
 
-
+  async noNewData(refresh) {
+    if (refresh == 1) {
+      let timestamp = parseInt(this.get('timestamp')) - 3;
+      let hasNew = await this.model('quizuser').where({ add_time: ['>', timestamp] }).find();
+      return think.isEmpty(hasNew);
+    }
+    return false;
+  }
+  
   async setUserInfoWithUid(info, openid) {
     if (!think.isEmpty(info)) {
       let userInfo = await this.model('user').where({openid: openid}).find();

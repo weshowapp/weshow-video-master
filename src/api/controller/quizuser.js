@@ -13,35 +13,82 @@ export default class extends Base {
 	await this.model('quizuser').setUserInfo(info);
     return this.json(info);
   }
+
+  async getbyquizidAction() {
+    let qid = this.get('quizid');
+    let refresh = this.get('refresh');
+    if (await this.model('quizuser').noNewData(refresh)) {
+      return this.fail({
+        result: 'NO NEW DATA',
+        hasNew: 0,
+        errorCode: 1
+      });
+    }
+    let info = await this.model('quizuser').where({ quizid: qid }).limit(8).select();
+    await this.model('quizuser').setUserInfo(info);
+    return this.json(info);
+  }
   
-  async getquizuserAction(){
-	let qid = this.get('quizid');
-	let uid = this.get('openid');
-	
-    let info = await this.model('quizuser').where({quizid: qid, openid: uid}).select();
-	await this.model('quizuser').setUserInfoWithUid(info, uid);
+  async getquizuserAction() {
+    let qid = this.get('quizid');
+    let uid = this.get('openid');
+    let refresh = this.get('refresh');
+    if (await this.model('quizuser').noNewData(refresh)) {
+      return this.fail({
+        result: 'NO NEW DATA',
+        hasNew: 0,
+        errorCode: 1
+      });
+    }
+
+    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).select();
+    await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
   
   async getbyuidAction() {
-	let uid = this.get('uid');
-    let info = await this.model('quizuser').where({uid: uid}).select();
-	await this.model('quizuser').setUserInfo(info);
+    let uid = this.get('uid');
+    let refresh = this.get('refresh');
+    if (await this.model('quizuser').noNewData(refresh)) {
+      return this.fail({
+        result: 'NO NEW DATA',
+        hasNew: 0,
+        errorCode: 1
+      });
+    }
+    let info = await this.model('quizuser').where({ uid: uid }).select();
+    await this.model('quizuser').setUserInfo(info);
     return this.json(info);
   }
 
   async getbyopenidAction() {
-	let uid = this.get('openid');
-    let info = await this.model('quizuser').where({openid: uid}).select();
-	await this.model('quizuser').setUserInfoWithUid(info, uid);
+    let uid = this.get('openid');
+    let refresh = this.get('refresh');
+    if (await this.model('quizuser').noNewData(refresh)) {
+      return this.fail({
+        result: 'NO NEW DATA',
+        hasNew: 0,
+        errorCode: 1
+      });
+    }
+    let info = await this.model('quizuser').where({ openid: uid }).select();
+    await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
 
   async getansweredAction() {
-	let quizid = this.get('quizid');
-	let question_id = this.get('question_id');
-    let info = await this.model('quizuser').where({quizid: quizid, answer_status: question_id}).select();
-	await this.model('quizuser').setUserInfo(info);
+    let refresh = this.get('refresh');
+    if (await this.model('quizuser').noNewData(refresh)) {
+      return this.fail({
+        result: 'NO NEW DATA',
+        hasNew: 0,
+        errorCode: 1
+      });
+    }
+    let quizid = this.get('quizid');
+    let question_id = this.get('question_id');
+    let info = await this.model('quizuser').where({ quizid: quizid, answer_status: question_id }).select();
+    await this.model('quizuser').setUserInfo(info);
     return this.json(info);
   }
 
