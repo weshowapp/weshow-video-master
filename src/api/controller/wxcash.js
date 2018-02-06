@@ -23,12 +23,14 @@ export default class extends Base {
 
     let l = await this.model('wxcash').where({openid: uid}).order('add_time DESC').select();
     if (!think.isEmpty(l)) {
-      l.open_gid = '0';
-      if (think.isEmpty(l.quizid)) { l.quizid = 0; }
-	  let quizInfo = await this.model('quiz').where({ id: l.quizid }).find();
-      if (!think.isEmpty(quizInfo)) {
-        l.str_time = this.formatDateTime(l.add_time);
-        l.open_gid = quizInfo.open_gid;
+      for (var i = 0; i < l.length; i++) {
+        l[i].open_gid = '0';
+        if (think.isEmpty(l[i].quizid)) { l[i].quizid = 0; }
+	    let quizInfo = await this.model('quiz').where({ id: l[i].quizid }).find();
+        if (!think.isEmpty(quizInfo)) {
+          l[i].str_time = this.formatDateTime(l[i].add_time);
+          l[i].open_gid = quizInfo.open_gid;
+        }
       }
     }
 
@@ -42,7 +44,9 @@ export default class extends Base {
     let uid = this.get('openid');
     let l = await this.model('wxcash').where({openid: uid, draw_type: 2}).order('add_time DESC').select();
     if (think.isEmpty(l)) {
-      l.current_time = Math.floor((new Date()).getTime() / 1000);
+      for (var i = 0; i < l.length; i++) {
+        l[i].current_time = Math.floor((new Date()).getTime() / 1000);
+      }
     }
     return this.success({
       list: l
