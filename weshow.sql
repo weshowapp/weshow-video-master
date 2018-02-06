@@ -319,7 +319,7 @@ CREATE TABLE `weshow_wxcash` (
   `openid` varchar(64) NOT NULL DEFAULT '',
   `username` varchar(32) NOT NULL DEFAULT '',
   `quizid` int(20) NOT NULL DEFAULT '0',
-  `cash_val` int(11) NOT NULL DEFAULT '0',
+  `cash_val` float NOT NULL DEFAULT '0',
   `draw_type` int(4) NOT NULL DEFAULT '0',
   `note` varchar(256) NOT NULL DEFAULT '',
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
@@ -335,7 +335,7 @@ CREATE TABLE `weshow_wxcash` (
 LOCK TABLES `weshow_wxcash` WRITE;
 /*!40000 ALTER TABLE `weshow_wxcash` DISABLE KEYS */;
 INSERT INTO `weshow_wxcash` 
-VALUES (1,'00','A1',0,0,0,'0',1516199514);
+VALUES (1,'00','A1',0,0.0,0,'0',1516199514);
 /*!40000 ALTER TABLE `weshow_wxcash` ENABLE KEYS */;
 UNLOCK TABLES;
 
