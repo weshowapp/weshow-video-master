@@ -28,7 +28,8 @@ export default class extends Base {
         if (think.isEmpty(l[i].quizid)) { l[i].quizid = 0; }
 	    let quizInfo = await this.model('quiz').where({ id: l[i].quizid }).find();
         if (!think.isEmpty(quizInfo)) {
-          l[i].str_time = this.formatDateTime(l[i].add_time);
+          l[i].format_time = this.formatDateTime(l[i].add_time);
+          l[i].str_time = (new Date(l[i].add_time)).format("yyyy-MM-dd hh:mm:ss");
           l[i].open_gid = quizInfo.open_gid;
         }
         if (l[i].draw_type == 1) {
