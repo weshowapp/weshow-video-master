@@ -57,6 +57,14 @@ export default class extends think.controller.base {
 
   getFullDateTime(time) {
     let date = new Date(time * 1000);
-    return date.format("yyyy-MM-dd hh:mm:ss");
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
   }
 }
