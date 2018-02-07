@@ -33,16 +33,16 @@ export default class extends Base {
           l[i].open_gid = quizInfo.open_gid;
         }
         if (l[i].draw_type == 1) {
-          l[i].desc = '充入';
+          l[i].desc = '创建比赛充入 + ';
         }
         else if (l[i].draw_type == 2) {
-          l[i].desc = '提现';
+          l[i].desc = '提现 - ';
         }
         else if (l[i].draw_type == 3) {
-          l[i].desc = '赢取';
+          l[i].desc = '赢取 + ';
         }
         else if (l[i].draw_type == 4) {
-          l[i].desc = '花费';
+          l[i].desc = '创建比赛支出 - ';
         }
         else {
           l[i].desc = '其他操作';
