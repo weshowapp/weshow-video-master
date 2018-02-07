@@ -41,7 +41,7 @@ export default class extends Base {
       });
     }
 
-    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).order('add_time DESC').select();
+    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).order('add_time ASC').select();
     await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
