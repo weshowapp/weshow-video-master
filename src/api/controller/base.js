@@ -70,7 +70,7 @@ export default class extends think.controller.base {
     var minute = date.getMinutes();
     var second = date.getSeconds();
 
-    //return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
-	return year + '-' + month + '-' + day + '-' + formatNumber(hour) + '-' + formatNumber(minute) + '-' + formatNumber(second);
+    return [year, month, day].map(this.formatNumber).join('/') + ' ' + [hour, minute, second].map(this.formatNumber).join(':');
+	//return year + '-' + month + '-' + day + ' ' + this.formatNumber(hour) + ':' + this.formatNumber(minute) + ':' + this.formatNumber(second);
   }
 }
