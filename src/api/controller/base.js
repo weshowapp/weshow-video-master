@@ -54,4 +54,9 @@ export default class extends think.controller.base {
     }
     return out;
   }
+
+  getFullDateTime(time) {
+    let date = new Date(time * 1000);
+    return date.format("yyyy-MM-dd hh:mm:ss");
+  }
 }
