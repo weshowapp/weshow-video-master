@@ -6,14 +6,6 @@ const _ = require('lodash');
 
 export default class extends Base {
 
-  async getbyquizidAction(){
-	let qid = this.get('quizid');
-	
-    let info = await this.model('quizuser').where({quizid: qid}).limit(8).select();
-	await this.model('quizuser').setUserInfo(info);
-    return this.json(info);
-  }
-
   async getbyquizidAction() {
     let qid = this.get('quizid');
     let refresh = this.get('refresh');
@@ -24,7 +16,7 @@ export default class extends Base {
         errorCode: 1
       });
     }
-    let info = await this.model('quizuser').where({ quizid: qid }).limit(8).select();
+    let info = await this.model('quizuser').where({ quizid: qid }).order('add_time DESC').limit(8).select();
     await this.model('quizuser').setUserInfo(info);
     return this.json(info);
   }
@@ -41,7 +33,7 @@ export default class extends Base {
       });
     }
 
-    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).order('add_time ASC').select();
+    let info = await this.model('quizuser').where({ quizid: qid, openid: uid }).select();
     await this.model('quizuser').setUserInfoWithUid(info, uid);
     return this.json(info);
   }
