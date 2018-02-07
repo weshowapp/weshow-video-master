@@ -55,6 +55,11 @@ export default class extends think.controller.base {
     return out;
   }
 
+  formatNumber(n) {
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+  }
+
   getFullDateTime(time) {
     let date = new Date(time * 1000);
     var year = date.getFullYear();
