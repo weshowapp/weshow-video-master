@@ -55,7 +55,7 @@ export default class extends think.controller.base {
     return out;
   }
 
-  formatNumber(n) {
+  function formatNumber(n) {
     n = n.toString();
     return n[1] ? n : '0' + n;
   }
