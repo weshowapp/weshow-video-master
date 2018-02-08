@@ -20,9 +20,9 @@ export default class extends Base {
     let quizInfo = await this.model('quiz').where({id: qid}).find();
 	if (!think.isEmpty(quizInfo)) {
       console.log('getbyquizid');
-      console.log(quizInfo.type);
+      console.log(quizInfo.category);
       console.log(quizInfo.creator_id);
-      if (quizInfo.type == 2) {
+      if (quizInfo.category == 17) {
         info = await this.model('quizuser').where({ quizid: qid, openid: ["!=", quizInfo.creator_id]}).order('add_time DESC').limit(8).select();
       }
       else {
