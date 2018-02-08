@@ -94,15 +94,14 @@ export default class extends Base {
 	var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
 	    + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
 		+ table + '))) ORDER BY id LIMIT ' + quest_count + ';';
-	var list = await this.model('question').query(sql);
-    console.log(list.length);
 	//var randId = maxid * random();
     //console.log(randId);
 	
 	//let list = await this.model('question').where({id: randId}).limit(quest_count).select();
-	if (think.isEmpty(list)) {
-	}
 	if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
+	  var list = await this.model('question').query(sql);
+      console.log(list.length);
+	  if (think.isEmpty(list)) {
 		quest_list = '';
         console.log('quest_list empty');
         quest_count = list.length;
@@ -116,10 +115,9 @@ export default class extends Base {
 			}
 		}
         console.log(quest_list);
+	  }
 	}
-	else {
-		quiz_type = 2;
-	}
+
 		let quizResult = await this.model('quiz').add({
             title: title,
             creator_id: creator_id,
