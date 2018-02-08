@@ -11,6 +11,7 @@ export default class extends Base {
   async indexAction() {
     let quiz_id = this.get('quiz_id');
     let openid = this.get('openid');
+	
     let quiz = await this.model('quiz').where({id: quiz_id}).find();
     await this.model('quiz').setQuizQuestion(quiz, openid);
     await this.model('quiz').setQuizState(quiz, openid);
@@ -23,6 +24,7 @@ export default class extends Base {
   
   async getbyuserAction() {
     let openid = this.get('openid');
+    let onlyactive = this.get('onlyactive');
     console.log(openid);
     let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).order('add_time DESC').select();
 	let list = null;
@@ -33,7 +35,14 @@ export default class extends Base {
 			qidList.push(quizIdList[i].quizid);
 		}
         console.log(qidList);
-        list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').limit(30).select();
+
+	    var curTime = Math.round((new Date()).getTime() / 1000);
+		if (onlyactive == 1) {
+          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1, start_time: [">", curTime]}).order('start_time DESC').limit(30).select();
+		}
+		else {
+          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').limit(30).select();
+		}
 	    if (!think.isEmpty(list)) {
           console.log(list.length);
 		  for (var i = 0; i < list.length; i++) {
@@ -152,7 +161,8 @@ export default class extends Base {
     var qid = this.post('quiz_id');
 	let cash_val = this.post('cash_val');
 	let username = this.post('username');
-	let add_time = this.post('add_time');
+	//let add_time = this.post('add_time');
+	var add_time = Math.round((new Date()).getTime() / 1000);
     console.log('updatepayAction');
     console.log(openid);
     console.log(cash_val);
