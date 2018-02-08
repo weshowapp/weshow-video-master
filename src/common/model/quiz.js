@@ -105,7 +105,7 @@ export default class extends think.model.base {
       }
       else {
         if (quiz.userdata.game_status == GAME_STATUS_WIN) {
-          quiz.result_text = '胜出，分得' + quiz.userdata.game_gain + '元';
+          quiz.result_text = '赢得' + quiz.userdata.game_gain + '元';
         }
         else {
           quiz.result_text = '未胜出';
@@ -117,7 +117,7 @@ export default class extends think.model.base {
     }
     else if (quiz.join_status == 2) {
       if (quiz.userdata.game_status == GAME_STATUS_WIN) {
-        quiz.result_text = '胜出，分得' + quiz.userdata.game_gain + '元';
+        quiz.result_text = '赢得' + quiz.userdata.game_gain + '元';
       }
       else {
         quiz.result_text = '未胜出';

@@ -101,7 +101,7 @@ export default class extends Base {
 	if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
 	  var list = await this.model('question').query(sql);
       console.log(list.length);
-	  if (think.isEmpty(list)) {
+	  if (!think.isEmpty(list)) {
 		quest_list = '';
         console.log('quest_list empty');
         quest_count = list.length;
