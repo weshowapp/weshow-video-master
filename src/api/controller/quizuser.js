@@ -16,7 +16,16 @@ export default class extends Base {
         errorCode: 1
       });
     }
-    let info = await this.model('quizuser').where({ quizid: qid }).order('add_time DESC').limit(8).select();
+	let info = null;
+    let quizInfo = await this.model('quiz').where({id: info[i].quizid}).find();
+	if (!think.isEmpty(quiznfo)) {
+      if (quizInfo.type == 2) {
+        info = await this.model('quizuser').where({ quizid: qid, openid: ["!=", quizInfo.creator_id]}).order('add_time DESC').limit(8).select();
+      }
+      else {
+        info = await this.model('quizuser').where({ quizid: qid }).order('add_time DESC').limit(8).select();
+      }
+    }
     await this.model('quizuser').setUserInfo(info);
     return this.json(info);
   }
