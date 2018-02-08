@@ -83,6 +83,8 @@ export default class extends Base {
     let min_users = this.post('min_users');
     let price = this.post('price');
     let start_time = this.post('start_time');
+    //let quiz_type = this.post('quiz_type');//2=self
+    let quiz_type = 1;//2=self
     console.log('addAction');
     console.log(price);
     console.log(quest_list);
@@ -115,6 +117,9 @@ export default class extends Base {
 		}
         console.log(quest_list);
 	}
+	else {
+		quiz_type = 2;
+	}
 		let quizResult = await this.model('quiz').add({
             title: title,
             creator_id: creator_id,
@@ -126,6 +131,7 @@ export default class extends Base {
 			quest_count: quest_count,
 			min_users: min_users,
 			price: price,
+			type: quiz_type,
 			level: quiz_level,
 			category: quiz_category
         });
