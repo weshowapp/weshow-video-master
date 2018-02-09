@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-var path = think.RESOURCE_PATH + '/keywords0'
+var path = think.RESOURCE_PATH + '/keywords1'
 
 var map = {}
 var array = []
@@ -51,8 +51,8 @@ function filter(s) {
     //}
   }
   
-  //console.log(re);
-  //console.log(s);
+  console.log(re);
+  console.log(s);
   var pattern = new RegExp(re,"g");
   if(pattern.test(s)) {
      return s;
