@@ -2,7 +2,8 @@ var fs = require('fs')
 
 var path = think.RESOURCE_PATH + '/keywords'
 
-var map = []
+var map = {}
+var array = []
 
 var lineReader = require('readline').createInterface({
   input: require('fs').createReadStream(path, {encoding: 'UTF-8'})
@@ -16,8 +17,11 @@ lineReader.on('line', function (line) {
 function addWord(word) {
 
   var parent = map
+  var arr = array
+  
+  arr.push(word)
 
-  parent.push(word)
+  //parent.push(word)
   for (var i = 0; i < word.length; i++) {
     //if (!parent[word[i]]) parent[word[i]] = {}
     //parent = parent[word[i]]
@@ -25,7 +29,7 @@ function addWord(word) {
   //parent.isEnd = true
 }
 
-function filter(s) {
+function filter1(s) {
   var parent = map
 
   if (s == null) {
@@ -109,6 +113,125 @@ function filter0(s) {
 
   return sWord
 }
+
+function buildMap(wordList) {
+
+    var result = {};
+
+    var count = wordList.length;
+
+    for (var i = 0; i < count; ++i) {
+
+        var map = result;
+
+        var word = wordList[i];
+
+        for (var j = 0; j < word.length; ++j) {
+
+            var ch = word.charAt(j);
+
+            if (typeof(map[ch]) != "undefined") {
+
+                map = map[ch];
+
+                if (map["empty"]) {
+
+                    break;
+
+                }
+
+            }
+
+            else {
+
+                if (map["empty"]) { 
+
+                    delete map["empty"]; 
+
+                }
+
+                map[ch] = {"empty":true};
+
+                map = map[ch];
+
+            }
+
+        }
+
+    }
+
+    return result;
+
+}
+
+          
+
+function check(map, content) {
+
+    var result = [];
+
+    var count = content.length;
+
+    var stack = [];
+
+    var point = map;
+
+    for (var i = 0; i < count; ++i) {
+
+        var ch = content.charAt(i);
+
+        var item = point[ch];
+
+        if (typeof(item) == "undefined") {
+
+            i = i - stack.length;
+
+            stack = [];
+
+            point = map;
+
+        }
+
+        else if (item["empty"]) {
+
+            stack.push(ch);
+
+            result.push(stack.join(""));
+
+            stack = [];
+
+            point = map;
+
+        }
+
+        else {      
+
+            stack.push(ch);
+
+            point = item;
+
+        }
+
+    }
+
+    return result;
+
+}
+
+          
+
+function filter(content) {
+
+    var map = buildMap(array);         
+
+    var words = check(map, content);
+
+    console.log(words);
+	return works;
+
+}
+
+
 
 module.exports = {
   filter: filter
