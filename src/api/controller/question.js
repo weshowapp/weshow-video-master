@@ -54,7 +54,7 @@ export default class extends Base {
   }
 
   async auditxwordAction() {
-    let content = this.post('content');
+    let content = this.get('content');
 	var swords = xwords.filter(content);
 	return this.success({
       result: 'OK',
@@ -88,14 +88,14 @@ export default class extends Base {
     console.log(swords);
     //if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
     //     || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
-    /*if (swords != '') {
+    if (swords != '') {
       return this.fail({
         result: 'AUDIT_ERROR',
         audit: false,
 		sword: swords,
         errorCode: 301
       });
-	}*/
+	}
 
     let questResult = await this.model('question').add({
             title: title,

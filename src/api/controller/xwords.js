@@ -32,7 +32,7 @@ function addWord(word) {
 
 function filter(s) {
   if (s == null) {
-    return ''
+    return '';
   }
 
   var re = '';
@@ -40,19 +40,14 @@ function filter(s) {
     //if (array[i].indexOf('*') > -1) {
     //  continue;
     //}
-	  if(i==array.length-1)
-           re+=array[i];
-      else
-           re+=array[i]+"|";
-    //var reg = new RegExp(parent[i], 'g')
-    //console.log(i);
-    //if (s.indexOf(array[i]) > -1) {
-    //  return array[i];
-    //}
+    if(i==array.length-1)
+       re+=array[i];
+    else
+       re+=array[i]+"|";
   }
-  
-  console.log(re);
-  console.log(s);
+
+  //console.log(re);
+  //console.log(s);
   var pattern = new RegExp(re,"g");
   if(pattern.test(s)) {
      return s;
