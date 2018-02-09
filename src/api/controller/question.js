@@ -77,7 +77,7 @@ export default class extends Base {
          || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
       return this.fail({
         result: 'AUDIT_ERROR',
-        audit: audit,
+        audit: false,
         errorCode: 301
       });
 	}
