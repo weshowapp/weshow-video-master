@@ -34,8 +34,8 @@ function filter(s) {
 
   var sWord = ''
   for (var i = 0; i < parent.length; i++) {
-    var reg = new RegExp(parent[i], 'g')
-    if (s.match(reg)) {
+    //var reg = new RegExp(parent[i], 'g')
+    if (s.match(/parent[i]/)) {
       return parent[i];
     }
   }
