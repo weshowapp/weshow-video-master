@@ -59,7 +59,7 @@ export default class extends Base {
   async getuserdrawAction() {
     let uid = this.get('openid');
     let l = await this.model('wxcash').where({openid: uid, draw_type: 2}).order('add_time DESC').select();
-    if (think.isEmpty(l)) {
+    if (!think.isEmpty(l)) {
       for (var i = 0; i < l.length; i++) {
         l[i].current_time = Math.floor((new Date()).getTime() / 1000);
       }
