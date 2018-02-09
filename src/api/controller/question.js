@@ -55,7 +55,7 @@ export default class extends Base {
 
   async auditxwordAction() {
     let content = this.post('content');
-	var swords = xwords.filter1(content);
+	var swords = xwords.filter(content);
 	return this.success({
       result: 'OK',
 	  xwords: swords,
