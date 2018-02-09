@@ -29,7 +29,7 @@ function addWord(word) {
   //parent.isEnd = true
 }
 
-function filter1(s) {
+function filter(s) {
   var parent = map
 
   if (s == null) {
@@ -220,7 +220,7 @@ function check(map, content) {
 
           
 
-function filter(content) {
+function filter1(content) {
 
     var map = buildMap(array);         
 
