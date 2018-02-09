@@ -5,10 +5,10 @@
  */
 export default class extends think.model.base {
 
-  async noNewData(refresh, tm) {
+  async noNewData(qid, refresh, tm) {
     if (refresh == 1) {
       let timestamp = parseInt(tm) - 3;
-      let hasNew = await this.model('quizuser').where({ add_time: ['>', timestamp] }).find();
+      let hasNew = await this.model('quizuser').where({ quizid: qid, add_time: ['>', timestamp] }).find();
       return think.isEmpty(hasNew);
     }
     return false;
@@ -34,6 +34,14 @@ export default class extends think.model.base {
         if (!think.isEmpty(userInfo)) {
           info[i].user_photo = userInfo.photo_url;
           info[i].user_name = userInfo.name;
+        }
+        else {
+          info[i].user_photo = '../../icon/share_more.png';
+          info[i].user_name = '未知';
+          var add_time = Math.round((new Date()).getTime() / 1000);
+          await this.model('quizuser').where({quizid: qid, openid: info[i].openid}).update({
+	        add_time: add_time
+          });
         }
       }
     }
