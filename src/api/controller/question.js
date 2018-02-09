@@ -53,6 +53,16 @@ export default class extends Base {
 
   }
 
+  async auditxwordAction() {
+    let content = this.post('content');
+	var swords = xwords.filter1(content);
+	return this.success({
+      result: 'OK',
+	  xwords: swords,
+      errorCode: 0
+    });
+  }
+ 
   async addAction() {
     let title = this.post('title');
     let create_time = this.post('create_time');

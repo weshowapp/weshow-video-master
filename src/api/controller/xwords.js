@@ -37,10 +37,10 @@ function filter1(s) {
   }
 
   var sWord = ''
-  for (var i = 0; i < parent.length; i++) {
+  for (var i = 0; i < array.length; i++) {
     //var reg = new RegExp(parent[i], 'g')
-    if (s.match(/parent[i]/)) {
-      return parent[i];
+    if (s.search(array[i]) > -1) {
+      return array[i];
     }
   }
   return '';
