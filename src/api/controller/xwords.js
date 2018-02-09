@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-var path = think.RESOURCE_PATH + '/keywords'
+var path = think.RESOURCE_PATH + '/keywords0'
 
 var map = {}
 var array = []
@@ -40,15 +40,15 @@ function filter(s) {
   var sWord = ''
   var re = '';
   for (var i = 0; i < array.length; i++) {
+    //if (array[i].indexOf('*') > -1) {
+    //  continue;
+    //}
 	  if(i==array.length-1)
            re+=array[i];
       else
            re+=array[i]+"|";
     //var reg = new RegExp(parent[i], 'g')
     //console.log(i);
-    //if (array[i].indexOf('*') > -1) {
-    //  continue;
-    //}
     //if (s.indexOf(array[i]) > -1) {
     //  return array[i];
     //}
