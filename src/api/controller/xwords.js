@@ -29,9 +29,10 @@ function filter(s) {
 
   var find = false
   if (s == null) {
-    return find
+    return ''
   }
 
+  var sWord = ''
   for (var i = 0; i < s.length; i++) {
     if (s[i] == '*') {
       continue
@@ -39,7 +40,7 @@ function filter(s) {
 
     var found = false
     var skip = 0
-    var sWord = ''
+    sWord = ''
 
     for (var j = i; j < s.length; j++) {
 
@@ -63,6 +64,8 @@ function filter(s) {
     if (skip > 1) {
       i += skip - 1
     }
+	
+	console.log(sWord)
 
     if (!found) {
       continue
@@ -86,7 +89,7 @@ function filter(s) {
   //  cb(null, find)
   //}
 
-  return find
+  return sWord
 }
 
 module.exports = {

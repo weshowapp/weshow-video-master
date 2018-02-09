@@ -73,11 +73,16 @@ export default class extends Base {
 
     //var audit = this.model('question').checkInput(quest_content, quest_item_a, quest_item_b, quest_item_c, quest_item_d);
     //if (!audit) {
-    if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
-         || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
+    var swords = xwords.filter(quest_content) + xwords.filter(quest_item_a) + xwords.filter(quest_item_b)
+         + xwords.filter(quest_item_c) + xwords.filter(quest_item_d);
+    console.log(swords);
+    //if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
+    //     || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
+    if (swords != '') {
       return this.fail({
         result: 'AUDIT_ERROR',
         audit: false,
+		sword: swords,
         errorCode: 301
       });
 	}
