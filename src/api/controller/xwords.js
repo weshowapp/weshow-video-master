@@ -2,7 +2,7 @@ var fs = require('fs')
 
 var path = think.RESOURCE_PATH + '/keywords'
 
-var map = {}
+var map = []
 
 var lineReader = require('readline').createInterface({
   input: require('fs').createReadStream(path, {encoding: 'UTF-8'})
@@ -17,11 +17,12 @@ function addWord(word) {
 
   var parent = map
 
+  parent.push(word)
   for (var i = 0; i < word.length; i++) {
-    if (!parent[word[i]]) parent[word[i]] = {}
-    parent = parent[word[i]]
+    //if (!parent[word[i]]) parent[word[i]] = {}
+    //parent = parent[word[i]]
   }
-  parent.isEnd = true
+  //parent.isEnd = true
 }
 
 function filter(s) {
