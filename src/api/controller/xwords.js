@@ -227,7 +227,7 @@ function filter(content) {
     var words = check(map, content);
 
     console.log(words);
-	return works;
+	return words;
 
 }
 
