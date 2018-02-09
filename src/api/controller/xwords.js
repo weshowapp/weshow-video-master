@@ -31,13 +31,10 @@ function addWord(word) {
 }
 
 function filter(s) {
-  var parent = map
-
   if (s == null) {
     return ''
   }
 
-  var sWord = ''
   var re = '';
   for (var i = 0; i < array.length; i++) {
     //if (array[i].indexOf('*') > -1) {
@@ -53,6 +50,9 @@ function filter(s) {
     //  return array[i];
     //}
   }
+  
+  //console.log(re);
+  //console.log(s);
   var pattern = new RegExp(re,"g");
   if(pattern.test(s)) {
      return s;
