@@ -27,6 +27,23 @@ function addWord(word) {
 function filter(s) {
   var parent = map
 
+  if (s == null) {
+    return ''
+  }
+
+  var sWord = ''
+  for (var i = 0; i < parent.length; i++) {
+    var reg = new RegExp(parent[i], 'g')
+    if (s.match(reg)) {
+      return parent[i];
+    }
+  }
+  return '';
+}
+
+function filter0(s) {
+  var parent = map
+
   var find = false
   if (s == null) {
     return ''
