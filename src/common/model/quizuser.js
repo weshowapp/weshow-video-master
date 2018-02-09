@@ -5,9 +5,9 @@
  */
 export default class extends think.model.base {
 
-  async noNewData(refresh) {
+  async noNewData(refresh, tm) {
     if (refresh == 1) {
-      let timestamp = parseInt(this.get('timestamp')) - 3;
+      let timestamp = parseInt(tm) - 3;
       let hasNew = await this.model('quizuser').where({ add_time: ['>', timestamp] }).find();
       return think.isEmpty(hasNew);
     }

@@ -9,7 +9,7 @@ export default class extends Base {
   async getbyquizidAction() {
     let qid = this.get('quizid');
     let refresh = this.get('refresh');
-    if (await this.model('quizuser').noNewData(refresh)) {
+    if (await this.model('quizuser').noNewData(refresh, this.get('timestamp'))) {
       return this.fail({
         result: 'NO NEW DATA',
         hasNew: 0,
@@ -37,7 +37,7 @@ export default class extends Base {
     let qid = this.get('quizid');
     let uid = this.get('openid');
     let refresh = this.get('refresh');
-    if (await this.model('quizuser').noNewData(refresh)) {
+    if (await this.model('quizuser').noNewData(refresh, this.get('timestamp'))) {
       return this.fail({
         result: 'NO NEW DATA',
         hasNew: 0,
@@ -53,7 +53,7 @@ export default class extends Base {
   async getbyuidAction() {
     let uid = this.get('uid');
     let refresh = this.get('refresh');
-    if (await this.model('quizuser').noNewData(refresh)) {
+    if (await this.model('quizuser').noNewData(refresh, this.get('timestamp'))) {
       return this.fail({
         result: 'NO NEW DATA',
         hasNew: 0,
@@ -68,7 +68,7 @@ export default class extends Base {
   async getbyopenidAction() {
     let uid = this.get('openid');
     let refresh = this.get('refresh');
-    if (await this.model('quizuser').noNewData(refresh)) {
+    if (await this.model('quizuser').noNewData(refresh, this.get('timestamp'))) {
       return this.fail({
         result: 'NO NEW DATA',
         hasNew: 0,
@@ -82,7 +82,7 @@ export default class extends Base {
 
   async getansweredAction() {
     let refresh = this.get('refresh');
-    if (await this.model('quizuser').noNewData(refresh)) {
+    if (await this.model('quizuser').noNewData(refresh, this.get('timestamp'))) {
       return this.fail({
         result: 'NO NEW DATA',
         hasNew: 0,
