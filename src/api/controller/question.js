@@ -2,6 +2,9 @@
 
 import Base from './base.js';
 
+
+var xwords = require('./xwords');
+
 export default class extends Base {
 
   /**
@@ -67,8 +70,19 @@ export default class extends Base {
     let note = this.post('note');
     console.log('addAction');
     console.log(quest_content);
-	
-		let questResult = await this.model('question').add({
+
+    //var audit = this.model('question').checkInput(quest_content, quest_item_a, quest_item_b, quest_item_c, quest_item_d);
+    //if (!audit) {
+    if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
+         || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
+      return this.fail({
+        result: 'AUDIT_ERROR',
+        audit: audit,
+        errorCode: 301
+      });
+	}
+
+    let questResult = await this.model('question').add({
             title: title,
 			creator_id: creator_id,
 			creator_name: creator_name,
