@@ -4,6 +4,7 @@ var path = think.RESOURCE_PATH + '/keywords'
 
 var map = {}
 var array = []
+var pattern = '';
 
 var lineReader = require('readline').createInterface({
   input: require('fs').createReadStream(path, {encoding: 'UTF-8'})
@@ -37,15 +38,24 @@ function filter(s) {
   }
 
   var sWord = ''
+  var re = '';
   for (var i = 0; i < array.length; i++) {
+	  if(i==array.length-1)
+           re+=array[i];
+      else
+           re+=array[i]+"|";
     //var reg = new RegExp(parent[i], 'g')
-    console.log(i);
+    //console.log(i);
     //if (array[i].indexOf('*') > -1) {
     //  continue;
     //}
-    if (s.indexOf(array[i]) > -1) {
-      return array[i];
-    }
+    //if (s.indexOf(array[i]) > -1) {
+    //  return array[i];
+    //}
+  }
+  var pattern = new RegExp(re,"g");
+  if(pattern.test(s)) {
+     return s;
   }
   return '';
 }
