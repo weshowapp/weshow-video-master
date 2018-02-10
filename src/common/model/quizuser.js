@@ -39,7 +39,7 @@ export default class extends think.model.base {
           info[i].user_photo = '../../icon/share_more.png';
           info[i].user_name = '未知';
           var add_time = Math.round((new Date()).getTime() / 1000);
-          await this.model('quizuser').where({quizid: qid, openid: info[i].openid}).update({
+          await this.model('quizuser').where({quizid: info[i].quizid, openid: info[i].openid}).update({
 	        add_time: add_time
           });
         }
