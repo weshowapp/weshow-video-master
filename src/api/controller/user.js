@@ -14,18 +14,21 @@ export default class extends Base {
 
     let uid = this.get('uid');
     let userInfo = await this.model('user').where({id: uid}).select();
-    delete userInfo.password;
+    //delete userInfo.password;
     return this.json(userInfo);
   }
 
   async infoAction(){
 	let userid = this.get('userid');
     let userInfo = await this.model('user').where({openid: userid}).find();
-    delete userInfo.password;
+    //delete userInfo.password;
+    if (!think.isEmpty(userInfo)) {
+      //wx.login()...
+    }
 	
 	console.log('userinfo');
     let count = await this.model('question').where({creator_id: userid}).count();
-	//if (!think.isEmpty(count))
+    //if (!think.isEmpty(count))
 	{
 	  console.log('userinfo question count');
 	  console.log(count);
@@ -66,16 +69,21 @@ export default class extends Base {
 	console.log(name);
 	
 	var invition_code = this.model('user').randomString(6);
-	
-	let existInfo = await this.model('user').where({openid: userid}).find();
-	if (!think.isEmpty(existInfo)) {
-		return this.success({
+
+    var addResult = -1;
+    var added = false;
+    let existInfo = await this.model('user').where({openid: userid}).find();
+    if (!think.isEmpty(existInfo)) {
+      addResult = existInfo.uid;
+		/*return this.success({
           result: 'ALREADY EXIST',
 	      uid: -1,
           errorCode: 1
-        });
+        });*/
 	}
-    let addResult = await this.model('user').add({
+    else {
+      added = true;
+      addResult = await this.model('user').add({
 		openid: userid,
 		country: country,
 		province: province,
@@ -88,11 +96,11 @@ export default class extends Base {
 		invition_code: invition_code,
         reg_time: add_time,
 		name: name
-    });
-	
-	console.log(addResult);
-	if (addResult >= 0) {
-		let userInfo = await this.model('user').where({openid: inviter_id, invition_code: inviter_code, _logic: "OR"}).find();
+      });
+
+      console.log(addResult);
+      if (addResult >= 0) {
+        let userInfo = await this.model('user').where({openid: inviter_id, invition_code: inviter_code, _logic: "OR"}).find();
 	    if (!think.isEmpty(userInfo)) {
 	        await this.model('user').updateRelive(inviter_id, 1, 1, '0', userid);
 		    var relive = 1 + userInfo.relive;
@@ -100,11 +108,23 @@ export default class extends Base {
                 relive: relive
             });
 	    }
-	}
+      }
+	  existInfo = await this.model('user').where({openid: userid}).find();
+    }
+
+    let sessionData = { user_id: addResult, openid: userInfo.openid };
+    sessionData.seed = Math.floor((new Date()).getTime() / 1000);
+    let TokenSerivce = this.service('token');
+    let tokenObj = new TokenSerivce();
+    let sessionKey = await tokenObj.create(sessionData);
+    existInfo.wxtoken = sessionKey;
 	
 	return this.success({
       result: 'OK',
 	  uid: addResult,
+      isNew: added,
+	  wxtoken: sessionKey,
+	  data: existInfo,
       errorCode: 0
     });
   }
