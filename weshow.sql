@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `weshow_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_user` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `level` smallint(3) unsigned NOT NULL DEFAULT '0',
@@ -48,7 +48,7 @@ CREATE TABLE `weshow_user` (
   `balance` float DEFAULT 0.0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +75,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_question` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `creator_id` varchar(64) NOT NULL DEFAULT '',
@@ -99,7 +99,7 @@ CREATE TABLE `weshow_question` (
   `more` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `creator_id` (`creator_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,13 @@ VALUES (1,'1','A1',1516199514,1,1,0,0,0,0,'','北京在古代曾经叫做?','蓟
   (11,'6','A1',1516199514,1,1,0,0,0,0,'','可燃冰的主要有效成分是？','乙炔','甲烷','乙醇','',3,1,'可燃冰，是分布于深海沉积物或陆域的永久冻土中，由天然气与水在高压低温条件下形成的类冰状的结晶物质，有极强的燃烧力，主要由水分子和烃类气体分子（主要是甲烷）组成。',''),
   (12,'6','A1',1516199514,1,1,0,0,0,0,'','下列生活用品中主要由合成纤维制造的是？','棉衬衣','羊绒衫','尼龙绳','',3,2,'棉衬衣的主要成分为天然纤维素，羊绒衫的主要成分是蛋白质，尼龙绳的主要成分是聚酯类合成纤维',''),
   (13,'6','A1',1516199514,1,1,0,0,0,0,'','“政启开元，治宏贞观”是郭沫若对下列哪一帝王功绩的正确评价?','唐太宗','武则天','唐玄宗','',3,1,'武则天当政期间，继续推行唐太宗发展农业生产、选拔贤才的政策，使唐朝社会经济进一步发展，国力不断增强。',''),
-  (30,'30','A1',1516199514,1,1,0,0,0,0,'','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'李世民争夺太子之战','');
+  (14,'1','AA',1516199666,1,1,0,0,0,0,'','哈佛大学位于美国的哪个城市？','波士顿','华盛顿','纽约','',3,0,'知识点',''),
+  (15,'1','AA',1516199666,1,1,0,0,0,0,'','歌词“他眼神湛蓝，像从爱琴海边刚归来”出自谁的歌曲《大艺术家》？','蔡依林','孙燕姿','萧亚轩','',3,0,'知识点',''),
+  (16,'1','AA',1516199666,1,1,0,0,0,0,'','甄嬛传是哪个皇帝时代？','乾隆','康熙','雍正','',3,2,'知识点',''),
+  (17,'1','AA',1516199666,1,1,0,0,0,0,'','传说黄帝和蚩尤大战的古地名是什么？','王屋山','逐鹿','昆仑','',3,1,'知识点',''),
+  (18,'1','AA',1516199666,1,1,0,0,0,0,'','比杨玉环大十八岁，却甘心做杨玉环的养儿的是谁？','安禄山','史思明','杨国忠','',3,0,'知识点',''),
+  (19,'1','AA',1516199666,1,1,0,0,0,0,'','下列名称不属于二十四节气的？','谷雨','大伏','春分','',3,1,'知识点',''),
+  (30,'30','A1',1516199666,1,1,0,0,0,0,'','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'李世民争夺太子之战','');
 /*!40000 ALTER TABLE `weshow_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +139,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_quiz`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_quiz` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `creator_id` varchar(64) NOT NULL DEFAULT '',
@@ -153,7 +159,7 @@ CREATE TABLE `weshow_quiz` (
   `share_ticket` varchar(64) NOT NULL DEFAULT '',
   `open_gid` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +180,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_group` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(20) NOT NULL DEFAULT '1',
@@ -187,7 +193,7 @@ CREATE TABLE `weshow_group` (
   PRIMARY KEY (`id`),
   KEY `open_gid` (`open_gid`),
   KEY `add_uid` (`add_uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +214,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_usergroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_usergroup` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(20) NOT NULL DEFAULT '1',
@@ -221,7 +227,7 @@ CREATE TABLE `weshow_usergroup` (
   KEY `openid` (`openid`),
   KEY `open_gid` (`open_gid`),
   UNIQUE KEY `usergroup_acc` (`openid`, `open_gid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +248,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_quizuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_quizuser` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(20) NOT NULL DEFAULT '1',
@@ -258,7 +264,7 @@ CREATE TABLE `weshow_quizuser` (
   KEY `quizid` (`quizid`),
   KEY `openid` (`openid`),
   UNIQUE KEY `quizuser_acc` (`openid`, `quizid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +285,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_relive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_relive` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(64) NOT NULL DEFAULT '',
@@ -292,7 +298,7 @@ CREATE TABLE `weshow_relive` (
   KEY `quizid` (`quizid`),
   KEY `openid` (`openid`),
   UNIQUE KEY `relive_acc` (`openid`, `quizid`, `invitee_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +319,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_wxcash`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_wxcash` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(64) NOT NULL DEFAULT '',
@@ -325,7 +331,7 @@ CREATE TABLE `weshow_wxcash` (
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +352,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_wxpay`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_wxpay` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(32) NOT NULL DEFAULT '',
@@ -356,7 +362,7 @@ CREATE TABLE `weshow_wxpay` (
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +383,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_note`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_note` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `userid` varchar(64) NOT NULL DEFAULT '',
@@ -385,7 +391,7 @@ CREATE TABLE `weshow_note` (
   `more` varchar(1024) NOT NULL DEFAULT '',
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
