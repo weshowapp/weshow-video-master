@@ -112,7 +112,7 @@ export default class extends Base {
 	  existInfo = await this.model('user').where({openid: userid}).find();
     }
 
-    let sessionData = { user_id: addResult, openid: userInfo.openid };
+    let sessionData = { user_id: addResult, openid: userid };
     sessionData.seed = Math.floor((new Date()).getTime() / 1000);
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
