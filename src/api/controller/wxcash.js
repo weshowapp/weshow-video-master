@@ -28,10 +28,10 @@ export default class extends Base {
         if (think.isEmpty(l[i].quizid)) { l[i].quizid = 0; }
 	    let quizInfo = await this.model('quiz').where({ id: l[i].quizid }).find();
         if (!think.isEmpty(quizInfo)) {
-          l[i].format_time = this.formatDateTime(l[i].add_time);
-          l[i].str_time = this.getFullDateTime(l[i].add_time);
           l[i].open_gid = quizInfo.open_gid;
         }
+        l[i].format_time = this.formatDateTime(l[i].add_time);
+        l[i].str_time = this.getFullDateTime(l[i].add_time);
         if (l[i].draw_type == 1) {
           l[i].desc = '创建比赛充入 + ';
         }
