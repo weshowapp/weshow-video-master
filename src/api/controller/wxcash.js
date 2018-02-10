@@ -79,16 +79,16 @@ export default class extends Base {
     //let tm = this.post('add_time');
     var tm = Math.floor((new Date()).getTime() / 1000);
 
-    let addResult = await this.model('wxcash').add({
+    /*let addResult = await this.model('wxcash').add({
       openid: uid,
       username: name,
       cash_val: cash_val,
       draw_type: 2,
       note: note,
       add_time: tm
-    });
+    });*/
 	
-    await this.model('wxcash').addOp(uid, '0', cash_val, 2, 'draw', tm);
+    let addResult = await this.model('wxcash').addOp(uid, '0', cash_val, 2, 'draw', tm);
 
 	return this.success({
       result: 'OK',
