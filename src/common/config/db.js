@@ -13,7 +13,7 @@ export default {
       user: 'root',
       password: 'weshow',
       prefix: 'weshow_',
-      encoding: 'utf8mb4'
+      encoding: 'utf8'
     },
     mongo: {
 
