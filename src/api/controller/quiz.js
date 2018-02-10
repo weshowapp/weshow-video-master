@@ -46,9 +46,11 @@ export default class extends Base {
 	    if (!think.isEmpty(list)) {
           console.log(list.length);
 		  for (var i = 0; i < list.length; i++) {
-            console.log(i);
-            await this.model('quiz').setQuizQuestion(list[i], openid);
+            //console.log(i);
             await this.model('quiz').setQuizState(list[i], openid);
+            if (list[i].is_completed == 0) {
+                await this.model('quiz').setQuizQuestion(list[i], openid);
+            }
 			
 			let quInfo = await this.model('quizuser').where({quizid: list[i].id, openid: openid}).find();
 			if (!think.isEmpty(quInfo)) {
