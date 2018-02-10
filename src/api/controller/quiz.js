@@ -38,10 +38,10 @@ export default class extends Base {
 
 	    var curTime = Math.round((new Date()).getTime() / 1000);
 		if (onlyactive == 1) {
-          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1, start_time: [">", curTime]}).order('start_time DESC').limit(30).select();
+          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1, start_time: [">", curTime]}).order('start_time DESC').limit(10).select();
 		}
 		else {
-          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').limit(30).select();
+          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').limit(10).select();
 		}
 	    if (!think.isEmpty(list)) {
           console.log(list.length);
