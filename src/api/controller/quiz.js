@@ -28,13 +28,13 @@ export default class extends Base {
     console.log(openid);
     let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).order('add_time DESC').select();
 	let list = null;
-    console.log(quizIdList);
+    //console.log(quizIdList.length);
 	if (!think.isEmpty(quizIdList)) {
 		var qidList = [];
 		for (var i = 0; i < quizIdList.length; i++) {
 			qidList.push(quizIdList[i].quizid);
 		}
-        console.log(qidList);
+        //console.log(qidList);
 
 	    var curTime = Math.round((new Date()).getTime() / 1000);
 		if (onlyactive == 1) {
