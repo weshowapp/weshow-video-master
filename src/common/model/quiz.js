@@ -68,13 +68,20 @@ export default class extends think.model.base {
 
     var curTime = this.getCurrentSecond();
     quiz.current_time = curTime;
+    quiz.is_start = 0;
     quiz.is_completed = 0;
+    quiz.phase = 0;
     if (curTime > quiz.start_time + quiz.quest_count * 15) {
       quiz.is_completed = 1;
+      quiz.phase = 3;
     }
-    quiz.is_start = 0;
-    if (curTime > quiz.start_time) {
+    else if (curTime > quiz.start_time) {
       quiz.is_start = 1;
+      quiz.phase = 1;
+    }
+    else {
+      quiz.is_start = 1;
+      quiz.phase = 2;
     }
 
     quiz.format_start = this.getHourMin(quiz.start_time);
