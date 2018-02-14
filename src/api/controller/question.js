@@ -35,9 +35,10 @@ export default class extends Base {
     var filepath = file.path;
     
     var lineReader = require('readline').createInterface({
-      input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'});
+      input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
     });
 
+    let questModel = this.model('question');
     lineReader.on('line', function (line) {
       if(!line) return;
       var arr = line.split(',');
@@ -46,7 +47,7 @@ export default class extends Base {
       if (arr[7] != '') {
         item_count = 4;
       }
-      let addResult = await this.model('question').add({
+      let addResult = questModel.add({
         title: 'A',
         creator_id: '1',
         creator_name: 'Administrator',
