@@ -123,6 +123,7 @@ export default class extends Base {
       var arr = [];
       var first = Math.random(list.length);
       for (var i = first; i < list.length; i++) {
+        console.log(i + ', ' + list[i]);
         if (arr.length < count) {
           arr.push(list[i]);
         }
@@ -134,6 +135,7 @@ export default class extends Base {
         }
       }
 
+      console.log(arr);
       let questList = await this.model('question').where({id: ["IN", arr]}).select();
       return this.success({
         questList: questList
