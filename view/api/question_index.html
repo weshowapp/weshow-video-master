@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>题目管理</title>
+<style>
+*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
+a, a:visited{color:#337ab7;text-decoration: none;}
+header{padding: 70px 0 70px 0;background-color: #4A6495}
+h1{font-size: 36px;color:#fff;font-weight: normal;}
+code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+.content{width: 1000px;margin: auto}
+.wrap{width: 1000px;margin: auto}
+.content{margin-top: 80px;}
+.list{width: 800px;}
+.list .item{position: relative;padding-left: 70px;margin-top: 50px;}
+.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
+.list .item h2{font-size: 24px;font-weight: normal;}
+.list .item p{line-height: 30px;margin-top: 10px}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>题目管理</h1>
+    </div>
+  </header>
+  <div class="content">
+    <div class="list">
+      <h2>选择文件,批量添加</h2>
+      <form action="question/upload" enctype="multipart/form-data" method="post">
+        请选择文件:<input type="file" name ="file_input"/><br>
+        <input type="submit" name ="file_submit" value="上传"/>
+      </form>
+      <h2>单个添加</h2>
+      <form action="question/add" enctype="multipart/form-data" method="post">
+        类别:<input type="text" name ="quest_type"/><br>
+        级别:<input type="text" name ="quest_level"/><br>
+        标签:<input type="text" name ="quest_tags"/><br>
+        来源:<input type="text" name ="quest_source"/><br>
+        题目:<input type="text" name ="quest_content"/><br>
+        选项1:<input type="text" name ="quest_item_a"/><br>
+        选项2:<input type="text" name ="quest_item_b"/><br>
+        选项3:<input type="text" name ="quest_item_c"/><br>
+        选项4:<input type="text" name ="quest_item_d"/><br>
+        答案:<input type="text" name ="quest_answer"/><br>
+        知识点:<input type="text" name ="note"/><br>
+        <input type="submit" name ="question_submit" value="提交"/>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -11,7 +11,7 @@ export default class extends Base {
   async indexAction() {
     let quiz_id = this.get('quiz_id');
     let openid = this.get('openid');
-	
+    
     let quiz = await this.model('quiz').where({id: quiz_id}).find();
     await this.model('quiz').setQuizQuestion(quiz, openid);
     await this.model('quiz').setQuizState(quiz, openid);
@@ -27,42 +27,42 @@ export default class extends Base {
     let onlyactive = this.get('onlyactive');
     console.log(openid);
     let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).order('add_time DESC').select();
-	let list = null;
+    let list = null;
     //console.log(quizIdList.length);
-	if (!think.isEmpty(quizIdList)) {
-		var qidList = [];
-		for (var i = 0; i < quizIdList.length; i++) {
-			qidList.push(quizIdList[i].quizid);
-		}
+    if (!think.isEmpty(quizIdList)) {
+        var qidList = [];
+        for (var i = 0; i < quizIdList.length; i++) {
+            qidList.push(quizIdList[i].quizid);
+        }
         //console.log(qidList);
 
-	    var curTime = Math.round((new Date()).getTime() / 1000);
-		if (onlyactive == 1) {
+        var curTime = Math.round((new Date()).getTime() / 1000);
+        if (onlyactive == 1) {
           list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1, start_time: [">", curTime]}).order('start_time DESC').limit(10).select();
-		}
-		else {
+        }
+        else {
           list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').limit(10).select();
-		}
-	    if (!think.isEmpty(list)) {
+        }
+        if (!think.isEmpty(list)) {
           console.log(list.length);
-		  for (var i = 0; i < list.length; i++) {
+          for (var i = 0; i < list.length; i++) {
             //console.log(i);
             await this.model('quiz').setQuizState(list[i], openid);
             if (list[i].is_completed == 0) {
                 await this.model('quiz').setQuizQuestion(list[i], openid);
             }
-			
-			let quInfo = await this.model('quizuser').where({quizid: list[i].id, openid: openid}).find();
-			if (!think.isEmpty(quInfo)) {
-				let userInfo = await this.model('user').where({openid: quInfo.openid}).find();
-				if (!think.isEmpty(userInfo)) {
-					quInfo.user_photo = userInfo.photo_url;
-				}
-			}
-			list[i].userdata = quInfo;
+            
+            let quInfo = await this.model('quizuser').where({quizid: list[i].id, openid: openid}).find();
+            if (!think.isEmpty(quInfo)) {
+                let userInfo = await this.model('user').where({openid: quInfo.openid}).find();
+                if (!think.isEmpty(userInfo)) {
+                    quInfo.user_photo = userInfo.photo_url;
+                }
+            }
+            list[i].userdata = quInfo;
           }
-		}
-	}
+        }
+    }
 
     return this.success({
       quizList: list
@@ -91,53 +91,53 @@ export default class extends Base {
     console.log(price);
     console.log(quest_list);
     console.log(quest_count);
-	
-	var table = 'weshow_question';
-	var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
-	    + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
-		+ table + '))) ORDER BY id LIMIT ' + quest_count + ';';
-	//var randId = maxid * random();
+    
+    var table = 'weshow_question';
+    var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
+        + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
+        + table + '))) ORDER BY id LIMIT ' + quest_count + ';';
+    //var randId = maxid * random();
     //console.log(randId);
-	
-	//let list = await this.model('question').where({id: randId}).limit(quest_count).select();
-	if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
-	  var list = await this.model('question').query(sql);
+    
+    //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
+    if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
+      var list = await this.model('question').query(sql);
       console.log(list.length);
-	  if (!think.isEmpty(list)) {
-		quest_list = '';
+      if (!think.isEmpty(list)) {
+        quest_list = '';
         console.log('quest_list empty');
         quest_count = list.length;
-		for (var i = 0; i < list.length; i++) {
+        for (var i = 0; i < list.length; i++) {
             console.log(list[i].id);
-			if (i == 0) {
-				quest_list = list[i].id;
-			}
-			else {
-				quest_list = quest_list + '-' + list[i].id;
-			}
-		}
+            if (i == 0) {
+                quest_list = list[i].id;
+            }
+            else {
+                quest_list = quest_list + '-' + list[i].id;
+            }
+        }
         console.log(quest_list);
-	  }
-	}
+      }
+    }
 
-		let quizResult = await this.model('quiz').add({
+        let quizResult = await this.model('quiz').add({
             title: title,
             creator_id: creator_id,
             creator_name: creator_name,
             creator_photo: creator_photo,
             create_time: create_time,
             start_time: start_time,
-			questions: quest_list,
-			quest_count: quest_count,
-			min_users: min_users,
-			price: price,
-			level: quiz_level,
-			category: quiz_category
+            questions: quest_list,
+            quest_count: quest_count,
+            min_users: min_users,
+            price: price,
+            level: quiz_level,
+            category: quiz_category
         });
-	
-	return this.success({
+    
+    return this.success({
       result: 'OK',
-	  quiz_id: quizResult,
+      quiz_id: quizResult,
       errorCode: 0
     });
   }
@@ -151,7 +151,7 @@ export default class extends Base {
 
     await this.model('quiz').where({id: qid}).update({
       open_gid: open_gid,
-	  share_ticket: share_ticket
+      share_ticket: share_ticket
     });
 
     return this.success({
@@ -161,20 +161,20 @@ export default class extends Base {
   }
 
   async updatepayAction(){
-	let openid = this.post('openid');
-	let payed = this.post('pay_status');
+    let openid = this.post('openid');
+    let payed = this.post('pay_status');
     var qid = this.post('quiz_id');
-	let cash_val = this.post('cash_val');
-	let username = this.post('username');
-	//let add_time = this.post('add_time');
-	var add_time = Math.round((new Date()).getTime() / 1000);
+    let cash_val = this.post('cash_val');
+    let username = this.post('username');
+    //let add_time = this.post('add_time');
+    var add_time = Math.round((new Date()).getTime() / 1000);
     console.log('updatepayAction');
     console.log(openid);
     console.log(cash_val);
     let result = await this.model('quiz').where({id: qid, creator_id: openid}).update({
       pay_status: payed
     });
-	await this.model('wxcash').addOp(openid, qid, cash_val, 1, 'pay', add_time);
+    await this.model('wxcash').addOp(openid, qid, cash_val, 1, 'pay', add_time);
     return this.json(result);
   }
 }
