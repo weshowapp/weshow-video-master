@@ -280,7 +280,7 @@ CREATE TABLE `weshow_quizuser` (
 LOCK TABLES `weshow_quizuser` WRITE;
 /*!40000 ALTER TABLE `weshow_quizuser` DISABLE KEYS */;
 INSERT INTO `weshow_quizuser` 
-VALUES (1,1,1,'A1','A1',0,0,0,0,1516199514);
+VALUES (1,1,1,'A1','A1',0,0,0,0,0,0,1516199514);
 /*!40000 ALTER TABLE `weshow_quizuser` ENABLE KEYS */;
 UNLOCK TABLES;
 
