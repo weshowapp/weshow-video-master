@@ -10,8 +10,6 @@ var xwords = require('./xwords');
 
 export default class extends Base {
 
-  addLine(line) {
-  }
 
   /**
    * index action
@@ -38,6 +36,7 @@ export default class extends Base {
       input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
     });
 
+    var count = 0;
     let questModel = this.model('question');
     lineReader.on('line', function (line) {
       if(!line) return;
@@ -47,19 +46,20 @@ export default class extends Base {
       if (arr[7] != '') {
         item_count = 4;
       }
+
       let addResult = questModel.add({
         title: 'A',
         creator_id: '1',
         creator_name: 'Administrator',
         item_count: item_count,
-        type: arr[1],
+        type: arr[1] == 'A' ? 1 : 2,
         source: arr[2],
         content: arr[3],
         item0: arr[4],
         item1: arr[5],
         item2: arr[6],
         item3: arr[7],
-        answer: arr[8],
+        answer: arr[8] == 'A' ? 0 : (arr[8] == 'B' ? 1 : (arr[8] == 'C' ? 2 : 3)),
         note: arr[9],
         more: arr[10],
         category0: arr[11],
@@ -68,7 +68,10 @@ export default class extends Base {
         category3: arr[14],
         tags: arr[15],
         level: arr[16]
-    });
+      });
+      if (addResult > 0) {
+        count++;
+      }
     });
 
     /*var uploadPath = think.RESOURCE_PATH + '/upload';
@@ -83,7 +86,7 @@ export default class extends Base {
       console.log('not exist')
     }
 
-    this.assign('fileInfo', file);
+    this.assign('result', 'Success Add ' + count + ' Lines');
 
     this.display();
   }
