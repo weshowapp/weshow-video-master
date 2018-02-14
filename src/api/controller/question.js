@@ -69,9 +69,9 @@ export default class extends Base {
         tags: arr[15],
         level: arr[16]
       });
-      if (addResult > 0) {
+      //if (addResult > 0) {
         count++;
-      }
+      //}
     });
 
     /*var uploadPath = think.RESOURCE_PATH + '/upload';
