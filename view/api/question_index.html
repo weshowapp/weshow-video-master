@@ -31,20 +31,22 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
       <form action="upload" enctype="multipart/form-data" method="post">
         请选择文件:<input type="file" name ="file_input"/><br>
         <input type="submit" name ="file_submit" value="上传"/>
-      </form>
+      </form><br><br>
       <h2>单个添加</h2>
       <form action="add" enctype="multipart/form-data" method="post">
-        类别:<input type="text" name ="quest_type"/><br>
-        级别:<input type="text" name ="quest_level"/><br>
-        标签:<input type="text" name ="quest_tags"/><br>
+        类别:<input type="text" name ="quest_type" value="1"/><br>
+        级别:<input type="text" name ="quest_level" value="1"/><br>
+        标签:<input type="text" name ="quest_tags" value="科技"/><br>
         来源:<input type="text" name ="quest_source"/><br>
         题目:<input type="text" name ="quest_content"/><br>
         选项1:<input type="text" name ="quest_item_a"/><br>
         选项2:<input type="text" name ="quest_item_b"/><br>
         选项3:<input type="text" name ="quest_item_c"/><br>
-        选项4:<input type="text" name ="quest_item_d"/><br>
+        选项个数:<input type="text" name ="item_count" value="3"/><br>
         答案:<input type="text" name ="quest_answer"/><br>
         知识点:<input type="text" name ="note"/><br>
+        提交人:<input type="text" name ="creator_id" value="1"/>
+        <input type="text" name ="creator_name" value="系统管理员"/><br>
         <input type="submit" name ="question_submit" value="提交"/>
       </form>
     </div>

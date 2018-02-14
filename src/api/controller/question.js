@@ -65,7 +65,6 @@ export default class extends Base {
  
   async addAction() {
     let title = this.post('title');
-    let create_time = this.post('create_time');
     let creator_id = this.post('creator_id');
     let creator_name = this.post('creator_name');
     let creator_account = this.post('creator_account');
@@ -82,8 +81,18 @@ export default class extends Base {
     let tags = this.post('quest_tags');
     let source = this.post('quest_source');
     let note = this.post('note');
+    //let create_time = this.post('create_time');
+    let create_time = Math.round((new Date()).getTime() / 1000);
     console.log('addAction');
-    console.log(quest_content);
+    //console.log(quest_content);
+    if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
+         || quest_item_c == '') {
+      return this.fail({
+        result: 'INVALID_INPUT',
+        audit: false,
+        errorCode: 302
+      });
+    }
 
     //var audit = this.model('question').checkInput(quest_content, quest_item_a, quest_item_b, quest_item_c, quest_item_d);
     //if (!audit) {
