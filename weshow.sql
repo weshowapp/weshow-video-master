@@ -264,7 +264,7 @@ CREATE TABLE `weshow_quizuser` (
   `game_gain` float NOT NULL DEFAULT '0',
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
   `answer_set` int(4) unsigned NOT NULL DEFAULT '0',
-  `answer_correct int(4) unsigned NOT NULL DEFAULT '0',
+  `answer_correct` int(4) unsigned NOT NULL DEFAULT '0',
   `add_time` int(16) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `quizid` (`quizid`),
