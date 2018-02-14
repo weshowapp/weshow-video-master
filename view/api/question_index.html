@@ -28,12 +28,12 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
   <div class="content">
     <div class="list">
       <h2>选择文件,批量添加</h2>
-      <form action="/upload" enctype="multipart/form-data" method="post">
+      <form action="upload" enctype="multipart/form-data" method="post">
         请选择文件:<input type="file" name ="file_input"/><br>
         <input type="submit" name ="file_submit" value="上传"/>
       </form>
       <h2>单个添加</h2>
-      <form action="/add" enctype="multipart/form-data" method="post">
+      <form action="add" enctype="multipart/form-data" method="post">
         类别:<input type="text" name ="quest_type"/><br>
         级别:<input type="text" name ="quest_level"/><br>
         标签:<input type="text" name ="quest_tags"/><br>
