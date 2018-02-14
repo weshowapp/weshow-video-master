@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,10 +21,10 @@
 
 DROP TABLE IF EXISTS `weshow_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_user` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `level` smallint(3) unsigned NOT NULL DEFAULT '0',
+  `level` smallint(4) unsigned NOT NULL DEFAULT '0',
   `gender` smallint(1) unsigned NOT NULL DEFAULT '0',
   `openid` varchar(32) NOT NULL DEFAULT '',
   `mobile` varchar(16) NOT NULL DEFAULT '',
@@ -48,7 +48,7 @@ CREATE TABLE `weshow_user` (
   `balance` float DEFAULT 0.0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +75,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_question` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `creator_id` varchar(64) NOT NULL DEFAULT '',
@@ -87,6 +87,8 @@ CREATE TABLE `weshow_question` (
   `category1` int(8) unsigned NOT NULL DEFAULT '0',
   `category2` int(8) unsigned NOT NULL DEFAULT '0',
   `category3` int(8) unsigned NOT NULL DEFAULT '0',
+  `tags` varchar(64) NOT NULL DEFAULT '',
+  `source` varchar(64) NOT NULL DEFAULT '',
   `title` varchar(32) NOT NULL DEFAULT '',
   `content` varchar(255) NOT NULL DEFAULT '',
   `item0` varchar(32) NOT NULL DEFAULT '',
@@ -97,9 +99,11 @@ CREATE TABLE `weshow_question` (
   `answer` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `note` varchar(255) NOT NULL DEFAULT '',
   `more` varchar(255) NOT NULL DEFAULT '',
+  `correct_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `wrong_count` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `creator_id` (`creator_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,26 +113,26 @@ CREATE TABLE `weshow_question` (
 LOCK TABLES `weshow_question` WRITE;
 /*!40000 ALTER TABLE `weshow_question` DISABLE KEYS */;
 INSERT INTO `weshow_question` 
-VALUES (1,'1','A1',1516199514,1,1,0,0,0,0,'','北京在古代曾经叫做?','蓟','京','燕','',3,0,'北京在秦代称作蓟',''),
-  (2,'2','A1',1516199514,1,1,0,0,0,0,'','以下哪种动物是哺乳动物？','鱼','燕子','恐龙','熊',4,3,'熊是哺乳动物',''),
-  (3,'3','A1',1516199514,1,1,0,0,0,0,'','以下哪种动物不是哺乳动物？','豹子','虎鲸','恐龙','熊',4,2,'鲸也是哺乳动物,恐龙是爬行动物',''),
-  (4,'4','A1',1516199514,1,1,0,0,0,0,'','“采菊东篱下，悠然见南山。”出自以下哪位诗人之手？','李白','王维','陶渊明','',3,2,'著名诗人陶渊明',''),
-  (5,'5','A1',1516199514,1,1,0,0,0,0,'','大气压的单位是什么？','帕斯卡','培','码','',3,0,'帕斯卡',''),
-  (6,'6','A1',1516199514,1,1,0,0,0,0,'','家用电器所使用的电线，一般是以下哪种材料制成的？','铁','铜','铝','',3,1,'铜的导电性能和柔软度最合适',''),
-  (7,'7','A1',1516199514,1,1,0,0,0,0,'','中国传统中，大年初几迎财神？','初一','初三','初五','',3,2,'中国民间传说正月初五是财神的生日，所以过了年初一，接下来最重要的活动就是初五接财神。',''),
-  (8,'6','A1',1516199514,1,1,0,0,0,0,'','"五日财源五日求，一年心愿一时酬；提防别处迎神早，隔夜匆匆抱路头" 描绘的是哪里人迎财神的情形？','上海人','苏州人','杭州人','',3,1,'清人顾铁卿《清嘉录》中引了一首蔡云的竹枝词，描绘了苏州人初五迎财神的情形："五日财源五日求，一年心愿一时酬；提防别处迎神早，隔夜匆匆抱路头"。"抱路头"亦即"迎财神"。',''),
-  (9,'6','A1',1516199514,1,1,0,0,0,0,'','春节是农历的哪一天？','十二月二十九','十二月三十','正月初一','',3,2,'春节俗称“年节”，是中华民族最隆重的传统佳节，汉武帝时期之前，各朝各代春节的日期并不一致，自汉武帝太初元年始，以夏历（农历）正月为岁首，年节的日期由此固定下来。1911年辛亥革命以后，开始采用公历计年，遂称公历1月1日为“元旦”，称农历正月初一为“春节”。',''),
-  (10,'6','A1',1516199514,1,1,0,0,0,0,'','民间习俗中，农历腊月二十三日送哪位神仙上天汇报工作？','灶君','财神','门神','',3,0,'灶神又称灶王爷，灶君。中国民间传说灶神每年腊月二十三晚，上天汇报，正月初四日返回人间。',''),
-  (11,'6','A1',1516199514,1,1,0,0,0,0,'','可燃冰的主要有效成分是？','乙炔','甲烷','乙醇','',3,1,'可燃冰，是分布于深海沉积物或陆域的永久冻土中，由天然气与水在高压低温条件下形成的类冰状的结晶物质，有极强的燃烧力，主要由水分子和烃类气体分子（主要是甲烷）组成。',''),
-  (12,'6','A1',1516199514,1,1,0,0,0,0,'','下列生活用品中主要由合成纤维制造的是？','棉衬衣','羊绒衫','尼龙绳','',3,2,'棉衬衣的主要成分为天然纤维素，羊绒衫的主要成分是蛋白质，尼龙绳的主要成分是聚酯类合成纤维',''),
-  (13,'6','A1',1516199514,1,1,0,0,0,0,'','“政启开元，治宏贞观”是郭沫若对下列哪一帝王功绩的正确评价?','唐太宗','武则天','唐玄宗','',3,1,'武则天当政期间，继续推行唐太宗发展农业生产、选拔贤才的政策，使唐朝社会经济进一步发展，国力不断增强。',''),
-  (14,'1','AA',1516199666,1,1,0,0,0,0,'','哈佛大学位于美国的哪个城市？','波士顿','华盛顿','纽约','',3,0,'知识点',''),
-  (15,'1','AA',1516199666,1,1,0,0,0,0,'','歌词“他眼神湛蓝，像从爱琴海边刚归来”出自谁的歌曲《大艺术家》？','蔡依林','孙燕姿','萧亚轩','',3,0,'知识点',''),
-  (16,'1','AA',1516199666,1,1,0,0,0,0,'','甄嬛传是哪个皇帝时代？','乾隆','康熙','雍正','',3,2,'知识点',''),
-  (17,'1','AA',1516199666,1,1,0,0,0,0,'','传说黄帝和蚩尤大战的古地名是什么？','王屋山','逐鹿','昆仑','',3,1,'知识点',''),
-  (18,'1','AA',1516199666,1,1,0,0,0,0,'','比杨玉环大十八岁，却甘心做杨玉环的养儿的是谁？','安禄山','史思明','杨国忠','',3,0,'知识点',''),
-  (19,'1','AA',1516199666,1,1,0,0,0,0,'','下列名称不属于二十四节气的？','谷雨','大伏','春分','',3,1,'知识点',''),
-  (30,'30','A1',1516199666,1,1,0,0,0,0,'','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'李世民争夺太子之战','');
+VALUES (1,'1','A1',1516199514,1,1,0,0,0,0,'','','','北京在古代曾经叫做?','蓟','京','燕','',3,0,'北京在秦代称作蓟','',1,0),
+  (2,'2','A1',1516199514,1,1,0,0,0,0,'','','','以下哪种动物是哺乳动物？','鱼','燕子','恐龙','熊',4,3,'熊是哺乳动物','',1,0),
+  (3,'3','A1',1516199514,1,1,0,0,0,0,'','','','以下哪种动物不是哺乳动物？','豹子','虎鲸','恐龙','熊',4,2,'鲸也是哺乳动物,恐龙是爬行动物','',1,0),
+  (4,'4','A1',1516199514,1,1,0,0,0,0,'','','','“采菊东篱下，悠然见南山。”出自以下哪位诗人之手？','李白','王维','陶渊明','',3,2,'著名诗人陶渊明','',1,0),
+  (5,'5','A1',1516199514,1,1,0,0,0,0,'','','','大气压的单位是什么？','帕斯卡','培','码','',3,0,'帕斯卡','',1,0),
+  (6,'6','A1',1516199514,1,1,0,0,0,0,'','','','家用电器所使用的电线，一般是以下哪种材料制成的？','铁','铜','铝','',3,1,'铜的导电性能和柔软度最合适','',1,0),
+  (7,'7','A1',1516199514,1,1,0,0,0,0,'','','','中国传统中，大年初几迎财神？','初一','初三','初五','',3,2,'中国民间传说正月初五是财神的生日，所以过了年初一，接下来最重要的活动就是初五接财神。','',1,0),
+  (8,'6','A1',1516199514,1,1,0,0,0,0,'','','','"五日财源五日求，一年心愿一时酬；提防别处迎神早，隔夜匆匆抱路头" 描绘的是哪里人迎财神的情形？','上海人','苏州人','杭州人','',3,1,'清人顾铁卿《清嘉录》中引了一首蔡云的竹枝词，描绘了苏州人初五迎财神的情形："五日财源五日求，一年心愿一时酬；提防别处迎神早，隔夜匆匆抱路头"。"抱路头"亦即"迎财神"。','',1,0),
+  (9,'6','A1',1516199514,1,1,0,0,0,0,'','','','春节是农历的哪一天？','十二月二十九','十二月三十','正月初一','',3,2,'春节俗称“年节”，是中华民族最隆重的传统佳节，汉武帝时期之前，各朝各代春节的日期并不一致，自汉武帝太初元年始，以夏历（农历）正月为岁首，年节的日期由此固定下来。1911年辛亥革命以后，开始采用公历计年，遂称公历1月1日为“元旦”，称农历正月初一为“春节”。','',1,0),
+  (10,'6','A1',1516199514,1,1,0,0,0,0,'','','','民间习俗中，农历腊月二十三日送哪位神仙上天汇报工作？','灶君','财神','门神','',3,0,'灶神又称灶王爷，灶君。中国民间传说灶神每年腊月二十三晚，上天汇报，正月初四日返回人间。','',1,0),
+  (11,'6','A1',1516199514,1,1,0,0,0,0,'','','','可燃冰的主要有效成分是？','乙炔','甲烷','乙醇','',3,1,'可燃冰，是分布于深海沉积物或陆域的永久冻土中，由天然气与水在高压低温条件下形成的类冰状的结晶物质，有极强的燃烧力，主要由水分子和烃类气体分子（主要是甲烷）组成。','',1,0),
+  (12,'6','A1',1516199514,1,1,0,0,0,0,'','','','下列生活用品中主要由合成纤维制造的是？','棉衬衣','羊绒衫','尼龙绳','',3,2,'棉衬衣的主要成分为天然纤维素，羊绒衫的主要成分是蛋白质，尼龙绳的主要成分是聚酯类合成纤维','',1,0),
+  (13,'6','A1',1516199514,1,1,0,0,0,0,'','','','“政启开元，治宏贞观”是郭沫若对下列哪一帝王功绩的正确评价?','唐太宗','武则天','唐玄宗','',3,1,'武则天当政期间，继续推行唐太宗发展农业生产、选拔贤才的政策，使唐朝社会经济进一步发展，国力不断增强。','',1,0),
+  (14,'1','AA',1516199666,1,1,0,0,0,0,'','','','哈佛大学位于美国的哪个城市？','波士顿','华盛顿','纽约','',3,0,'知识点','',1,0),
+  (15,'1','AA',1516199666,1,1,0,0,0,0,'','','','歌词“他眼神湛蓝，像从爱琴海边刚归来”出自谁的歌曲《大艺术家》？','蔡依林','孙燕姿','萧亚轩','',3,0,'知识点','',1,0),
+  (16,'1','AA',1516199666,1,1,0,0,0,0,'','','','甄嬛传是哪个皇帝时代？','乾隆','康熙','雍正','',3,2,'知识点','',1,0),
+  (17,'1','AA',1516199666,1,1,0,0,0,0,'','','','传说黄帝和蚩尤大战的古地名是什么？','王屋山','逐鹿','昆仑','',3,1,'知识点','',1,0),
+  (18,'1','AA',1516199666,1,1,0,0,0,0,'','','','比杨玉环大十八岁，却甘心做杨玉环的养儿的是谁？','安禄山','史思明','杨国忠','',3,0,'知识点','',1,0),
+  (19,'1','AA',1516199666,1,1,0,0,0,0,'','','','下列名称不属于二十四节气的？','谷雨','大伏','春分','',3,1,'知识点','',1,0),
+  (30,'30','A1',1516199666,1,1,0,0,0,0,'','','','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'李世民争夺太子之战','',1,0);
 /*!40000 ALTER TABLE `weshow_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +143,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_quiz`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_quiz` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `creator_id` varchar(64) NOT NULL DEFAULT '',
@@ -159,7 +163,7 @@ CREATE TABLE `weshow_quiz` (
   `share_ticket` varchar(64) NOT NULL DEFAULT '',
   `open_gid` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +184,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_group` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(20) NOT NULL DEFAULT '1',
@@ -193,7 +197,7 @@ CREATE TABLE `weshow_group` (
   PRIMARY KEY (`id`),
   KEY `open_gid` (`open_gid`),
   KEY `add_uid` (`add_uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +218,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_usergroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_usergroup` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(20) NOT NULL DEFAULT '1',
@@ -227,7 +231,7 @@ CREATE TABLE `weshow_usergroup` (
   KEY `openid` (`openid`),
   KEY `open_gid` (`open_gid`),
   UNIQUE KEY `usergroup_acc` (`openid`, `open_gid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +252,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_quizuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_quizuser` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(20) NOT NULL DEFAULT '1',
@@ -259,12 +263,14 @@ CREATE TABLE `weshow_quizuser` (
   `game_status` tinyint(3) NOT NULL DEFAULT '0',
   `game_gain` float NOT NULL DEFAULT '0',
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
+  `answer_set` int(4) unsigned NOT NULL DEFAULT '0',
+  `answer_correct int(4) unsigned NOT NULL DEFAULT '0',
   `add_time` int(16) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `quizid` (`quizid`),
   KEY `openid` (`openid`),
   UNIQUE KEY `quizuser_acc` (`openid`, `quizid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,7 +291,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_relive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_relive` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(64) NOT NULL DEFAULT '',
@@ -298,7 +304,7 @@ CREATE TABLE `weshow_relive` (
   KEY `quizid` (`quizid`),
   KEY `openid` (`openid`),
   UNIQUE KEY `relive_acc` (`openid`, `quizid`, `invitee_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +325,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_wxcash`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_wxcash` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(64) NOT NULL DEFAULT '',
@@ -331,7 +337,7 @@ CREATE TABLE `weshow_wxcash` (
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +358,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_wxpay`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_wxpay` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `openid` varchar(32) NOT NULL DEFAULT '',
@@ -362,7 +368,7 @@ CREATE TABLE `weshow_wxpay` (
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,7 +389,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `weshow_note`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weshow_note` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `userid` varchar(64) NOT NULL DEFAULT '',
@@ -391,7 +397,7 @@ CREATE TABLE `weshow_note` (
   `more` varchar(1024) NOT NULL DEFAULT '',
   `add_time` int(18) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

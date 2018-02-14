@@ -177,6 +177,8 @@ export default class extends Base {
   async updateansweredAction() {
     var userid = this.post('openid');
     var question_id = this.post('question_id');
+    var answer_set = this.post('answer_set');
+    var answer_correct = this.post('answer_correct');
     var qid = this.post('quizid');
     //let answer_time = this.post('answer_time');
 	var answer_time = Math.round((new Date()).getTime() / 1000);
@@ -185,6 +187,8 @@ export default class extends Base {
 
     await this.model('quizuser').where({quizid: qid, openid: userid}).update({
       answer_status: question_id,
+      answer_set: answer_set,
+      answer_correct: answer_correct,
 	  answer_time: answer_time
     });
 

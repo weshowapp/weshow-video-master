@@ -2,10 +2,16 @@
 
 import Base from './base.js';
 
+var fs = require('fs');
+//var path = require('path');
 
 var xwords = require('./xwords');
 
+
 export default class extends Base {
+
+  addLine(line) {
+  }
 
   /**
    * index action
@@ -23,7 +29,64 @@ export default class extends Base {
     });*/
     this.display();
   }
-  
+
+  async uploadAction() {
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+    
+    var lineReader = require('readline').createInterface({
+      input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'});
+    });
+
+    lineReader.on('line', function (line) {
+      if(!line) return;
+      var arr = line.split(',');
+
+      var item_count = 3;
+      if (arr[7] != '') {
+        item_count = 4;
+      }
+      let addResult = await this.model('question').add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        item_count: item_count,
+        type: arr[1],
+        source: arr[2],
+        content: arr[3],
+        item0: arr[4],
+        item1: arr[5],
+        item2: arr[6],
+        item3: arr[7],
+        answer: arr[8],
+        note: arr[9],
+        more: arr[10],
+        category0: arr[11],
+        category1: arr[12],
+        category2: arr[13],
+        category3: arr[14],
+        tags: arr[15],
+        level: arr[16]
+    });
+    });
+
+    /*var uploadPath = think.RESOURCE_PATH + '/upload';
+    think.mkdir(uploadPath);
+    var basename = path.basename(filepath);
+    fs.renameSync(filepath, uploadPath + '/' + basename);
+    file.path = uploadPath + '/' + basename;*/
+
+    if(think.isFile(file.path)){
+      console.log('is file')
+    }else{
+      console.log('not exist')
+    }
+
+    this.assign('fileInfo', file);
+
+    this.display();
+  }
+
   async getbyuserAction() {
     let creator_id = this.get('creator_id');
     let list = await this.model('question').where({creator_id: creator_id}).select();
@@ -86,7 +149,7 @@ export default class extends Base {
     console.log('addAction');
     //console.log(quest_content);
     if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
-         || quest_item_c == '') {
+         || quest_item_c == ''|| quest_answer == '') {
       return this.fail({
         result: 'INVALID_INPUT',
         audit: false,
