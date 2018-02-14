@@ -21,7 +21,7 @@ export default class extends Base {
     return this.success({
       questList: list
     });*/
-    self.display();
+    this.display();
   }
   
   async getbyuserAction() {
@@ -114,7 +114,7 @@ export default class extends Base {
         item3: quest_item_d,
         answer: quest_answer,
         type: type,
-        level: level
+        level: level,
         tags: tags,
         source: source,
         note: note
