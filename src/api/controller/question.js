@@ -16,7 +16,11 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
-    /*let quest_id = this.get('question_id');
+    this.display();
+  }
+
+  async getbyidAction() {
+    let quest_id = this.get('question_id');
     let list = await this.model('question').where({id: quest_id}).find();
     if (!think.isEmpty(list)) {
         console.log(list);
@@ -24,8 +28,7 @@ export default class extends Base {
 
     return this.success({
       questList: list
-    });*/
-    this.display();
+    });
   }
 
   async uploadAction() {
@@ -69,22 +72,22 @@ export default class extends Base {
         tags: arr[15],
         level: arr[16]
       });
-      //if (addResult > 0) {
+      if (addResult > 0) {
         count++;
-      //}
+      }
     });
 
     /*var uploadPath = think.RESOURCE_PATH + '/upload';
     think.mkdir(uploadPath);
     var basename = path.basename(filepath);
     fs.renameSync(filepath, uploadPath + '/' + basename);
-    file.path = uploadPath + '/' + basename;*/
+    file.path = uploadPath + '/' + basename;
 
     if(think.isFile(file.path)){
       console.log('is file')
     }else{
       console.log('not exist')
-    }
+    }*/
 
     this.assign('result', 'Success Add ' + count + ' Lines');
 
@@ -107,15 +110,39 @@ export default class extends Base {
   async getrandomAction() {
     let count = this.get('count');
     
-    var table = 'weshow_question';
+    /*var table = 'weshow_question';
     var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
         + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
         + table + '))) ORDER BY id LIMIT ' + count + ';';
     var list = await this.model('question').query(sql);
-    console.log(list.length);
+    console.log(list.length);*/
 
-    return this.success({
-      questList: list
+    let list = await this.model('question').field('id').where({type: 2}).select();
+    if (!think.isEmpty(list)) {
+      console.log(list.length);
+      var arr = [];
+      var first = Math.random(list.length);
+      for (var i = first; i < list.length; i++) {
+        if (arr.length < count) {
+          arr.push(list[i]);
+        }
+        else {
+          break;
+        }
+        if (i == list.length - 1) {
+          i = 0;
+        }
+      }
+
+      let questList = await this.model('question').where({id: ["IN", arr]}).select();
+      return this.success({
+        questList: questList
+      });
+    }
+
+    return this.fail({
+      result: 'QUESTION EMPTY',
+      errorCode: 401
     });
 
   }
