@@ -94,7 +94,7 @@ export default class extends Base {
 
     //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
     if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
-      var list = await this.model('question').getRandomList(count, 1, 1);
+      var list = await this.model('question').getRandomList(quest_count, 1, 1);
       console.log(list.length);
       if (!think.isEmpty(list)) {
         quest_list = '';
