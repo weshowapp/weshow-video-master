@@ -51,7 +51,8 @@ export default class extends Base {
           i = 0;
         }
         else {
-          i = Math.floor(Math.random(list.length * ((new Date()).getMilliseconds() / 1000)));
+          i += (seed % 6);
+          i = i % list.length;
         }
       }
 
