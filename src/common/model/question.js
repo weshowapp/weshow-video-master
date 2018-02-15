@@ -30,7 +30,7 @@ export default class extends Base {
       console.log(seed);
       var first = Math.floor((list.length * seed / 1000));
       for (var i = first; i < list.length; i++) {
-        console.log(i + ', ' + list[i].id);
+        //console.log(i + ', ' + list[i].id);
         if (arr.length < count) {
           var contain = false;
           for (var j = 0; j < arr.length; j++) {
@@ -50,7 +50,7 @@ export default class extends Base {
           i = 0;
         }
         else {
-          i = Math.floor((list.length * ((new Date()).getMilliseconds()) / 1000));
+          i = Math.floor(Math.random(list.length));
         }
       }
 
