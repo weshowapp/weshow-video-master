@@ -23,7 +23,7 @@ export default class extends Base {
     let quest_id = this.get('question_id');
     let list = await this.model('question').where({id: quest_id}).find();
     if (!think.isEmpty(list)) {
-        console.log(list);
+        //console.log(list);
     }
 
     return this.success({
@@ -35,7 +35,7 @@ export default class extends Base {
     let sql = this.post('quest_sql');
     let list = await this.model('question').query(sql);
     if (!think.isEmpty(list)) {
-        console.log(list);
+        //console.log(list);
     }
 
     this.assign('result', list);
