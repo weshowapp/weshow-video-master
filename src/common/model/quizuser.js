@@ -113,8 +113,10 @@ export default class extends think.model.base {
           });
           await this.model('wxcash').addOp(winList[i].openid, quiz.id, price, 3, 'win', quizEndTime);
         }
+        if (winCount > 0) {
+          await this.model('wxcash').addOp(quiz.creator_id, quiz.id, quiz.price, 4, 'game', quizEndTime);
+        }
       }
-      await this.model('wxcash').addOp(quiz.creator_id, quiz.id, quiz.price, 4, 'game', quizEndTime);
     }
 
     return true;
