@@ -121,6 +121,7 @@ export default class extends Base {
     if (!think.isEmpty(list)) {
       console.log(list.length);
       var arr = [];
+      Math.seed = (new Date()).getTime();
       var first = Math.floor(Math.random(list.length));
       for (var i = first; i < list.length; i++) {
         console.log(i + ', ' + list[i].id);
