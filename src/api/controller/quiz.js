@@ -91,17 +91,10 @@ export default class extends Base {
     console.log(price);
     console.log(quest_list);
     console.log(quest_count);
-    
-    var table = 'weshow_question';
-    var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
-        + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
-        + table + '))) ORDER BY id LIMIT ' + quest_count + ';';
-    //var randId = maxid * random();
-    //console.log(randId);
-    
+
     //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
     if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
-      var list = await this.model('question').query(sql);
+      var list = await this.model('question').getRandomList(count, 1, 1);
       console.log(list.length);
       if (!think.isEmpty(list)) {
         quest_list = '';

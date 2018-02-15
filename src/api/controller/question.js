@@ -106,48 +106,14 @@ export default class extends Base {
     });
 
   }
-  
+
   async getrandomAction() {
     let count = this.get('count');
-    
-    /*var table = 'weshow_question';
-    var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
-        + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
-        + table + '))) ORDER BY id LIMIT ' + count + ';';
-    var list = await this.model('question').query(sql);
-    console.log(list.length);*/
 
-    let list = await this.model('question').field('id').where({type: 2}).select();
-    if (!think.isEmpty(list)) {
-      console.log(list.length);
-      var arr = [];
-      var seed = (new Date()).getMilliseconds();
-      var first = Math.floor(Math.random(list.length * seed / 1000));
-      for (var i = first; i < list.length; i++) {
-        console.log(i + ', ' + list[i].id);
-        if (arr.length < count) {
-          arr.push(list[i].id);
-        }
-        else {
-          break;
-        }
-        if (i == list.length - 1) {
-          i = 0;
-        }
-      }
-
-      console.log(arr);
-      let questList = await this.model('question').where({id: ["IN", arr]}).select();
-      return this.success({
-        questList: questList
-      });
-    }
-
-    return this.fail({
-      result: 'QUESTION EMPTY',
-      errorCode: 401
+    let list = await this.model('question').getRandomList(count, 2, 1);
+    return this.success({
+      questList: list
     });
-
   }
 
   async auditxwordAction() {
