@@ -47,13 +47,17 @@ export default class extends think.model.base {
       console.log(quiz.id);
       var questArr = [];
       var arr = quiz.questions.split('-');
-      for (var j = 0; j < arr.length; j++) {
+      questArr = await this.model('question').where({id: ["IN", arr]}).select();
+      for (var i = 0; i < questArr.length; i++) {
+        questArr[i].answered = -1;
+      }
+      /*for (var j = 0; j < arr.length; j++) {
         var quest_id = arr[j];
         console.log(quest_id);
         let questItem = await this.model('question').where({id: quest_id}).find();
         questItem.answered = -1;
         questArr.push(questItem);
-      }
+      }*/
       quiz.quest_array = questArr;
     }
     return quiz;
@@ -75,7 +79,7 @@ export default class extends think.model.base {
       quiz.is_start = 0;
       quiz.phase = 1;
     }
-    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15) {
+    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 4) {
       quiz.is_start = 1;
       quiz.phase = 2;
     }

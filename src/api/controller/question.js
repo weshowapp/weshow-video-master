@@ -125,7 +125,7 @@ export default class extends Base {
       for (var i = first; i < list.length; i++) {
         console.log(i + ', ' + list[i].id);
         if (arr.length < count) {
-          arr.push(list[i]);
+          arr.push(list[i].id);
         }
         else {
           break;
