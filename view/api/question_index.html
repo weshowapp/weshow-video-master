@@ -30,19 +30,19 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
       <h2>按ID查询</h2>
       <form class="p" action="getbyid" enctype="multipart/form-data" method="get">
         ID：<input type="text" name ="question_id" value="1"/><br>
-        <input type="submit" name ="question_submit" value=" - -  查 询  - - "/>
+        <input type="submit" name ="question_submit" value="  - -  查 询  - -  "/>
       </form>
       <br><br>
       <h2>SQL语句执行</h2>
       <form class="p" action="queryinput" enctype="multipart/form-data" method="post">
         SQL语句：<input type="text" name ="quest_sql" value="select * from weshow_question where id=1"/><br>
-        <input type="submit" name ="question_submit" value=" - -  查 询  - - "/>
+        <input type="submit" name ="question_submit" value="   - -  查 询  - -   "/>
       </form>
       <br><br>
       <h2>选择文件,批量添加</h2>
       <form class="p" action="upload" enctype="multipart/form-data" method="post">
-        请选择文件：<input type="file" name ="file_input"/><br>
-        <input type="submit" name ="file_submit" value=" - -  上 传  - - "/>
+        请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/><br>
+        <input type="submit" name ="file_submit" value="   - -  上 传  - -   "/>
       </form><br><br>
       <h2>单个添加</h2>
       <form class="p" action="add" enctype="multipart/form-data" method="post">
@@ -59,7 +59,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         知识点：<input type="text" name ="note"/><br>
         提交人ID：<input type="text" name ="creator_id" value="1"/><br>
         提交人名：<input type="text" name ="creator_name" value="系统管理员"/><br>
-        <input type="submit" name ="question_submit" value=" - -  提 交   - - "/>
+        <input type="submit" name ="question_submit" value="   - -  提 交   - -   "/>
       </form>
       <br><br>
     </div>

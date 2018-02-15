@@ -32,7 +32,7 @@ export default class extends Base {
   }
 
   async queryinputAction() {
-    let sql = this.get('quest_sql');
+    let sql = this.post('quest_sql');
     let list = await this.model('question').query(sql);
     if (!think.isEmpty(list)) {
         console.log(list);
