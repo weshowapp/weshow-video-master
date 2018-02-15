@@ -31,6 +31,17 @@ export default class extends Base {
     });
   }
 
+  async queryinputAction() {
+    let sql = this.get('quest_sql');
+    let list = await this.model('question').query(sql);
+    if (!think.isEmpty(list)) {
+        console.log(list);
+    }
+
+    this.assign('result', list);
+    this.display();
+  }
+
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
@@ -41,7 +52,7 @@ export default class extends Base {
 
     var count = 0;
     let questModel = this.model('question');
-    lineReader.on('line', function (line) {
+    await lineReader.on('line', function (line) {
       if(!line) return;
       var arr = line.split(',');
 

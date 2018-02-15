@@ -13,10 +13,10 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
 .wrap{width: 480px;margin: auto}
 .content{margin-top: 80px;}
 .list{width: 400px;font-size: 36px;}
-.list .item{position: relative;padding-left: 70px;margin-top: 50px;}
+.list .item{position: relative;padding-left: 70px;margin-top: 50px;font-size: 36px;}
 .list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
-.list .item h2{font-size: 36px;font-weight: normal;}
-.list .item p{line-height: 36px;margin-top: 10px}
+.list .item h2{font-size: 38px;font-weight: normal;}
+.list .item p{line-height: 36px;margin-top: 10px;font-size: 36px;}
 </style>
 </head>
 <body>
@@ -27,29 +27,41 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
   </header>
   <div class="content">
     <div class="list">
-      <br>
+      <h2>按ID查询</h2>
+      <form class="p" action="getbyid" enctype="multipart/form-data" method="get">
+        ID：<input type="text" name ="question_id" value="1"/><br>
+        <input type="submit" name ="question_submit" value=" - -  查 询  - - "/>
+      </form>
+      <br><br>
+      <h2>SQL语句执行</h2>
+      <form class="p" action="queryinput" enctype="multipart/form-data" method="post">
+        SQL语句：<input type="text" name ="quest_sql" value="select * from weshow_question where id=1"/><br>
+        <input type="submit" name ="question_submit" value=" - -  查 询  - - "/>
+      </form>
+      <br><br>
       <h2>选择文件,批量添加</h2>
-      <form action="upload" enctype="multipart/form-data" method="post">
-        请选择文件:<input type="file" name ="file_input"/><br>
-        <input type="submit" name ="file_submit" value=" 上 传 "/>
+      <form class="p" action="upload" enctype="multipart/form-data" method="post">
+        请选择文件：<input type="file" name ="file_input"/><br>
+        <input type="submit" name ="file_submit" value=" - -  上 传  - - "/>
       </form><br><br>
       <h2>单个添加</h2>
-      <form action="add" enctype="multipart/form-data" method="post">
-        类别:<input type="text" name ="quest_type" value="1"/><br>
-        级别:<input type="text" name ="quest_level" value="1"/><br>
-        标签:<input type="text" name ="quest_tags" value="科技"/><br>
-        来源:<input type="text" name ="quest_source"/><br>
-        题目:<input type="text" name ="quest_content"/><br>
-        选项1:<input type="text" name ="quest_item_a"/><br>
-        选项2:<input type="text" name ="quest_item_b"/><br>
-        选项3:<input type="text" name ="quest_item_c"/><br>
-        选项个数:<input type="text" name ="item_count" value="3"/><br>
-        答案:<input type="text" name ="quest_answer"/><br>
-        知识点:<input type="text" name ="note"/><br>
-        提交人:<input type="text" name ="creator_id" value="1"/>
-        <input type="text" name ="creator_name" value="系统管理员"/><br>
-        <input type="submit" name ="question_submit" value=" 提 交 "/>
+      <form class="p" action="add" enctype="multipart/form-data" method="post">
+        类别：<input type="text" name ="quest_type" value="1"/><br>
+        级别：<input type="text" name ="quest_level" value="1"/><br>
+        标签：<input type="text" name ="quest_tags" value="科技"/><br>
+        来源：<input type="text" name ="quest_source"/><br>
+        题目：<input type="text" name ="quest_content"/><br>
+        选项1：<input type="text" name ="quest_item_a"/><br>
+        选项2：<input type="text" name ="quest_item_b"/><br>
+        选项3：<input type="text" name ="quest_item_c"/><br>
+        选项个数：<input type="text" name ="item_count" value="3"/><br>
+        答案：<input type="text" name ="quest_answer"/><br>
+        知识点：<input type="text" name ="note"/><br>
+        提交人ID：<input type="text" name ="creator_id" value="1"/><br>
+        提交人名：<input type="text" name ="creator_name" value="系统管理员"/><br>
+        <input type="submit" name ="question_submit" value=" - -  提 交   - - "/>
       </form>
+      <br><br>
     </div>
   </div>
 </body>
