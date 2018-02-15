@@ -34,7 +34,7 @@ export default class extends Base {
         if (arr.length < count) {
           var contain = false;
           for (var j = 0; j < arr.length; j++) {
-            console.log(arr[j]);
+            //console.log(arr[j]);
             if (arr[j] == list[i].id) {
               contain = true;
               break;
@@ -47,12 +47,12 @@ export default class extends Base {
         else {
           break;
         }
+
+        i += (seed % 6);
+        i = i % list.length;
+        console.log('i: ' + i);
         if (i == list.length - 1) {
           i = 0;
-        }
-        else {
-          i += (seed % 6);
-          i = i % list.length;
         }
       }
 
