@@ -79,11 +79,11 @@ export default class extends think.model.base {
       quiz.is_start = 0;
       quiz.phase = 1;
     }
-    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 4) {
+    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 1) {
       quiz.is_start = 1;
       quiz.phase = 2;
     }
-    else if (curTime > quiz.start_time + quiz.quest_count * 15) {
+    else if (curTime > quiz.start_time + quiz.quest_count * 15 - 1) {
       quiz.is_completed = 1;
       quiz.phase = 3;
     }
