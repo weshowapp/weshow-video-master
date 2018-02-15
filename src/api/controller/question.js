@@ -121,9 +121,9 @@ export default class extends Base {
     if (!think.isEmpty(list)) {
       console.log(list.length);
       var arr = [];
-      var first = Math.random(list.length);
+      var first = Math.floor(Math.random(list.length));
       for (var i = first; i < list.length; i++) {
-        console.log(i + ', ' + list[i]);
+        console.log(i + ', ' + list[i].id);
         if (arr.length < count) {
           arr.push(list[i]);
         }
