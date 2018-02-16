@@ -2,6 +2,8 @@
 
 import Base from './base.js';
 
+var wxconst = require('./wxconst');
+
 export default class extends Base {
 
   /**
@@ -48,7 +50,7 @@ export default class extends Base {
           list = await this.model('quiz').where({
               _complex: {'id': ["IN", qidList],
                 'open_gid': ["IN", gidList],
-                type: this.QUIZ_TYPE_PUBLIC,
+                type: wxconst.QUIZ_TYPE_PUBLIC,
                 _logic: "or"
               },
               pay_status: 1,
@@ -59,7 +61,7 @@ export default class extends Base {
           list = await this.model('quiz').where({
               _complex: {'id': ["IN", qidList],
                 'open_gid': ["IN", gidList],
-                type: this.QUIZ_TYPE_PUBLIC,
+                type: wxconst.QUIZ_TYPE_PUBLIC,
                 _logic: "or"
               },
               pay_status: 1
@@ -112,9 +114,9 @@ export default class extends Base {
     console.log(quest_list);
     console.log(quest_count);
     
-    var quiz_type = this.QUIZ_TYPE_NORMAL;
-    if (creator_level == this.USER_LEVEL_PUBLIC) {
-      quiz_type = this.QUIZ_TYPE_PUBLIC;
+    var quiz_type = wxconst.QUIZ_TYPE_NORMAL;
+    if (creator_level == wxconst.USER_LEVEL_PUBLIC) {
+      quiz_type = wxconst.QUIZ_TYPE_PUBLIC;
     }
 
     //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
