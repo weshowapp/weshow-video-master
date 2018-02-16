@@ -29,9 +29,9 @@ export default class extends Base {
       var seed = (new Date()).getMilliseconds();
       console.log(seed);
       var first = Math.floor((list.length * seed / 1000));
-      var count = 0;
+      var loopIndex = 0;
       for (var i = first; i < list.length; i++) {
-        console.log(i + ', ' + list[i].id);
+        //console.log(i + ', ' + list[i].id);
         if (arr.length < count) {
           var contain = false;
           for (var j = 0; j < arr.length; j++) {
@@ -55,7 +55,7 @@ export default class extends Base {
         if (i == list.length - 1) {
           i = 0;
         }
-        if (count++ > 1000) {
+        if (loopIndex++ > 1000) {
           break;
         }
       }
