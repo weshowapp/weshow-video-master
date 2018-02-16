@@ -113,7 +113,7 @@ export default class extends Base {
     console.log(quest_count);
     
     var quiz_type = this.QUIZ_TYPE_NORMAL;
-    if (creator_level == USER_LEVEL_PUBLIC) {
+    if (creator_level == Base.USER_LEVEL_PUBLIC) {
       quiz_type = QUIZ_TYPE_PUBLIC;
     }
 

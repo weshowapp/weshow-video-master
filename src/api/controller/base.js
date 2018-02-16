@@ -1,8 +1,5 @@
 'use strict';
 
-
-export default class extends think.controller.base {
-
 const USER_LEVEL_DEFAULT = 0;
 const USER_LEVEL_NORMAL = 1;
 const USER_LEVEL_PUBLIC = 3;
@@ -10,6 +7,8 @@ const USER_LEVEL_PUBLIC = 3;
 const QUIZ_TYPE_DEFAULT = 0;
 const QUIZ_TYPE_NORMAL = 1;
 const QUIZ_TYPE_PUBLIC = 3;
+
+export default class extends think.controller.base {
 
   /**
    * 前置操作
