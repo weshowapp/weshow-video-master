@@ -2,8 +2,10 @@
 
 import Base from './base.js';
 
-export default class extends Base {
+var wxconst = require('../../api/controller/wxconst');
 
+
+export default class extends Base {
 
   async checkInput(content, item0, item1, item2, item3) {
     console.log('checkInput');
@@ -14,7 +16,7 @@ export default class extends Base {
 
   }
 
-  async getRandomList(count, type, creator_id) {
+  async getRandomList(count, type, level, creator_id) {
     /*var table = 'weshow_question';
     var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
         + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
@@ -22,7 +24,20 @@ export default class extends Base {
     var list = await this.model('question').query(sql);
     console.log(list.length);*/
 
-    let list = await this.model('question').field('id').where({type: type}).select();
+    var whereArg = {type: type, creator_id: creator_id};
+    if (type != wxconst.QUIZ_CATEGORY_SELF) {
+      if (level == wxconst.QUIZ_LEVEL_AUTO) {
+      }
+      else {
+        whereArg = {type: type, level: level};
+      }
+    }
+    else {
+      if (creator_id != wxconst.USER_ID_ADMIN) {
+        whereArg = {type: type, creator_id: ["IN", [creator_id, wxconst.USER_ID_ADMIN]]};
+      }
+    }
+    let list = await this.model('question').field('id').where(whereArg).select();
     if (!think.isEmpty(list)) {
       console.log(list.length);
       var arr = [];

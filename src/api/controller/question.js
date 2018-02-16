@@ -6,6 +6,7 @@ var fs = require('fs');
 //var path = require('path');
 
 var xwords = require('./xwords');
+var wxconst = require('./wxconst');
 
 
 export default class extends Base {
@@ -105,6 +106,14 @@ export default class extends Base {
     this.display();
   }
 
+  async getcategoryAction() {
+    let openid = this.get('openid');
+
+    return this.success({
+      category_items: wxconst.QUESTION_CATEGORY_ITEMS
+    });
+  }
+
   async getbyuserAction() {
     let creator_id = this.get('creator_id');
     let list = await this.model('question').where({creator_id: creator_id}).select();
@@ -120,8 +129,9 @@ export default class extends Base {
 
   async getrandomAction() {
     let count = this.get('count');
+    let openid = this.get('openid');
 
-    let list = await this.model('question').getRandomList(count, 2, 1);
+    let list = await this.model('question').getRandomList(count, wxconst.QUIZ_CATEGORY_SELF, wxconst.QUIZ_LEVEL_AUTO, openid);
     return this.success({
       questList: list
     });
