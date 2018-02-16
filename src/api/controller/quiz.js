@@ -27,9 +27,16 @@ export default class extends Base {
     let onlyactive = this.get('onlyactive');
     console.log(openid);
     let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).order('add_time DESC').select();
+    let groupList = await this.model('group').field('open_gid').where({add_uid: openid}).select();
+    var gidList = [];
+    if (!think.isEmpty(groupList)) {
+        for (var i = 0; i < groupList.length; i++) {
+            gidList.push(groupList[i].open_gid);
+        }
+    }
     let list = null;
     //console.log(quizIdList.length);
-    if (!think.isEmpty(quizIdList)) {
+    if (!think.isEmpty(quizIdList) || gidList.length > 0) {
         var qidList = [];
         for (var i = 0; i < quizIdList.length; i++) {
             qidList.push(quizIdList[i].quizid);
@@ -38,10 +45,25 @@ export default class extends Base {
 
         var curTime = Math.round((new Date()).getTime() / 1000);
         if (onlyactive == 1) {
-          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1, start_time: [">", curTime]}).order('start_time DESC').limit(10).select();
+          list = await this.model('quiz').where({
+              _complex: {'id': ["IN", qidList],
+                'open_gid': ["IN", gidList],
+                type: QUIZ_TYPE_PUBLIC,
+                _logic: "or"
+              },
+              pay_status: 1,
+              start_time: [">", curTime]
+          }).order('start_time DESC').limit(10).select();
         }
         else {
-          list = await this.model('quiz').where({'id': ["IN", qidList], pay_status: 1}).order('start_time DESC').limit(10).select();
+          list = await this.model('quiz').where({
+              _complex: {'id': ["IN", qidList],
+                'open_gid': ["IN", gidList],
+                type: QUIZ_TYPE_PUBLIC,
+                _logic: "or"
+              },
+              pay_status: 1
+          }).order('start_time DESC').limit(10).select();
         }
         if (!think.isEmpty(list)) {
           console.log(list.length);
@@ -85,12 +107,15 @@ export default class extends Base {
     let min_users = this.post('min_users');
     let price = this.post('price');
     let start_time = this.post('start_time');
-    //let quiz_type = this.post('quiz_type');//2=self
-    //let quiz_type = 1;//2=self
     console.log('addAction');
     console.log(price);
     console.log(quest_list);
     console.log(quest_count);
+    
+    var quiz_type = QUIZ_TYPE_NORMAL;
+    if (creator_level == USER_LEVEL_PUBLIC) {
+      quiz_type = QUIZ_TYPE_PUBLIC;
+    }
 
     //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
     if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
@@ -119,6 +144,7 @@ export default class extends Base {
             creator_name: creator_name,
             creator_photo: creator_photo,
             create_time: create_time,
+            type: quiz_type,
             start_time: start_time,
             questions: quest_list,
             quest_count: quest_count,
