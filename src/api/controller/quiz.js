@@ -67,7 +67,7 @@ export default class extends Base {
         }
         else {
           list = await this.model('quiz').where({
-              _complex: complexQuery0,
+              _complex: complexQuery1,
               pay_status: 1
           }).order('start_time DESC').limit(10).select();
         }
