@@ -46,24 +46,27 @@ export default class extends Base {
         //console.log(qidList);
 
         var curTime = Math.round((new Date()).getTime() / 1000);
+        var complexQuery = {'id': ["IN", qidList],
+            type: wxconst.QUIZ_TYPE_PUBLIC,
+            _logic: "OR"
+        };
+        if (gidList.length > 0) {
+          complexQuery = {'id': ["IN", qidList],
+            'open_gid': ["IN", gidList],
+            type: wxconst.QUIZ_TYPE_PUBLIC,
+            _logic: "OR"
+          };
+        }
         if (onlyactive == 1) {
           list = await this.model('quiz').where({
-              _complex: {'id': ["IN", qidList],
-                'open_gid': ["IN", gidList],
-                type: wxconst.QUIZ_TYPE_PUBLIC,
-                _logic: "or"
-              },
+              _complex: complexQuery,
               pay_status: 1,
               start_time: [">", curTime]
           }).order('start_time DESC').limit(10).select();
         }
         else {
           list = await this.model('quiz').where({
-              _complex: {'id': ["IN", qidList],
-                'open_gid': ["IN", gidList],
-                type: wxconst.QUIZ_TYPE_PUBLIC,
-                _logic: "or"
-              },
+              _complex: complexQuery,
               pay_status: 1
           }).order('start_time DESC').limit(10).select();
         }
