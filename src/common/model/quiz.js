@@ -115,6 +115,13 @@ export default class extends think.model.base {
     }
     quiz.userdata = quInfo;
 
+    if (quiz.start_time > curTime) {
+      quiz.result_text = quiz.format_start + '开始';
+    }
+    else {
+      quiz.result_text = '未参与';
+    }
+
     if (quiz.join_status == 0) {
       if (quiz.start_time > curTime) {
         quiz.result_text = quiz.format_start + '开始';
