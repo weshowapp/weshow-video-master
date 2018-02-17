@@ -114,6 +114,14 @@ export default class extends Base {
     });
   }
 
+  async getrulesAction() {
+    let openid = this.get('openid');
+
+    return this.success({
+      game_rules: wxconst.QUIZ_GAME_RULES
+    });
+  }
+
   async getbyuserAction() {
     let creator_id = this.get('creator_id');
     let list = await this.model('question').where({creator_id: creator_id}).select();

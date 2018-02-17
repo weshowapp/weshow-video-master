@@ -37,6 +37,13 @@ module.exports = {
     QUIZ_TYPE_NORMAL: 1,
     QUIZ_TYPE_PUBLIC: 3,
 
+    QUIZ_GAME_RULES: ['欢迎来答题',
+      '每道题有10秒作答时间',
+      '超时或回答错误将被淘汰',
+      '答题胜出者瓜分奖金',
+      '你也可以当出题官考大家哦',
+      '点“发起红包答题”试试吧'
+    ],
     QUESTION_CATEGORY_ITEMS: [
       { name: '0', value: '智能搭配', checked: 'true' },
       { name: '1', value: '佛系' },
