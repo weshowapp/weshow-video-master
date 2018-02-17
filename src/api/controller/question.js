@@ -67,7 +67,7 @@ export default class extends Base {
         creator_id: '1',
         creator_name: 'Administrator',
         item_count: item_count,
-        type: arr[1] == 'A' ? 1 : 2,
+        type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
         source: arr[2],
         content: arr[3],
         item0: arr[4],
