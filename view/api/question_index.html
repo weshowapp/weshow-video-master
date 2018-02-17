@@ -88,8 +88,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
           </form>
           <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="get">
             <td>
-              <input size="2" type="submit" name="delete" value="删除"/>
-              <input size="1" type="submit" name="id" value="<%= item.id %>"/>
+              <input size="2" type="submit" name="delete" value="删除:<%= item.id %>"/>
             </td>
           </form>
         </tr>

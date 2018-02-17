@@ -358,6 +358,14 @@ export default class extends Base {
 
   async deleteAction() {
     let id = this.get('id');
+    let str = this.get('delete');
+    console.log('delete ' + id + ',' + str);
+    if (id == '') {
+      var arr = str.split(':');
+      if (arr.length > 1) {
+        id = arr[1];
+      }
+    }
     let result = await this.model('question').where({id: id}).delete();
 
     return this.success({
