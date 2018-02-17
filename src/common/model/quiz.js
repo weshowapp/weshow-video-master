@@ -103,6 +103,13 @@ export default class extends think.model.base {
       quiz.join_status = 1;
     }
 
+    if (quiz.start_time > curTime) {
+      quiz.result_text = quiz.format_start + '开始';
+    }
+    else {
+      quiz.result_text = '未参与';
+    }
+
     let quInfo = await this.model('quizuser').where({quizid: quiz.id, openid: openid}).find();
     if (!think.isEmpty(quInfo)) {
       let userInfo = await this.model('user').where({openid: openid}).find();
@@ -114,13 +121,6 @@ export default class extends think.model.base {
       return quiz;
     }
     quiz.userdata = quInfo;
-
-    if (quiz.start_time > curTime) {
-      quiz.result_text = quiz.format_start + '开始';
-    }
-    else {
-      quiz.result_text = '未参与';
-    }
 
     if (quiz.join_status == 0) {
       if (quiz.start_time > curTime) {
