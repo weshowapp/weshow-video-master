@@ -19,14 +19,17 @@ export default class extends Base {
   async indexAction() {
     let page = this.get('page');
     let size = this.get('size');
-    if (page == undefined || page == null) {
+    let filter = this.get('filter');
+    if (page == '' || page == undefined || page == null || page == NaN) {
       page = 0;
     }
-    if (size == undefined || size == null) {
-      page = 0;
+    if (size == '' || size == undefined || size == null || size == NaN) {
+      size = 10;
     }
-    let begin = parseInt(page) * parseInt(size);
-    let list = await this.model('question').where({id: [">=", begin]}).limit(size).select();
+    if (filter == '' || filter == undefined || filter == null || filter == NaN) {
+      filter = 0;
+    }
+    let list = await this.model('question').where({id: [">=", page], filter: filter}).limit(size).select();
     this.assign('quest_list', list);
     this.display();
   }
@@ -165,7 +168,7 @@ export default class extends Base {
       errorCode: 0
     });
   }
- 
+
   async addAction() {
     let title = this.post('title');
     let creator_id = this.post('creator_id');
@@ -184,6 +187,11 @@ export default class extends Base {
     let tags = this.post('quest_tags');
     let source = this.post('quest_source');
     let note = this.post('note');
+    let more = this.post('more');
+    let category0 = this.post('category0');
+    let category1 = this.post('category1');
+    let category2 = this.post('category2');
+    let category3 = this.post('category3');
     //let create_time = this.post('create_time');
     let create_time = Math.round((new Date()).getTime() / 1000);
     console.log('addAction');
@@ -239,7 +247,12 @@ export default class extends Base {
         filter: filter,
         tags: tags,
         source: source,
-        note: note
+        category0: category0,
+        category1: category1,
+        category2: category2,
+        category3: category3,
+        note: note,
+        more: more
     });
 
     return this.success({
@@ -247,5 +260,108 @@ export default class extends Base {
       question_id: questResult,
       errorCode: 0
     });
+
+  async updateAction() {
+    let id = this.post('id');
+    let title = this.post('title');
+    let creator_id = this.post('creator_id');
+    let creator_name = this.post('creator_name');
+    let creator_account = this.post('creator_account');
+    let creator_level = this.post('creator_level');
+    let quest_content = this.post('quest_content');
+    let quest_item_a = this.post('quest_item_a');
+    let quest_item_b = this.post('quest_item_b');
+    let quest_item_c = this.post('quest_item_c');
+    let quest_item_d = this.post('quest_item_d');
+    let item_count = this.post('item_count');
+    let quest_answer = this.post('quest_answer');
+    let type = this.post('quest_type');
+    let level = this.post('quest_level');
+    let tags = this.post('quest_tags');
+    let source = this.post('quest_source');
+    let note = this.post('note');
+    let more = this.post('more');
+    let category0 = this.post('category0');
+    let category1 = this.post('category1');
+    let category2 = this.post('category2');
+    let category3 = this.post('category3');
+    //let create_time = this.post('create_time');
+    let create_time = Math.round((new Date()).getTime() / 1000);
+    console.log('addAction');
+    //console.log(quest_content);
+    if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
+         || quest_item_c == ''|| quest_answer == '') {
+      return this.fail({
+        result: 'INVALID_INPUT',
+        audit: false,
+        errorCode: 302
+      });
+    }
+
+    //var audit = this.model('question').checkInput(quest_content, quest_item_a, quest_item_b, quest_item_c, quest_item_d);
+    //if (!audit) {
+    var swords = xwords.block(quest_content) + xwords.block(quest_item_a) + xwords.block(quest_item_b)
+         + xwords.block(quest_item_c) + xwords.block(quest_item_d);
+    console.log(swords);
+    //if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
+    //     || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
+    if (swords != '') {
+      return this.fail({
+        result: 'AUDIT_ERROR',
+        audit: false,
+        sword: swords,
+        errorCode: 301
+      });
+    }
+
+    var filter = 0;
+    var filterwords = xwords.filter(quest_content) + xwords.filter(quest_item_a) + xwords.filter(quest_item_b)
+         + xwords.filter(quest_item_c) + xwords.filter(quest_item_d);
+    console.log(filterwords);
+    if (filterwords != '') {
+      filter = 1;
+      note = 'xwords:' + filterwords;
+    }
+
+    let questResult = await this.model('question').where({id: id}).update({
+        title: title,
+        creator_id: creator_id,
+        creator_name: creator_name,
+        create_time: create_time,
+        content: quest_content,
+        item_count: item_count,
+        item0: quest_item_a,
+        item1: quest_item_b,
+        item2: quest_item_c,
+        item3: quest_item_d,
+        answer: quest_answer,
+        type: type,
+        level: level,
+        filter: filter,
+        tags: tags,
+        source: source,
+        category0: category0,
+        category1: category1,
+        category2: category2,
+        category3: category3,
+        note: note,
+        more: more
+    });
+
+    return this.success({
+      result: 'OK',
+      question_id: questResult,
+      errorCode: 0
+    });
+  }
+
+  async deleteAction() {
+    let id = this.get('id');
+    let result = await this.model('question').where({id: id}).delete();
+
+    return this.success({
+      result: result
+    });
+
   }
 }
