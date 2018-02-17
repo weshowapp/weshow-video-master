@@ -1,33 +1,76 @@
 var fs = require('fs')
 
-var path = think.RESOURCE_PATH + '/keywords1'
+var blockpath = think.RESOURCE_PATH + '/blockwords'
+var filterpath = think.RESOURCE_PATH + '/filterwords'
 
 var map = {}
-var array = []
-var pattern = '';
+var blockArray = []
+var filterArray = []
 
-var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream(path, {encoding: 'UTF-8'})
+var lineBlockReader = require('readline').createInterface({
+  input: require('fs').createReadStream(blockpath, {encoding: 'UTF-8'})
 });
 
-lineReader.on('line', function (line) {
+lineBlockReader.on('line', function (line) {
   if(!line) return
-  addWord(line)
+  addBlockWord(line)
 });
 
-function addWord(word) {
+var lineFilterReader = require('readline').createInterface({
+  input: require('fs').createReadStream(blockpath, {encoding: 'UTF-8'})
+});
+
+lineFilterReader.on('line', function (line) {
+  if(!line) return
+  addFilterWord(line)
+});
+
+function addBlockWord(word) {
 
   var parent = map
-  var arr = array
+  var arr = blockArray
+  
+  arr.push(word)
+}
+
+function addFilterWord(word) {
+
+  var parent = map
+  var arr = filterArray
   
   arr.push(word)
 
   //parent.push(word)
-  for (var i = 0; i < word.length; i++) {
+  //for (var i = 0; i < word.length; i++) {
     //if (!parent[word[i]]) parent[word[i]] = {}
     //parent = parent[word[i]]
-  }
+  //}
   //parent.isEnd = true
+}
+
+function block(s) {
+  if (s == null) {
+    return '';
+  }
+
+  var re = '';
+  for (var i = 0; i < blockArray.length; i++) {
+    //if (array[i].indexOf('*') > -1) {
+    //  continue;
+    //}
+    if(i==blockArray.length-1)
+       re+=blockArray[i];
+    else
+       re+=blockArray[i]+"|";
+  }
+
+  //console.log(re);
+  //console.log(s);
+  var pattern = new RegExp(re,"g");
+  if(pattern.test(s)) {
+     return s;
+  }
+  return '';
 }
 
 function filter(s) {
@@ -36,14 +79,14 @@ function filter(s) {
   }
 
   var re = '';
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0; i < filterArray.length; i++) {
     //if (array[i].indexOf('*') > -1) {
     //  continue;
     //}
-    if(i==array.length-1)
-       re+=array[i];
+    if(i==filterArray.length-1)
+       re+=filterArray[i];
     else
-       re+=array[i]+"|";
+       re+=filterArray[i]+"|";
   }
 
   //console.log(re);
@@ -243,5 +286,6 @@ function filter1(content) {
 
 
 module.exports = {
+  block: block,
   filter: filter
 }

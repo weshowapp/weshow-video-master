@@ -180,8 +180,8 @@ export default class extends Base {
 
     //var audit = this.model('question').checkInput(quest_content, quest_item_a, quest_item_b, quest_item_c, quest_item_d);
     //if (!audit) {
-    var swords = xwords.filter(quest_content) + xwords.filter(quest_item_a) + xwords.filter(quest_item_b)
-         + xwords.filter(quest_item_c) + xwords.filter(quest_item_d);
+    var swords = xwords.block(quest_content) + xwords.block(quest_item_a) + xwords.block(quest_item_b)
+         + xwords.block(quest_item_c) + xwords.block(quest_item_d);
     console.log(swords);
     //if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
     //     || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
@@ -192,6 +192,15 @@ export default class extends Base {
         sword: swords,
         errorCode: 301
       });
+    }
+
+    var filter = 0;
+    swords = xwords.filter(quest_content) + xwords.filter(quest_item_a) + xwords.filter(quest_item_b)
+         + xwords.filter(quest_item_c) + xwords.filter(quest_item_d);
+    console.log(swords);
+    if (swords != '') {
+      filter = 1;
+      note = 'xwords';
     }
 
     let questResult = await this.model('question').add({
@@ -208,6 +217,7 @@ export default class extends Base {
         answer: quest_answer,
         type: type,
         level: level,
+        filter: filter,
         tags: tags,
         source: source,
         note: note
