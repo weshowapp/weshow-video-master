@@ -17,7 +17,7 @@ lineBlockReader.on('line', function (line) {
 });
 
 var lineFilterReader = require('readline').createInterface({
-  input: require('fs').createReadStream(blockpath, {encoding: 'UTF-8'})
+  input: require('fs').createReadStream(filterpath, {encoding: 'UTF-8'})
 });
 
 lineFilterReader.on('line', function (line) {
