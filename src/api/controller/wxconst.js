@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    USER_ID_ADMIN: 1,
+    USER_ID_ADMIN: '1',
 
     USER_LEVEL_DEFAULT: 0,
     USER_LEVEL_NORMAL: 1,
