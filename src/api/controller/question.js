@@ -17,11 +17,11 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
-    let page = this.get('page');
+    let id = this.get('id');
     let size = this.get('size');
     let filter = this.get('filter');
-    if (page == '' || page == undefined || page == null || page == NaN) {
-      page = 0;
+    if (id == '' || id == undefined || id == null || id == NaN) {
+      id = 0;
     }
     if (size == '' || size == undefined || size == null || size == NaN) {
       size = 10;
@@ -29,7 +29,7 @@ export default class extends Base {
     if (filter == '' || filter == undefined || filter == null || filter == NaN) {
       filter = 0;
     }
-    let list = await this.model('question').where({id: [">=", page], filter: filter}).limit(size).select();
+    let list = await this.model('question').where({id: [">=", id], filter: filter}).limit(size).select();
     this.assign('quest_list', list);
     this.display();
   }
