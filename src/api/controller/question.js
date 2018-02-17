@@ -260,6 +260,7 @@ export default class extends Base {
       question_id: questResult,
       errorCode: 0
     });
+  }
 
   async updateAction() {
     let id = this.post('id');
@@ -287,7 +288,7 @@ export default class extends Base {
     let category3 = this.post('category3');
     //let create_time = this.post('create_time');
     let create_time = Math.round((new Date()).getTime() / 1000);
-    console.log('addAction');
+    console.log('updateAction');
     //console.log(quest_content);
     if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
          || quest_item_c == ''|| quest_answer == '') {
@@ -362,6 +363,5 @@ export default class extends Base {
     return this.success({
       result: result
     });
-
   }
 }

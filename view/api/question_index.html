@@ -59,7 +59,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <% quest_list.forEach(function(item) { %>
         <tr>
           <form action="update" enctype="multipart/form-data" method="post">
-            <td><input size="1" type="text" name ="id" disabled="true" value="<%= item.id %>"/></td>
+            <td><input size="1" type="text" name ="id" value="<%= item.id %>"/></td>
             <td><input size="1" type="text" name ="quest_type" value="<%= item.type %>"/></td>
             <td><input size="1" type="text" name ="quest_level" value="<%= item.level %>"/></td>
             <td><input size="10" type="text" name ="quest_content" value="<%= item.content %>"/></td>
@@ -88,7 +88,8 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
           </form>
           <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="get">
             <td>
-              <input size="2" type="submit" name="delete" value="删除[]"/>
+              <input size="2" type="submit" name="delete" value="删除"/>
+              <input size="1" type="submit" name="id" value="<%= item.id %>"/>
             </td>
           </form>
         </tr>
@@ -136,6 +137,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td><input size="1" type="text" name ="page" value="0"/></td>
             <td>查询个数</td>
             <td><input size="1" type="text" name ="size" value="10"/></td>
+            <td><input size="1" type="text" name="filter" value="1"/></td>
             <td><input size="4" type="submit" value="查询敏感内容"/></td>
           </form>
         </tr>
