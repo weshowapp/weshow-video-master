@@ -6,13 +6,13 @@
 <style>
 *{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
 a, a:visited{color:#337ab7;text-decoration: none;}
-header{padding: 70px 0 70px 0;background-color: #4A6495}
-h1{font-size: 40px;color:#fff;font-weight: normal;}
+header{padding: 10px 0 10px 0;background-color: #4A6495}
+h1{font-size: 32px;color:#fff;font-weight: normal;}
 code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-.content{width: 480px;margin: auto}
-.wrap{width: 480px;margin: auto}
-.content{margin-top: 80px;}
-.list{width: 400px;font-size: 36px;}
+.content{width: 100%;margin: auto}
+.wrap{width: 100%;margin: 10px;}
+.content{margin-top: 30px;}
+.list{width: 90%;font-size: 36px;}
 .list .item{position: relative;padding-left: 70px;margin-top: 50px;font-size: 36px;}
 .list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
 .list .item h2{font-size: 38px;font-weight: normal;}
@@ -27,6 +27,45 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
   </header>
   <div class="content">
     <div class="list">
+      <table border="1px">
+        <tr>
+          <td>类别</td>
+          <td>难易级别</td>
+          <td>内容</td>
+          <td>选项1</td>
+          <td>选项2</td>
+          <td>选项3</td>
+          <td>选项4</td>
+          <td>答案</td>
+          <td>知识点</td>
+          <td>Tags</td>
+          <td>来源</td>
+          <td>类别1</td>
+          <td>类别2</td>
+          <td>类别3</td>
+          <td>类别4</td>
+          <td>包含敏感词</td>
+          <td>创建人ID</td>
+          <td>创建人</td>
+          <td>创建时间</td>
+          <td>答对总数</td>
+          <td>答错总数</td>
+          <td>成功率</td>
+          <td>备注</td>
+        </tr>
+        <% for item in quest_list {%>
+          <tr>
+            <td><%item.type%></td>
+            <td><%item.level%></td>
+            <td><%item.content%></td>
+            <td><%item.item0%></td>
+            <td><%item.item1%></td>
+            <td><%item.item2%></td>
+            <td><%item.item3%></td>
+          </tr>
+        <%}%>
+      </table>
+
       <h2>按ID查询</h2>
       <form class="p" action="getbyid" enctype="multipart/form-data" method="get">
         ID：<input type="text" name ="question_id" value="1"/><br>

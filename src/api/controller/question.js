@@ -17,6 +17,17 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
+    let page = this.get('page');
+    let size = this.get('size');
+    if (page == undefined || page == null) {
+      page = 0;
+    }
+    if (size == undefined || size == null) {
+      page = 0;
+    }
+    let begin = parseInt(page) * parseInt(size);
+    let list = await this.model('question').where({id: [">=", begin]}).limit(size).select();
+    this.assign('quest_list', list);
     this.display();
   }
 
