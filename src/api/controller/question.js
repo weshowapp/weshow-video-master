@@ -195,12 +195,12 @@ export default class extends Base {
     }
 
     var filter = 0;
-    swords = xwords.filter(quest_content) + xwords.filter(quest_item_a) + xwords.filter(quest_item_b)
+    var filterwords = xwords.filter(quest_content) + xwords.filter(quest_item_a) + xwords.filter(quest_item_b)
          + xwords.filter(quest_item_c) + xwords.filter(quest_item_d);
-    console.log(swords);
-    if (swords != '') {
+    console.log(filterwords);
+    if (filterwords != '') {
       filter = 1;
-      note = 'xwords';
+      note = 'xwords:' + filterwords;
     }
 
     let questResult = await this.model('question').add({
