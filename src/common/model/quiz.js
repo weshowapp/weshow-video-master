@@ -29,7 +29,13 @@ export default class extends think.model.base {
       min = '0' + min;
     }
     if (cur.getDate() != date.getDate()) {
-      if (cur.getDate() - date.getDate() < 7) {
+      if (cur.getDate() - date.getDate() == -1) {
+        return '明天' + ' ' + hour + ':' + min;
+      }
+      else if (cur.getDate() - date.getDate() == 1) {
+        return '昨天' + ' ' + hour + ':' + min;
+      }
+      else if (cur.getDate() > date.getDate() && cur.getDate() - date.getDate() < 7) {
         return (cur.getDate() - date.getDate()) + '天前' + ' ' + hour + ':' + min;
       }
       return (date.getMonth() + 1) + '/' + date.getDate() + ' ' + hour + ':' + min;
