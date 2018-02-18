@@ -88,7 +88,7 @@ export default class extends Base {
         item1: arr[5],
         item2: arr[6],
         item3: arr[7],
-        answer: arr[8] == 'A' ? 0 : (arr[8] == 'B' ? 1 : (arr[8] == 'C' ? 2 : 3)),
+        answer: arr[8] == 'A' ? 0 : (arr[8] == 'B' ? 1 : (arr[8] == 'C' ? 2 : (arr[8] == 'D' ? 3 : -1))),
         note: arr[9],
         more: arr[10],
         category0: arr[11],
