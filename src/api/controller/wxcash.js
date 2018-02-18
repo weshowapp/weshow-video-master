@@ -22,7 +22,9 @@ export default class extends Base {
       for (var i = 0; i < list.length; i++) {
         list[i].str_time = this.getFullDateTime(list[i].add_time);
         let userInfo = await this.model('user').where({openid: list[i].openid}).find();
-        list[i].username = userInfo.name;
+        if (!think.isEmpty(userInfo)) {
+          list[i].username = userInfo.name;
+        }
       }
     }
     this.assign('wxcash_list', list);
