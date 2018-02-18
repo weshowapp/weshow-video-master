@@ -37,6 +37,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
           <td>金额</td>
           <td>操作</td>
           <td>备注</td>
+          <td>是否成功</td>
           <td>操作时间</td>
         </tr>
         <% var currentId = 0; %>
@@ -50,6 +51,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td><input size="2" type="text" name ="cash_val" value="<%= item.cash_val %>"/></td>
             <td><input size="1" type="text" name ="draw_type" value="<%= item.draw_type %>"/></td>
             <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
+            <td><input size="1" type="text" name ="draw_status" value="<%= item.draw_status %>"/></td>
             <td><input size="14" type="text" name ="add_time" value="<%= item.str_time %>"/></td>
           </form>
         </tr>

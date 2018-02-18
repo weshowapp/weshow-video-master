@@ -199,7 +199,7 @@ export default class extends Base {
     let result = await this.model('quiz').where({id: qid, creator_id: openid}).update({
       pay_status: payed
     });
-    await this.model('wxcash').addOp(openid, qid, cash_val, 1, 'pay', add_time);
+    await this.model('wxcash').addOp(openid, qid, cash_val, wxconst.WXCASH_OP_TYPE_PAY, wxconst.WXCASH_OP_NOTE_PAY, add_time);
     return this.json(result);
   }
 }

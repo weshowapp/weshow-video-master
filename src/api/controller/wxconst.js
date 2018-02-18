@@ -37,6 +37,19 @@ module.exports = {
     QUIZ_TYPE_NORMAL: 1,
     QUIZ_TYPE_PUBLIC: 3,
 
+    WXCASH_OP_TYPE_PAY: 1,
+    WXCASH_OP_TYPE_DRAW: 2,
+    WXCASH_OP_TYPE_WIN: 3,
+    WXCASH_OP_TYPE_GAME: 4,
+
+    WXCASH_OP_NOTE_PAY: 'pay',
+    WXCASH_OP_NOTE_DRAW: 'draw',
+    WXCASH_OP_NOTE_WIN: 'win',
+    WXCASH_OP_NOTE_GAME: 'game',
+
+    WXCASH_STATUS_BEGIN: 0,
+    WXCASH_STATUS_SUCCESS: 1,
+
     QUIZ_GAME_RULES: ['欢迎来答题',
       '每道题有10秒作答时间',
       '超时或回答错误将被淘汰',

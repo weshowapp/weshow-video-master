@@ -1,5 +1,7 @@
 'use strict';
 
+var wxconst = require('../../api/controller/wxconst');
+
 /**
  * model
  */
@@ -111,10 +113,10 @@ export default class extends think.model.base {
           let result = await this.model('user').where({ openid: winList[i].openid }).update({
             win: perUserPrice
           });
-          await this.model('wxcash').addOp(winList[i].openid, quiz.id, price, 3, 'win', quizEndTime);
+          await this.model('wxcash').addOp(winList[i].openid, quiz.id, price, wxconst.WXCASH_OP_TYPE_WIN, wxconst.WXCASH_OP_NOTE_WIN, quizEndTime);
         }
         if (winCount > 0) {
-          await this.model('wxcash').addOp(quiz.creator_id, quiz.id, quiz.price, 4, 'game', quizEndTime);
+          await this.model('wxcash').addOp(quiz.creator_id, quiz.id, quiz.price, wxconst.WXCASH_OP_TYPE_GAME, wxconst.WXCASH_OP_NOTE_GAME, quizEndTime);
         }
       }
     }
