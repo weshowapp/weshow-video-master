@@ -11,13 +11,23 @@ export default class extends Base {
   async indexAction() {
     let id = this.get('id');
     let size = this.get('size');
+    let openid = this.get('openid');
     if (id == '' || id == undefined || id == null || id == NaN) {
       id = 0;
     }
     if (size == '' || size == undefined || size == null || size == NaN) {
       size = 10;
     }
-    let list = await this.model('wxcash').where({id: [">=", id]}).limit(size).select();
+    if (openid == '' || openid == undefined || openid == null || openid == NaN) {
+      openid = '';
+    }
+    let list = null;
+    if (openid == '') {
+      list = await this.model('wxcash').where({id: [">=", id]}).limit(size).select();
+    }
+    else {
+      list = await this.model('wxcash').where({openid: openid}).limit(size).select();
+    }
     if (!think.isEmpty(list)) {
       for (var i = 0; i < list.length; i++) {
         list[i].str_time = this.getFullDateTime(list[i].add_time);

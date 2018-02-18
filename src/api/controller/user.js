@@ -13,13 +13,23 @@ export default class extends Base {
     //auto render template file user_index.html
     let id = this.get('id');
     let size = this.get('size');
+    let name = this.get('name');
     if (id == '' || id == undefined || id == null || id == NaN) {
       id = 0;
     }
     if (size == '' || size == undefined || size == null || size == NaN) {
       size = 10;
     }
-    let list = await this.model('user').where({id: [">=", id]}).limit(size).select();
+    if (name == '' || name == undefined || name == null || name == NaN) {
+      name = '';
+    }
+    let list = null;
+    if (name == '') {
+      list = await this.model('user').where({id: [">=", id]}).limit(size).select();
+    }
+    else {
+      list = await this.model('user').where({name: ["LIKE", name]}).limit(size).select();
+    }
     if (!think.isEmpty(list)) {
       for (var i = 0; i < list.length; i++) {
         list[i].str_time = this.getFullDateTime(list[i].reg_time);
