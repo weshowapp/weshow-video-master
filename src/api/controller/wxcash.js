@@ -28,15 +28,15 @@ export default class extends Base {
     else {
       list = await this.model('wxcash').where({openid: openid}).limit(size).select();
     }
-    /*if (!think.isEmpty(list)) {
+    if (!think.isEmpty(list)) {
       for (var i = 0; i < list.length; i++) {
         list[i].str_time = this.getFullDateTime(list[i].add_time);
-        let userInfo = await this.model('user').where({openid: list[i].openid}).find();
+        /*let userInfo = await this.model('user').where({openid: list[i].openid}).find();
         if (!think.isEmpty(userInfo)) {
           list[i].username = userInfo.name;
-        }
+        }*/
       }
-    }*/
+    }
     this.assign('wxcash_list', list);
     this.display();
   }
