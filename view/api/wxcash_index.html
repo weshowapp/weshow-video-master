@@ -44,13 +44,13 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <tr>
           <form action="update" enctype="multipart/form-data" method="post">
             <td><input size="1" type="text" name ="id" value="<%= item.id %>"/></td>
-            <td><input size="1" type="text" name ="openid" value="<%= item.openid %>"/></td>
+            <td><input size="6" type="text" name ="openid" value="<%= item.openid %>"/></td>
             <td><input size="1" type="text" name ="username" value="<%= item.username %>"/></td>
             <td><input size="1" type="text" name ="quizid" value="<%= item.quizid %>"/></td>
             <td><input size="1" type="text" name ="cash_val" value="<%= item.cash_val %>"/></td>
-            <td><input size="2" type="text" name ="draw_type" value="<%= item.draw_type %>"/></td>
+            <td><input size="1" type="text" name ="draw_type" value="<%= item.draw_type %>"/></td>
             <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
-            <td><input size="1" type="text" name ="add_time" value="<%= item.add_time %>"/></td>
+            <td><input size="1" type="text" name ="add_time" value="<%= item.str_time %>"/></td>
           </form>
         </tr>
         <% currentId = item.id %>
@@ -58,7 +58,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <tr>
           <form action="index" enctype="multipart/form-data" method="get">
             <td>起始ID</td>
-            <td><input size="1" type="text" name ="page" value="<%= currentId + 1 %>"/></td>
+            <td><input size="1" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
             <td>个数</td>
             <td><input size="2" type="text" name ="size" value="10"/></td>
             <td><input size="4" type="submit" value=" 下一页 "/></td>

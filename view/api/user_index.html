@@ -83,7 +83,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td><input size="1" type="text" disabled="true" value="<%= item.win %>"/></td>
             <td><input size="1" type="text" disabled="true" value="<%= item.balance %>"/></td>
             <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
-            <td><input size="2" type="submit" value="更新"/></td>
+            <td><input size="2" type="submit" value=" 更 新 "/></td>
           </form>
           <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="get">
             <td>
@@ -96,7 +96,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <tr>
           <form action="index" enctype="multipart/form-data" method="get">
             <td>起始ID</td>
-            <td><input size="1" type="text" name ="page" value="<%= currentId + 1 %>"/></td>
+            <td><input size="1" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
             <td>个数</td>
             <td><input size="2" type="text" name ="size" value="10"/></td>
             <td><input size="4" type="submit" value=" 下一页 "/></td>
