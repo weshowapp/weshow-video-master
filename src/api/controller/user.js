@@ -20,6 +20,11 @@ export default class extends Base {
       size = 10;
     }
     let list = await this.model('user').where({id: [">=", id]}).limit(size).select();
+    if (!think.isEmpty(list)) {
+      for (var i = 0; i < list.length; i++) {
+        list[i].str_time = this.getFullDateTime(list[i].reg_time);
+      }
+    }
     this.assign('user_list', list);
     this.display();
   }
@@ -164,7 +169,6 @@ export default class extends Base {
         photo_url: avatarUrl,
         inviter_id: inviter_id,
         inviter_code: inviter_code,
-        invition_code: invition_code,
         reg_time: add_time,
         level: level,
         enabled: enabled,
@@ -242,6 +246,23 @@ export default class extends Base {
         //});
     }
     return this.json(result);
+  }
+
+  async deleteAction() {
+    let id = this.get('id');
+    let str = this.get('delete');
+    console.log('delete ' + id + ',' + str);
+    if (id == '') {
+      var arr = str.split(':');
+      if (arr.length > 1) {
+        id = arr[1];
+      }
+    }
+    let result = await this.model('user').where({id: id}).delete();
+
+    return this.success({
+      result: result
+    });
   }
 
   /**
