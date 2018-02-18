@@ -39,7 +39,7 @@ CREATE TABLE `weshow_user` (
   `inviter_code` varchar(32) NOT NULL DEFAULT '',
   `invition_code` varchar(32) NOT NULL DEFAULT '',
   `reg_time` int(11) NOT NULL DEFAULT '0',
-  `enabled` tinyint(3) unsigned DEFAULT NULL,
+  `enabled` tinyint(3) unsigned DEFAULT 1,
   `join_count` int(8) unsigned DEFAULT 0,
   `win_count` int(8) unsigned DEFAULT 0,
   `relive` int(8) unsigned DEFAULT 1,
@@ -59,8 +59,8 @@ CREATE TABLE `weshow_user` (
 LOCK TABLES `weshow_user` WRITE;
 /*!40000 ALTER TABLE `weshow_user` DISABLE KEYS */;
 INSERT INTO `weshow_user` 
-VALUES (1,0,1,'1','1','wx-1','Zhan0','','','','','','','','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0',1503171637,1,1,1,1,1,1,0,''),
-  (2,0,1,'2','1','wx-2','Zhan1','','','','','','','','https://tvax1.sinaimg.cn/crop.0.0.996.996.180/005WFisyly8fghoqxipmsj30ro0romzf.jpg',1503171637,1,1,1,1,1,1,0,'');
+VALUES (1,0,1,'wx-1','10086','wx-1','Zhan0','CN','BJ','BJ','CN','https://wx.qlogo.cn/mmopen/vi_32/bMqoLrFBhxP8ZsHJqOd2eIsEtpkCuSW0JtfOPZpsIaBKhqMaeONREia3R2TdtIf9oMAY2wq0pJPHUOCqzNXR7iaw/0','0','AA','A1',1513171637,1,1,1,1,1,0,0,''),
+  (2,0,1,'wx-0','10010','wx-2','Zhan1','CN','BJ','Hai','CN','https://tvax1.sinaimg.cn/crop.0.0.996.996.180/005WFisyly8fghoqxipmsj30ro0romzf.jpg','0','BB','B1',1513171637,1,1,1,1,1,0,0,'');
 /*!40000 ALTER TABLE `weshow_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
