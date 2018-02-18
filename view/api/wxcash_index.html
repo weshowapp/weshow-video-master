@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>帐单管理</title>
+<style>
+*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
+a, a:visited{color:#337ab7;text-decoration: none;}
+header{padding: 10px 0 10px 0;background-color: #4A6495}
+h1{font-size: 32px;color:#fff;font-weight: normal;}
+code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+.content{width: 100%;margin: auto}
+.wrap{width: 100%;margin: 10px;}
+.content{margin-top: 30px;}
+.list{width: 90%;font-size: 36px;}
+.list .item{position: relative;padding-left: 10px;margin-top: 50px;font-size: 36px;}
+.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
+.list .item h2{font-size: 38px;font-weight: normal;}
+.list .item p{line-height: 36px;margin-top: 10px;font-size: 36px;}
+.list .item t1{line-height: 36px;margin-top: 10px;font-size: 36px;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>帐单管理</h1>
+    </div>
+  </header>
+  <div class="content">
+    <div class="list">
+      <table border="1px">
+        <tr>
+          <td>ID</td>
+          <td>微信ID</td>
+          <td>用户名</td>
+          <td>比赛ID</td>
+          <td>金额</td>
+          <td>操作</td>
+          <td>备注</td>
+          <td>操作时间</td>
+        </tr>
+        <% var currentId = 0; %>
+        <% user_list.forEach(function(item) { %>
+        <tr>
+          <form action="update" enctype="multipart/form-data" method="post">
+            <td><input size="1" type="text" name ="id" value="<%= item.id %>"/></td>
+            <td><input size="1" type="text" name ="openid" value="<%= item.openid %>"/></td>
+            <td><input size="1" type="text" name ="username" value="<%= item.username %>"/></td>
+            <td><input size="1" type="text" name ="quizid" value="<%= item.quizid %>"/></td>
+            <td><input size="1" type="text" name ="cash_val" value="<%= item.cash_val %>"/></td>
+            <td><input size="2" type="text" name ="draw_type" value="<%= item.draw_type %>"/></td>
+            <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
+            <td><input size="1" type="text" name ="add_time" value="<%= item.add_time %>"/></td>
+          </form>
+        </tr>
+        <% currentId = item.id %>
+        <% }) %>
+        <tr>
+          <form action="index" enctype="multipart/form-data" method="get">
+            <td>起始ID</td>
+            <td><input size="1" type="text" name ="page" value="<%= currentId + 1 %>"/></td>
+            <td>个数</td>
+            <td><input size="2" type="text" name ="size" value="10"/></td>
+            <td><input size="4" type="submit" value=" 下一页 "/></td>
+          </form>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</body>
+</html>

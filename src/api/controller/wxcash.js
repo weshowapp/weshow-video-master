@@ -9,14 +9,19 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
-    let l = await this.model('wxcash').limit(30).select();
-
-    return this.success({
-      list: l
-    });
-
+    let id = this.get('id');
+    let size = this.get('size');
+    if (id == '' || id == undefined || id == null || id == NaN) {
+      id = 0;
+    }
+    if (size == '' || size == undefined || size == null || size == NaN) {
+      size = 10;
+    }
+    let list = await this.model('wxcash').where({id: [">=", id]}).limit(size).select();
+    this.assign('wxcash_list', list);
+    this.display();
   }
-  
+
   async getuserdetailAction() {
     let uid = this.get('openid');
     //let type = this.get('draw_type');
@@ -26,7 +31,7 @@ export default class extends Base {
       for (var i = 0; i < l.length; i++) {
         l[i].open_gid = '0';
         if (think.isEmpty(l[i].quizid)) { l[i].quizid = 0; }
-	    let quizInfo = await this.model('quiz').where({ id: l[i].quizid }).find();
+        let quizInfo = await this.model('quiz').where({ id: l[i].quizid }).find();
         if (!think.isEmpty(quizInfo)) {
           l[i].open_gid = quizInfo.open_gid;
         }
@@ -87,12 +92,12 @@ export default class extends Base {
       note: note,
       add_time: tm
     });*/
-	
+
     let addResult = await this.model('wxcash').addOp(uid, '0', cash_val, 2, 'draw', tm);
 
-	return this.success({
+    return this.success({
       result: 'OK',
-	  wxcash: addResult,
+      wxcash: addResult,
       errorCode: 0
     });
   }
