@@ -55,7 +55,7 @@ export default class extends Base {
 
   async queryinputAction() {
     let sql = this.post('quest_sql');
-    let tm = this.get('tm');
+    let tm = this.post('tm');
     if (!this.checkTimeStamp(tm)) {
       return this.success({
         result: 'OK',
@@ -76,7 +76,7 @@ export default class extends Base {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
 
-    let tm = this.get('tm');
+    let tm = this.post('tm');
     if (!this.checkTimeStamp(tm)) {
       return this.success({
         result: 'OK',
