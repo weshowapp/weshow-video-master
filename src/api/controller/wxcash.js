@@ -12,6 +12,13 @@ export default class extends Base {
     let id = this.get('id');
     let size = this.get('size');
     let openid = this.get('openid');
+    let tm = this.get('tm');
+    if (!this.checkTimeStamp(tm)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 0
+      });
+    }
     if (id == '' || id == undefined || id == null || id == NaN) {
       id = 0;
     }

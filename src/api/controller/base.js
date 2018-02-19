@@ -78,4 +78,10 @@ export default class extends think.controller.base {
     var curTime = Math.round((new Date()).getTime() / 1000);
     return curTime;
   }
+
+  checkTimeStamp(tm) {
+    var date = new Date(tm * 1000);
+    var cur = new Date();
+    return true;
+  }
 }
