@@ -88,7 +88,7 @@ export default class extends Base {
         item1: arr[5],
         item2: arr[6],
         item3: arr[7],
-        answer: arr[8] == 'A' ? 0 : (arr[8] == 'B' ? 1 : (arr[8] == 'C' ? 2 : (arr[8] == 'D' ? 3 : -1))),
+        answer: arr[8] == 'A' ? 0 : (arr[8] == 'B' ? 1 : (arr[8] == 'C' ? 2 : (arr[8] == 'D' ? 3 : 4))),
         note: arr[9],
         more: arr[10],
         category0: arr[11],
@@ -165,6 +165,33 @@ export default class extends Base {
     return this.success({
       result: 'OK',
       xwords: swords,
+      errorCode: 0
+    });
+  }
+
+  async auditquestionAction() {
+    let quest_content = this.post('quest_content');
+    let quest_item_a = this.post('quest_item_a');
+    let quest_item_b = this.post('quest_item_b');
+    let quest_item_c = this.post('quest_item_c');
+    let quest_item_d = this.post('quest_item_d');
+
+    var swords = xwords.block(quest_content) + xwords.block(quest_item_a) + xwords.block(quest_item_b)
+         + xwords.block(quest_item_c) + xwords.block(quest_item_d);
+    console.log(swords);
+    //if (xwords.filter(quest_content) || xwords.filter(quest_item_a) || xwords.filter(quest_item_b)
+    //     || xwords.filter(quest_item_c) || xwords.filter(quest_item_d)) {
+    if (swords != '') {
+      return this.fail({
+        result: 'AUDIT_ERROR',
+        audit: false,
+        sword: swords,
+        errorCode: 301
+      });
+    }
+
+    return this.success({
+      result: 'OK',
       errorCode: 0
     });
   }
