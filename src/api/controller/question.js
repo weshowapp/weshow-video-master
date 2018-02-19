@@ -55,6 +55,14 @@ export default class extends Base {
 
   async queryinputAction() {
     let sql = this.post('quest_sql');
+    let tm = this.get('tm');
+    if (!this.checkTimeStamp(tm)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 0
+      });
+    }
+
     let list = await this.model('question').query(sql);
     if (!think.isEmpty(list)) {
         //console.log(list);
@@ -67,7 +75,15 @@ export default class extends Base {
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
-    
+
+    let tm = this.get('tm');
+    if (!this.checkTimeStamp(tm)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 0
+      });
+    }
+
     var lineReader = require('readline').createInterface({
       input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
     });
