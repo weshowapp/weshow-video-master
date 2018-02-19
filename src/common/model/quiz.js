@@ -3,12 +3,12 @@
 /**
  * model
  */
- 
+
+var wxconst = require('../../api/controller/wxconst');
+
 const GAME_STATUS_UNCOMPLETE = 0;
 const GAME_STATUS_WIN = 1;
 const GAME_STATUS_FAIL = 2;
-const RELIVE_ADD = 1;
-const RELIVE_DECREASE = 0;
 
 export default class extends think.model.base {
 
@@ -80,23 +80,29 @@ export default class extends think.model.base {
     quiz.current_time = curTime;
     quiz.is_start = 0;
     quiz.is_completed = 0;
-    quiz.phase = 0;
+    quiz.phase = wxconst.QUIZ_PHASE_BEGIN;
     if (curTime <= quiz.start_time) {
       quiz.is_start = 0;
-      quiz.phase = 1;
+      quiz.phase = wxconst.QUIZ_PHASE_WAIT;
     }
     else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 1) {
       quiz.is_start = 1;
-      quiz.phase = 2;
+      quiz.phase = wxconst.QUIZ_PHASE_GAMING;
+      let groupInfo = await this.model('quizuser').where({quizid: quiz.id}).count();
+      if (!think.isEmpty(groupInfo)) {
+        if (groupInfo < quiz.min_users) {
+          quiz.phase = wxconst.QUIZ_PHASE_FINISH;
+        }
+      }
     }
     else if (curTime > quiz.start_time + quiz.quest_count * 15 - 1) {
       quiz.is_completed = 1;
-      quiz.phase = 3;
+      quiz.phase = wxconst.QUIZ_PHASE_FINISH;
     }
     else {
       quiz.is_start = 1;
       quiz.is_completed = 2;
-      quiz.phase = 3;
+      quiz.phase = wxconst.QUIZ_PHASE_FINISH;
     }
 
     quiz.format_start = this.getHourMin(quiz.start_time);

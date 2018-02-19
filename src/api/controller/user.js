@@ -88,6 +88,7 @@ export default class extends Base {
     let add_time = this.post('add_time');
     console.log('User.add');
     console.log(name);
+    add_time = this.getCurrentTime();
     
     var invition_code = this.model('user').randomString(6);
 

@@ -71,6 +71,11 @@ export default class extends think.controller.base {
     var second = date.getSeconds();
 
     return [year, month, day].map(this.formatNumber).join('/') + ' ' + [hour, minute, second].map(this.formatNumber).join(':');
-	//return year + '-' + month + '-' + day + ' ' + this.formatNumber(hour) + ':' + this.formatNumber(minute) + ':' + this.formatNumber(second);
+    //return year + '-' + month + '-' + day + ' ' + this.formatNumber(hour) + ':' + this.formatNumber(minute) + ':' + this.formatNumber(second);
+  }
+
+  getCurrentTime() {
+    var curTime = Math.round((new Date()).getTime() / 1000);
+    return curTime;
   }
 }
