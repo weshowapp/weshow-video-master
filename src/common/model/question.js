@@ -135,6 +135,7 @@ export default class extends Base {
     if (note.length > 255) {
       note = note.substring(0, 240);
     }
+    return note;
   }
 
   async addFromMfg(line) {
