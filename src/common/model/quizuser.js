@@ -75,7 +75,7 @@ export default class extends think.model.base {
 
     var curTime = (new Date()).getTime() / 1000;
     let info = await this.model('quizuser').where({ quizid: qid, game_status: 0 }).select();
-    if (think.isEmpty(info) || (curTime > quizEndTime - 2 && curTime < quizEndTime + 10)) {
+    if (think.isEmpty(info) || (curTime > quizEndTime - 3 && curTime < quizEndTime + 10)) {
       console.log('begin calculateGain');
       //All Completed
       let winList = await this.model('quizuser').where({ quizid: qid, game_status: 1 }).select();
