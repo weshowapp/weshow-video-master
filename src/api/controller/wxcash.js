@@ -2,6 +2,8 @@
 
 import Base from './base.js';
 
+var wxconst = require('./wxconst');
+
 export default class extends Base {
 
   /**
@@ -63,16 +65,16 @@ export default class extends Base {
         }
         l[i].format_time = this.formatDateTime(l[i].add_time);
         l[i].str_time = this.getFullDateTime(l[i].add_time);
-        if (l[i].draw_type == 1) {
+        if (l[i].draw_type == wxconst.WXCASH_OP_TYPE_PAY) {
           l[i].desc = '创建比赛充入 + ';
         }
-        else if (l[i].draw_type == 2) {
+        else if (l[i].draw_type == wxconst.WXCASH_OP_TYPE_DRAW) {
           l[i].desc = '提现 - ';
         }
-        else if (l[i].draw_type == 3) {
+        else if (l[i].draw_type == wxconst.WXCASH_OP_TYPE_WIN) {
           l[i].desc = '赢取 + ';
         }
-        else if (l[i].draw_type == 4) {
+        else if (l[i].draw_type == wxconst.WXCASH_OP_TYPE_GAME) {
           l[i].desc = '创建比赛支出 - ';
         }
         else {

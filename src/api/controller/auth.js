@@ -27,7 +27,7 @@ export default class extends Base {
    */
   async indexAction() {
 
-    let avatar_path = think.RESOURCE_PATH + '/static/user/avatar/1.' + _.last(_.split('https://img6.xxx.com/img/image/smallpic/liutaoxiaotu.jpg', '.'));
+    let avatar_path = think.RESOURCE_PATH + '/static/user/avatar/photo1.png';
     return this.success(avatar_path);
   }
 

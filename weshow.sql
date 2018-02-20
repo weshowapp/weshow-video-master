@@ -80,10 +80,10 @@ CREATE TABLE `weshow_question` (
   `type` int(8) unsigned NOT NULL DEFAULT '0',
   `level` int(4) unsigned NOT NULL DEFAULT '0',
   `filter` int(4) unsigned NOT NULL DEFAULT '0',
-  `category0` int(8) unsigned NOT NULL DEFAULT '0',
-  `category1` int(8) unsigned NOT NULL DEFAULT '0',
-  `category2` int(8) unsigned NOT NULL DEFAULT '0',
-  `category3` int(8) unsigned NOT NULL DEFAULT '0',
+  `category0` varchar(32) NOT NULL DEFAULT '0',
+  `category1` varchar(32) NOT NULL DEFAULT '1',
+  `category2` varchar(32) NOT NULL DEFAULT '2',
+  `category3` varchar(32) NOT NULL DEFAULT '3',
   `tags` varchar(64) NOT NULL DEFAULT '',
   `source` varchar(64) NOT NULL DEFAULT '',
   `title` varchar(32) NOT NULL DEFAULT '',
@@ -110,10 +110,10 @@ CREATE TABLE `weshow_question` (
 LOCK TABLES `weshow_question` WRITE;
 /*!40000 ALTER TABLE `weshow_question` DISABLE KEYS */;
 INSERT INTO `weshow_question` 
-VALUES (1,'1','A1',1516199514,1,1,0,0,0,0,0,'','','','北京在秦代曾经叫做?','蓟','京','燕','',3,0,'北京在秦代称作蓟','',1,0),
-  (2,'1','AA',1516199666,1,1,0,0,0,0,0,'','','','甄嬛传是哪个皇帝时代？','乾隆','康熙','雍正','',3,2,'电视剧','',1,0),
-  (3,'1','AA',1516199666,1,1,0,0,0,0,0,'','','','下列名称不属于二十四节气的？','谷雨','大伏','春分','',3,1,'二十四节气','',1,0),
-  (4,'3','A1',1516199666,1,1,0,0,0,0,0,'','','','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'李世民争夺太子之战','',1,0);
+VALUES (1,'1','A1',1516199514,1,1,0,'0','1','2','3','','','','北京在秦代曾经叫做?','蓟','京','燕','',3,0,'北京在秦代称作蓟','',1,0),
+  (2,'1','AA',1516199666,1,1,0,'0','1','2','3','','','','甄嬛传是哪个皇帝时代？','乾隆','康熙','雍正','',3,2,'电视剧','',1,0),
+  (3,'1','AA',1516199666,1,1,0,'0','1','2','3','','','','下列名称不属于二十四节气的？','谷雨','大伏','春分','',3,1,'二十四节气','',1,0),
+  (4,'3','A1',1516199666,1,1,0,'0','1','2','3','','','','玄武门之变发生在以下哪个皇帝时期','唐太宗','唐明皇','唐高祖','',3,2,'李世民争夺太子之战','',1,0);
 /*!40000 ALTER TABLE `weshow_question` ENABLE KEYS */;
 UNLOCK TABLES;
 

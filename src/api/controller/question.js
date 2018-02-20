@@ -143,6 +143,78 @@ export default class extends Base {
     this.display();
   }
 
+  async uploadmfgAction() {
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+
+    let tm = this.post('tm');
+    if (!this.checkTimeStamp(tm)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 0
+      });
+    }
+
+    var lineReader = require('readline').createInterface({
+      input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
+    });
+
+    var count = 0;
+    let questModel = this.model('question');
+    await lineReader.on('line', function (line) {
+      if(!line) return;
+      var arr = line.split(',');
+
+      let options = {
+        method: 'GET',
+        url: arr[3]
+      };
+
+      var rawData = await rp(options);
+      var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
+      var questDataArr = rawData.split(DIVIDER);
+      var content = getMfgContent(questDataArr[1]);
+      var items = getMfgItems(questDataArr[1]);
+      var answer = getMfgAnswer(questDataArr[2]);
+      var note = getMfgNote(questDataArr[3]);
+
+      var item_count = 3;
+      if (item3 != '') {
+        item_count = 4;
+      }
+
+      let addResult = questModel.add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        item_count: item_count,
+        type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
+        level: arr[2],
+        source: 'mofangge',
+        content: content,
+        item0: items.item0,
+        item1: items.item1,
+        item2: items.item2,
+        item3: items.item3,
+        answer: answer,
+        note: note,
+        tags: arr[4],
+        category0: arr[5],
+        category1: arr[6],
+        category2: arr[7],
+        category3: arr[8],
+        more: arr[9]
+      });
+      if (addResult > 0) {
+        count++;
+      }
+    });
+
+    this.assign('result', 'Success Add ' + count + ' Lines');
+
+    this.display();
+  }
+
   async getcategoryAction() {
     let openid = this.get('openid');
 

@@ -24,38 +24,38 @@ export default class extends Base {
 
   async notifyAction() {
     var http = require('http');
-	var server = http.createServer(function(req,res){
-		if(req.url!=="/favicon.ico"){
-			req.on('data',function(data){
-				console.log("RECEIVED:　"+decodeURIComponent(data));
-			});
-			req.on("end",function(){
-				console.log('客户端请求数据全部接收完毕');
-			});
-		}
-		res.end();
-	});
-	
+    var server = http.createServer(function(req,res){
+    if(req.url!=="/favicon.ico"){
+      req.on('data',function(data){
+        console.log("RECEIVED:　"+decodeURIComponent(data));
+      });
+      req.on("end",function(){
+        console.log('客户端请求数据全部接收完毕');
+      });
+    }
+    res.end();
+  });
+  
     let return_code = this.post('return_code');
     let return_msg = this.post('return_msg');
-	var msg = 'msg-' + return_code + '-' + return_msg;
-	var tm = ((new Date()).getTime()) / 1000;
-	
-		let addResult = await this.model('wxpay').add({
+    var msg = 'msg-' + return_code + '-' + return_msg;
+    var tm = ((new Date()).getTime()) / 1000;
+  
+    let addResult = await this.model('wxpay').add({
             notify: msg,
-			add_time: tm
+      add_time: tm
         });
-	
-	return this.success({
+  
+    return this.success({
       result: 'OK',
-	  notify: addResult,
+      notify: addResult,
       errorCode: 0
     });
   }
 
   async mmtransferAction() {
-	console.log('mmtransferAction');
-	
+    console.log('mmtransferAction');
+  
     var amount = this.post('amount');
     var body = 'QuestionPaltform';//商户名
     var check_name = 'FORCE_CHECK';
@@ -100,38 +100,38 @@ export default class extends Base {
     formData += "<sign>" + sign + "</sign>"
     formData += "</xml>"
 
-	  var BOUNDARYPREFIX = 'wxmebn';
-	  var max = 9007196154740990;
-      var dec = Math.random() * max;
-      var hex = dec.toString(36);
-      var boundary = BOUNDARYPREFIX + hex;
+    var BOUNDARYPREFIX = 'wxmebn';
+    var max = 9007196154740990;
+    var dec = Math.random() * max;
+    var hex = dec.toString(36);
+    var boundary = BOUNDARYPREFIX + hex;
 
-      var body = util.format('Content-Type: multipart/form-data; boundary=%s\r\n\r\n', boundary)
+    var body = util.format('Content-Type: multipart/form-data; boundary=%s\r\n\r\n', boundary)
         + util.format('--%s\r\n', boundary)
         + formData
         + util.format('\r\n--%s', boundary);
 
-      //console.log(body);
+    //console.log(body);
 
-	  var url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
-      var parse_url = require('url').parse(url, true);
-      console.log(parse_url.hostname);
-      console.log(parse_url.path);
-      var options = {
+    var url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
+    var parse_url = require('url').parse(url, true);
+    console.log(parse_url.hostname);
+    console.log(parse_url.path);
+    var options = {
         host: parse_url.hostname,
         port: 443,
         path: parse_url.path,
         method: 'POST',
-		//key:fs.readFileSync('./keys/client-key.pem'),
-	    //cert:fs.readFileSync('./keys/client-cert.pem'),
-	    //ca: [fs.readFileSync('./keys/ca-cert.pem')],
+        //key: fs.readFileSync('./keys/client-key.pem'),
+        //cert: fs.readFileSync('./keys/client-cert.pem'),
+        //ca: [fs.readFileSync('./keys/ca-cert.pem')],
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Content-Length': body.length
         }
-      };
+    };
 
-      https.request(options, function (resHttps) {
+    https.request(options, function (resHttps) {
         console.log("statusCode: ", resHttps.statusCode);
         console.log("headers: ", resHttps.headers);
 
@@ -150,6 +150,6 @@ export default class extends Base {
           console.error("error:" + e);
           reject(e);
         });
-      });
+    });
   }
 }
