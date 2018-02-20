@@ -132,6 +132,8 @@ export default class extends Base {
       let options = {
         method: 'GET',
         url: arr[3],
+        //host: 'http://www.mofangge.com/',
+        //path: '/html/qDetail/06/c1/201408/gmqdc106196190.html',
         header: {
           'Content-Type': 'text/html; charset=UTF-8',
           'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 appservice webview/100000',

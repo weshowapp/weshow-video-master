@@ -176,6 +176,56 @@ export default class extends Base {
     this.display();
   }
 
+  async uploadmfgfileAction() {
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+
+    let tm = this.post('tm');
+    if (!this.checkTimeStamp(tm)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 0
+      });
+    }
+
+    var rawData = fs.readFileSync(filepath);
+    if (rawData != null) {
+      var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
+      var questDataArr = rawData.split(DIVIDER);
+      console.log(questDataArr.length);
+      var content = getMfgContent(questDataArr[1]);
+      var items = getMfgItems(questDataArr[1]);
+      var answer = getMfgAnswer(questDataArr[2]);
+      var note = getMfgNote(questDataArr[3]);
+
+      var item_count = 3;
+      if (item3 != '') {
+        item_count = 4;
+      }
+
+      let addResult = await this.model('question').add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        item_count: item_count,
+        type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
+        level: 4,
+        source: 'mofangge',
+        content: content,
+        item0: items.item0,
+        item1: items.item1,
+        item2: items.item2,
+        item3: items.item3,
+        answer: answer,
+        note: note,
+        tags: ''
+      });
+    }
+    this.assign('result', 'Success Add ' + 1 + ' File');
+
+    this.display();
+  }
+
   async getcategoryAction() {
     let openid = this.get('openid');
 
