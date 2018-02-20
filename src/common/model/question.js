@@ -2,6 +2,7 @@
 
 import Base from './base.js';
 
+const rp = require("request-promise");
 var wxconst = require('../../api/controller/wxconst');
 
 
@@ -127,14 +128,19 @@ export default class extends Base {
     var arr = line.split(',');
     var quest =  {};
     if (arr[3] != null) {
+      console.log(arr[3]);
       let options = {
         method: 'GET',
-        url: arr[3]
+        url: arr[3],
+        Content-Type: 'text/html; charset=UTF-8',
+        User-Agent: 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 appservice webview/100000',
       };
 
       var rawData = await rp(options);
+      console.log(rawData.length);
       var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
       var questDataArr = rawData.split(DIVIDER);
+      console.log(questDataArr.length);
       var content = getMfgContent(questDataArr[1]);
       var items = getMfgItems(questDataArr[1]);
       var answer = getMfgAnswer(questDataArr[2]);
