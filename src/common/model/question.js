@@ -108,13 +108,13 @@ export default class extends Base {
       return quest;
     }
     var end = arr[1].indexOf('</td>');
-    quest.item0 = arr[1].substring(0, end);
+    quest.item0 = arr[1].substring(2, end);
     end = arr[2].indexOf('</td>');
-    quest.item1 = arr[2].substring(0, end);
+    quest.item1 = arr[2].substring(2, end);
     end = arr[3].indexOf('</td>');
-    quest.item2 = arr[3].substring(0, end);
+    quest.item2 = arr[3].substring(2, end);
     end = arr[4].indexOf('</td>');
-    quest.item3 = arr[4].substring(0, end);
+    quest.item3 = arr[4].substring(2, end);
     return quest;
   }
 
