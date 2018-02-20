@@ -188,15 +188,16 @@ export default class extends Base {
       });
     }
 
+    let questModel = this.model('question');
     var rawData = fs.readFileSync(filepath);
     if (rawData != null) {
       var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
-      var questDataArr = rawData.split(DIVIDER);
+      var questDataArr = (rawData+"").split(DIVIDER);
       console.log(questDataArr.length);
-      var content = getMfgContent(questDataArr[1]);
-      var items = getMfgItems(questDataArr[1]);
-      var answer = getMfgAnswer(questDataArr[2]);
-      var note = getMfgNote(questDataArr[3]);
+      var content = questModel.getMfgContent(questDataArr[1]);
+      var items = questModel.getMfgItems(questDataArr[1]);
+      var answer = questModel.getMfgAnswer(questDataArr[2]);
+      var note = questModel.getMfgNote(questDataArr[3]);
 
       var item_count = 3;
       if (item3 != '') {
