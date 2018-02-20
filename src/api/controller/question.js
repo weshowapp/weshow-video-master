@@ -163,37 +163,9 @@ export default class extends Base {
     let questModel = this.model('question');
     await lineReader.on('line', function (line) {
       if(!line) return;
-      var arr = line.split(',');
 
-      var quest = questModel.getFromMfg(arr[3]);
+      var addResult = questModel.addFromMfg(line);
 
-      var item_count = 3;
-      if (item3 != '') {
-        item_count = 4;
-      }
-
-      let addResult = questModel.add({
-        title: 'A',
-        creator_id: '1',
-        creator_name: 'Administrator',
-        item_count: item_count,
-        type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
-        level: arr[2],
-        source: 'mofangge',
-        content: quest.content,
-        item0: quest.item0,
-        item1: quest.item1,
-        item2: quest.item2,
-        item3: quest.item3,
-        answer: quest.answer,
-        note: quest.note,
-        tags: arr[4],
-        category0: arr[5],
-        category1: arr[6],
-        category2: arr[7],
-        category3: arr[8],
-        more: arr[9]
-      });
       if (addResult > 0) {
         count++;
       }

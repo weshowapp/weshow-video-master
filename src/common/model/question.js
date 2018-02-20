@@ -123,12 +123,13 @@ export default class extends Base {
     return data.substring(13, end);
   }
 
-  async getFromMfg(url) {
+  async addFromMfg(line) {
+    var arr = line.split(',');
     var quest =  {};
-    if (url != null) {
+    if (arr[3] != null) {
       let options = {
         method: 'GET',
-        url: url
+        url: arr[3]
       };
 
       var rawData = await rp(options);
@@ -146,7 +147,37 @@ export default class extends Base {
       quest.item3 = items.item3;
       quest.answer = answer;
       quest.note = note;
+      console.log(quest);
+
+      var item_count = 3;
+      if (item3 != '') {
+        item_count = 4;
+      }
+
+      let addResult = await this.model('question').add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        item_count: item_count,
+        type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
+        level: arr[2],
+        source: 'mofangge',
+        content: quest.content,
+        item0: quest.item0,
+        item1: quest.item1,
+        item2: quest.item2,
+        item3: quest.item3,
+        answer: quest.answer,
+        note: quest.note,
+        tags: arr[4],
+        category0: arr[5],
+        category1: arr[6],
+        category2: arr[7],
+        category3: arr[8],
+        more: arr[9]
+      });
+      return addResult;
     }
-    return quest;
+    return 0;
   }
 }
