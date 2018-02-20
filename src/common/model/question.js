@@ -113,7 +113,8 @@ export default class extends Base {
     if (data == null) {
       return '';
     }
-    return data.substring(0, 1);
+    var answer = data.substring(0, 1);
+    return answer == 'A' ? 0 : (answer == 'B' ? 1 : (answer == 'C' ? 2 : (answer == 'D' ? 3 : 4)));
   }
 
   async getMfgNote(data) {

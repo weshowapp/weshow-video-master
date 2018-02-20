@@ -177,6 +177,10 @@ export default class extends Base {
   }
 
   async uploadmfgfileAction() {
+    let level = this.post('quest_level');
+    let tags = this.post('quest_tags');
+    let category0 = this.post('category0');
+
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
 
@@ -203,6 +207,8 @@ export default class extends Base {
       if (items.item3 != '') {
         item_count = 4;
       }
+      //console.log(items);
+      console.log(content);
 
       let addResult = await this.model('question').add({
         title: 'A',
@@ -210,7 +216,7 @@ export default class extends Base {
         creator_name: 'Administrator',
         item_count: item_count,
         type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
-        level: 4,
+        level: level,
         source: 'mofangge',
         content: content,
         item0: items.item0,
@@ -219,7 +225,8 @@ export default class extends Base {
         item3: items.item3,
         answer: answer,
         note: note,
-        tags: ''
+        category0: category0,
+        tags: tags
       });
     }
     this.assign('result', 'Success Add ' + 1 + ' File');

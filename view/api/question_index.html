@@ -32,7 +32,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <tr>
           <td>ID</td>
           <td>类别</td>
-          <td>难易级别</td>
+          <td>难度</td>
           <td>内容</td>
           <td>选项1</td>
           <td>选项2</td>
@@ -71,8 +71,8 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td><input size="1" type="text" name ="item_count" value="<%= item.item_count %>"/></td>
             <td><input size="2" type="text" name ="quest_answer" value="<%= item.answer %>"/></td>
             <td><input size="8" type="text" name ="note" value="<%= item.note %>"/></td>
-            <td><input size="6" type="text" name ="quest_source" value="<%= item.source %>"/></td>
             <td><input size="3" type="text" name ="quest_tags" value="<%= item.tags %>"/></td>
+            <td><input size="6" type="text" name ="quest_source" value="<%= item.source %>"/></td>
             <td><input size="1" type="text" name ="category0" value="<%= item.category0 %>"/></td>
             <td><input size="1" type="text" name ="category1" value="<%= item.category1 %>"/></td>
             <td><input size="1" type="text" name ="category2" value="<%= item.category2 %>"/></td>
@@ -147,9 +147,24 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
       </table>
       <br><br>
 
-      <h2>选择文件,批量添加</h2>
+      <h2>选择整理文件,批量添加</h2>
       <form class="p" action="upload" enctype="multipart/form-data" method="post">
         请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/><br>
+        <input type="submit" name ="file_submit" value="   - -  上 传  - -   "/>
+      </form><br><br>
+
+      <h2>选择链接文件,批量添加</h2>
+      <form class="p" action="uploadmfg" enctype="multipart/form-data" method="post">
+        请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/><br>
+        <input type="submit" name ="file_submit" value="   - -  上 传  - -   "/>
+      </form><br><br>
+
+      <h2>选择单个HTML文件,单个添加</h2>
+      <form class="p" action="uploadmfgfile" enctype="multipart/form-data" method="post">
+        请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/><br>
+        难度:<input size="1" type="text" name ="quest_level" value="3"/><br>
+        Tags:<input size="3" type="text" name ="quest_tags" value="考题"/><br>
+        类别1:<input size="1" type="text" name ="category0"/><br>
         <input type="submit" name ="file_submit" value="   - -  上 传  - -   "/>
       </form><br><br>
 
