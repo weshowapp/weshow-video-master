@@ -83,7 +83,7 @@ export default class extends think.model.base {
       //console.log(winList);
       if (!think.isEmpty(winList) && !think.isEmpty(quiz)) {
         var winCount = winList.length;
-        var price = quiz.price / winCount;
+        var price = Math.floor(quiz.price * 100 / winCount) / 100;
         console.log('price');
         console.log(price);
         console.log('winCount');
