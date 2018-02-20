@@ -198,10 +198,10 @@ export default class extends Base {
       var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
       var questDataArr = (rawData+"").split(DIVIDER);
       console.log(questDataArr.length);
-      var content = questModel.getMfgContent(questDataArr[1]);
-      var items = questModel.getMfgItems(questDataArr[1]);
-      var answer = questModel.getMfgAnswer(questDataArr[2]);
-      var note = questModel.getMfgNote(questDataArr[3]);
+      var content = await questModel.getMfgContent(questDataArr[1]);
+      var items = await questModel.getMfgItems(questDataArr[1]);
+      var answer = await questModel.getMfgAnswer(questDataArr[2]);
+      var note = await questModel.getMfgNote(questDataArr[3]);
 
       var item_count = 3;
       if (items.item3 != '') {
