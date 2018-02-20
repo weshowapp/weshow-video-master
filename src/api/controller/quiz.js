@@ -137,7 +137,7 @@ export default class extends Base {
                 quest_list = list[i].id;
             }
             else {
-                quest_list = quest_list + '-' + list[i].id;
+                quest_list = quest_list + wxconst.QUIZ_QUESTION_SUBFIX + list[i].id;
             }
         }
         console.log(quest_list);

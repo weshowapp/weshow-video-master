@@ -6,9 +6,6 @@
 
 var wxconst = require('../../api/controller/wxconst');
 
-const GAME_STATUS_UNCOMPLETE = 0;
-const GAME_STATUS_WIN = 1;
-const GAME_STATUS_FAIL = 2;
 
 export default class extends think.model.base {
 
@@ -52,7 +49,7 @@ export default class extends think.model.base {
     if (!think.isEmpty(quiz)) {
       console.log(quiz.id);
       var questArr = [];
-      var arr = quiz.questions.split('-');
+      var arr = quiz.questions.split(wxconst.QUIZ_QUESTION_SUBFIX);
       questArr = await this.model('question').where({id: ["IN", arr]}).select();
       for (var i = 0; i < questArr.length; i++) {
         questArr[i].answered = -1;
@@ -139,8 +136,8 @@ export default class extends think.model.base {
         quiz.result_text = quiz.format_start + '开始';
       }
       else {
-        if (quiz.userdata.game_status == GAME_STATUS_WIN) {
-          quiz.result_text = '赢得' + quiz.userdata.game_gain + '元';
+        if (quiz.userdata.game_status == wxconst.GAME_STATUS_WIN) {
+          quiz.result_text = '赢得' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
         }
         else {
           quiz.result_text = '未胜出';
@@ -151,8 +148,8 @@ export default class extends think.model.base {
       quiz.result_text = quiz.format_start + '开始';
     }
     else if (quiz.join_status == 2) {
-      if (quiz.userdata.game_status == GAME_STATUS_WIN) {
-        quiz.result_text = '赢得' + quiz.userdata.game_gain + '元';
+      if (quiz.userdata.game_status == wxconst.GAME_STATUS_WIN) {
+        quiz.result_text = '赢得' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
       }
       else {
         quiz.result_text = '未胜出';

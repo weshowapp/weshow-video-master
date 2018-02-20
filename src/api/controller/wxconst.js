@@ -14,6 +14,8 @@ module.exports = {
     RELIVE_ADD: 1,
     RELIVE_DECREASE: 0,
 
+    QUIZ_QUESTION_SUBFIX: '-',
+
     QUIZ_LEVEL_AUTO: 0,
     QUIZ_LEVEL_SIMPLE: 1,
     QUIZ_LEVEL_MID: 2,

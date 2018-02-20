@@ -72,16 +72,26 @@ export default class extends think.model.base {
     console.log(quizEndTime);
     console.log('calculateGain');
     console.log(qid);
+    var arr = quiz.questions.split(wxconst.QUIZ_QUESTION_SUBFIX);
+    var secondLastQuestionId = arr[arr.length - 2];
+    console.log(secondLastQuestionId + ', ' + quiz.questions);
 
     var curTime = (new Date()).getTime() / 1000;
-    let info = await this.model('quizuser').where({ quizid: qid, game_status: 0 }).select();
-    if (think.isEmpty(info) || (curTime > quizEndTime - 3 && curTime < quizEndTime + 10)) {
+    let uncompletedCount = await this.model('quizuser').where({ quizid: qid, game_status: wxconst.GAME_STATUS_UNCOMPLETE }).count();
+    let secondLastAnswerCount = await this.model('quizuser').where({ quizid: qid, answer_status: secondLastQuestionId }).count();
+    console.log(uncompletedCount + ',' + secondLastAnswerCount);
+    if (uncompletedCount == 0 || secondLastAnswerCount == 0 || (curTime > quizEndTime - 3 && curTime < quizEndTime + 10)) {
       console.log('begin calculateGain');
       //All Completed
-      let winList = await this.model('quizuser').where({ quizid: qid, game_status: 1 }).select();
+      let winList = await this.model('quizuser').where({ quizid: qid, game_status: wxconst.GAME_STATUS_WIN }).select();
       console.log('winList');
       //console.log(winList);
-      if (!think.isEmpty(winList) && !think.isEmpty(quiz)) {
+      if (think.isEmpty(winList)) {
+        await this.model('quiz').where({ id: qid }).update({
+          win_users: 0
+        });
+      }
+      else {
         var winCount = winList.length;
         var price = Math.floor(quiz.price * 100 / winCount) / 100;
         console.log('price');
