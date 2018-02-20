@@ -131,7 +131,10 @@ export default class extends Base {
       return '';
     }
     var end = data.indexOf('</div></td></tr></tbody></table>');
-    return data.substring(13, end);
+    var note = data.substring(13, end);
+    if (note.length > 255) {
+      note = note.substring(0, 240);
+    }
   }
 
   async addFromMfg(line) {
