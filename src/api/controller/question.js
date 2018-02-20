@@ -165,18 +165,7 @@ export default class extends Base {
       if(!line) return;
       var arr = line.split(',');
 
-      let options = {
-        method: 'GET',
-        url: arr[3]
-      };
-
-      var rawData = await rp(options);
-      var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
-      var questDataArr = rawData.split(DIVIDER);
-      var content = getMfgContent(questDataArr[1]);
-      var items = getMfgItems(questDataArr[1]);
-      var answer = getMfgAnswer(questDataArr[2]);
-      var note = getMfgNote(questDataArr[3]);
+      var quest = questModel.getFromMfg(arr[3]);
 
       var item_count = 3;
       if (item3 != '') {
@@ -191,13 +180,13 @@ export default class extends Base {
         type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
         level: arr[2],
         source: 'mofangge',
-        content: content,
-        item0: items.item0,
-        item1: items.item1,
-        item2: items.item2,
-        item3: items.item3,
-        answer: answer,
-        note: note,
+        content: quest.content,
+        item0: quest.item0,
+        item1: quest.item1,
+        item2: quest.item2,
+        item3: quest.item3,
+        answer: quest.answer,
+        note: quest.note,
         tags: arr[4],
         category0: arr[5],
         category1: arr[6],

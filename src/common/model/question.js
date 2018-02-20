@@ -122,4 +122,31 @@ export default class extends Base {
     var end = data.indexOf('</div></td></tr></tbody></table>');
     return data.substring(13, end);
   }
+
+  async getFromMfg(url) {
+    var quest =  {};
+    if (url != null) {
+      let options = {
+        method: 'GET',
+        url: url
+      };
+
+      var rawData = await rp(options);
+      var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td><div>';
+      var questDataArr = rawData.split(DIVIDER);
+      var content = getMfgContent(questDataArr[1]);
+      var items = getMfgItems(questDataArr[1]);
+      var answer = getMfgAnswer(questDataArr[2]);
+      var note = getMfgNote(questDataArr[3]);
+
+      quest.content = content;
+      quest.item0 = items.item0;
+      quest.item1 = items.item1;
+      quest.item2 = items.item2;
+      quest.item3 = items.item3;
+      quest.answer = answer;
+      quest.note = note;
+    }
+    return quest;
+  }
 }
