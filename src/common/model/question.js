@@ -98,6 +98,15 @@ export default class extends Base {
     }
     var quest = {};
     var arr = data.split('<td width="25%">');
+    if (arr.length < 5) {
+      arr = data.split('<td width="50%">');
+      if (arr.length < 5) {
+        arr = data.split('<td width="100%">');
+      }
+    }
+    if (arr.length < 5) {
+      return quest;
+    }
     var end = arr[1].indexOf('</td>');
     quest.item0 = arr[1].substring(0, end);
     end = arr[2].indexOf('</td>');
