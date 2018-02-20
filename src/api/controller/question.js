@@ -200,7 +200,7 @@ export default class extends Base {
       var note = questModel.getMfgNote(questDataArr[3]);
 
       var item_count = 3;
-      if (item3 != '') {
+      if (items.item3 != '') {
         item_count = 4;
       }
 
