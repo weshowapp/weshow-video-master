@@ -40,6 +40,8 @@ export default class extends Base {
     //let return_msg = this.post('return_msg');
     var getMsg = this.get();
     var postMsg = this.post();
+    console.log(getMsg);
+    console.log(postMsg);
     var msg = 'msg-' + getMsg + '-' + postMsg;
     var tm = this.getCurrentTime();
     console.log(msg);
@@ -51,7 +53,8 @@ export default class extends Base {
 
     return this.success({
       result: 'OK',
-      notify: addResult,
+      notify: getMsg,
+      note: postMsg,
       errorCode: 0
     });
   }
