@@ -42,8 +42,8 @@ export default class extends Base {
     var getMsg = this.get();
     var postMsg = this.post();
     console.log(headerMsg);
-    //console.log(getMsg);
-    //console.log(postMsg);
+    console.log(getMsg);
+    console.log(postMsg);
     //var msg = 'msg-' + getMsg + '-' + postMsg;
     var tm = this.getCurrentTime();
     //console.log(msg);
@@ -56,6 +56,8 @@ export default class extends Base {
     });
 
     return this.success({
+      return_code: 'SUCCESS',
+      return_msg: 'OK',
       result: 'OK',
       notify: addResult,
       errorCode: 0
