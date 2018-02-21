@@ -115,7 +115,7 @@ export default class extends Base {
     let uid = this.post('userid');
     let note = this.post('note');
     //let add_time = this.post('add_time');
-    var add_time = Math.round((new Date()).getTime() / 1000);
+    var add_time = this.getCurrentTime();
     console.log('QuizUser.add');
     console.log(uid);
     console.log(quizid);
@@ -195,7 +195,7 @@ export default class extends Base {
     var answer_correct = this.post('answer_correct');
     var qid = this.post('quizid');
     //let answer_time = this.post('answer_time');
-    var answer_time = Math.round((new Date()).getTime() / 1000);
+    var answer_time = this.getCurrentTime();
     console.log(qid);
     console.log(question_id);
 

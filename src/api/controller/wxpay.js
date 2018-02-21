@@ -23,7 +23,7 @@ export default class extends Base {
   }
 
   async notifyAction() {
-    var http = require('http');
+    /*var http = require('http');
     var server = http.createServer(function(req,res){
     if(req.url!=="/favicon.ico"){
       req.on('data',function(data){
@@ -34,18 +34,21 @@ export default class extends Base {
       });
     }
     res.end();
-  });
-  
-    let return_code = this.post('return_code');
-    let return_msg = this.post('return_msg');
-    var msg = 'msg-' + return_code + '-' + return_msg;
-    var tm = ((new Date()).getTime()) / 1000;
-  
+  });*/
+
+    //let return_code = this.post('return_code');
+    //let return_msg = this.post('return_msg');
+    var getMsg = this.get();
+    var postMsg = this.post();
+    var msg = 'msg-' + getMsg + '-' + postMsg;
+    var tm = this.getCurrentTime();
+    console.log(msg);
+
     let addResult = await this.model('wxpay').add({
-            notify: msg,
+      notify: msg,
       add_time: tm
-        });
-  
+    });
+
     return this.success({
       result: 'OK',
       notify: addResult,

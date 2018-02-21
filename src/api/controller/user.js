@@ -65,7 +65,7 @@ export default class extends Base {
     //console.log(userInfo);
 
     let sessionData = { user_id: userInfo.id, openid: userInfo.openid };
-    sessionData.seed = Math.floor((new Date()).getTime() / 1000);
+    sessionData.seed = this.getCurrentTime();
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
     let sessionKey = await tokenObj.create(sessionData);
@@ -142,7 +142,7 @@ export default class extends Base {
     }
 
     let sessionData = { user_id: addResult, openid: userid };
-    sessionData.seed = Math.floor((new Date()).getTime() / 1000);
+    sessionData.seed = this.getCurrentTime();
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
     let sessionKey = await tokenObj.create(sessionData);

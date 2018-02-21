@@ -98,11 +98,13 @@ export default class extends Base {
       if (arr[7] != '') {
         item_count = 4;
       }
+      var tm = this.getCurrentTime();
 
       let addResult = questModel.add({
         title: 'A',
         creator_id: '1',
         creator_name: 'Administrator',
+        create_time: tm,
         item_count: item_count,
         type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
         source: arr[2],
@@ -209,11 +211,13 @@ export default class extends Base {
       }
       //console.log(items);
       console.log(content);
+      var tm = this.getCurrentTime();
 
       let addResult = await this.model('question').add({
         title: 'A',
         creator_id: '1',
         creator_name: 'Administrator',
+        create_time: tm,
         item_count: item_count,
         type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
         level: level,
@@ -334,7 +338,7 @@ export default class extends Base {
     let category2 = this.post('category2');
     let category3 = this.post('category3');
     //let create_time = this.post('create_time');
-    let create_time = Math.round((new Date()).getTime() / 1000);
+    let create_time = this.getCurrentTime();
     console.log('addAction');
     //console.log(quest_content);
     if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
@@ -428,7 +432,7 @@ export default class extends Base {
     let category2 = this.post('category2');
     let category3 = this.post('category3');
     //let create_time = this.post('create_time');
-    let create_time = Math.round((new Date()).getTime() / 1000);
+    let create_time = this.getCurrentTime();
     console.log('updateAction');
     //console.log(quest_content);
     if (quest_content == '' || quest_item_a == '' || quest_item_b == ''

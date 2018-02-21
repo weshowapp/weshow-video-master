@@ -45,7 +45,7 @@ export default class extends Base {
         }
         //console.log(qidList);
 
-        var curTime = Math.round((new Date()).getTime() / 1000);
+        var curTime = this.getCurrentTime();
         var complexQuery0 = {'id': ["IN", qidList],
             type: wxconst.QUIZ_TYPE_PUBLIC,
             _logic: "OR"
@@ -192,7 +192,7 @@ export default class extends Base {
     let cash_val = this.post('cash_val');
     let username = this.post('username');
     //let add_time = this.post('add_time');
-    var add_time = Math.round((new Date()).getTime() / 1000);
+    var add_time = this.getCurrentTime();
     console.log('updatepayAction');
     console.log(openid);
     console.log(cash_val);

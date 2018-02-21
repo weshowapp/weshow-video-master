@@ -94,7 +94,7 @@ export default class extends Base {
     let l = await this.model('wxcash').where({openid: uid, draw_type: 2}).order('add_time DESC').select();
     if (!think.isEmpty(l)) {
       for (var i = 0; i < l.length; i++) {
-        l[i].current_time = Math.floor((new Date()).getTime() / 1000);
+        l[i].current_time = this.getCurrentTime();
       }
     }
     return this.success({
@@ -110,7 +110,7 @@ export default class extends Base {
     let draw_type = this.post('draw_type');
     let note = this.post('note');
     //let tm = this.post('add_time');
-    var tm = Math.floor((new Date()).getTime() / 1000);
+    var tm = this.getCurrentTime();
 
     /*let addResult = await this.model('wxcash').add({
       openid: uid,
