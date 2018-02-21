@@ -137,7 +137,7 @@ export default class extends think.model.base {
       }
       else {
         if (quiz.userdata.game_status == wxconst.GAME_STATUS_WIN) {
-          quiz.result_text = '赢得' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
+          quiz.result_text = '赢' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
         }
         else {
           quiz.result_text = '未胜出';
@@ -149,7 +149,7 @@ export default class extends think.model.base {
     }
     else if (quiz.join_status == 2) {
       if (quiz.userdata.game_status == wxconst.GAME_STATUS_WIN) {
-        quiz.result_text = '赢得' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
+        quiz.result_text = '赢' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
       }
       else {
         quiz.result_text = '未胜出';
