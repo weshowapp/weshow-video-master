@@ -38,23 +38,26 @@ export default class extends Base {
 
     //let return_code = this.post('return_code');
     //let return_msg = this.post('return_msg');
+    var headerMsg = this.header();
     var getMsg = this.get();
     var postMsg = this.post();
-    console.log(getMsg);
-    console.log(postMsg);
-    var msg = 'msg-' + getMsg + '-' + postMsg;
+    console.log(headerMsg);
+    //console.log(getMsg);
+    //console.log(postMsg);
+    //var msg = 'msg-' + getMsg + '-' + postMsg;
     var tm = this.getCurrentTime();
-    console.log(msg);
+    //console.log(msg);
 
     let addResult = await this.model('wxpay').add({
-      notify: msg,
+      //notify: msg,
+      notify: headerMsg,
+      //note: postMsg,
       add_time: tm
     });
 
     return this.success({
       result: 'OK',
-      notify: getMsg,
-      note: postMsg,
+      notify: addResult,
       errorCode: 0
     });
   }
