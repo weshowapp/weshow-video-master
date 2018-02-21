@@ -82,7 +82,7 @@ export default class extends think.model.base {
       quiz.is_start = 0;
       quiz.phase = wxconst.QUIZ_PHASE_WAIT;
     }
-    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 1) {
+    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 4) {
       quiz.is_start = 1;
       quiz.phase = wxconst.QUIZ_PHASE_GAMING;
       let groupInfo = await this.model('quizuser').where({quizid: quiz.id}).count();
@@ -92,7 +92,7 @@ export default class extends think.model.base {
         }
       }
     }
-    else if (curTime > quiz.start_time + quiz.quest_count * 15 - 1) {
+    else if (curTime > quiz.start_time + quiz.quest_count * 15 - 4) {
       quiz.is_completed = 1;
       quiz.phase = wxconst.QUIZ_PHASE_FINISH;
     }
