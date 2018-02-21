@@ -88,6 +88,7 @@ export default class extends Base {
       input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
     });
 
+    var add_tm = this.getCurrentTime();
     var count = 0;
     let questModel = this.model('question');
     await lineReader.on('line', function (line) {
@@ -98,13 +99,12 @@ export default class extends Base {
       if (arr[7] != '') {
         item_count = 4;
       }
-      var tm = this.getCurrentTime();
 
       let addResult = questModel.add({
         title: 'A',
         creator_id: '1',
         creator_name: 'Administrator',
-        create_time: tm,
+        create_time: add_tm,
         item_count: item_count,
         type: arr[1] == 'A' ? wxconst.QUIZ_CATEGORY_PUBLIC_MIX : wxconst.QUIZ_CATEGORY_SELF,
         source: arr[2],
@@ -211,13 +211,13 @@ export default class extends Base {
       }
       //console.log(items);
       console.log(content);
-      var tm = this.getCurrentTime();
+      var add_tm = this.getCurrentTime();
 
       let addResult = await this.model('question').add({
         title: 'A',
         creator_id: '1',
         creator_name: 'Administrator',
-        create_time: tm,
+        create_time: add_tm,
         item_count: item_count,
         type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
         level: level,
