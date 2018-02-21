@@ -156,7 +156,7 @@ export default class extends think.model.base {
       }
     }
     if (quiz.start_time > curTime) {
-      quiz.result_text = Math.round((quiz.start_time - curTime) / 60) + '分钟后开始';
+      quiz.result_text = Math.round((quiz.start_time - curTime) / 60) + '分钟后';
     }
     return quiz;
   }
