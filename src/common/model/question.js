@@ -99,7 +99,9 @@ export default class extends Base {
       return '';
     }
     var end = data.indexOf('<table name="optionsTable" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>');
-    return data.substring(0, end);
+    var content = data.substring(0, end);
+    content = content.replace('&nbsp;', '');
+    return content;
   }
 
   async getMfgItems(data) {
