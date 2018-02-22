@@ -168,7 +168,7 @@ export default class extends Base {
     console.log(qid);
     console.log('updategain');
 
-    let quizInfo = this.model('quiz').where({id: qid}).find();
+    let quizInfo = await this.model('quiz').where({id: qid}).find();
     if (think.isEmpty(quizInfo)) {
       console.log('Invalid quiz id ' + qid);
       return this.fail({
