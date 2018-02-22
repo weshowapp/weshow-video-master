@@ -1,6 +1,7 @@
 'use strict';
 
 import Base from './base.js';
+var wxconst = require('./wxconst');
 const fs = require('fs');
 const _ = require('lodash');
 
@@ -28,10 +29,10 @@ export default class extends Base {
       console.log(quizInfo.creator_id);
       if (onlywin == 1 || onlywin == '1') {
         if (quizInfo.category == 17) {
-          info = await this.model('quizuser').where({ quizid: qid, game_status: 1, openid: ["!=", quizInfo.creator_id]}).order('add_time DESC').limit(8).select();
+          info = await this.model('quizuser').where({ quizid: qid, game_status: wxconst.GAME_STATUS_WIN, openid: ["!=", quizInfo.creator_id]}).order('add_time DESC').limit(8).select();
         }
         else {
-          info = await this.model('quizuser').where({ quizid: qid, game_status: 1 }).order('add_time DESC').limit(8).select();
+          info = await this.model('quizuser').where({ quizid: qid, game_status: wxconst.GAME_STATUS_WIN }).order('add_time DESC').limit(8).select();
         }
       }
       else {
@@ -172,9 +173,11 @@ export default class extends Base {
     var userModel = this.model('user');
     var trResult = quizuserModel.transaction(function () {
       return quizuserModel.calculateGain(qid).then(function (result) {
-        let quizInfo = quizModel.where({id: qid}).find();
-        if (!think.isEmpty(quizInfo)) {
-          return userModel.updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
+        if (result) {
+          let quizInfo = quizModel.where({id: qid}).find();
+          if (!think.isEmpty(quizInfo)) {
+            return userModel.updateRelive(quizInfo.creator_id, wxconst.RELIVE_ADD, 1, qid, '0');
+          }
         }
         return false;
       });

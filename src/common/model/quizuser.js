@@ -62,7 +62,7 @@ export default class extends think.model.base {
     var quizEndTime = 0;
     if (!think.isEmpty(quiz)) {
       if (quiz.win_users >= 0) {
-        return true;
+        return false;
       }
       quizEndTime = quiz.start_time + quiz.quest_count * 15;
     }
@@ -100,7 +100,7 @@ export default class extends think.model.base {
         console.log(winCount);
         for (var i = 0; i < winCount; i++) {
           if (winList[i].game_gain > 0.0) {
-            return true;
+            return false;
           }
         }
 
@@ -129,9 +129,10 @@ export default class extends think.model.base {
           await this.model('wxcash').addOp(quiz.creator_id, quiz.id, quiz.price, wxconst.WXCASH_OP_TYPE_GAME, wxconst.WXCASH_OP_NOTE_GAME, quizEndTime);
         }
       }
+      return true;
     }
 
-    return true;
+    return false;
   }
 
 async calculateGain1(qid) {

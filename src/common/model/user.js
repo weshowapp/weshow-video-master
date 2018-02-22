@@ -1,5 +1,7 @@
 'use strict';
 
+var wxconst = require('../../api/controller/wxconst');
+
 /**
  * model
  */
@@ -31,7 +33,7 @@ export default class extends think.model.base {
     }
     let userInfo = await this.model('user').where({openid: userid}).find();
     if (!think.isEmpty(userInfo)) {
-      if (add == 1) {
+      if (add == wxconst.RELIVE_ADD) {
         result = await this.model('user').where({openid: userid}).increment('relive', relive);
       }
       else {

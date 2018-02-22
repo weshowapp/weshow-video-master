@@ -1,6 +1,7 @@
 'use strict';
 
 import Base from './base.js';
+var wxconst = require('./wxconst');
 const fs = require('fs');
 const _ = require('lodash');
 
@@ -131,7 +132,7 @@ export default class extends Base {
       if (addResult >= 0) {
         let userInfo = await this.model('user').where({openid: inviter_id, invition_code: inviter_code, _logic: "OR"}).find();
         if (!think.isEmpty(userInfo)) {
-            await this.model('user').updateRelive(inviter_id, 1, 1, '0', userid);
+            await this.model('user').updateRelive(inviter_id, wxconst.RELIVE_ADD, 1, '0', userid);
             var relive = 1 + userInfo.relive;
             let result = await this.model('user').where({openid: inviter_id}).update({
                 relive: relive
