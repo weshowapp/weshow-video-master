@@ -41,7 +41,7 @@ export default class extends Base {
           if (!think.isEmpty(selfList)) {
             return selfList;
           }
-          whereArg = {type: type, creator_id: creator_id};
+          whereArg = {type: type, creator_id: ["IN", [creator_id, wxconst.USER_ID_ADMIN]]};
         }
         else {
           whereArg = {type: type, creator_id: ["IN", [creator_id, wxconst.USER_ID_ADMIN]]};
