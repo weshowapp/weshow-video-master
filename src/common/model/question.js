@@ -37,7 +37,11 @@ export default class extends Base {
       if (creator_id != wxconst.USER_ID_ADMIN) {
         if (onlyself == 1) {
           whereArg = {creator_id: creator_id};
-          return await this.model('question').where(whereArg).select();
+          var selfList = await this.model('question').where(whereArg).limit(count).select();
+          if (!think.isEmpty(selfList)) 
+            return selfList;
+          }
+          whereArg = {type: type, creator_id: creator_id};
         }
         else {
           whereArg = {type: type, creator_id: ["IN", [creator_id, wxconst.USER_ID_ADMIN]]};
