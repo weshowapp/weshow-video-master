@@ -33,35 +33,36 @@ export default class extends Base {
 
   async decryptshareAction() {
     let data = this.post('data');
-	let iv = this.post('iv');
-	let app_id = this.post('appid');
-	let sessionKey = this.post('session_key');
-	if (think.isEmpty(app_id)) {
-		app_id = appId;
-	}
-	//console.log(data);
-	var pc = new WXBizDataCrypt(app_id, sessionKey);
+    let iv = this.post('iv');
+    let app_id = this.post('appid');
+    let sessionKey = this.post('session_key');
+    if (think.isEmpty(app_id)) {
+        app_id = appId;
+    }
+    console.log(data);
+    console.log(sessionKey);
+    var pc = new WXBizDataCrypt(app_id, sessionKey);
     var ddata = pc.decryptData(data, iv);
-	console.log(ddata);
-	return this.success({
+    console.log(ddata);
+    return this.success({
       dedata: ddata
-	});
+    });
   }
 
   async argsigAction() {
     let url = this.post('url');
     let ath = this.post('ath');
-	var sign = crypto.createHmac(ath, secKey).update(url).digest().toString('base64');
-	console.log(sign);
-	return this.success({
+    var sign = crypto.createHmac(ath, secKey).update(url).digest().toString('base64');
+    console.log(sign);
+    return this.success({
       sign: sign
-	});
+    });
   }
 
   async uploadsigAction() {
-	var current = parseInt((new Date()).getTime() / 1000);
+    var current = parseInt((new Date()).getTime() / 1000);
     var expired = current + 86400 * 3;  // 签名有效期：3天
-	var rand = Math.round(Math.random() * Math.pow(2, 32));
+    var rand = Math.round(Math.random() * Math.pow(2, 32));
 
     // 向参数列表填入参数
     var arg_list = {
@@ -82,18 +83,18 @@ export default class extends Base {
 
     console.log(signature);
 
-	return this.success({
+    return this.success({
       sign: signature,
-	  timestamp: current,
-	  expire: expired,
-	  random: rand
-	});
+      timestamp: current,
+      expire: expired,
+      random: rand
+    });
   }
 
   async getwxpayunifiedAction() {
     var fee = this.post('fee');
     var pay_sn = this.post('pay_sn');
-	var appid = appId;
+    var appid = appId;
     var body = 'QuestionPaltform';//商户名
     var mch_id = mchId;//商户号
     var nonce_str = this.post('nonce');
@@ -103,7 +104,7 @@ export default class extends Base {
     var spbill_create_ip = this.ip();//ip
     var trade_type = "JSAPI";
     var key = mchPayKey;
-	
+    
     var unifiedPayment = 'appid=' + appid + '&body=' + body + '&mch_id=' + mch_id
       + '&nonce_str=' + nonce_str + '&notify_url=' + notify_url + '&openid=' + openid
       + '&out_trade_no=' + pay_sn + '&sign_type=' + sign_type + '&spbill_create_ip=' + spbill_create_ip
@@ -130,15 +131,15 @@ export default class extends Base {
     formData += "<trade_type>" + trade_type + "</trade_type>"
     formData += "<sign>" + sign + "</sign>"
     formData += "</xml>"
-	
+    
     let options = {
       method: 'POST',
       url: 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers',
-	  head: 'application/x-www-form-urlencoded; charset=UTF-8',
+      head: 'application/x-www-form-urlencoded; charset=UTF-8',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
-	  data: formData
+      data: formData
     };
 
     let resultData = await rp(options);

@@ -17,7 +17,7 @@ export default class extends Base {
 
   }
 
-  async getRandomList(count, type, level, creator_id) {
+  async getRandomList(count, type, level, creator_id, onlyself) {
     /*var table = 'weshow_question';
     var sql = 'SELECT * FROM ' + table + ' WHERE id >= (SELECT floor(RAND() * ((SELECT MAX(id) FROM '
         + table + ') - (SELECT MIN(id) FROM ' + table + ')) + (SELECT MIN(id) FROM '
@@ -35,7 +35,12 @@ export default class extends Base {
     }
     else {
       if (creator_id != wxconst.USER_ID_ADMIN) {
-        whereArg = {type: type, creator_id: ["IN", [creator_id, wxconst.USER_ID_ADMIN]]};
+        if (onlyself == 1) {
+          whereArg = {creator_id: creator_id};
+        }
+        else {
+          whereArg = {type: type, creator_id: ["IN", [creator_id, wxconst.USER_ID_ADMIN]]};
+        }
       }
     }
     let list = await this.model('question').field('id').where(whereArg).select();

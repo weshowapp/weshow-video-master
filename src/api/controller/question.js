@@ -269,9 +269,10 @@ export default class extends Base {
 
   async getrandomAction() {
     let count = this.get('count');
+    let onlyself = this.get('onlyself');
     let openid = this.get('openid');
 
-    let list = await this.model('question').getRandomList(count, wxconst.QUIZ_CATEGORY_SELF, wxconst.QUIZ_LEVEL_AUTO, openid);
+    let list = await this.model('question').getRandomList(count, wxconst.QUIZ_CATEGORY_SELF, wxconst.QUIZ_LEVEL_AUTO, openid, onlyself);
     return this.success({
       questList: list
     });
