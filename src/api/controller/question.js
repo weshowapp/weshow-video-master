@@ -342,14 +342,14 @@ export default class extends Base {
     let create_time = this.getCurrentTime();
     console.log('addAction');
     //console.log(quest_content);
-    if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
+    /*if (quest_content == '' || quest_item_a == '' || quest_item_b == ''
          || quest_item_c == ''|| quest_answer == '') {
       return this.fail({
         result: 'INVALID_INPUT',
         audit: false,
         errorCode: 302
       });
-    }
+    }*/
 
     //var audit = this.model('question').checkInput(quest_content, quest_item_a, quest_item_b, quest_item_c, quest_item_d);
     //if (!audit) {
