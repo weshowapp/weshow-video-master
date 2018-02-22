@@ -100,7 +100,7 @@ export default class extends Base {
     }
     var end = data.indexOf('<table name="optionsTable" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>');
     var content = data.substring(0, end);
-    content = content.replace('&nbsp;', '');
+    content = content.replace(new RegExp('&nbsp;', "gm"), '');
     return content;
   }
 
