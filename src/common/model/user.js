@@ -40,7 +40,7 @@ export default class extends think.model.base {
         result = await this.model('user').where({openid: userid}).decrement('relive', relive);
       }
       if (think.isEmpty(existInfo)) {
-        var addTime = (new Date()).getTime() / 1000;
+        var addTime = Math.round((new Date()).getTime() / 1000);
         let addResult = await this.model('relive').add({
           openid: userid,
           quizid: quizid,

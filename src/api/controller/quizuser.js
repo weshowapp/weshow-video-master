@@ -175,6 +175,7 @@ export default class extends Base {
       return quizuserModel.calculateGain(qid).then(function (result) {
         if (result) {
           let quizInfo = quizModel.where({id: qid}).find();
+          console.log(quizInfo);
           if (!think.isEmpty(quizInfo)) {
             return userModel.updateRelive(quizInfo.creator_id, wxconst.RELIVE_ADD, 1, qid, '0');
           }
