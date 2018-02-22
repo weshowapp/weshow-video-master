@@ -168,11 +168,13 @@ export default class extends Base {
     console.log('updategain');
 
     var quizuserModel = this.model('quizuser');
+    var quizModel = this.model('quiz');
+    var userModel = this.model('user');
     var trResult = quizuserModel.transaction(function () {
       return quizuserModel.calculateGain(qid).then(function (result) {
-        let quizInfo = self.model('quiz').where({id: qid}).find();
+        let quizInfo = quizModel.where({id: qid}).find();
         if (!think.isEmpty(quizInfo)) {
-          return self.model('user').updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
+          return userModel.updateRelive(quizInfo.creator_id, 1, 1, qid, '0');
         }
         return false;
       });
