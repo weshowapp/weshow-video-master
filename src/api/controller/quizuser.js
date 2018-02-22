@@ -168,14 +168,20 @@ export default class extends Base {
     console.log(qid);
     console.log('updategain');
 
+    let quizInfo = this.model('quiz').where({id: qid}).find();
+    if (think.isEmpty(quizInfo)) {
+      console.log('Invalid quiz id ' + qid);
+      return this.fail({
+        result: 'DATA NOT EXIST',
+        errorCode: 1
+      });
+    }
+
     var quizuserModel = this.model('quizuser');
-    var quizModel = this.model('quiz');
     var userModel = this.model('user');
     var trResult = quizuserModel.transaction(function () {
       return quizuserModel.calculateGain(qid).then(function (result) {
         if (result) {
-          let quizInfo = quizModel.where({id: qid}).find();
-          console.log(quizInfo);
           if (!think.isEmpty(quizInfo)) {
             return userModel.updateRelive(quizInfo.creator_id, wxconst.RELIVE_ADD, 1, qid, '0');
           }
