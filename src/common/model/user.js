@@ -27,8 +27,9 @@ export default class extends think.model.base {
   async updateRelive(userid, add, relive, quizid, invitee_id) {
     console.log('updateRelive');
     var result = -1;
-    let existInfo = await this.model('relive').where({ openid: userid, quizid: quizid, invitee_id: invitee_id }).find();
+    let existInfo = await this.model('relive').where({ openid: userid, quizid: quizid, invitee_id: invitee_id, increase: add }).find();
     if (!think.isEmpty(existInfo)) {
+      console.log('updateRelive return for exist ' + quizid);
       return result;
     }
     let userInfo = await this.model('user').where({openid: userid}).find();
