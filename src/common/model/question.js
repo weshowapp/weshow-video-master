@@ -38,7 +38,7 @@ export default class extends Base {
         if (onlyself == 1) {
           whereArg = {creator_id: creator_id};
           var selfList = await this.model('question').where(whereArg).limit(count).select();
-          if (!think.isEmpty(selfList)) 
+          if (!think.isEmpty(selfList)) {
             return selfList;
           }
           whereArg = {type: type, creator_id: creator_id};
