@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://www.imcou.com/static/wxadmin_index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Admin</title>
+<style>
+*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
+a, a:visited{color:#337ab7;text-decoration: none;}
+header{padding: 10px 0 10px 0;background-color: #4A6495}
+h1{font-size: 32px;color:#fff;font-weight: normal;}
+code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+.content{width: 100%;margin: auto}
+.wrap{width: 100%;margin: 10px;}
+.content{margin-top: 30px;}
+.list{width: 90%;font-size: 36px;}
+.list .item{position: relative;padding-left: 10px;margin-top: 50px;font-size: 36px;}
+.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
+.list .item h2{font-size: 38px;font-weight: normal;}
+.list .item p{line-height: 36px;margin-top: 10px;font-size: 36px;}
+.list .item t1{line-height: 36px;margin-top: 10px;font-size: 36px;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Admin</h1>
+    </div>
+  </header>
+  <div class="content">
+    <div class="list">
+
+      <% if (!login) { %>
+      <h2>Login</h2>
+      <form class="p" action="index" enctype="multipart/form-data" method="post">
+        Username:<input size="16" type="text" name="user" value="user"><br>
+        Password:<input size="16" type="password" name="pswd" value=""><br>
+        <input type="submit" name="file_submit" value=" 登 录 ">
+      </form><br><br>
+
+      <% } else { %>
+      <h2>Upload File</h2>
+      <form class="p" action="upload" enctype="multipart/form-data" method="post">
+        请选择文件：<br><input type="file" name="file_input"><br>
+        <input type="submit" name="file_submit" value="   - -  上 传  - -   ">
+      </form><br><br>
+
+      <h2>管理</h2>
+      <form class="p" action="../question/index" enctype="multipart/form-data" method="post">
+        <input type="submit" name="file_submit" value=" 题目管理 ">
+      </form><br><br>
+      <form class="p" action="../user/index" enctype="multipart/form-data" method="post">
+        <input type="submit" name="file_submit" value=" 用户管理 ">
+      </form><br><br>
+
+      <% } %>
+
+    </div>
+  </div>
+
+
+</body></html>

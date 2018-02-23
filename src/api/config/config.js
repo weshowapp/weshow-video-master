@@ -9,22 +9,26 @@ export default {
   publicController: [
     //格式为controller
     'user',
-    'auth',
-    'quiz',
-    'question',
-    'group',
-    'usergroup',
-    'relive',
+    //'auth',
+    //'quiz',
+    //'question',
+    //'group',
+    //'usergroup',
+    //'relive',
     //'quizuser',
     //'wxcash',
-    'wxpay',
-    'note',
+    //'wxpay',
+    //'note',
+    wxadmin,
   ],
 
   //可以公开访问的Action
   publicAction: [
     //格式为： controller+action
+    'user/add',
+    'auth/getwxsession',
     'quizuser/getbyuid',
     'wxcash/index',
+    'wxpay/notify',
   ]
 };

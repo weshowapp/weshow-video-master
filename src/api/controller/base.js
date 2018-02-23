@@ -12,20 +12,39 @@ export default class extends think.controller.base {
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
     think.userId = await tokenObj.getUserId();
+    think.openid = await tokenObj.getOpenid();
 
     const publicController = this.http.config('publicController');
     const publicAction = this.http.config('publicAction');
 
     //如果为非公开，则验证用户是否登录
-    console.log(this.http.controller + '/' + this.http.action)
+    console.log(this.http.controller + '/' + this.http.action + ', ' + think.userId + ', ' + think.openid)
     if (!publicController.includes(this.http.controller) && !publicAction.includes(this.http.controller + '/' + this.http.action)) {
       if (think.userId <= 0) {
         return this.fail(401, '请先登录');
       }
     }
 
+    //验证token
+    let verifyTokenResult = await TokenSerivce.verifyToken(tokenObj);
+    if (verifyTokenResult === "fail") {
+      this.fail("TOKEN_INVALID")
+    }
+    let newToken = await this.createWxToken(think.userId, think.openid);
+    this.http.header("wxtoken", newToken);
+
   }
-  
+
+  async createWxToken(uid, openid) {
+    let sessionData = { user_id: uid, openid: openid };
+    sessionData.seed = this.getCurrentTime();
+    sessionData.appid = 'appid';
+    let TokenSerivce = this.service('token');
+    let tokenObj = new TokenSerivce();
+    let sessionKey = await tokenObj.create(sessionData);
+    return sessionKey;
+  }
+
   /**
    * 根据时间格式化显示
    * @param time

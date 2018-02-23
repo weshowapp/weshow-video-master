@@ -142,11 +142,12 @@ export default class extends Base {
       existInfo = await this.model('user').where({openid: userid}).find();
     }
 
-    let sessionData = { user_id: addResult, openid: userid };
+    let sessionKey = await this.createWxToken(addResult, userid);
+    /*let sessionData = { user_id: addResult, openid: userid };
     sessionData.seed = this.getCurrentTime();
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
-    let sessionKey = await tokenObj.create(sessionData);
+    let sessionKey = await tokenObj.create(sessionData);*/
     existInfo.wxtoken = sessionKey;
     
     return this.success({
