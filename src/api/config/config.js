@@ -19,7 +19,7 @@ export default {
     //'wxcash',
     //'wxpay',
     //'note',
-    wxadmin,
+    //'wxadmin',
   ],
 
   //可以公开访问的Action
@@ -30,5 +30,6 @@ export default {
     'quizuser/getbyuid',
     'wxcash/index',
     'wxpay/notify',
+    'wxadmin/index',
   ]
 };
