@@ -12,13 +12,12 @@ export default class extends think.controller.base {
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
     think.userId = await tokenObj.getUserId();
-    think.openid = await tokenObj.getOpenid();
 
     const publicController = this.http.config('publicController');
     const publicAction = this.http.config('publicAction');
 
     //如果为非公开，则验证用户是否登录
-    console.log(this.http.controller + '/' + this.http.action + ', ' + think.userId + ', ' + think.openid)
+    console.log(this.http.controller + '/' + this.http.action + ', ' + think.userId)
     if (!publicController.includes(this.http.controller) && !publicAction.includes(this.http.controller + '/' + this.http.action)) {
       if (think.userId <= 0) {
         return this.fail(401, '请先登录');
@@ -30,6 +29,8 @@ export default class extends think.controller.base {
     if (verifyTokenResult === "fail") {
       this.fail("TOKEN_INVALID")
     }
+    think.openid = await verifyTokenResult.openid;
+    console.log(think.openid);
     let newToken = await this.createWxToken(think.userId, think.openid);
     this.http.header("wxtoken", newToken);
 
