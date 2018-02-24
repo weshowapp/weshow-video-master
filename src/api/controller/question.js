@@ -162,9 +162,10 @@ export default class extends Base {
       console.log(count);
 
       ppArray.push(line);
-      if (count++ % 2 == 1) {
+      if (count % 2 == 1) {
         questModel.addPpText(ppArray[count - 1], line);
       }
+      count = count + 1;
     });
 
     this.assign('result', 'Success Add ' + count + ' Lines');
