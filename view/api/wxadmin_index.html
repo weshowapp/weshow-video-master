@@ -54,6 +54,10 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         <input type="submit" name="file_submit" value=" 用户管理 ">
       </form><br><br>
+      <form class="p" action="../wxcash/index" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+        <input type="submit" name="file_submit" value=" 帐单管理 ">
+      </form><br><br>
 
       <% } %>
 

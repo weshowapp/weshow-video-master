@@ -58,19 +58,21 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
         <% currentId = item.id %>
         <% }) %>
         <tr>
-          <form action="index" enctype="multipart/form-data" method="get">
+          <form action="index" enctype="multipart/form-data" method="post">
             <td>起始ID</td>
             <td><input size="2" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
             <td>个数</td>
             <td><input size="2" type="text" name ="size" value="10"/></td>
             <td><input size="4" type="submit" value=" 下一页 "/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
         <tr>
-          <form action="index" enctype="multipart/form-data" method="get">
+          <form action="index" enctype="multipart/form-data" method="post">
             <td>用户ID</td>
             <td><input size="8" type="text" name ="openid" value="o5G-"/></td>
             <td><input size="4" type="submit" value="查询"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
       </table>

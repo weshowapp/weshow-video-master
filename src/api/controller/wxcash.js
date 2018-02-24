@@ -11,10 +11,10 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction() {
-    let id = this.get('id');
-    let size = this.get('size');
-    let openid = this.get('openid');
-    let tm = this.get('tm');
+    let id = this.post('id');
+    let size = this.post('size');
+    let openid = this.post('openid');
+    let tm = this.post('tm');
     if (!this.checkTimeStamp(tm)) {
       return this.success({
         result: 'OK',
@@ -46,7 +46,8 @@ export default class extends Base {
         }*/
       }
     }
-    this.assign('wxcash_list', list);
+    var tk = this.post('wxtoken');
+    this.assign({'wxcash_list': list, 'wxtoken': tk});
     this.display();
   }
 
