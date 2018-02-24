@@ -13,7 +13,7 @@ export default class extends think.controller.base {
     let tokenObj = new TokenSerivce();
 
     //验证token
-    let verifyTokenResult = await TokenSerivce.verifyToken(tokenObj);
+    let verifyTokenResult = await tokenObj.verifyToken(think.token);
     if (verifyTokenResult === "fail") {
       this.fail("TOKEN_INVALID")
     }
