@@ -31,7 +31,8 @@ export default class extends think.controller.base {
     console.log(this.http.controller + '/' + this.http.action + ', ' + think.userId)
     if (!publicController.includes(this.http.controller) && !publicAction.includes(this.http.controller + '/' + this.http.action)) {
       if (think.userId <= 0) {
-        return this.fail(401, '请先登录');
+        console.log('请先登录');
+        //return this.fail(401, '请先登录');
       }
     }
 
@@ -47,6 +48,8 @@ export default class extends think.controller.base {
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
     let sessionKey = await tokenObj.create(sessionData);
+    console.log(sessionData);
+    console.log(sessionKey);
     return sessionKey;
   }
 
