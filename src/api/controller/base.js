@@ -9,18 +9,18 @@ export default class extends think.controller.base {
 
     //根据token值获取用户id
     think.token = this.header('X-Weshow-Token') || '';
-    let TokenSerivce = think.service('token');
+    let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
+    think.userId = await tokenObj.getUserId();
 
     //验证token
-    let verifyTokenResult = await tokenObj.verifyToken(think.token);
+    let verifyTokenResult = await tokenObj.verify(think.token);
     if (verifyTokenResult === "fail") {
       this.fail("TOKEN_INVALID")
     }
-    //think.userId = await tokenObj.getUserId();
     think.user_id = verifyTokenResult.user_id;
     think.openid = verifyTokenResult.openid;
-    console.log(think.openid);
+    console.log(think.openid + ', ' + think.user_id);
 
     const publicController = this.http.config('publicController');
     const publicAction = this.http.config('publicAction');
@@ -33,7 +33,7 @@ export default class extends think.controller.base {
       }
     }
 
-    let newToken = await this.createWxToken(think.userId, think.openid);
+    let newToken = await this.createWxToken(think.user_id, think.openid);
     this.http.header("wxtoken", newToken);
 
   }
