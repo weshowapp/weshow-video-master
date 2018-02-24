@@ -26,7 +26,7 @@ export default class extends think.controller.base {
       console.log(verifyTokenResult);
       if (think.userId <= 0/* || !verifyTokenResult*/) {
         console.log('Invalid Token!');
-        //return this.fail(401, '请先登录');
+        return this.fail(401, '请先登录');
       }
     }
 
