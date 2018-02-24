@@ -316,6 +316,10 @@ export default class extends Base {
     });
   }
 
+  async webaddAction() {
+    return await this.addAction();
+  }
+
   async addAction() {
     let title = this.post('title');
     let creator_id = this.post('creator_id');

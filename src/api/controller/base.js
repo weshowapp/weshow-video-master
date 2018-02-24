@@ -31,7 +31,7 @@ export default class extends think.controller.base {
     }
 
     if (htmlAction.includes(this.http.controller + '/' + this.http.action)) {
-      var result = this.verityWxToken();
+      var result = await this.verityWxToken();
       if (!result || result == 'false') {
         return this.fail(401, '请先登录');
       }
@@ -40,6 +40,7 @@ export default class extends think.controller.base {
 
   async verityWxToken() {
     var tk = this.post('wxtoken');
+    think.token = tk;
     let TokenSerivce = this.service('token');
     let tokenObj = new TokenSerivce();
 

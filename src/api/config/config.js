@@ -42,12 +42,11 @@ export default {
   htmlAction: [
     'wxadmin/upload',
 
-    'user/add',
     'user/index',
     'user/delete',
     'user/update',
 
-    'question/add',
+    'question/webadd',
     'question/index',
     'question/delete',
     'question/update',

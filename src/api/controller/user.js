@@ -83,6 +83,10 @@ export default class extends Base {
     return this.json(userInfo.level);
   }
 
+  async webaddAction() {
+    return await this.addAction();
+  }
+
   async addAction() {
     let userid = this.post('userid');
     let name = this.post('name');
