@@ -253,9 +253,10 @@ export default class extends Base {
     console.log(line0);
     var content = line0.trim();
     console.log(content);
-    var answer = content.substring(content.length - 1, 1);
+    var answer = content.substring(content.length - 2, 2);
     console.log(answer);
     content = content.substring(0, content.length - 1);
+    console.log(content);
     answer = parseAnswer(answer);
 
     if (content != null && content != '') {
