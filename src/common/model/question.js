@@ -130,12 +130,17 @@ export default class extends Base {
     return quest;
   }
 
+  parseAnswer(answer) {
+    return answer == 'A' ? 0 : (answer == 'B' ? 1 : (answer == 'C' ? 2 : (answer == 'D' ? 3 : 4)));
+  }
+
   async getMfgAnswer(data) {
     if (data == null) {
       return '';
     }
     var answer = data.substring(0, 1);
-    return answer == 'A' ? 0 : (answer == 'B' ? 1 : (answer == 'C' ? 2 : (answer == 'D' ? 3 : 4)));
+    //return answer == 'A' ? 0 : (answer == 'B' ? 1 : (answer == 'C' ? 2 : (answer == 'D' ? 3 : 4)));
+    return parseAnswer(answer);
   }
 
   async getMfgNote(data) {
@@ -215,6 +220,69 @@ export default class extends Base {
         category2: arr[7],
         category3: arr[8],
         more: arr[9]
+      });
+      return addResult;
+    }
+    return 0;
+  }
+
+  parsePpItems(data) {
+    if (data == null) {
+      return {};
+    }
+    var quest = {};
+    var arr = data.split('A');
+    if (arr.length < 1) {
+      return quest;
+    }
+    var next = arr[1];
+    var end = next.indexOf('B');
+    quest.item0 = next.substring(1, end);
+    next = next.substring(end);
+    end = next.indexOf('C');
+    quest.item1 = next.substring(1, end);
+    next = next.substring(end);
+    end = next.indexOf('D');
+    quest.item2 = next.substring(1, end);
+    next = next.substring(end);
+    quest.item3 = next.substring(1, end);
+    return quest;
+  }
+
+  async addPpText(line0, line1) {
+    var content = line0.trim();
+    var answer = content.substring(content.length - 1, 1);
+    content = content.substring(0, content.length - 1);
+    answer = parseAnswer(answer);
+
+    if (content != null && content != '') {
+      console.log(content);
+      var items = getMfgItems(line1.trim());
+
+      var item_count = 2;
+      if (items.item2 != '') {
+        item_count = 3;
+      }
+      if (items.item3 != '') {
+        item_count = 4;
+      }
+
+      let addResult = await this.model('question').add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        item_count: item_count,
+        type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
+        level: 6,
+        source: 'paipai',
+        content: content,
+        item0: items.item0,
+        item1: items.item1,
+        item2: items.item2,
+        item3: items.item3,
+        answer: answer,
+        note: '',
+        tags: '1'
       });
       return addResult;
     }

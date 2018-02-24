@@ -8,6 +8,7 @@ var fs = require('fs');
 var xwords = require('./xwords');
 var wxconst = require('./wxconst');
 
+var ppArray = [];
 
 export default class extends Base {
 
@@ -140,6 +141,31 @@ export default class extends Base {
     }else{
       console.log('not exist')
     }*/
+
+    this.assign('result', 'Success Add ' + count + ' Lines');
+
+    this.display();
+  }
+
+  async uploadpptxtAction() {
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+
+    var lineReader = require('readline').createInterface({
+      input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
+    });
+
+    var count = 0;
+    let questModel = this.model('question');
+    await lineReader.on('line', function (line) {
+      if(!line) return;
+      console(count);
+
+      ppArray.push(line);
+      if (count++ % 2 == 1) {
+        questModel.addPpText(ppArray[count - 1], line);
+      }
+    });
 
     this.assign('result', 'Success Add ' + count + ' Lines');
 
