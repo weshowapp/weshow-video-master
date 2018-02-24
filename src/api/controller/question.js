@@ -37,7 +37,8 @@ export default class extends Base {
       filter = 0;
     }
     let list = await this.model('question').where({id: [">=", id], filter: filter}).limit(size).select();
-    this.assign('quest_list', list);
+    var tk = this.post('wxtoken');
+    this.assign({'quest_list': list, 'wxtoken': tk});
     this.display();
   }
 

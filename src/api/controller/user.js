@@ -43,7 +43,8 @@ export default class extends Base {
         list[i].str_time = this.getFullDateTime(list[i].reg_time);
       }
     }
-    this.assign('user_list', list);
+    var tk = this.post('wxtoken');
+    this.assign({'user_list': list, 'wxtoken': tk});
     this.display();
   }
 
