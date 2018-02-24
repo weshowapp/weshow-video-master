@@ -21,6 +21,8 @@ export default class extends think.controller.base {
     think.user_id = verifyTokenResult.user_id;
     think.openid = verifyTokenResult.openid;
     console.log(think.openid + ', ' + think.user_id);
+    console.log(think.token);
+    console.log(verifyTokenResult);
 
     const publicController = this.http.config('publicController');
     const publicAction = this.http.config('publicAction');
@@ -34,7 +36,7 @@ export default class extends think.controller.base {
     }
 
     let newToken = await this.createWxToken(think.user_id, think.openid);
-    this.http.header("wxtoken", newToken);
+    this.http.header('X-Weshow-Token', newToken);
 
   }
 

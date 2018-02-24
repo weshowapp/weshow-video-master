@@ -29,9 +29,10 @@ export default class extends Base {
     var login = false;
     if (user == 'user' && pswd == 'pswd') {
       login = true;
-      tk = await this.createcreateWxToken(1, 'WxAdmin0');
+      tk = await this.createWxToken(1, 'WxAdmin0');
     }
     //console.log(user + ',' + pswd + ',' + login);
+    this.http.header('X-Weshow-Token', tk);
     this.assign({'login': login, 'wxtoken': tk});
     this.display();
   }
