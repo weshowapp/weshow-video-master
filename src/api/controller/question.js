@@ -159,7 +159,7 @@ export default class extends Base {
     let questModel = this.model('question');
     await lineReader.on('line', function (line) {
       if(!line) return;
-      console(count);
+      console.log(count);
 
       ppArray.push(line);
       if (count++ % 2 == 1) {

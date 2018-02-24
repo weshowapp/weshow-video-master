@@ -250,6 +250,7 @@ export default class extends Base {
   }
 
   async addPpText(line0, line1) {
+    console.log(line0);
     var content = line0.trim();
     var answer = content.substring(content.length - 1, 1);
     content = content.substring(0, content.length - 1);
