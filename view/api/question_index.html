@@ -152,6 +152,23 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
       </table>
       <br><br>
 
+      <h2>选择单个HTML文件,单个添加</h2>
+      <form class="p" action="uploadmfgfile" enctype="multipart/form-data" method="post">
+        请选择文件(支持HTML文件)：<br><input type="file" name ="file_input"/><br>
+        难度:<input size="1" type="text" name ="quest_level" value="3"/><br>
+        Tags:<input size="3" type="text" name ="quest_tags" value="考题"/><br>
+        类别1:<input size="1" type="text" name ="category0"/><br>
+        <input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/>
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+      </form><br><br>
+
+      <h2>选择Txt文件,批量添加</h2>
+      <form class="p" action="uploadpptxt" enctype="multipart/form-data" method="post">
+        请选择文件(固定格式txt文件)：<br><input type="file" name ="file_input"/><br>
+        <input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/>
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+      </form><br><br>
+
       <h2>选择整理文件,批量添加</h2>
       <form class="p" action="upload" enctype="multipart/form-data" method="post">
         请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/><br>
@@ -162,16 +179,6 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
       <h2>选择链接文件,批量添加</h2>
       <form class="p" action="uploadmfg" enctype="multipart/form-data" method="post">
         请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/><br>
-        <input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/>
-        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-      </form><br><br>
-
-      <h2>选择单个HTML文件,单个添加</h2>
-      <form class="p" action="uploadmfgfile" enctype="multipart/form-data" method="post">
-        请选择文件(支持HTML文件)：<br><input type="file" name ="file_input"/><br>
-        难度:<input size="1" type="text" name ="quest_level" value="3"/><br>
-        Tags:<input size="3" type="text" name ="quest_tags" value="考题"/><br>
-        类别1:<input size="1" type="text" name ="category0"/><br>
         <input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/>
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
       </form><br><br>
