@@ -8,10 +8,10 @@ export default {
   //可以公开访问的Controller
   publicController: [
     //格式为controller
-    'user',
-    //'auth',
+    //'user',
+    'auth',
     //'quiz',
-    //'question',
+    'question',
     //'group',
     //'usergroup',
     //'relive',
@@ -26,10 +26,35 @@ export default {
   publicAction: [
     //格式为： controller+action
     'user/add',
+    'user/info',
+    'user/index',
+    'user/level',
+    'user/delete',
+    'user/update',
     'auth/getwxsession',
     'quizuser/getbyuid',
     'wxcash/index',
     'wxpay/notify',
     'wxadmin/index',
-  ]
+  ],
+
+  //Html的Action
+  htmlAction: [
+    'wxadmin/upload',
+
+    'user/add',
+    'user/index',
+    'user/delete',
+    'user/update',
+
+    'question/add',
+    'question/index',
+    'question/delete',
+    'question/update',
+    'question/queryinput',
+    'question/upload',
+    'question/uploadmfg',
+    'question/uploadmfgfile',
+  ],
+
 };

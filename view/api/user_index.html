@@ -83,10 +83,12 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td><input size="1" type="text" disabled="true" value="<%= item.win %>"/></td>
             <td><input size="1" type="text" disabled="true" value="<%= item.balance %>"/></td>
             <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input size="2" type="submit" value=" 更 新 "/></td>
           </form>
           <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="get">
             <td>
+              <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
               <input size="2" type="submit" name="delete" value="删除:<%= item.id %>"/>
             </td>
           </form>
@@ -100,6 +102,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td>个数</td>
             <td><input size="2" type="text" name ="size" value="10"/></td>
             <td><input size="4" type="submit" value="下一页"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
         <tr>
@@ -107,6 +110,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <td>Name</td>
             <td><input size="1" type="text" name ="name" value="李%"/></td>
             <td><input size="4" type="submit" value="查询"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
       </table>

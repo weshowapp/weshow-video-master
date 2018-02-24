@@ -104,7 +104,7 @@ export default class extends Base {
     var added = false;
     let existInfo = await this.model('user').where({openid: userid}).find();
     if (!think.isEmpty(existInfo)) {
-      addResult = existInfo.uid;
+      addResult = existInfo.id;
         /*return this.success({
           result: 'ALREADY EXIST',
           uid: -1,

@@ -13,32 +13,38 @@ export default class extends think.controller.base {
     let tokenObj = new TokenSerivce();
     think.userId = await tokenObj.getUserId();
 
-    //验证token
-    let verifyTokenResult = await tokenObj.verify(think.token);
-    if (verifyTokenResult === "fail") {
-      this.fail("TOKEN_INVALID")
-    }
-    think.user_id = verifyTokenResult.user_id;
-    think.openid = verifyTokenResult.openid;
-    console.log(think.openid + ', ' + think.user_id);
     console.log(think.token);
-    console.log(verifyTokenResult);
 
     const publicController = this.http.config('publicController');
     const publicAction = this.http.config('publicAction');
+    const htmlAction = this.http.config('htmlAction');
 
     //如果为非公开，则验证用户是否登录
     console.log(this.http.controller + '/' + this.http.action + ', ' + think.userId)
     if (!publicController.includes(this.http.controller) && !publicAction.includes(this.http.controller + '/' + this.http.action)) {
-      if (think.userId <= 0) {
-        console.log('请先登录');
+      let verifyTokenResult = await tokenObj.verify(think.token);
+      console.log(verifyTokenResult);
+      if (think.userId <= 0/* || !verifyTokenResult*/) {
+        console.log('Invalid Token!');
         //return this.fail(401, '请先登录');
       }
     }
 
-    let newToken = await this.createWxToken(think.user_id, think.openid);
-    this.http.header('X-Weshow-Token', newToken);
+    if (htmlAction.includes(this.http.controller + '/' + this.http.action)) {
+      if (!this.verityWxToken()) {
+        return this.fail(401, '请先登录');
+      }
+    }
+  }
 
+  async verityWxToken() {
+    var tk = this.post('wxtoken');
+    let TokenSerivce = this.service('token');
+    let tokenObj = new TokenSerivce();
+
+    let verifyTokenResult = await tokenObj.verify(tk);
+    console.log(verifyTokenResult);
+    return verifyTokenResult;
   }
 
   async createWxToken(uid, openid) {

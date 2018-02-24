@@ -41,14 +41,17 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
       <h2>Upload File</h2>
       <form class="p" action="upload" enctype="multipart/form-data" method="post">
         请选择文件：<br><input type="file" name="file_input"><br>
-        <input type="submit" name="file_submit" value="   - -  上 传  - -   ">
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+        <input type="submit" name="file_submit" value=" 　  - -  上 传  - -  　 ">
       </form><br><br>
 
       <h2>管理</h2>
       <form class="p" action="../question/index" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         <input type="submit" name="file_submit" value=" 题目管理 ">
       </form><br><br>
       <form class="p" action="../user/index" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         <input type="submit" name="file_submit" value=" 用户管理 ">
       </form><br><br>
 
