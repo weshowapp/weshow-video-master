@@ -32,6 +32,8 @@ export default {
     'user/delete',
     'user/update',
     'auth/getwxsession',
+    'quiz/index',
+    'quiz/getbyuser',
     'quizuser/getbyuid',
     'wxcash/index',
     'wxpay/notify',
