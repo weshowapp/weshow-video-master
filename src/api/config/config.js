@@ -42,6 +42,8 @@ export default {
   htmlAction: [
     'wxadmin/upload',
 
+    'wxcash/index',
+
     'user/index',
     'user/delete',
     'user/update',
