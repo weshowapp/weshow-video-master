@@ -88,7 +88,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input size="2" type="submit" value="更新"/></td>
           </form>
-          <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="get">
+          <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="post">
             <td>
               <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
               <input size="2" type="submit" name="delete" value="删除:<%= item.id %>"/>
@@ -129,7 +129,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
           </form>
         </tr>
         <tr>
-          <form action="index" enctype="multipart/form-data" method="get">
+          <form action="index" enctype="multipart/form-data" method="post">
             <td>起始ID</td>
             <td><input size="1" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
             <td>个数</td>
@@ -139,7 +139,7 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
           </form>
         </tr>
         <tr>
-          <form action="index?filter=1" enctype="multipart/form-data" method="get">
+          <form action="index?filter=1" enctype="multipart/form-data" method="post">
             <td>起始ID</td>
             <td><input size="1" type="text" name ="id" value="0"/></td>
             <td>个数</td>

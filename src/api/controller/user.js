@@ -12,10 +12,10 @@ export default class extends Base {
    */
   async indexAction(){
     //auto render template file user_index.html
-    let id = this.get('id');
-    let size = this.get('size');
-    let name = this.get('name');
-    let tm = this.get('tm');
+    let id = this.post('id');
+    let size = this.post('size');
+    let name = this.post('name');
+    let tm = this.post('tm');
     if (!this.checkTimeStamp(tm)) {
       return this.success({
         result: 'OK',
@@ -270,8 +270,8 @@ export default class extends Base {
   }
 
   async deleteAction() {
-    let id = this.get('id');
-    let str = this.get('delete');
+    let id = this.post('id');
+    let str = this.post('delete');
     console.log('delete ' + id + ',' + str);
     if (id == '') {
       var arr = str.split(':');

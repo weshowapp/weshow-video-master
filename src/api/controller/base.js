@@ -31,7 +31,8 @@ export default class extends think.controller.base {
     }
 
     if (htmlAction.includes(this.http.controller + '/' + this.http.action)) {
-      if (!this.verityWxToken()) {
+      var result = this.verityWxToken();
+      if (!result || result == 'false') {
         return this.fail(401, '请先登录');
       }
     }
