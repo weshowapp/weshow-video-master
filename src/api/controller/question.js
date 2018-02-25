@@ -223,10 +223,10 @@ export default class extends Base {
         return this.display();
       }
       var next = (rawData+'').substring(start+7, end);
-      console.log(next);
+      //console.log(next);
       end = next.indexOf('A．');
       var content = next.substring(0, end);
-      console.log(content);
+      //console.log(content);
       var items = questModel.parseMfgTitleItems(next);
       end = next.indexOf('-魔方格');
       next = next.substring(0, end);
@@ -249,7 +249,7 @@ export default class extends Base {
         item_count = 4;
       }
       //console.log(items);
-      console.log(content);
+      //console.log(content);
       var add_tm = this.getCurrentTime();
 
       let addResult = await this.model('question').add({

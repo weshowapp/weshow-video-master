@@ -231,7 +231,7 @@ export default class extends Base {
     if (data == null) {
       return {};
     }
-    console.log(data);
+    //console.log(data);
     var quest = {item0: '', item1: '', item2: '', item3: ''};
     var start = data.indexOf('A');
     var next = data.substring(start);
