@@ -226,24 +226,50 @@ export default class extends Base {
     return 0;
   }
 
+  trimItem(item) {
+    item = item.trim();
+    if (item.substr(0, 1) == '.') {
+      item = item.substring(1);
+      item = item.trim();
+    }
+    return item;
+  }
+
   parsePpItems(data) {
     if (data == null) {
       return {};
     }
     console.log(data);
-    var quest = {};
+    var quest = {item0: '', item1: '', item2: '', item3: ''};
     var start = data.indexOf('A');
     var next = data.substring(start);
     var end = next.indexOf('B');
     quest.item0 = next.substring(1, end);
+    quest.item0 = this.trimItem(quest.item0);
     next = next.substring(end);
     end = next.indexOf('C');
+    if (end == -1) {
+      quest.item1 = next.substring(1);
+      quest.item1 = this.trimItem(quest.item1);
+      quest.item2 = '';
+      quest.item3 = '';
+      return quest;
+    }
     quest.item1 = next.substring(1, end);
+    quest.item1 = this.trimItem(quest.item1);
     next = next.substring(end);
     end = next.indexOf('D');
+    if (end == -1) {
+      quest.item2 = next.substring(1);
+      quest.item2 = this.trimItem(quest.item2);
+      quest.item3 = '';
+      return quest;
+    }
     quest.item2 = next.substring(1, end);
+    quest.item2 = this.trimItem(quest.item2);
     next = next.substring(end);
     quest.item3 = next.substring(1, end);
+    quest.item3 = this.trimItem(quest.item3);
     console.log(quest);
     return quest;
   }
@@ -256,7 +282,19 @@ export default class extends Base {
     var answer = content.substr(start, 1);
     content = content.substring(0, start);
     answer = this.parseAnswer(answer);
-    console.log(answer);
+    //console.log(answer);
+
+    var arr = content.split('.');
+    if (arr.length > 1 && parseInt(arr[0]) > 0) {
+      content = arr[1];
+    }
+    else {
+      var arr1 = content.split('、');
+      if (arr1.length > 1 && parseInt(arr1[0]) > 0) {
+        content = arr1[1];
+      }
+    }
+    content = content.trim();
 
     if (content != null && content != '') {
       //console.log(content);
