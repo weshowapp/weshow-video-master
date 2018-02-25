@@ -273,8 +273,8 @@ export default class extends Base {
     }
     this.assign('result', 'Success Add ' + 1 + ' File');
 
-    this.redirect('index');
-    //this.display();
+    //this.redirect('index');
+    this.display();
   }
 
   async uploadmfgfileAction() {
