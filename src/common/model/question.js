@@ -227,6 +227,49 @@ export default class extends Base {
     return 0;
   }
 
+  parseMfgTitleItems(data) {
+    if (data == null) {
+      return {};
+    }
+    console.log(data);
+    var quest = {item0: '', item1: '', item2: '', item3: ''};
+    var start = data.indexOf('A');
+    var next = data.substring(start);
+    var end = next.indexOf('B');
+    quest.item0 = next.substring(1, end);
+    quest.item0 = this.trimItem(quest.item0);
+    next = next.substring(end);
+    end = next.indexOf('C');
+    if (end == -1) {
+      end = next.indexOf('-');
+      quest.item1 = next.substring(1, end);
+      quest.item1 = this.trimItem(quest.item1);
+      quest.item2 = '';
+      quest.item3 = '';
+      return quest;
+    }
+    quest.item1 = next.substring(1, end);
+    quest.item1 = this.trimItem(quest.item1);
+    next = next.substring(end);
+    end = next.indexOf('D');
+    if (end == -1) {
+      end = next.indexOf('-');
+      quest.item2 = next.substring(1, end);
+      quest.item2 = this.trimItem(quest.item2);
+      quest.item3 = '';
+      console.log(quest);
+      return quest;
+    }
+    quest.item2 = next.substring(1, end);
+    quest.item2 = this.trimItem(quest.item2);
+    next = next.substring(end);
+    end = next.indexOf('-');
+    quest.item3 = next.substring(1, end);
+    quest.item3 = this.trimItem(quest.item3);
+    console.log(quest);
+    return quest;
+  }
+
   trimItem(item) {
     item = item.trim();
     if (item.substr(0, 1) == '.') {
@@ -273,7 +316,7 @@ export default class extends Base {
     quest.item2 = next.substring(1, end);
     quest.item2 = this.trimItem(quest.item2);
     next = next.substring(end);
-    quest.item3 = next.substring(1, end);
+    quest.item3 = next.substring(1);
     quest.item3 = this.trimItem(quest.item3);
     console.log(quest);
     return quest;

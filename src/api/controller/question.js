@@ -227,7 +227,7 @@ export default class extends Base {
       end = next.indexOf('A．');
       var content = next.substring(0, end);
       console.log(content);
-      var items = questModel.parsePpItems(next);
+      var items = questModel.parseMfgTitleItems(next);
       end = next.indexOf('-魔方格');
       next = next.substring(0, end);
       start = next.lastIndexOf('-');
