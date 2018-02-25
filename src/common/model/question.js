@@ -261,7 +261,7 @@ export default class extends Base {
 
     if (content != null && content != '') {
       console.log(content);
-      var items = getPpItems(line1.trim());
+      var items = this.getPpItems(line1.trim());
 
       var item_count = 2;
       if (items.item2 != '') {
