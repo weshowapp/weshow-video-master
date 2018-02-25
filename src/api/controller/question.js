@@ -206,6 +206,71 @@ export default class extends Base {
     this.display();
   }
 
+  async mfgwithoutanswerAction() {
+    let level = this.post('quest_level');
+    let tags = this.post('quest_tags');
+    let answer = this.post('answer');
+
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+
+    let questModel = this.model('question');
+    var rawData = fs.readFileSync(filepath);
+    if (rawData != null) {
+      var start = rawData.indexOf('<title>');
+      var end = rawData.indexOf('</title>');
+      if (start == -1 || end == -1) {
+        return this.display();
+      }
+      var next = rawData.substring(start, end);
+      end = next.indexOf('A．');
+      var content = next.substring(0, end);
+      var items = questModel.parsePpItems(next);
+      end = next.indexOf('-魔方格');
+      next = next.substring(0, end);
+      start = next.lastIndexOf('-');
+      var category0 = next.substring(start + 1);
+
+      var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td>';
+      var questDataArr = (rawData+"").split(DIVIDER);
+      console.log(questDataArr.length);
+      var note = await questModel.getMfgNote(questDataArr[2]);
+      answer = questModel.parseAnswer(answer);
+
+      var item_count = 3;
+      if (items.item3 != '') {
+        item_count = 4;
+      }
+      //console.log(items);
+      console.log(content);
+      var add_tm = this.getCurrentTime();
+
+      let addResult = await this.model('question').add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        create_time: add_tm,
+        item_count: item_count,
+        type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
+        level: level,
+        source: 'mofangge',
+        content: content,
+        item0: items.item0,
+        item1: items.item1,
+        item2: items.item2,
+        item3: items.item3,
+        answer: answer,
+        note: note,
+        category0: category0,
+        tags: tags
+      });
+    }
+    this.assign('result', 'Success Add ' + 1 + ' File');
+
+    this.redirect('index');
+    //this.display();
+  }
+
   async uploadmfgfileAction() {
     let level = this.post('quest_level');
     let tags = this.post('quest_tags');

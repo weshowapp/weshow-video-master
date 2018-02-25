@@ -233,6 +233,10 @@ export default class extends Base {
       item = item.substring(1);
       item = item.trim();
     }
+    if (item.substr(0, 1) == '．') {
+      item = item.substring(1);
+      item = item.trim();
+    }
     return item;
   }
 
