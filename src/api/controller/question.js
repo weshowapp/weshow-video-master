@@ -233,14 +233,15 @@ export default class extends Base {
       start = next.lastIndexOf('-');
       var category0 = next.substring(start + 1);
 
-      var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td>';
+      /*var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td>';
       var questDataArr = (rawData+"").split(DIVIDER);
       if (questDataArr.length < 2) {
         DIVIDER = '<table style="word-break:break-all" border="0" width="650"><tbody><tr><td>';
         questDataArr = (rawData+"").split(DIVIDER);
       }
       console.log(questDataArr.length);
-      var note = await questModel.getMfgNote(questDataArr[2]);
+      var note = await questModel.getMfgNote(questDataArr[2]);*/
+      var note = '';
       answer = questModel.parseAnswer(answer);
 
       var item_count = 3;
