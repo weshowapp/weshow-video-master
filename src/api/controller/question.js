@@ -299,8 +299,12 @@ export default class extends Base {
     let count = this.get('count');
     let onlyself = this.get('onlyself');
     let openid = this.get('openid');
+    let type = this.get('type');
+    if (type == '' || type == undefined) {
+      type = wxconst.QUIZ_CATEGORY_SELF;
+    }
 
-    let list = await this.model('question').getRandomList(count, wxconst.QUIZ_CATEGORY_SELF, wxconst.QUIZ_LEVEL_AUTO, openid, onlyself);
+    let list = await this.model('question').getRandomList(count, type, wxconst.QUIZ_LEVEL_AUTO, openid, onlyself);
     return this.success({
       questList: list
     });

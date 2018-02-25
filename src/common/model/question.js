@@ -75,7 +75,8 @@ export default class extends Base {
           break;
         }
 
-        i += (seed % 6);
+        //i += (seed % 6);
+        i += Math.floor((list.length * Math.random()));
         i = i % list.length;
         console.log('i: ' + i);
         if (i == list.length - 1) {
