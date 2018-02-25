@@ -254,7 +254,7 @@ export default class extends Base {
     var content = line0.trim();
     console.log(content.length);
     var start = content.length - 1;
-    var answer = content.substring(start, 1);
+    var answer = content.substr(start, 1);
     console.log(answer);
     content = content.substring(0, start);
     console.log(content);
