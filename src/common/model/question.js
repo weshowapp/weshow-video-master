@@ -255,14 +255,13 @@ export default class extends Base {
     console.log(content.length);
     var start = content.length - 1;
     var answer = content.substr(start, 1);
-    console.log(answer);
     content = content.substring(0, start);
-    console.log(content);
-    answer = parseAnswer(answer);
+    answer = this.parseAnswer(answer);
+    console.log(answer);
 
     if (content != null && content != '') {
       console.log(content);
-      var items = getMfgItems(line1.trim());
+      var items = getPpItems(line1.trim());
 
       var item_count = 2;
       if (items.item2 != '') {
