@@ -222,9 +222,11 @@ export default class extends Base {
       if (start == -1 || end == -1) {
         return this.display();
       }
-      var next = rawData.substring(start, end);
+      var next = (rawData+'').substring(start+7, end);
+      console.log(next);
       end = next.indexOf('A．');
       var content = next.substring(0, end);
+      console.log(content);
       var items = questModel.parsePpItems(next);
       end = next.indexOf('-魔方格');
       next = next.substring(0, end);
@@ -233,6 +235,10 @@ export default class extends Base {
 
       var DIVIDER = '<table style="WORD-BREAK: break-all" border="0" width="650"><tbody><tr><td>';
       var questDataArr = (rawData+"").split(DIVIDER);
+      if (questDataArr.length < 2) {
+        DIVIDER = '<table style="word-break:break-all" border="0" width="650"><tbody><tr><td>';
+        questDataArr = (rawData+"").split(DIVIDER);
+      }
       console.log(questDataArr.length);
       var note = await questModel.getMfgNote(questDataArr[2]);
       answer = questModel.parseAnswer(answer);
