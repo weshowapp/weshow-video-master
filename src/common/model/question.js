@@ -230,12 +230,10 @@ export default class extends Base {
     if (data == null) {
       return {};
     }
+    console.log(data);
     var quest = {};
-    var arr = data.split('A');
-    if (arr.length < 1) {
-      return quest;
-    }
-    var next = arr[1];
+    var start = data.indexOf('A');
+    var next = data.substring(start);
     var end = next.indexOf('B');
     quest.item0 = next.substring(1, end);
     next = next.substring(end);
@@ -246,11 +244,12 @@ export default class extends Base {
     quest.item2 = next.substring(1, end);
     next = next.substring(end);
     quest.item3 = next.substring(1, end);
+    console.log(quest);
     return quest;
   }
 
   async addPpText(line0, line1) {
-    console.log(line0);
+    //console.log(line0);
     var content = line0.trim();
     console.log(content.length);
     var start = content.length - 1;
@@ -260,7 +259,7 @@ export default class extends Base {
     console.log(answer);
 
     if (content != null && content != '') {
-      console.log(content);
+      //console.log(content);
       var items = this.getPpItems(line1.trim());
 
       var item_count = 2;
