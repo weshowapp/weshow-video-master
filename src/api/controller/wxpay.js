@@ -39,8 +39,8 @@ export default class extends Base {
     //let return_code = this.post('return_code');
     //let return_msg = this.post('return_msg');
     var headerMsg = this.header();
-    var getMsg = this.http.req.body;
-    var postMsg = this.http.request;
+    var getMsg = this.http._get;
+    var postMsg = this.http._post;
     console.log(headerMsg);
     console.log(getMsg);
     console.log(postMsg);
@@ -50,8 +50,8 @@ export default class extends Base {
 
     let addResult = await this.model('wxpay').add({
       //notify: msg,
-      notify: headerMsg,
-      //note: postMsg,
+      notify: postMsg,
+      note: getMsg,
       add_time: tm
     });
 
