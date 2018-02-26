@@ -150,22 +150,24 @@ export default class extends Base {
       }
     }
 
-        let quizResult = await this.model('quiz').add({
-            title: title,
-            creator_id: creator_id,
-            creator_name: creator_name,
-            creator_photo: creator_photo,
-            create_time: create_time,
-            type: quiz_type,
-            start_time: start_time,
-            questions: quest_list,
-            quest_count: quest_count,
-            min_users: min_users,
-            price: price,
-            level: quiz_level,
-            category: quiz_category
-        });
-    
+    let quizResult = await this.model('quiz').add({
+        title: title,
+        creator_id: creator_id,
+        creator_name: creator_name,
+        creator_photo: creator_photo,
+        create_time: create_time,
+        type: quiz_type,
+        start_time: start_time,
+        questions: quest_list,
+        quest_count: quest_count,
+        min_users: min_users,
+        price: price,
+        level: quiz_level,
+        category: quiz_category
+    });
+
+    await this.model('quiz').createCalculateGainEvent(quizResult);
+
     return this.success({
       result: 'OK',
       quiz_id: quizResult,
