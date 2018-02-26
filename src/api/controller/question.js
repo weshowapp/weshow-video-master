@@ -155,6 +155,8 @@ export default class extends Base {
       input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
     });
 
+    ppArray.splice(0, ppArray.length);
+
     var count = 0;
     let questModel = this.model('question');
     await lineReader.on('line', function (line) {
@@ -274,6 +276,10 @@ export default class extends Base {
     }
     this.assign('result', 'Success Add ' + 1 + ' File');
 
+    var tk = this.post('wxtoken');
+    this.assign({'wxtoken': tk});
+    this.http.post('wxtoken', tk);
+    this.post('wxtoken', tk);
     //this.redirect('index');
     this.display();
   }
