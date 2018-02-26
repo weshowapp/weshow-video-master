@@ -26,7 +26,7 @@ export default class extends Base {
     console.log(list.length);*/
 
     var whereArg = {type: type, creator_id: creator_id};
-    if (type != wxconst.QUIZ_CATEGORY_SELF) {
+    if (type != wxconst.QUIZ_TYPE_SELF) {
       if (level == wxconst.QUIZ_LEVEL_AUTO) {
       }
       else {

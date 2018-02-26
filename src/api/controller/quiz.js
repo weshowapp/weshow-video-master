@@ -117,15 +117,21 @@ export default class extends Base {
     console.log(price);
     console.log(quest_list);
     console.log(quest_count);
-    
+
     var quiz_type = wxconst.QUIZ_TYPE_NORMAL;
     if (creator_level == wxconst.USER_LEVEL_PUBLIC) {
       quiz_type = wxconst.QUIZ_TYPE_PUBLIC;
     }
+    if (quiz_category == wxconst.QUIZ_CATEGORY_SELF) {
+      quiz_type = wxconst.QUIZ_TYPE_SELF;
+    }
+    else {
+      quiz_type = wxconst.QUIZ_TYPE_NORMAL;
+    }
 
     //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
     if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
-      var list = await this.model('question').getRandomList(quest_count, quiz_category, quiz_level, wxconst.USER_ID_ADMIN);
+      var list = await this.model('question').getRandomList(quest_count, quiz_type, quiz_level, wxconst.USER_ID_ADMIN);
       console.log(list.length);
       if (!think.isEmpty(list)) {
         quest_list = '';

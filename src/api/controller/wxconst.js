@@ -38,6 +38,7 @@ module.exports = {
     QUIZ_TYPE_DEFAULT: 0,
     QUIZ_TYPE_NORMAL: 1,
     QUIZ_TYPE_PUBLIC: 3,
+    QUIZ_TYPE_SELF: 17,
 
     WXCASH_OP_TYPE_PAY: 1,
     WXCASH_OP_TYPE_DRAW: 2,
