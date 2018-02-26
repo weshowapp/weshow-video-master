@@ -164,7 +164,7 @@ export default class extends think.model.base {
   async createCalculateGainEvent(quizid) {
     var table = 'weshow_quiz';
     var sql = 'CREATE EVENT quiz_' + quizid + '_cal_gain_event '
-        + ' on schedule at timestamp + interval ' + 20 + ' second  do '
+        + ' on schedule at current_timestamp + interval ' + 20 + ' second  do '
         + 'UPDATE ' + table + ' SET win_users=-2 WHERE id=' + quizid + ';';
     return await this.model('question').execute(sql);
   }
