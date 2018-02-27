@@ -186,7 +186,7 @@ export default class extends think.model.base {
         + 'IF var_win_user_cur > -1 THEN '
         + '  ROLLBACK; '
         + 'ELSE '
-        + '  SET var_time = CONVERT(current_timestamp / 1000, INTEGER); '
+        + '  SET var_time = UNIX_TIMESTAMP(current_timestamp); '
         + '  SELECT COUNT(*) INTO var_win_count FROM ' + tableQuizUser + ' WHERE quizid=qid AND game_status=' + wxconst.GAME_STATUS_WIN + ' ; '
         + '  IF var_win_count > 0 THEN '
         + '    SET var_game_gain = var_price / var_win_count; '
