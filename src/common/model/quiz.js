@@ -167,11 +167,12 @@ export default class extends think.model.base {
         + 'CREATE PROCEDURE CalGainProc(IN qid INT) IF NOT EXISTS '
         + 'BEGIN '
         + 'UPDATE ' + table + 'SET win_users=-3 WHERE id=' + quizid + '; '
-        + 'END// '
+        + 'END // '
         + 'DELIMITER ; '
+    await this.model('quiz').execute(sqlProc);
     var sql = 'CREATE EVENT quiz_' + quizid + '_cal_gain_event '
         + ' on schedule at current_timestamp + interval ' + 100 + ' second  do '
         + ' CALL CalGainProc(' + quizid + ');';
-    return await this.model('question').execute(sql);
+    return await this.model('quiz').execute(sql);
   }
 }
