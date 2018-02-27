@@ -163,12 +163,12 @@ export default class extends think.model.base {
 
   async createCalculateGainEvent(quizid) {
     var table = 'weshow_quiz';
-	var sqlProc = 'DELIMITER // '
-        + 'CREATE PROCEDURE CalGainProc(IN qid INT) IF NOT EXISTS '
+	var sqlProc = ' '
+        + 'CREATE PROCEDURE CalGainProc(IN qid INT) '
         + 'BEGIN '
-        + 'UPDATE ' + table + 'SET win_users=-3 WHERE id=' + quizid + '; '
-        + 'END // '
-        + 'DELIMITER ; '
+        + 'UPDATE ' + table + ' SET win_users=-3 WHERE id=' + quizid + '; '
+        + 'END '
+        + ' ; '
     await this.model('quiz').execute(sqlProc);
     var sql = 'CREATE EVENT quiz_' + quizid + '_cal_gain_event '
         + ' on schedule at current_timestamp + interval ' + 100 + ' second  do '
