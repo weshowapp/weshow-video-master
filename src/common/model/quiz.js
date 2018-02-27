@@ -175,8 +175,8 @@ export default class extends think.model.base {
         + 'DECLARE var_game_gain INTEGER DEFAULT 0; '
         + 'DECLARE var_win FLOAT DEFAULT 0; '
         + 'DECLARE var_balance FLOAT DEFAULT 0; '
-        + 'DECLARE var_openid CHAR(64) DEFAULT ''; '
-        + 'DECLARE var_creator_id CHAR(64) DEFAULT ''; '
+        + 'DECLARE var_openid CHAR(64); '
+        + 'DECLARE var_creator_id CHAR(64); '
         + 'START TRANSACTION; ';
         + 'SELECT COUNT(*) INTO var_win_count FROM ' + tableQuizUser + ' WHERE quizid=qid AND game_status=' + wxconst.GAME_STATUS_WIN + ' ; '
         + 'IF var_win_count > 0 THEN '
