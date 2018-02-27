@@ -25,7 +25,7 @@ export default class extends Base {
     if (!think.isEmpty(userInfo)) {
       var bal = userInfo.balance;
       console.log('bal ' + bal);
-      if (draw_type == 1 || draw_type == 3) {
+      if (draw_type == wxconst.WXCASH_OP_TYPE_PAY || draw_type == wxconst.WXCASH_OP_TYPE_WIN) {
         bal = bal + parseFloat(cash_val);
       }
       else {

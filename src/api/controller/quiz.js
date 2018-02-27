@@ -113,6 +113,7 @@ export default class extends Base {
     let min_users = this.post('min_users');
     let price = this.post('price');
     let start_time = this.post('start_time');
+    create_time = this.getCurrentTime();
     console.log('addAction');
     console.log(price);
     console.log(quest_list);
@@ -166,7 +167,8 @@ export default class extends Base {
         category: quiz_category
     });
 
-    await this.model('quiz').createCalculateGainEvent(quizResult);
+    var interval = start_time - this.getCurrentTime() + 15 * quest_count;
+    await this.model('quiz').createCalculateGainEvent(quizResult, interval);
 
     return this.success({
       result: 'OK',

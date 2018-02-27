@@ -161,17 +161,54 @@ export default class extends think.model.base {
     return quiz;
   }
 
-  async createCalculateGainEvent(quizid) {
+  async createCalculateGainEvent(quizid, interval) {
+    console.log('createEvent ' + quizid + ', ' + interval);
     var table = 'weshow_quiz';
-	var sqlProc = ' '
+    var tableUser = 'weshow_user';
+    var tableQuizUser = 'weshow_quizuser';
+    var tableWxcash = 'weshow_wxcash';
+    var sqlProc = ' '
         + 'CREATE PROCEDURE CalGainProc(IN qid INT) '
         + 'BEGIN '
-        + 'UPDATE ' + table + ' SET win_users=-3 WHERE id=' + quizid + '; '
+        + 'DECLARE var_win_count INTEGER DEFAULT 0; '
+        + 'DECLARE var_price INTEGER DEFAULT 0; '
+        + 'DECLARE var_game_gain INTEGER DEFAULT 0; '
+        + 'DECLARE var_win FLOAT DEFAULT 0; '
+        + 'DECLARE var_balance FLOAT DEFAULT 0; '
+        + 'DECLARE var_openid CHAR(64) DEFAULT ''; '
+        + 'DECLARE var_creator_id CHAR(64) DEFAULT ''; '
+        + 'START TRANSACTION; ';
+        + 'SELECT COUNT(*) INTO var_win_count FROM ' + tableQuizUser + ' WHERE quizid=qid AND game_status=' + wxconst.GAME_STATUS_WIN + ' ; '
+        + 'IF var_win_count > 0 THEN '
+        + '  UPDATE ' + table + ' SET win_users=var_win_count WHERE id=qid; '
+        + '  SELECT create_id,price INTO var_creator_id,var_price FROM ' + table + ' WHERE id=qid; '
+        + '  SET var_game_gain = var_price / var_win_count; '
+        + '  UPDATE ' + tableQuizUser + ' SET game_gain=var_game_gain WHERE quizid=qid AND game_status=' + wxconst.GAME_STATUS_WIN + ' ; '
+        + '  DECLARE cur CURSOR FOR (SELECT * FROM ' + tableQuizUser + ' WHERE quizid=qid AND game_status=' + wxconst.GAME_STATUS_WIN + ' ) '
+        + '  OPEN cur;'
+        + '    read_loop : LOOP'
+        + '      FETCH cur INTO quizuser;'
+        + '      SELECT win,balance INTO var_win,var_balance FROM ' + tableUser + ' WHERE openid=' + quizuser.openid + ' ; '
+        + '      SET var_balance = var_balance + game_gain; '
+        + '      SET var_win = var_win + game_gain; '
+        + '      UPDATE ' + tableUser + ' SET balance=var_balance,win=var_win WHERE openid=' + quizuser.openid + '; '
+        + '      INSERT INTO ' + tableWxcash + '(openid,quizid,cash_val,draw_type,note,draw_status,add_time) VALUES(' + quizuser.openid + ',qid,' + var_game_gain + ',' + wxconst.WXCASH_OP_TYPE_WIN + ',' + wxconst.WXCASH_OP_NOTE_WIN + ',' + wxconst.WXCASH_STATUS_SUCCESS + ',current_timestamp/1000); '
+        + '    END LOOP;'
+        + '  CLOSE cur;'
+        + '  SELECT balance INTO var_balance FROM ' + tableUser + ' WHERE openid=var_creator_id; '
+        + '  SET var_balance = var_balance - var_price; '
+        + '  UPDATE ' + tableUser + ' SET balance=var_balance WHERE openid=var_creator_id; '
+        + '  INSERT INTO ' + tableWxcash + '(openid,quizid,cash_val,draw_type,note,draw_status,add_time) VALUES(' + var_creator_id + ',qid,' + var_price + ',' + wxconst.WXCASH_OP_TYPE_GAME + ',' + wxconst.WXCASH_OP_NOTE_GAME + ',' + wxconst.WXCASH_STATUS_SUCCESS + ',current_timestamp/1000); '
+        + 'ELSE '
+        + '  UPDATE ' + table + ' SET win_users=0 WHERE id=qid; '
+        + 'END IF; '
+        + 'COMMIT;'
         + 'END '
         + ' ; '
     await this.model('quiz').execute(sqlProc);
+
     var sql = 'CREATE EVENT quiz_' + quizid + '_cal_gain_event '
-        + ' on schedule at current_timestamp + interval ' + 100 + ' second  do '
+        + ' on schedule at current_timestamp + interval ' + interval + ' second  do '
         + ' CALL CalGainProc(' + quizid + ');';
     return await this.model('quiz').execute(sql);
   }

@@ -160,10 +160,10 @@ async calculateGain1(qid) {
       //#2
       var curTime = (new Date()).getTime() / 1000;
       console.log('#2');
-      return quizUserModel.where({ quizid: qid, game_status: 0 }).select().then(function (info) {
+      return quizUserModel.where({ quizid: qid, game_status: wxconst.GAME_STATUS_UNCOMPLETE }).select().then(function (info) {
         if (think.isEmpty(info) || (!think.isEmpty(quiz) && curTime >= quizEndTime - 2)) {
           console.log('#3');
-          let winList = quizuserModel.where({ quizid: qid, game_status: 1 }).select();
+          let winList = quizuserModel.where({ quizid: qid, game_status: wxconst.GAME_STATUS_WIN }).select();
           if (think.isEmpty(winList)) {
             return false;
           }
@@ -191,14 +191,14 @@ async calculateGain1(qid) {
               let result = userModel.where({ openid: winList[i].openid }).update({
                 win: perUserPrice
               });
-              wxcashModel.addOp(winList[i].openid, quiz.id, price, 3, 'win', quizEndTime);
+              wxcashModel.addOp(winList[i].openid, quiz.id, price, wxconst.WXCASH_OP_TYPE_WIN, wxconst.WXCASH_OP_NOTE_WIN, quizEndTime);
             }
             console.log('#5');
             return quizModel.where({ id: qid }).update({
               win_users: winCount
             }).then(function (updateInfo) {
               console.log('#6');
-              return wxcashModel.addOp(quiz.creator_id, quiz.id, quiz.price, 4, 'game', quizEndTime);
+              return wxcashModel.addOp(quiz.creator_id, quiz.id, quiz.price, wxconst.WXCASH_OP_TYPE_GAME, wxconst.WXCASH_OP_NOTE_GAME, quizEndTime);
             });
           }
         }
