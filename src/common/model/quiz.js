@@ -193,7 +193,7 @@ export default class extends think.model.base {
         + '      FETCH cur INTO var_openid;'
         + '      IF done THEN '
         + '        LEAVE cal_loop; '
-        + '      END IF '
+        + '      END IF; '
         + '      SELECT win,balance INTO var_win,var_balance FROM ' + tableUser + ' WHERE openid=var_openid; '
         + '      SET var_balance = var_balance + game_gain; '
         + '      SET var_win = var_win + game_gain; '
@@ -212,7 +212,7 @@ export default class extends think.model.base {
         + 'COMMIT;'
         + 'END '
         + ' ; '
-    await this.model('quiz').execute(sqlProc);
+    //await this.model('quiz').execute(sqlProc);
 
     var sql = 'CREATE EVENT quiz_' + quizid + '_cal_gain_event '
         + ' on schedule at current_timestamp + interval ' + interval + ' second  do '
