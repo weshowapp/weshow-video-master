@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
 <title>用户管理</title>
 <style>
-*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
+body {font-family:arial, 'Microsoft Yahei', '微软雅黑'; font-size:12px;}
+*{padding: 0;margin: 0;font-size: 14px;line-height: 20px;font-family: arial;}
 a, a:visited{color:#337ab7;text-decoration: none;}
-header{padding: 10px 0 10px 0;background-color: #4A6495}
-h1{font-size: 32px;color:#fff;font-weight: normal;}
-code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-.content{width: 100%;margin: auto}
+header{padding: 10px 0 2px 0;background-color: #fff; width:100%;}
+h1{font-size: 24px;color:#333;font-weight: normal; font-family:arial, 'Microsoft Yahei', '微软雅黑';}
+code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
 .wrap{width: 100%;margin: 10px;}
-.content{margin-top: 30px;}
-.list{width: 90%;font-size: 36px;}
+.content{margin-top: 30px; padding:0 10px 0 10px; width: 100%;}
+.list{width:100%;font-size: 36px;}
 .list .item{position: relative;padding-left: 10px;margin-top: 50px;font-size: 36px;}
-.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
+.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0; text-align: center;line-height: 36px;}
 .list .item h2{font-size: 38px;font-weight: normal;}
 .list .item p{line-height: 36px;margin-top: 10px;font-size: 36px;}
 .list .item t1{line-height: 36px;margin-top: 10px;font-size: 36px;}
+table.dataintable {margin-top:15px; border-collapse:collapse; border:1px solid #aaa; width:100%; font-family:arial, 'Microsoft Yahei', '微软雅黑'; }
+table.dataintable td {vertical-align:text-top; padding:2px; border:1px solid #666; font-family:arial, 'Microsoft Yahei', '微软雅黑'; font-size:12px;}
+table.dataintable th {vertical-align:baseline; padding:2px; background-color:#999; border:1px solid #3F3F3F; text-align:left; color:#fff;}
+.bn {border: 1px; width:100%; }
+p {padding:3px 0 3px 0;}
 </style>
 </head>
 <body>
@@ -28,88 +37,89 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
   </header>
   <div class="content">
     <div class="list">
-      <table border="1px">
+      <table class="dataintable">
         <tr>
-          <td>ID</td>
-          <td>级别</td>
-          <td>性别</td>
-          <td>微信ID</td>
-          <td>电话</td>
-          <td>账号</td>
-          <td>Name</td>
-          <td>国家</td>
-          <td>省</td>
-          <td>市</td>
-          <td>语言</td>
-          <td>头像</td>
-          <td>邀请人</td>
-          <td>受邀请码</td>
-          <td>邀请码</td>
-          <td>注册时间</td>
-          <td>是否激活</td>
-          <td>参赛次数</td>
-          <td>赢得次数</td>
-          <td>复活卡</td>
-          <td>出题数量</td>
-          <td>赢取奖金</td>
-          <td>余额</td>
-          <td>备注</td>
-        </tr>
+          <th width="3%">ID</th>
+          <th width="3%">级别</th>
+          <th width="3%">性别</th>
+          <th width="3%">微信ID</th>
+          <th width="4%">电话</th>
+          <th width="4%">账号</th>
+          <th width="4%">Name</th>
+          <th width="4%">国家</th>
+          <th width="4%">省</th>
+          <th width="4%">市</th>
+          <th width="4%">语言</th>
+          <th width="4%">头像</th>
+          <th width="4%">邀请人</th>
+          <th width="4%">受邀请码</th>
+          <th width="4%">邀请码</th>
+          <th width="4%">注册时间</th>
+          <th width="4%">是否激活</th>
+          <th width="4%">参赛次数</th>
+          <th width="4%">赢得次数</th>
+          <th width="4%">复活卡</th>
+          <th width="4%">出题数量</th>
+          <th width="4%">赢取奖金</th>
+          <th width="4%">余额</th>
+          <th width="4%">备注</th>
+          <th width="6%" colspan="2">操作</th>
+		</tr>
         <% var currentId = 0; %>
         <% user_list.forEach(function(item) { %>
         <tr>
           <form action="update" enctype="multipart/form-data" method="post">
-            <td><input size="1" type="text" name ="id" value="<%= item.id %>"/></td>
-            <td><input size="1" type="text" name ="level" value="<%= item.level %>"/></td>
-            <td><input size="1" type="text" name ="gender" value="<%= item.gender %>"/></td>
-            <td><input size="1" type="text" name ="userid" value="<%= item.openid %>"/></td>
-            <td><input size="1" type="text" name ="mobile" value="<%= item.mobile %>"/></td>
-            <td><input size="1" type="text" name ="account" value="<%= item.account %>"/></td>
-            <td><input size="3" type="text" name ="name" value="<%= item.name %>"/></td>
-            <td><input size="1" type="text" name ="country" value="<%= item.country %>"/></td>
-            <td><input size="1" type="text" name ="province" value="<%= item.province %>"/></td>
-            <td><input size="1" type="text" name ="city" value="<%= item.city %>"/></td>
-            <td><input size="1" type="text" name ="language" value="<%= item.language %>"/></td>
-            <td><input size="1" type="text" name ="avatarUrl" value="<%= item.photo_url %>"/></td>
-            <td><input size="1" type="text" name ="inviter_id" value="<%= item.inviter_id %>"/></td>
-            <td><input size="1" type="text" name ="inviter_code" value="<%= item.inviter_code %>"/></td>
-            <td><input size="1" type="text" disabled="true" value="<%= item.invition_code %>"/></td>
-            <td><input size="6" type="text" name ="add_time" value="<%= item.str_time %>"/></td>
-            <td><input size="1" type="text" name ="enabled" value="<%= item.enabled %>"/></td>
-            <td><input size="1" type="text" disabled="true" value="<%= item.join_count %>"/></td>
-            <td><input size="1" type="text" disabled="true" value="<%= item.win_count %>"/></td>
-            <td><input size="1" type="text" name ="relive" value="<%= item.relive %>"/></td>
-            <td><input size="1" type="text" disabled="true" value="<%= item.question_count %>"/></td>
-            <td><input size="1" type="text" disabled="true" value="<%= item.win %>"/></td>
-            <td><input size="1" type="text" disabled="true" value="<%= item.balance %>"/></td>
-            <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="id" value="<%= item.id %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="level" value="<%= item.level %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="gender" value="<%= item.gender %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="userid" value="<%= item.openid %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="mobile" value="<%= item.mobile %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="account" value="<%= item.account %>"/></td>
+            <td><input class="bn" size="3" type="text" name ="name" value="<%= item.name %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="country" value="<%= item.country %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="province" value="<%= item.province %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="city" value="<%= item.city %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="language" value="<%= item.language %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="avatarUrl" value="<%= item.photo_url %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="inviter_id" value="<%= item.inviter_id %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="inviter_code" value="<%= item.inviter_code %>"/></td>
+            <td><input class="bn" size="1" type="text" disabled="true" value="<%= item.invition_code %>"/></td>
+            <td><input class="bn" size="6" type="text" name ="add_time" value="<%= item.str_time %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="enabled" value="<%= item.enabled %>"/></td>
+            <td><input class="bn" size="1" type="text" disabled="true" value="<%= item.join_count %>"/></td>
+            <td><input class="bn" size="1" type="text" disabled="true" value="<%= item.win_count %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="relive" value="<%= item.relive %>"/></td>
+            <td><input class="bn" size="1" type="text" disabled="true" value="<%= item.question_count %>"/></td>
+            <td><input class="bn" size="1" type="text" disabled="true" value="<%= item.win %>"/></td>
+            <td><input class="bn" size="1" type="text" disabled="true" value="<%= item.balance %>"/></td>
+            <td><input class="bn" size="1" type="text" name ="note" value="<%= item.note %>"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input size="2" type="submit" value=" 更 新 "/></td>
           </form>
           <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="post">
             <td>
               <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-              <input size="2" type="submit" name="delete" value="删除:<%= item.id %>"/>
+              <input size="2" type="submit" name="delete" value="删除"/>
             </td>
           </form>
         </tr>
         <% currentId = item.id %>
         <% }) %>
         <tr>
+		<tr>
+		<td colspan="26" height="10px"></td>
+		</tr>
           <form action="index" enctype="multipart/form-data" method="post">
-            <td>起始ID</td>
-            <td><input size="1" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
-            <td>个数</td>
-            <td><input size="2" type="text" name ="size" value="10"/></td>
-            <td><input size="4" type="submit" value="下一页"/></td>
+            <td colspan="4">起始ID：<input size="5" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
+            <td colspan="3">个数：<input size="5" type="text" name ="size" value="10"/></td>
+            <td colspan="25"><input size="4" type="submit" value="下一页"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
         <tr>
           <form action="index" enctype="multipart/form-data" method="post">
-            <td>Name</td>
-            <td><input size="1" type="text" name ="name" value="李%"/></td>
-            <td><input size="4" type="submit" value="查询"/></td>
+            <td colspan="7">Name：<input size="10" type="text" name ="name" value="李%"/></td>
+            <td colspan="20"><input size="4" type="submit" value="查 询"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>

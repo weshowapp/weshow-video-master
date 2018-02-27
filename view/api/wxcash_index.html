@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
 <title>帐单管理</title>
 <style>
-*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
+body {font-family:arial, 'Microsoft Yahei', '微软雅黑'; font-size:12px;}
+*{padding: 0;margin: 0;font-size: 14px;line-height: 20px;font-family: arial;}
 a, a:visited{color:#337ab7;text-decoration: none;}
-header{padding: 10px 0 10px 0;background-color: #4A6495}
-h1{font-size: 32px;color:#fff;font-weight: normal;}
-code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-.content{width: 100%;margin: auto}
+header{padding: 10px 0 2px 0;background-color: #fff; width:100%;}
+h1{font-size: 24px;color:#333;font-weight: normal; font-family:arial, 'Microsoft Yahei', '微软雅黑';}
+code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
 .wrap{width: 100%;margin: 10px;}
-.content{margin-top: 30px;}
-.list{width: 90%;font-size: 36px;}
+.content{margin-top: 30px; padding:0 10px 0 10px; width: 100%;}
+.content1{margin-top: 30px; padding-left:10px; width: 100%; line-height:160%;}
+.list{width:90%;font-size: 36px;}
 .list .item{position: relative;padding-left: 10px;margin-top: 50px;font-size: 36px;}
-.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
+.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0; text-align: center;line-height: 36px;}
 .list .item h2{font-size: 38px;font-weight: normal;}
 .list .item p{line-height: 36px;margin-top: 10px;font-size: 36px;}
 .list .item t1{line-height: 36px;margin-top: 10px;font-size: 36px;}
+table.dataintable {margin-top:15px; border-collapse:collapse; border:1px solid #aaa; width:100%; font-family:arial, 'Microsoft Yahei', '微软雅黑'; }
+table.dataintable td {vertical-align:text-top; padding:2px; border:1px solid #666; font-family:arial, 'Microsoft Yahei', '微软雅黑'; font-size:12px;}
+table.dataintable th {vertical-align:baseline; padding:2px; background-color:#999; border:1px solid #3F3F3F; text-align:left; color:#fff;}
+.bn {border: 1px; width:100%; }
+p {padding:3px 0 3px 0;}
 </style>
 </head>
 <body>
@@ -28,50 +38,50 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
   </header>
   <div class="content">
     <div class="list">
-      <table border="1px">
+      <table class="dataintable">
         <tr>
-          <td>ID</td>
-          <td>微信ID</td>
-          <td>用户名</td>
-          <td>比赛ID</td>
-          <td>金额</td>
-          <td>操作</td>
-          <td>备注</td>
-          <td>是否成功</td>
-          <td>操作时间</td>
+          <th width="10%">ID</th>
+          <th width="15%">微信ID</th>
+          <th width="15%">用户名</th>
+          <th width="10%">比赛ID</th>
+          <th width="10%">金额</th>
+          <th width="10%">操作</th>
+          <th width="7%">备注</th>
+          <th width="8%">是否成功</th>
+          <th width="15%">操作时间</th>
         </tr>
         <% var currentId = 0; %>
         <% wxcash_list.forEach(function(item) { %>
         <tr>
           <form action="update" enctype="multipart/form-data" method="post">
-            <td><input size="1" type="text" name ="id" value="<%= item.id %>"/></td>
-            <td><input size="10" type="text" name ="openid" value="<%= item.openid %>"/></td>
-            <td><input size="6" type="text" name ="username" value="<%= item.username %>"/></td>
-            <td><input size="1" type="text" name ="quizid" value="<%= item.quizid %>"/></td>
-            <td><input size="2" type="text" name ="cash_val" value="<%= item.cash_val %>"/></td>
-            <td><input size="1" type="text" name ="draw_type" value="<%= item.draw_type %>"/></td>
-            <td><input size="1" type="text" name ="note" value="<%= item.note %>"/></td>
-            <td><input size="1" type="text" name ="draw_status" value="<%= item.draw_status %>"/></td>
-            <td><input size="14" type="text" name ="add_time" value="<%= item.str_time %>"/></td>
+            <td><input class="bn" size="10" type="text" name ="id" value="<%= item.id %>"/></td>
+            <td><input class="bn" size="15" type="text" name ="openid" value="<%= item.openid %>"/></td>
+            <td><input class="bn" size="15" type="text" name ="username" value="<%= item.username %>"/></td>
+            <td><input class="bn" size="10" type="text" name ="quizid" value="<%= item.quizid %>"/></td>
+            <td><input class="bn" size="10" type="text" name ="cash_val" value="<%= item.cash_val %>"/></td>
+            <td><input class="bn" size="10" type="text" name ="draw_type" value="<%= item.draw_type %>"/></td>
+            <td><input class="bn" size="10" type="text" name ="note" value="<%= item.note %>"/></td>
+            <td><input class="bn" size="10" type="text" name ="draw_status" value="<%= item.draw_status %>"/></td>
+            <td><input class="bn" size="15" type="text" name ="add_time" value="<%= item.str_time %>"/></td>
           </form>
         </tr>
         <% currentId = item.id %>
         <% }) %>
         <tr>
+		<tr>
+		<td colspan="27" height="10px"></td>
+		</tr>
           <form action="index" enctype="multipart/form-data" method="post">
-            <td>起始ID</td>
-            <td><input size="2" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
-            <td>个数</td>
-            <td><input size="2" type="text" name ="size" value="10"/></td>
-            <td><input size="4" type="submit" value=" 下一页 "/></td>
+            <td>起始ID：<input size="2" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
+            <td>个数：<input size="2" type="text" name ="size" value="10"/></td>
+            <td colspan="7"><input size="4" type="submit" value=" 下一页 "/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
         <tr>
           <form action="index" enctype="multipart/form-data" method="post">
-            <td>用户ID</td>
-            <td><input size="8" type="text" name ="openid" value="o5G-"/></td>
-            <td><input size="4" type="submit" value="查询"/></td>
+            <td colspan="2">用户ID：<input size="8" type="text" name ="openid" value="o5G-"/></td>
+            <td colspan="7"><input size="4" type="submit" value="查询"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
           </form>
         </tr>
