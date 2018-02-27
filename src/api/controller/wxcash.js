@@ -55,7 +55,7 @@ export default class extends Base {
     let uid = this.get('openid');
     //let type = this.get('draw_type');
 
-    let l = await this.model('wxcash').where({openid: uid}).order('add_time DESC').select();
+    let l = await this.model('wxcash').where({openid: uid}).order('add_time DESC').limit(30).select();
     if (!think.isEmpty(l)) {
       for (var i = 0; i < l.length; i++) {
         l[i].open_gid = '0';
