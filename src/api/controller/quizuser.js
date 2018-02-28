@@ -136,6 +136,8 @@ export default class extends Base {
         openid: uid,
         note: note
     });
+
+    await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
     
     return this.success({
       result: 'OK',
@@ -221,9 +223,22 @@ export default class extends Base {
       answer_time: answer_time
     });
 
+    await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
+
     return this.success({
       result: 'OK',
       errorCode: 0
     });
+  }
+
+  //WebSocket Related
+  async openAction(self) {
+    var socket = self.http.socket;
+    await this.model('quizuser').openWebSocket(socket);
+  }
+
+  async closeAction(self) {
+    var socket = self.http.socket;
+    await this.model('quizuser').closeWebSocket(socket);
   }
 }

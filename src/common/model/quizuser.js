@@ -2,6 +2,9 @@
 
 var wxconst = require('../../api/controller/wxconst');
 
+var mSocketMap = new Map();
+
+
 /**
  * model
  */
@@ -50,7 +53,31 @@ export default class extends think.model.base {
     return info;
   }
 
-/**
+  async openWebSocket(socket) {
+    var openid = socket.openid;
+    mSocketMap.set(openid, socket);
+  }
+
+  async closeWebSocket(socket) {
+    var openid = socket.openid;
+    mSocketMap.delete(openid);
+  }
+
+  asnyc sendWebSocketMsg(quizid, uid, msg) {
+    let userList = await this.model('quizuser').where({ quizid: quizid }).select();
+    for (var i = 0; i < userList.length; i++) {
+      var openid = userList[i].openid;
+      var socket = mSocketMap.get(openid);
+      if (socket != null && socket != undefined) {
+        this.emit(msg, {
+          msg: msg,
+          openid: uid
+        });
+      }
+    }
+  }
+
+  /**
    * Calculate the gain
    * @param newsId
    * @returns {Promise.<*>}
