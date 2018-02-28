@@ -6,7 +6,7 @@ export default {
   allow_origin: "",
   sub_protocal: "",
   adapter: undefined,
-  path: "", //url path for websocket
+  path: "/socket.io", //url path for websocket
   messages: {
     open: 'api/quizuser/open',
     close: 'api/quizuser/close',
