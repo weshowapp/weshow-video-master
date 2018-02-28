@@ -82,7 +82,7 @@ export default class extends think.model.base {
       quiz.is_start = 0;
       quiz.phase = wxconst.QUIZ_PHASE_WAIT;
     }
-    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * 15 - 4) {
+    else if (curTime > quiz.start_time && curTime <= quiz.start_time + quiz.quest_count * wxconst.GAME_LENGTH_SECOND - 4) {
       quiz.is_start = 1;
       quiz.phase = wxconst.QUIZ_PHASE_GAMING;
       let groupInfo = await this.model('quizuser').where({quizid: quiz.id}).count();
@@ -90,9 +90,17 @@ export default class extends think.model.base {
         if (groupInfo < quiz.min_users) {
           quiz.phase = wxconst.QUIZ_PHASE_FINISH;
         }
+        else if (curTime > quiz.start_time + wxconst.GAME_LENGTH_SECOND - 1) {
+          let answerInfo = await this.model('quizuser').where({quizid: quiz.id, answer_correct: 1}).count();
+          if (!think.isEmpty(answerInfo)) {
+            if (answerInfo < 1) {
+              quiz.phase = wxconst.QUIZ_PHASE_FINISH;
+            }
+          }
+        }
       }
     }
-    else if (curTime > quiz.start_time + quiz.quest_count * 15 - 4) {
+    else if (curTime > quiz.start_time + quiz.quest_count * wxconst.GAME_LENGTH_SECOND - 4) {
       quiz.is_completed = 1;
       quiz.phase = wxconst.QUIZ_PHASE_FINISH;
     }
@@ -161,8 +169,8 @@ export default class extends think.model.base {
     return quiz;
   }
 
-  async createCalculateGainEvent(quizid, interval) {
-    console.log('createEvent ' + quizid + ', ' + interval);
+  async createCalculateGainProcedure() {
+    console.log('createCalculateGainProcedure');
     var table = 'weshow_quiz';
     var tableUser = 'weshow_user';
     var tableQuizUser = 'weshow_quizuser';
@@ -223,8 +231,11 @@ export default class extends think.model.base {
         + 'END IF; '
         + 'END '
         + ' ; '
-    //await this.model('quiz').execute(sqlProc);
+    await this.model('quiz').execute(sqlProc);
+  }
 
+  async createCalculateGainEvent(quizid, interval) {
+    console.log('createEvent ' + quizid + ', ' + interval);
     var sql = 'CREATE EVENT quiz_' + quizid + '_cal_gain_event '
         + ' on schedule at current_timestamp + interval ' + interval + ' second  do '
         + ' CALL CalGainProc(' + quizid + ');';

@@ -210,6 +210,9 @@ export default class extends Base {
     var answer_time = this.getCurrentTime();
     console.log(qid);
     console.log(question_id);
+    if (answer_correct == '') {
+      answer_correct = 1;
+    }
 
     await this.model('quizuser').where({quizid: qid, openid: userid}).update({
       answer_status: question_id,

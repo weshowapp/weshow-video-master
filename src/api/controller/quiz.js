@@ -195,7 +195,7 @@ export default class extends Base {
     });
   }
 
-  async updatepayAction(){
+  async updatepayAction() {
     let openid = this.post('openid');
     let payed = this.post('pay_status');
     var qid = this.post('quiz_id');
@@ -211,5 +211,13 @@ export default class extends Base {
     });
     await this.model('wxcash').addOp(openid, qid, cash_val, wxconst.WXCASH_OP_TYPE_PAY, wxconst.WXCASH_OP_NOTE_PAY, add_time);
     return this.json(result);
+  }
+
+  async creategainprocAction() {
+    await this.model('quiz').createCalculateGainProcedure();
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
   }
 }
