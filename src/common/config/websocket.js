@@ -6,11 +6,11 @@ export default {
   allow_origin: "",
   sub_protocal: "",
   adapter: undefined,
-  path: "api", //url path for websocket
+  path: "", //url path for websocket
   messages: {
-    open: 'quizuser/open',
-    close: 'quizuser/close',
-    join: 'quizuser/join',
-    answer: 'quizuser/answer',
+    open: 'api/quizuser/open',
+    close: 'api/quizuser/close',
+    join: 'api/quizuser/join',
+    answer: 'api/quizuser/answer',
   }
 };
