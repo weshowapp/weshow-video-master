@@ -175,6 +175,7 @@ export default class extends think.model.base {
     var tableUser = 'weshow_user';
     var tableQuizUser = 'weshow_quizuser';
     var tableWxcash = 'weshow_wxcash';
+    var tableRelive = 'weshow_relive';
     var sqlProc = ' '
         + 'CREATE PROCEDURE CalGainProc(IN qid INT) '
         + 'BEGIN '
@@ -223,6 +224,7 @@ export default class extends think.model.base {
         + '      SET var_relive = var_relive + 1; '
         + '      UPDATE ' + tableUser + ' SET ' + tableUser + '.balance=var_balance,' + tableUser + '.relive=var_relive WHERE ' + tableUser + '.openid=var_creator_id; '
         + '      INSERT INTO ' + tableWxcash + '(openid,quizid,cash_val,draw_type,note,draw_status,add_time) VALUES(var_creator_id,qid,var_price,' + wxconst.WXCASH_OP_TYPE_GAME + ',\'' + wxconst.WXCASH_OP_NOTE_GAME + '\',' + wxconst.WXCASH_STATUS_SUCCESS + ',var_time); '
+        + '      INSERT INTO ' + tableRelive + '(openid,quizid,invitee_id,increase,add_time) VALUES(var_creator_id,qid,\'0\',1,var_time); '
         + '    END; '
         + '  ELSE '
         + '    UPDATE ' + table + ' SET win_users=0 WHERE id=qid; '
@@ -231,6 +233,7 @@ export default class extends think.model.base {
         + 'END IF; '
         + 'END '
         + ' ; '
+    await this.model('quiz').execute('DROP PROCEDURE IF EXISTS CalGainProc;');
     await this.model('quiz').execute(sqlProc);
   }
 
