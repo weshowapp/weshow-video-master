@@ -379,7 +379,7 @@ export default class extends Base {
   }
 
   async addWord(line) {
-    //console.log(line);
+    console.log(line);
     var arr = line.trim().split(',');
     var wrong = line;
     var correct = line;
@@ -388,7 +388,7 @@ export default class extends Base {
       correct = arr[1];
     }
     else {
-      var arr1 = content.split('，');
+      var arr1 = line.split('，');
       if (arr1.length > 1) {
         wrong = arr[0];
         correct = arr[1];
@@ -396,6 +396,7 @@ export default class extends Base {
     }
     wrong = wrong.trim();
     correct = correct.trim();
+    console.log(wrong + ", " + correct);
     if (wrong != null && wrong != '' && correct != null && correct != '') {
       var content = '“' + wrong + '”中的第一个错别字是哪个？';
       var note = '正确的写法是：“' + correct + '”';
