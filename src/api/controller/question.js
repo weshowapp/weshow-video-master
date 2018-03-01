@@ -147,6 +147,29 @@ export default class extends Base {
     this.display();
   }
 
+  async uploadwordsAction() {
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+
+    var lineReader = require('readline').createInterface({
+      input: require('fs').createReadStream(filepath, {encoding: 'UTF-8'})
+    });
+
+    var count = 0;
+    let questModel = this.model('question');
+    await lineReader.on('line', function (line) {
+      if(!line) return;
+      console.log(count);
+
+      questModel.addWord(line);
+      count = count + 1;
+    });
+
+    this.assign('result', 'Success Add ' + count + ' Lines');
+
+    this.display();
+  }
+
   async uploadpptxtAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;

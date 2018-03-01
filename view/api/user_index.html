@@ -96,9 +96,10 @@ p {padding:3px 0 3px 0;}
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input size="2" type="submit" value=" 更 新 "/></td>
           </form>
-          <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="post">
+          <form action="delete" enctype="multipart/form-data" method="post">
             <td>
               <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+              <input type="hidden" name="id" value="<%= item.id %>">
               <input size="2" type="submit" name="delete" value="删除"/>
             </td>
           </form>

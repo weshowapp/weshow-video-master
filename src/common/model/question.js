@@ -377,4 +377,69 @@ export default class extends Base {
     }
     return 0;
   }
+
+  async addWord(line) {
+    //console.log(line);
+    var arr = line.trim().split(',');
+    var wrong = line;
+    var correct = line;
+    if (arr.length > 1) {
+      wrong = arr[0];
+      correct = arr[1];
+    }
+    else {
+      var arr1 = content.split('，');
+      if (arr1.length > 1) {
+        wrong = arr[0];
+        correct = arr[1];
+      }
+    }
+    wrong = wrong.trim();
+    correct = correct.trim();
+    if (wrong != null && wrong != '' && correct != null && correct != '') {
+      var content = '“' + wrong + '”中的错别字是哪个？';
+      var note = '正确的写法是：“' + correct + '”';
+      var item_count = 2;
+      var item0 = wrong.substring(0, 1);
+      var item1 = wrong.substring(1, 2);
+      var item2 = '';
+      if (wrong.length > 2) {
+        item2 = wrong.substring(2, 3);
+        item_count = 3;
+      }
+      var item3 = '';
+      if (wrong.length > 3) {
+        item3 = wrong.substring(3, 4);
+        item_count = 4;
+      }
+      var answer = 4;
+      for (var i = 0; i < wrong.length; i++) {
+        if (i > 3) {
+          break;
+        }
+        if (wrong.substr(i, 1) != correct.substr(i, 1)) {
+          answer = i;
+        }
+      }
+      let addResult = await this.model('question').add({
+        title: 'A',
+        creator_id: '1',
+        creator_name: 'Administrator',
+        item_count: item_count,
+        type: wxconst.QUIZ_CATEGORY_PUBLIC_MIX,
+        level: 3,
+        source: 'word',
+        content: content,
+        item0: item0,
+        item1: item1,
+        item2: item2,
+        item3: item3,
+        answer: answer,
+        note: note,
+        tags: '文艺范'
+      });
+      return addResult;
+    }
+    return 0;
+  }
 }
