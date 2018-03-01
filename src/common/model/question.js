@@ -380,7 +380,7 @@ export default class extends Base {
 
   async addWord(line) {
     console.log(line);
-    var arr = line.trim().split(',');
+    var arr = line.trim().split('，');
     var wrong = line;
     var correct = line;
     if (arr.length > 1) {
@@ -388,10 +388,10 @@ export default class extends Base {
       correct = arr[1];
     }
     else {
-      var arr1 = line.split('，');
+      var arr1 = line.trim().split(',');
       if (arr1.length > 1) {
-        wrong = arr[0];
-        correct = arr[1];
+        wrong = arr1[0];
+        correct = arr1[1];
       }
     }
     wrong = wrong.trim();
