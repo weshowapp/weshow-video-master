@@ -397,20 +397,24 @@ export default class extends Base {
     wrong = wrong.trim();
     correct = correct.trim();
     if (wrong != null && wrong != '' && correct != null && correct != '') {
-      var content = '“' + wrong + '”中的错别字是哪个？';
+      var content = '“' + wrong + '”中的第一个错别字是哪个？';
       var note = '正确的写法是：“' + correct + '”';
       var item_count = 2;
-      var item0 = wrong.substring(0, 1);
-      var item1 = wrong.substring(1, 2);
+      var item0 = wrong.substr(0, 1);
+      var item1 = wrong.substr(1, 1);
       var item2 = '';
       if (wrong.length > 2) {
-        item2 = wrong.substring(2, 3);
+        item2 = wrong.substr(2, 1);
         item_count = 3;
       }
       var item3 = '';
       if (wrong.length > 3) {
-        item3 = wrong.substring(3, 4);
+        item3 = wrong.substr(3, 1);
         item_count = 4;
+        if (item3 == item2 && correct.substr(2, 1) == correct.substr(3, 1)) {
+          item3 = '';
+          item_count = 3;
+        }
       }
       var answer = 4;
       for (var i = 0; i < wrong.length; i++) {
