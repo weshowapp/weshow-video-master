@@ -371,7 +371,6 @@ export default class extends Base {
         item3: items.item3,
         answer: answer,
         note: '',
-        category0: '文化',
         tags: '1'
       });
       return addResult;
@@ -442,6 +441,7 @@ export default class extends Base {
         item3: item3,
         answer: answer,
         note: note,
+        category0: '文化',
         tags: '文艺范'
       });
       return addResult;
