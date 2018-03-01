@@ -424,6 +424,7 @@ export default class extends Base {
         }
         if (wrong.substr(i, 1) != correct.substr(i, 1)) {
           answer = i;
+          break;
         }
       }
       let addResult = await this.model('question').add({
