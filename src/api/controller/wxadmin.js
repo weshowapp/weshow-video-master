@@ -66,4 +66,23 @@ export default class extends Base {
     this.display();
   }
 
+  async queryinputAction() {
+    let sql = this.post('quest_sql');
+    let tm = this.post('tm');
+    if (!this.checkTimeStamp(tm)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 0
+      });
+    }
+
+    let list = await this.model('question').query(sql);
+    if (!think.isEmpty(list)) {
+        //console.log(list);
+    }
+
+    this.assign('result', list);
+    this.display();
+  }
+
 }

@@ -19,7 +19,7 @@ export default {
     //'wxcash',
     //'wxpay',
     //'note',
-    //'wxadmin',
+    'wxadmin',
   ],
 
   //可以公开访问的Action
@@ -43,6 +43,7 @@ export default {
   //Html的Action
   htmlAction: [
     'wxadmin/upload',
+    'wxadmin/queryinput',
 
     'wxcash/index',
 
@@ -58,6 +59,7 @@ export default {
     'question/upload',
     'question/uploadmfg',
     'question/uploadmfgfile',
+    'question/uploadwords',
   ],
 
 };

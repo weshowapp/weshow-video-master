@@ -99,9 +99,10 @@ p {padding:3px 0 3px 0;}
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input size="2" type="submit" value="更新"/></td>
           </form>
-          <form action="delete?id=<%= item.id %>" enctype="multipart/form-data" method="post">
+          <form action="delete" enctype="multipart/form-data" method="post">
             <td>
               <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+              <input type="hidden" name="id" value="<%= item.id %>">
               <input size="2" type="submit" name="delete" value="删除"/>
             </td>
           </form>
@@ -181,11 +182,17 @@ p {padding:3px 0 3px 0;}
         <p>类别1：<input size="10" type="text" name ="category0"/></p>
         <input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/></p>
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-      </form>
-	  <br><br>
+      </form><br><br>
 
       <h2>选择TXT文件,批量添加</h2>
       <form class="p" action="uploadpptxt" enctype="multipart/form-data" method="post">
+        <p>请选择文件(固定格式txt文件)：<br><input type="file" name ="file_input"/></p>
+        <p><input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/></p>
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+      </form><br><br>
+
+      <h2>选择词语列表TXT文件,批量添加</h2>
+      <form class="p" action="uploadwords" enctype="multipart/form-data" method="post">
         <p>请选择文件(固定格式txt文件)：<br><input type="file" name ="file_input"/></p>
         <p><input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/></p>
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
@@ -207,7 +214,7 @@ p {padding:3px 0 3px 0;}
 
       <h2>SQL语句执行</h2>
       <form class="p" action="queryinput" enctype="multipart/form-data" method="post">
-        <p>SQL语句：<input size="80" type="text" name ="quest_sql" value="select * from weshow_question where id=1"/></p>
+        <p>SQL语句：<input size="80" height="300" type="text" name ="quest_sql" value="select * from weshow_question where id=1"/></p>
         <p><input type="submit" name ="question_submit" value=" 　  - -  查 询  - -  　 "/></p>
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
       </form>
