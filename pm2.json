@@ -9,6 +9,10 @@
     "autorestart": true,
     "node_args": [],
     "args": [],
+    "error_file"      : "/var/www/weshow/weshow-video-master/logs/pm2-err.log",
+    "out_file"        : "/var/www/weshow/weshow-video-master/logs/pm2-out.log",
+    "log_date_format" : "YYYY-MM-DD HH:mm:ss Z",
+    "merge_logs"      : false,
     "env": {
       
     }
