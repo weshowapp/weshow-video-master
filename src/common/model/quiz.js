@@ -67,7 +67,7 @@ export default class extends think.model.base {
   }
 
   async setQuizState(quiz, openid) {
-    //console.log('setQuizResult');
+    console.log('setQuizState');
     //console.log(quiz.id);
     if (think.isEmpty(quiz)) {
       return quiz;
@@ -92,11 +92,13 @@ export default class extends think.model.base {
         }
         else if (curTime > quiz.start_time + wxconst.GAME_LENGTH_SECOND - 1) {
           let answerInfo = await this.model('quizuser').where({quizid: quiz.id, answer_correct: 1}).count();
-          if (!think.isEmpty(answerInfo)) {
+          console.log(answerInfo);
+          console.log(answerInfo);
+          //if (!think.isEmpty(answerInfo)) {
             if (answerInfo < 1) {
               quiz.phase = wxconst.QUIZ_PHASE_FINISH;
             }
-          }
+          //}
         }
       }
     }
