@@ -214,7 +214,7 @@ export default class extends Base {
     console.log(qid);
     console.log(question_id);
     console.log(answer_correct);
-    if (answer_correct == '') {
+    if ((answer_correct+'') != '0' && (answer_correct+'') == '') {
       console.log(answer_correct);
       answer_correct = 1;
     }
