@@ -203,6 +203,7 @@ export default class extends Base {
   }
 
   async updateansweredAction() {
+    console.log('updateanswered');
     var userid = this.post('openid');
     var question_id = this.post('question_id');
     var answer_set = this.post('answer_set');
@@ -212,9 +213,12 @@ export default class extends Base {
     var answer_time = this.getCurrentTime();
     console.log(qid);
     console.log(question_id);
+    console.log(answer_correct);
     if (answer_correct == '') {
+      console.log(answer_correct);
       answer_correct = 1;
     }
+    console.log(answer_correct);
 
     await this.model('quizuser').where({quizid: qid, openid: userid}).update({
       answer_status: question_id,
