@@ -74,8 +74,9 @@ export default class extends think.model.base {
     for (var i = 0; i < userList.length; i++) {
       var openid = userList[i].openid;
       console.log(openid);
+      console.log(mSocketMap);
       var socket = mSocketMap.get(openid);
-      //console.log(socket);
+      console.log(socket);
       if (socket != null && socket != undefined) {
         this.emit(msg, {
           msg: msg,
