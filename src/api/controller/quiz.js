@@ -28,7 +28,7 @@ export default class extends Base {
     let openid = this.get('openid');
     let onlyactive = this.get('onlyactive');
     console.log(openid);
-    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).order('add_time DESC').select();
+    let quizIdList = await this.model('quizuser').field('quizid').where({openid: openid}).order('add_time DESC').limit(100).select();
     let groupList = await this.model('usergroup').field('open_gid').where({openid: openid}).select();
     var gidList = [];
     if (!think.isEmpty(groupList)) {
