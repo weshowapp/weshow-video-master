@@ -238,14 +238,11 @@ export default class extends Base {
   //WebSocket Related
   async openAction(self) {
     console.log('openAction');
+	var openid = this.get('openid');
     var socket = self.http.socket;
-	this.emit('connect', {
-          msg: 'connecting'
-        });
+	socket.openid = openid;
     await this.model('quizuser').openWebSocket(socket);
-	this.emit('connected', {
-          msg: 'connected'
-        });
+	this.emit('connected', {msg: 'connected'});
   }
 
   async closeAction(self) {

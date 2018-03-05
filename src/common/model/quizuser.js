@@ -55,14 +55,17 @@ export default class extends think.model.base {
 
   async openWebSocket(socket) {
     console.log('openWebSocket');
-    console.log(socket);
+    console.log(socket.openid);
     var openid = socket.openid;
     mSocketMap.set(openid, socket);
+    console.log(mSocketMap);
   }
 
   async closeWebSocket(socket) {
+    console.log('closeWebSocket');
     var openid = socket.openid;
     mSocketMap.delete(openid);
+    console.log(mSocketMap);
   }
 
   async sendWebSocketMsg(quizid, uid, msg) {
@@ -72,7 +75,7 @@ export default class extends think.model.base {
       var openid = userList[i].openid;
       console.log(openid);
       var socket = mSocketMap.get(openid);
-      console.log(socket);
+      //console.log(socket);
       if (socket != null && socket != undefined) {
         this.emit(msg, {
           msg: msg,

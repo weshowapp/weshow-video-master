@@ -38,6 +38,8 @@ export default {
     'wxcash/index',
     'wxpay/notify',
     'wxadmin/index',
+    'quizuser/open', //wss
+    'quizuser/close', //wss
   ],
 
   //Html的Action
