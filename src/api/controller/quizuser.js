@@ -237,8 +237,15 @@ export default class extends Base {
 
   //WebSocket Related
   async openAction(self) {
+    console.log('openAction');
     var socket = self.http.socket;
+	this.emit('connect', {
+          msg: 'connecting'
+        });
     await this.model('quizuser').openWebSocket(socket);
+	this.emit('connected', {
+          msg: 'connected'
+        });
   }
 
   async closeAction(self) {
