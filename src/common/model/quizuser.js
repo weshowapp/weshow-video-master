@@ -65,6 +65,13 @@ export default class extends think.model.base {
     console.log('closeWebSocket');
     var openid = socket.openid;
     console.log(mSocketMap);
+    for (var [key, value] of mSocketMap) {
+      if (value.id == socket.id) {
+        openid = key;
+        break;
+      }
+	}
+    console.log(openid);
     mSocketMap.delete(openid);
     console.log(mSocketMap);
   }
