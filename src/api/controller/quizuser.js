@@ -137,7 +137,7 @@ export default class extends Base {
         note: note
     });
 
-    await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join', this);
+    await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
     
     return this.success({
       result: 'OK',
@@ -227,7 +227,7 @@ export default class extends Base {
       answer_time: answer_time
     });
 
-    await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer', this);
+    await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
 
     return this.success({
       result: 'OK',
