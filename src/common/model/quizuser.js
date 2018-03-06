@@ -78,6 +78,7 @@ export default class extends think.model.base {
 
   async sendWebSocketMsg(quizid, uid, msg) {
     console.log('sendWebSocketMsg');
+    var arr = [];
     let userList = await this.model('quizuser').where({ quizid: quizid }).select();
     for (var i = 0; i < userList.length; i++) {
       var openid = userList[i].openid;
@@ -85,7 +86,7 @@ export default class extends think.model.base {
       console.log(mSocketMap);
       var socket = mSocketMap.get(openid);
       console.log(socket);
-	  return socket;
+	  arr.push(socket);
       /*if (socket != null && socket != undefined) {
         this.emit(msg, {
           msg: msg,
@@ -93,6 +94,7 @@ export default class extends think.model.base {
         });
       }*/
     }
+    return arr;
   }
 
   /**

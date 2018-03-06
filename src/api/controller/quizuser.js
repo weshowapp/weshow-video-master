@@ -137,13 +137,15 @@ export default class extends Base {
         note: note
     });
 
-    //var socket = await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
-    var socket = mSocketMap.get(uid);
-    if (socket != null && socket != undefined) {
-      this.emit('join', {
-        msg: 'join',
-        openid: uid
-      });
+    var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
+    for (var item in sockets) {
+      var socket = item;
+      if (socket != null && socket != undefined) {
+        this.emit('join', {
+          msg: 'join',
+          openid: uid
+        });
+      }
     }
     
     return this.success({
@@ -234,12 +236,15 @@ export default class extends Base {
       answer_time: answer_time
     });
 
-    var socket = await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
-    if (socket != null && socket != undefined) {
-      this.emit('answer', {
-        msg: 'answer',
-        openid: userid
-      });
+    var sockets = await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
+    for (var item in sockets) {
+      var socket = item;
+      if (socket != null && socket != undefined) {
+        this.emit('answer', {
+          msg: 'answer',
+          openid: userid
+        });
+      }
     }
 
     return this.success({
