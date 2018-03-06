@@ -137,7 +137,8 @@ export default class extends Base {
         note: note
     });
 
-    var socket = await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
+    //var socket = await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
+    var socket = mSocketMap.get(uid);
     if (socket != null && socket != undefined) {
       this.emit('join', {
         msg: 'join',
