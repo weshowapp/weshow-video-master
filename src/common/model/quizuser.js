@@ -2,6 +2,8 @@
 
 var wxconst = require('../../api/controller/wxconst');
 
+var mSocketMap = new Map();
+
 
 /**
  * model
@@ -49,6 +51,48 @@ export default class extends think.model.base {
       }
     }
     return info;
+  }
+
+  async openWebSocket(socket) {
+    console.log('openWebSocket');
+    console.log(socket.openid);
+    var openid = socket.openid;
+    mSocketMap.set(openid, socket);
+    console.log(mSocketMap);
+  }
+
+  async closeWebSocket(socket) {
+    console.log('closeWebSocket');
+    var openid = socket.openid;
+    console.log(mSocketMap);
+    for (var [key, value] of mSocketMap) {
+      if (value.id == socket.id) {
+        openid = key;
+        break;
+      }
+	}
+    console.log(openid);
+    mSocketMap.delete(openid);
+    console.log(mSocketMap);
+  }
+
+  async sendWebSocketMsg(quizid, uid, msg) {
+    console.log('sendWebSocketMsg');
+    let userList = await this.model('quizuser').where({ quizid: quizid }).select();
+    for (var i = 0; i < userList.length; i++) {
+      var openid = userList[i].openid;
+      console.log(openid);
+      console.log(mSocketMap);
+      var socket = mSocketMap.get(openid);
+      console.log(socket);
+	  return socket;
+      /*if (socket != null && socket != undefined) {
+        socket.emit(msg, {
+          msg: msg,
+          openid: uid
+        });
+      }*/
+    }
   }
 
   /**
