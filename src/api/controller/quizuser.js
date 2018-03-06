@@ -139,7 +139,7 @@ export default class extends Base {
         note: note
     });
 
-    await this.sendWebSocketMsg(quizid, uid, 'join');
+    this.sendWebSocketMsg(quizid, uid, 'join');
     
     return this.success({
       result: 'OK',
@@ -229,7 +229,7 @@ export default class extends Base {
       answer_time: answer_time
     });
 
-    await this.sendWebSocketMsg(qid, userid, 'answer');
+    this.sendWebSocketMsg(qid, userid, 'answer');
 
     return this.success({
       result: 'OK',
@@ -250,7 +250,7 @@ export default class extends Base {
     console.log(self.http.header('openid'));
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.openWebSocket(socket);
+    this.openWebSocket(socket);
     this.emit('connected', {msg: 'connected'});
   }
 
@@ -258,10 +258,10 @@ export default class extends Base {
     var openid = self.http.header('openid');
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.closeWebSocket(socket);
+    this.closeWebSocket(socket);
   }
 
-  async openWebSocket(socket) {
+  openWebSocket(socket) {
     console.log('openWebSocket');
     console.log(socket.openid);
     var openid = socket.openid;
@@ -269,7 +269,7 @@ export default class extends Base {
     console.log(mSocketMap);
   }
 
-  async closeWebSocket(socket) {
+  closeWebSocket(socket) {
     console.log('closeWebSocket');
     var openid = socket.openid;
     console.log(mSocketMap);
@@ -284,7 +284,7 @@ export default class extends Base {
     console.log(mSocketMap);
   }
 
-  async sendWebSocketMsg(quizid, uid, msg) {
+  sendWebSocketMsg(quizid, uid, msg) {
     console.log('sendWebSocketMsg');
     let userList = await this.model('quizuser').where({ quizid: quizid }).select();
     for (var i = 0; i < userList.length; i++) {
