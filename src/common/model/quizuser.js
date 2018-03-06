@@ -64,6 +64,7 @@ export default class extends think.model.base {
   async closeWebSocket(socket) {
     console.log('closeWebSocket');
     var openid = socket.openid;
+    console.log(mSocketMap);
     mSocketMap.delete(openid);
     console.log(mSocketMap);
   }
