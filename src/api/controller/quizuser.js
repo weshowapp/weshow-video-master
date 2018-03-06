@@ -239,7 +239,9 @@ export default class extends Base {
   async openAction(self) {
     console.log('openAction');
     //var openid = this.get('openid');
-    var openid = self.http.header('openid');
+    var openid = this.http.header('openid');
+    console.log(this.http.header);
+    console.log(self.http.header);
     var socket = self.http.socket;
     socket.openid = openid;
     await this.model('quizuser').openWebSocket(socket);
