@@ -87,7 +87,7 @@ export default class extends think.model.base {
       console.log(socket);
 	  return socket;
       /*if (socket != null && socket != undefined) {
-        socket.emit(msg, {
+        this.emit(msg, {
           msg: msg,
           openid: uid
         });

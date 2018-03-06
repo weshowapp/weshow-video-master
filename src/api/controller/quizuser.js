@@ -139,7 +139,7 @@ export default class extends Base {
 
     var socket = await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
     if (socket != null && socket != undefined) {
-      socket.emit('join', {
+      this.emit('join', {
         msg: 'join',
         openid: uid
       });
@@ -235,7 +235,7 @@ export default class extends Base {
 
     var socket = await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
     if (socket != null && socket != undefined) {
-      socket.emit('answer', {
+      this.emit('answer', {
         msg: 'answer',
         openid: userid
       });
