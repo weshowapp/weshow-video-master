@@ -238,8 +238,8 @@ export default class extends Base {
   //WebSocket Related
   async openAction(self) {
     console.log('openAction');
-    //var openid = this.get('openid');
-    var openid = this.http.header('openid');
+    var openid = this.get('openid');
+    //var openid = this.http.header('openid');
     console.log(this.http.header);
     console.log(self.http.header);
     var socket = self.http.socket;
