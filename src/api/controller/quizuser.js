@@ -137,7 +137,7 @@ export default class extends Base {
         note: note
     });
 
-    await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
+    await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join', this);
     
     return this.success({
       result: 'OK',
@@ -227,7 +227,7 @@ export default class extends Base {
       answer_time: answer_time
     });
 
-    await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
+    await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer', this);
 
     return this.success({
       result: 'OK',
@@ -240,8 +240,12 @@ export default class extends Base {
     console.log('openAction');
     var openid = this.get('openid');
     //var openid = this.http.header('openid');
-    console.log(this.http.header);
-    console.log(self.http.header);
+    console.log('openid length ' + openid.length);
+    if (Object.prototype.toString.call(openid) == '[object Array]') {
+      openid = openid[openid.length - 1];
+    }
+    console.log(this.http.header('openid'));
+    console.log(self.http.header('openid'));
     var socket = self.http.socket;
     socket.openid = openid;
     await this.model('quizuser').openWebSocket(socket);
