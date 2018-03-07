@@ -40,6 +40,8 @@ export default {
     'wxadmin/index',
     'quizuser/open', //wss
     'quizuser/close', //wss
+    'quizuser/join', //wss
+    'quizuser/answer', //wss
   ],
 
   //Html的Action
