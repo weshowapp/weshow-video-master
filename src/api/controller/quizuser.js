@@ -265,14 +265,14 @@ export default class extends Base {
     socket.openid = openid;
     var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'join');
     for (var item in sockets) {
-      if (item != null && item != undefined) {
-        var socket = item;
+      var socket = sockets[item];
+      if (socket != null && socket != undefined) {
         console.log(socket);
         this.emit('join', {
           msg: 'join',
           openid: openid
         });
-        console.log('send to ' + socket.id);
+        console.log('send to ' + socket.openid);
       }
     }
   }
@@ -286,8 +286,9 @@ export default class extends Base {
     socket.openid = openid;
     var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'answer');
     for (var item in sockets) {
-      if (item != null && item != undefined) {
-        var socket = item;
+      var socket = sockets[item];
+      if (socket != null && socket != undefined) {
+        console.log(socket);
         this.emit('answer', {
           msg: 'answer',
           openid: openid
