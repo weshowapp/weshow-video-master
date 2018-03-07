@@ -236,7 +236,7 @@ export default class extends Base {
     console.log('openAction');
     var openid = this.get('openid');
     //var openid = this.http.header('openid');
-    //console.log('openid length ' + openid.length);
+    console.log(openid);
     if (Object.prototype.toString.call(openid) == '[object Array]') {
       openid = openid[openid.length - 1];
     }

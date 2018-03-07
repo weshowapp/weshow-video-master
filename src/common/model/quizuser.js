@@ -82,10 +82,10 @@ export default class extends think.model.base {
     console.log('sendWebSocketMsg');
     var arr = [];
     let userList = await this.model('quizuser').where({ quizid: quizid }).select();
+    console.log(mSocketMap);
     for (var i = 0; i < userList.length; i++) {
       var openid = userList[i].openid;
       console.log(openid);
-      //console.log(mSocketMap.size());
       console.log(Object.getOwnPropertyNames(mSocketMap).length);
       var socket = mSocketMap.get(openid);
       arr.push(socket);
