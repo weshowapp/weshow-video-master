@@ -266,6 +266,8 @@ export default class extends Base {
     var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'join');
     for (var item in sockets) {
       var socket = sockets[item];
+      console.log(item);
+      console.log(socket);
       if (socket != null && socket != undefined) {
         console.log(socket);
         this.emit('join', {
