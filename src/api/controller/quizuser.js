@@ -271,6 +271,7 @@ export default class extends Base {
           msg: 'join',
           openid: openid
         });
+        console.log('send to ' + socket.openid);
       }
     }
   }
@@ -290,6 +291,7 @@ export default class extends Base {
           msg: 'answer',
           openid: openid
         });
+        console.log('send to ' + socket.openid);
       }
     }
   }
