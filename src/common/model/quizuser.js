@@ -88,10 +88,10 @@ export default class extends think.model.base {
       //console.log(mSocketMap.size());
       console.log(Object.getOwnPropertyNames(mSocketMap).length);
       var socket = mSocketMap.get(openid);
-      console.log(socket.id);
-      console.log(socket.openid);
       //arr.push(socket);
       if (socket != null && socket != undefined) {
+        console.log(socket.id);
+        console.log(socket.openid);
         this.emit(msg, {
           msg: msg,
           openid: uid
