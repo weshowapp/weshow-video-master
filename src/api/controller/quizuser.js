@@ -269,7 +269,7 @@ export default class extends Base {
         var socket = item;
         this.emit('join', {
           msg: 'join',
-          openid: uid
+          openid: openid
         });
       }
     }
@@ -288,7 +288,7 @@ export default class extends Base {
         var socket = item;
         this.emit('answer', {
           msg: 'answer',
-          openid: uid
+          openid: openid
         });
       }
     }
