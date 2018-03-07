@@ -321,13 +321,15 @@ export default class extends Base {
       var openid = userList[i].openid;
       console.log(openid);
       var socket = mSocketMap.get(openid);
+      console.log(socket);
       if (socket != null && socket != undefined) {
         console.log(socket.id);
-        console.log(socket.openid);
+        //console.log(socket.openid);
         this.emit(msg, {
           msg: msg,
           openid: uid
         });
+        console.log('send ' uid + ' ----> ' + socket.openid);
       }
     }
   }
