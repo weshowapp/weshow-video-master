@@ -263,7 +263,16 @@ export default class extends Base {
     var quizid = self.http.data.quizid;
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'join');
+    var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'join');
+    for (var item in sockets) {
+      if (item != null && item != undefined) {
+        var socket = item;
+        this.emit('join', {
+          msg: 'join',
+          openid: uid
+        });
+      }
+    }
   }
 
   async answerAction(self) {
@@ -273,6 +282,15 @@ export default class extends Base {
     var quizid = self.http.data.quizid;
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'answer');
+    var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'answer');
+    for (var item in sockets) {
+      if (item != null && item != undefined) {
+        var socket = item;
+        this.emit('answer', {
+          msg: 'answer',
+          openid: uid
+        });
+      }
+    }
   }
 }
