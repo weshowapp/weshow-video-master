@@ -248,7 +248,7 @@ export default class extends Base {
     socket.openid = openid;
     //await this.model('quizuser').openWebSocket(socket);
     mSocketMap.set(openid, socket);
-    console.log(mSocketMap);
+    //console.log(mSocketMap);
     this.emit('connected', {msg: 'connected'});
   }
 
@@ -325,7 +325,7 @@ export default class extends Base {
       if (socket != null && socket != undefined) {
         console.log(socket.id);
         //console.log(socket.openid);
-        this.emit(msg, {
+        socket.send(msg, {
           msg: msg,
           openid: uid
         });
