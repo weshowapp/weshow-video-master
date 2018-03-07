@@ -249,6 +249,7 @@ export default class extends Base {
   }
 
   async closeAction(self) {
+    console.log('closeAction');
     var openid = self.http.header('openid');
     var socket = self.http.socket;
     socket.openid = openid;
@@ -256,14 +257,18 @@ export default class extends Base {
   }
 
   async joinAction(self) {
-    var openid = self.http.header('openid');
+    console.log('joinAction');
+    console.log(self.http.data);
+    var openid = self.http.data.openid;
     var socket = self.http.socket;
     socket.openid = openid;
     await this.model('quizuser').sendWebSocketMsg(qid, openid, 'join');
   }
 
   async answerAction(self) {
-    var openid = self.http.header('openid');
+    console.log('answerAction');
+    console.log(self.http.data);
+    var openid = self.http.data.openid;
     var socket = self.http.socket;
     socket.openid = openid;
     await this.model('quizuser').sendWebSocketMsg(qid, openid, 'answer');
