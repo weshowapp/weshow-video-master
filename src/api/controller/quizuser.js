@@ -5,6 +5,8 @@ var wxconst = require('./wxconst');
 const fs = require('fs');
 const _ = require('lodash');
 
+var mSocketMap = new Map();
+
 export default class extends Base {
 
   async getbyquizidAction() {
@@ -244,16 +246,27 @@ export default class extends Base {
     //console.log(self.http.header('openid'));
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.model('quizuser').openWebSocket(socket);
+    //await this.model('quizuser').openWebSocket(socket);
+    mSocketMap.set(openid, socket);
+    console.log(mSocketMap);
     this.emit('connected', {msg: 'connected'});
   }
 
   async closeAction(self) {
     console.log('closeAction');
-    var openid = self.http.header('openid');
     var socket = self.http.socket;
-    socket.openid = openid;
-    await this.model('quizuser').closeWebSocket(socket);
+    var openid = socket.openid;
+    console.log(openid);
+    //socket.openid = openid;
+    //await this.model('quizuser').closeWebSocket(socket);
+    for (var [key, value] of mSocketMap) {
+      if (value.id == socket.id) {
+        openid = key;
+        break;
+      }
+    }
+    console.log(openid);
+    mSocketMap.delete(openid);
   }
 
   async joinAction(self) {
@@ -263,8 +276,8 @@ export default class extends Base {
     var quizid = self.http.data.quizid;
     var socket = self.http.socket;
     socket.openid = openid;
-    var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'join');
-    for (var item in sockets) {
+    await this.sendWebSocketMsg(quizid, openid, 'join');
+    /*for (var item in sockets) {
       var socket = sockets[item];
       console.log(item);
       console.log(socket);
@@ -276,7 +289,7 @@ export default class extends Base {
         });
         console.log('send to ' + socket.openid);
       }
-    }
+    }*/
   }
 
   async answerAction(self) {
@@ -286,8 +299,8 @@ export default class extends Base {
     var quizid = self.http.data.quizid;
     var socket = self.http.socket;
     socket.openid = openid;
-    var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'answer');
-    for (var item in sockets) {
+    await this.sendWebSocketMsg(quizid, openid, 'answer');
+    /*for (var item in sockets) {
       var socket = sockets[item];
       if (socket != null && socket != undefined) {
         console.log(socket);
@@ -296,6 +309,25 @@ export default class extends Base {
           openid: openid
         });
         console.log('send to ' + socket.openid);
+      }
+    }*/
+  }
+
+  async sendWebSocketMsg(quizid, uid, msg) {
+    console.log('sendWebSocketMsg');
+    let userList = await this.model('quizuser').where({ quizid: quizid }).select();
+    console.log(mSocketMap);
+    for (var i = 0; i < userList.length; i++) {
+      var openid = userList[i].openid;
+      console.log(openid);
+      var socket = mSocketMap.get(openid);
+      if (socket != null && socket != undefined) {
+        console.log(socket.id);
+        console.log(socket.openid);
+        this.emit(msg, {
+          msg: msg,
+          openid: uid
+        });
       }
     }
   }

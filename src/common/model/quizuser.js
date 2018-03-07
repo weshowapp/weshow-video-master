@@ -2,8 +2,6 @@
 
 var wxconst = require('../../api/controller/wxconst');
 
-var mSocketMap = new Map();
-
 
 /**
  * model
@@ -53,7 +51,7 @@ export default class extends think.model.base {
     return info;
   }
 
-  async openWebSocket(socket) {
+  /*async openWebSocket(socket) {
     console.log('openWebSocket');
     console.log(socket.openid);
     var openid = socket.openid;
@@ -72,7 +70,7 @@ export default class extends think.model.base {
         openid = key;
         break;
       }
-	}
+    }
     console.log(openid);
     mSocketMap.delete(openid);
     //console.log(mSocketMap.size());
@@ -101,7 +99,7 @@ export default class extends think.model.base {
     }
     console.log(arr.length);
     return arr;
-  }
+  }*/
 
   /**
    * Calculate the gain
