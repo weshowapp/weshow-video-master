@@ -58,13 +58,14 @@ export default class extends think.model.base {
     console.log(socket.openid);
     var openid = socket.openid;
     mSocketMap.set(openid, socket);
-    console.log(mSocketMap.size());
+    console.log(Object.getOwnPropertyNames(mSocketMap).length);
   }
 
   async closeWebSocket(socket) {
     console.log('closeWebSocket');
     var openid = socket.openid;
-    console.log(mSocketMap.size());
+    //console.log(mSocketMap.size());
+    console.log(Object.getOwnPropertyNames(mSocketMap).length);
     for (var [key, value] of mSocketMap) {
       if (value.id == socket.id) {
         openid = key;
@@ -73,7 +74,8 @@ export default class extends think.model.base {
 	}
     console.log(openid);
     mSocketMap.delete(openid);
-    console.log(mSocketMap.size());
+    //console.log(mSocketMap.size());
+    console.log(Object.getOwnPropertyNames(mSocketMap).length);
   }
 
   async sendWebSocketMsg(quizid, uid, msg) {
@@ -83,7 +85,8 @@ export default class extends think.model.base {
     for (var i = 0; i < userList.length; i++) {
       var openid = userList[i].openid;
       console.log(openid);
-      console.log(mSocketMap.size());
+      //console.log(mSocketMap.size());
+      console.log(Object.getOwnPropertyNames(mSocketMap).length);
       var socket = mSocketMap.get(openid);
       console.log(socket.id);
       console.log(socket.openid);
