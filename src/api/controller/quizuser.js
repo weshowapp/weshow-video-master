@@ -267,11 +267,12 @@ export default class extends Base {
     for (var item in sockets) {
       if (item != null && item != undefined) {
         var socket = item;
+        console.log(socket);
         this.emit('join', {
           msg: 'join',
           openid: openid
         });
-        console.log('send to ' + socket.openid);
+        console.log('send to ' + socket.id);
       }
     }
   }
