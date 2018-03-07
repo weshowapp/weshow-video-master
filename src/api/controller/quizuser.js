@@ -236,12 +236,12 @@ export default class extends Base {
     console.log('openAction');
     var openid = this.get('openid');
     //var openid = this.http.header('openid');
-    console.log('openid length ' + openid.length);
+    //console.log('openid length ' + openid.length);
     if (Object.prototype.toString.call(openid) == '[object Array]') {
       openid = openid[openid.length - 1];
     }
-    console.log(this.http.header('openid'));
-    console.log(self.http.header('openid'));
+    //console.log(this.http.header('openid'));
+    //console.log(self.http.header('openid'));
     var socket = self.http.socket;
     socket.openid = openid;
     await this.model('quizuser').openWebSocket(socket);
