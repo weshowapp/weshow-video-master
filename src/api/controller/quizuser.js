@@ -274,8 +274,8 @@ export default class extends Base {
     console.log(self.http.data);
     var openid = self.http.data.openid;
     var quizid = self.http.data.quizid;
-    var socket = self.http.socket;
-    socket.openid = openid;
+    //var socket = self.http.socket;
+    //socket.openid = openid;
     await this.sendWebSocketMsg(quizid, openid, 'join');
     /*for (var item in sockets) {
       var socket = sockets[item];
@@ -297,8 +297,8 @@ export default class extends Base {
     console.log(self.http.data);
     var openid = self.http.data.openid;
     var quizid = self.http.data.quizid;
-    var socket = self.http.socket;
-    socket.openid = openid;
+    //var socket = self.http.socket;
+    //socket.openid = openid;
     await this.sendWebSocketMsg(quizid, openid, 'answer');
     /*for (var item in sockets) {
       var socket = sockets[item];
@@ -321,7 +321,7 @@ export default class extends Base {
       var openid = userList[i].openid;
       console.log(openid);
       var socket = mSocketMap.get(openid);
-      console.log(socket);
+      //console.log(socket);
       if (socket != null && socket != undefined) {
         console.log(socket.id);
         //console.log(socket.openid);
@@ -329,7 +329,7 @@ export default class extends Base {
           msg: msg,
           openid: uid
         });
-        console.log('send ' uid + ' ----> ' + socket.openid);
+        console.log('send ' + uid + ' ----> ' + socket.openid);
       }
     }
   }
