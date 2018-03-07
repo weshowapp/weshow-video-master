@@ -260,17 +260,19 @@ export default class extends Base {
     console.log('joinAction');
     console.log(self.http.data);
     var openid = self.http.data.openid;
+    var quizid = self.http.data.quizid;
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.model('quizuser').sendWebSocketMsg(qid, openid, 'join');
+    await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'join');
   }
 
   async answerAction(self) {
     console.log('answerAction');
     console.log(self.http.data);
     var openid = self.http.data.openid;
+    var quizid = self.http.data.quizid;
     var socket = self.http.socket;
     socket.openid = openid;
-    await this.model('quizuser').sendWebSocketMsg(qid, openid, 'answer');
+    await this.model('quizuser').sendWebSocketMsg(quizid, openid, 'answer');
   }
 }
