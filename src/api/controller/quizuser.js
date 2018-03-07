@@ -136,17 +136,6 @@ export default class extends Base {
         openid: uid,
         note: note
     });
-
-    var sockets = await this.model('quizuser').sendWebSocketMsg(quizid, uid, 'join');
-    for (var item in sockets) {
-      var socket = item;
-      if (socket != null && socket != undefined) {
-        this.emit('join', {
-          msg: 'join',
-          openid: uid
-        });
-      }
-    }
     
     return this.success({
       result: 'OK',
@@ -236,17 +225,6 @@ export default class extends Base {
       answer_time: answer_time
     });
 
-    var sockets = await this.model('quizuser').sendWebSocketMsg(qid, userid, 'answer');
-    for (var item in sockets) {
-      var socket = item;
-      if (socket != null && socket != undefined) {
-        this.emit('answer', {
-          msg: 'answer',
-          openid: userid
-        });
-      }
-    }
-
     return this.success({
       result: 'OK',
       errorCode: 0
@@ -275,5 +253,19 @@ export default class extends Base {
     var socket = self.http.socket;
     socket.openid = openid;
     await this.model('quizuser').closeWebSocket(socket);
+  }
+
+  async joinAction(self) {
+    var openid = self.http.header('openid');
+    var socket = self.http.socket;
+    socket.openid = openid;
+    await this.model('quizuser').sendWebSocketMsg(qid, openid, 'join');
+  }
+
+  async answerAction(self) {
+    var openid = self.http.header('openid');
+    var socket = self.http.socket;
+    socket.openid = openid;
+    await this.model('quizuser').sendWebSocketMsg(qid, openid, 'answer');
   }
 }

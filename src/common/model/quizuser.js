@@ -45,7 +45,7 @@ export default class extends think.model.base {
           info[i].user_name = '未知';
           //var add_time = Math.round((new Date()).getTime() / 1000);
           //await this.model('quizuser').where({quizid: info[i].quizid, openid: info[i].openid}).update({
-	      //  add_time: add_time
+          //  add_time: add_time
           //});
         }
       }
@@ -78,23 +78,24 @@ export default class extends think.model.base {
 
   async sendWebSocketMsg(quizid, uid, msg) {
     console.log('sendWebSocketMsg');
-    var arr = [];
+    //var arr = [];
     let userList = await this.model('quizuser').where({ quizid: quizid }).select();
     for (var i = 0; i < userList.length; i++) {
       var openid = userList[i].openid;
       console.log(openid);
       console.log(mSocketMap);
       var socket = mSocketMap.get(openid);
-      console.log(socket);
-	  arr.push(socket);
-      /*if (socket != null && socket != undefined) {
+      console.log(socket.id);
+      console.log(socket.openid);
+      //arr.push(socket);
+      if (socket != null && socket != undefined) {
         this.emit(msg, {
           msg: msg,
           openid: uid
         });
-      }*/
+      }
     }
-    return arr;
+    //return arr;
   }
 
   /**
