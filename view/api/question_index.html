@@ -154,8 +154,10 @@ p {padding:3px 0 3px 0;}
           }
         </script>
         <tr>
+          <form action="update" enctype="multipart/form-data" method="post">
             <td colspan="23"><input size="4" type="submit" value=" 批量更新 " onclick="submitAll();"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+          </form>
         </tr>
         <tr>
           <form action="index" enctype="multipart/form-data" method="post">
