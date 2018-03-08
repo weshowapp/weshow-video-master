@@ -71,7 +71,7 @@ p {padding:3px 0 3px 0;}
         <% var index = 0; %>
         <% quest_list.forEach(function(item) { %>
         <tr>
-          <form action="update" enctype="multipart/form-data" method="post">
+          <form action="update" id="form_<%= index %>" enctype="multipart/form-data" method="post">
             <td><input class="bn" size="1" type="text" name ="id" value="<%= item.id %>"/></td>
             <td><input class="bn" size="1" type="text" name ="quest_type" value="<%= item.type %>"/></td>
             <td><input class="bn" size="1" type="text" name ="quest_level" value="<%= item.level %>"/></td>
@@ -98,7 +98,7 @@ p {padding:3px 0 3px 0;}
             <td><input class="bn" size="1" type="text" name ="rate" disabled="true" value="<%= item.correct_count / (item.wrong_count + item.correct_count) * 100 %>"/></td>
             <td><input class="bn" size="2" type="text" name ="more" value="<%= item.more %>"/>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-            <td><input id=upd_btn_<%= index %>size="2" type="submit" value="更新"/></td>
+            <td><input id="upd_btn_<%= index %>" size="2" type="submit" value="更新"/></td>
           </form>
           <form action="delete" enctype="multipart/form-data" method="post">
             <td>
@@ -149,7 +149,7 @@ p {padding:3px 0 3px 0;}
         <script type="text/javascript">
           function submitAll() {
             for (var i = 0; i < <%= index %>; i++) {
-              document.getElementById("upd_btn_" + i).submit();
+              document.getElementById("form_" + i).submit();
             }
           }
         </script>
