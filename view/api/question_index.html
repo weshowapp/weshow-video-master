@@ -71,7 +71,7 @@ p {padding:3px 0 3px 0;}
         <% var index = 0; %>
         <% quest_list.forEach(function(item) { %>
         <tr>
-          <form action="update" id="form_<%= index %>" enctype="multipart/form-data" method="post">
+          <form action="update" id="form_<%= index %>" enctype="multipart/form-data" method="post"target="hidden_frame_<%= index %>">
             <td><input class="bn" size="1" type="text" name ="id" value="<%= item.id %>"/></td>
             <td><input class="bn" size="1" type="text" name ="quest_type" value="<%= item.type %>"/></td>
             <td><input class="bn" size="1" type="text" name ="quest_level" value="<%= item.level %>"/></td>
@@ -100,6 +100,7 @@ p {padding:3px 0 3px 0;}
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input id="upd_btn_<%= index %>" size="2" type="submit" value="更新"/></td>
           </form>
+          <iframe name="hidden_frame_<%= index %>" style="display:none;"></iframe>
           <form action="delete" enctype="multipart/form-data" method="post">
             <td>
               <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
@@ -148,8 +149,6 @@ p {padding:3px 0 3px 0;}
         </tr>
         <script type="text/javascript">
           function submitAll() {
-              document.getElementById("form_0").submit();
-              document.getElementById("form_1").submit();
             for (var i = 0; i < <%= index %>; i++) {
               document.getElementById("form_" + i).submit();
             }
