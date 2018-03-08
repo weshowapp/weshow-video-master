@@ -65,9 +65,10 @@ p {padding:3px 0 3px 0;}
           <th width="3%">答错数</th>
           <th width="3%">成功率</th>
           <th width="3%">备注</th>
-		  <th width="3%" colspan="2">操作</th>
+          <th width="3%" colspan="2">操作</th>
         </tr>
         <% var currentId = 0; %>
+        <% var index = 0; %>
         <% quest_list.forEach(function(item) { %>
         <tr>
           <form action="update" enctype="multipart/form-data" method="post">
@@ -97,7 +98,7 @@ p {padding:3px 0 3px 0;}
             <td><input class="bn" size="1" type="text" name ="rate" disabled="true" value="<%= item.correct_count / (item.wrong_count + item.correct_count) * 100 %>"/></td>
             <td><input class="bn" size="2" type="text" name ="more" value="<%= item.more %>"/>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-            <td><input size="2" type="submit" value="更新"/></td>
+            <td><input id=upd_btn_<%= index %>size="2" type="submit" value="更新"/></td>
           </form>
           <form action="delete" enctype="multipart/form-data" method="post">
             <td>
@@ -108,6 +109,7 @@ p {padding:3px 0 3px 0;}
           </form>
         </tr>
         <% currentId = item.id %>
+        <% index = index + 1 %>
         <% }) %>
         <tr>
           <form action="webadd" enctype="multipart/form-data" method="post">
@@ -138,12 +140,23 @@ p {padding:3px 0 3px 0;}
             <td><input class="bn" size="2" type="text" name ="more"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input size="2" type="submit" value="添加"/></td>
-			<td></td>
+            <td></td>
           </form>
         </tr>
-		<tr>
-		<td colspan="27" height="10px"></td>
-		</tr>
+        <tr>
+            <td colspan="27" height="10px"></td>
+        </tr>
+        <script type="text/javascript">
+          function submitAll() {
+            for (var i = 0; i < <%= index %>; i++) {
+              document.getElementById("upd_btn_" + i).submit();
+            }
+          }
+        </script>
+        <tr>
+            <td colspan="23"><input size="4" type="submit" value=" 批量更新 " onclick="submitAll();"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+        </tr>
         <tr>
           <form action="index" enctype="multipart/form-data" method="post">
             <td colspan="3">起始ID：<input size="5" type="text" name ="id" value="<%= currentId + 1 %>"/></td>
