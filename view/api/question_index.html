@@ -148,16 +148,16 @@ p {padding:3px 0 3px 0;}
         </tr>
         <script type="text/javascript">
           function submitAll() {
+              document.getElementById("form_0").submit();
+              document.getElementById("form_1").submit();
             for (var i = 0; i < <%= index %>; i++) {
               document.getElementById("form_" + i).submit();
             }
           }
         </script>
         <tr>
-          <form action="update" enctype="multipart/form-data" method="post">
             <td colspan="23"><input size="4" type="submit" value=" 批量更新 " onclick="submitAll();"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-          </form>
         </tr>
         <tr>
           <form action="index" enctype="multipart/form-data" method="post">
