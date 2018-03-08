@@ -395,6 +395,11 @@ VALUES (1,'0','ABC','0',1516199514);
 UNLOCK TABLES;
 
 
+--
+--SHOW VARIABLES LIKE 'event_scheduler';
+--SET GLOBAL event_scheduler = ON;
+--
+
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
