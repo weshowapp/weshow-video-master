@@ -25,7 +25,7 @@ export default class extends Base {
     var list = await this.model('question').query(sql);
     console.log(list.length);*/
 
-    var whereArg = {type: type, creator_id: creator_id};
+    var whereArg = {type: type, creator_id: creator_id, level: ["<", wxconst.QUIZ_LEVEL_DIFFICULT]};
     if (type != wxconst.QUIZ_TYPE_SELF) {
       if (level == wxconst.QUIZ_LEVEL_AUTO) {
       }
@@ -49,11 +49,29 @@ export default class extends Base {
       }
     }
     let list = await this.model('question').field('id').where(whereArg).select();
+    var arr = this.getRandomFromList(list, count);
+    if (arr != null && arr.length > 0) {
+      if (level == wxconst.QUIZ_LEVEL_AUTO) {
+        whereArg = {type: type, creator_id: creator_id, level: [">=", wxconst.QUIZ_LEVEL_DIFFICULT]};
+        let listDiff = await this.model('question').field('id').where(whereArg).select();
+        var arrDiff = this.getRandomFromList(listDiff, 1);
+        if (arrDiff != null && arrDiff.length > 0) {
+          arr[arr.length - 1] = arrDiff[0];
+        }
+      }
+      let questList = await this.model('question').where({id: ["IN", arr]}).order('level ASC').select();
+      return questList;
+    }
+
+    return list;
+  }
+  
+  async getRandomFromList(list, count) {
+    var arr = [];
     if (!think.isEmpty(list)) {
       console.log(list.length);
-      var arr = [];
       var seed = (new Date()).getMilliseconds();
-      console.log(seed);
+      //console.log(seed);
       var first = Math.floor((list.length * seed / 1000));
       var loopIndex = 0;
       for (var i = first; i < list.length; i++) {
@@ -88,11 +106,9 @@ export default class extends Base {
       }
 
       console.log(arr);
-      let questList = await this.model('question').where({id: ["IN", arr]}).select();
-      return questList;
     }
 
-    return list;
+    return arr;
   }
 
   async getMfgContent(data) {
