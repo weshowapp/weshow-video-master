@@ -66,7 +66,7 @@ export default class extends Base {
     return list;
   }
   
-  async getRandomFromList(list, count) {
+  getRandomFromList(list, count) {
     var arr = [];
     if (!think.isEmpty(list)) {
       console.log(list.length);
