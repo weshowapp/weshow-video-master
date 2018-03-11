@@ -371,6 +371,50 @@ UNLOCK TABLES;
 
 
 --
+-- Table structure for table `weshow_wxmsg`
+--
+
+DROP TABLE IF EXISTS `weshow_wxmsg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `weshow_wxmsg` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `MsgId` bigint(32) NOT NULL DEFAULT 0,
+  `ToUserName` varchar(64) NOT NULL DEFAULT '',
+  `FromUserName` varchar(64) NOT NULL DEFAULT '',
+  `MsgType` varchar(16) NOT NULL DEFAULT '',
+  `Content` varchar(64) NOT NULL DEFAULT '',
+  `PicUrl` varchar(64) NOT NULL DEFAULT '',
+  `MediaId` varchar(64) NOT NULL DEFAULT '',
+  `Event` varchar(64) NOT NULL DEFAULT '',
+  `SessionFrom` varchar(64) NOT NULL DEFAULT '',
+  `Title` varchar(64) NOT NULL DEFAULT '',
+  `AppId` varchar(64) NOT NULL DEFAULT '',
+  `PagePath` varchar(256) NOT NULL DEFAULT '',
+  `ThumbUrl` varchar(256) NOT NULL DEFAULT '',
+  `ThumbMediaId` varchar(256) NOT NULL DEFAULT '',
+  `rawData` varchar(2048) NOT NULL DEFAULT '',
+  `more` varchar(1024) NOT NULL DEFAULT '',
+  `CreateTime` int(18) unsigned NOT NULL DEFAULT '0',
+  `add_time` int(18) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `MsgId` (`MsgId`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weshow_wxmsg`
+--
+
+LOCK TABLES `weshow_wxmsg` WRITE;
+/*!40000 ALTER TABLE `weshow_wxmsg` DISABLE KEYS */;
+INSERT INTO `weshow_wxmsg` 
+VALUES (1,1,'0','0','0','3','0','0','0','7','0','0','0','0','12','0','14',1516799514,1516799518);
+/*!40000 ALTER TABLE `weshow_wxmsg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
 -- Table structure for table `weshow_note`
 --
 

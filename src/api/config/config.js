@@ -19,6 +19,7 @@ export default {
     //'wxcash',
     //'wxpay',
     //'note',
+    'wxmsg',
     'wxadmin',
   ],
 
