@@ -138,12 +138,15 @@ CREATE TABLE `weshow_quiz` (
   `level` int(4) unsigned NOT NULL DEFAULT '0',
   `category` int(4) unsigned NOT NULL DEFAULT '0',
   `price` float unsigned NOT NULL DEFAULT '0',
+  `award` varchar(32) NOT NULL DEFAULT '',
+  `award_image` varchar(255) NOT NULL DEFAULT '',
   `pay_status` tinyint(3) unsigned DEFAULT '0',
   `min_users` int(8) unsigned NOT NULL DEFAULT '0',
   `win_users` int(8) NOT NULL DEFAULT '-1',
   `start_time` int(11) unsigned NOT NULL DEFAULT '0',
   `share_ticket` varchar(64) NOT NULL DEFAULT '',
   `open_gid` varchar(64) NOT NULL DEFAULT '',
+  `note` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -243,6 +246,7 @@ CREATE TABLE `weshow_quizuser` (
   `note` varchar(32) NOT NULL DEFAULT '',
   `answer_status` int(20) NOT NULL DEFAULT '0',
   `game_status` tinyint(3) NOT NULL DEFAULT '0',
+  `pay_status` tinyint(3) NOT NULL DEFAULT '0',
   `game_gain` float NOT NULL DEFAULT '0',
   `answer_time` int(16) unsigned NOT NULL DEFAULT '0',
   `answer_set` int(4) unsigned NOT NULL DEFAULT '0',

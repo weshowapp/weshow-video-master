@@ -112,6 +112,8 @@ export default class extends Base {
     let quest_list = this.post('question_list');
     let min_users = this.post('min_users');
     let price = this.post('price');
+    let quiz_award = this.post('quiz_award');
+    let quiz_award_image = this.post('quiz_award_image');
     let start_time = this.post('start_time');
     create_time = this.getCurrentTime();
     console.log('addAction');
@@ -163,6 +165,8 @@ export default class extends Base {
         quest_count: quest_count,
         min_users: min_users,
         price: price,
+        award: quiz_award,
+        award_image: quiz_award_image,
         level: quiz_level,
         category: quiz_category
     });
@@ -217,6 +221,27 @@ export default class extends Base {
     await this.model('quiz').createCalculateGainProcedure();
     return this.success({
       result: 'OK',
+      errorCode: 0
+    });
+  }
+
+  async uploadawardAction() {
+    var file = think.extend({}, this.file('file_input'));
+    var filepath = file.path;
+
+    var uploadPath = think.RESOURCE_PATH + '/static/award';
+    think.mkdir(uploadPath);
+    var basename = path.basename(filepath);
+    fs.renameSync(filepath, uploadPath + '/' + basename);
+    file.path = uploadPath + '/' + basename;
+
+    var success = (think.isFile(file.path));
+    var url = 'https://www.imcou.com/static/award/' + file.path;
+
+    return this.success({
+      result: 'OK',
+      success: success,
+      fileurl: url,
       errorCode: 0
     });
   }
