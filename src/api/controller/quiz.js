@@ -2,6 +2,7 @@
 
 import Base from './base.js';
 
+var fs = require('fs');
 var path = require('path');
 var wxconst = require('./wxconst');
 
