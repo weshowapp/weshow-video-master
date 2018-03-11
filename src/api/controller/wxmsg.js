@@ -39,6 +39,8 @@ export default class extends Base {
     if (MsgId == '') {
       MsgId = 0;
     }
+    
+    var echostr = this.get('echostr');
 
     let addResult = await this.model('wxmsg').add({
       MsgId: MsgId,
@@ -62,6 +64,7 @@ export default class extends Base {
 
     return this.success({
       result: 'OK',
+      echostr: echostr,
       errorCode: 0
     });
   }
