@@ -28,6 +28,7 @@ export default class extends Base {
     let Content = this.post('Content');
     let PicUrl = this.post('PicUrl');
     let MediaId = this.post('MediaId');
+    let SessionFrom = this.post('SessionFrom');
     let Event = this.post('Event');
     let Title = this.post('Title');
     let AppId = this.post('AppId');
@@ -57,7 +58,7 @@ export default class extends Base {
     });
 
     return this.success({
-      result: 'OK'
+      result: 'OK',
       errorCode: 0
     });
   }
