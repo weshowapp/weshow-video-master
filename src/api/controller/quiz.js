@@ -219,14 +219,6 @@ export default class extends Base {
     return this.json(result);
   }
 
-  async creategainprocAction() {
-    await this.model('quiz').createCalculateGainProcedure();
-    return this.success({
-      result: 'OK',
-      errorCode: 0
-    });
-  }
-
   async uploadawardAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
@@ -238,12 +230,20 @@ export default class extends Base {
     file.path = uploadPath + '/' + basename;
 
     var success = (think.isFile(file.path));
-    var url = 'https://www.imcou.com/static/award/' + file.path;
+    var url = 'https://www.imcou.com/static/award/' + basename;
 
     return this.success({
       result: 'OK',
       success: success,
       fileurl: url,
+      errorCode: 0
+    });
+  }
+
+  async creategainprocAction() {
+    await this.model('quiz').createCalculateGainProcedure();
+    return this.success({
+      result: 'OK',
       errorCode: 0
     });
   }

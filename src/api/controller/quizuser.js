@@ -84,6 +84,7 @@ export default class extends Base {
 
   async getbyopenidAction() {
     let uid = this.get('openid');
+    let game_status = this.get('game_status');
     /*let refresh = this.get('refresh');
     if (await this.model('quizuser').noNewData('', refresh, this.get('timestamp'))) {
       return this.fail({
@@ -92,9 +93,29 @@ export default class extends Base {
         errorCode: 1
       });
     }*/
-    let info = await this.model('quizuser').where({ openid: uid }).select();
+    let list = await this.model('quizuser').where({ openid: uid, game_status: game_status }).limit(30).order('quizid DESC').select();
     await this.model('quizuser').setUserInfoWithUid(info, uid);
-    return this.json(info);
+    if (!think.isEmpty(list)) {
+      for (var i = 0; i < list.length; i++) {
+        list[i].open_gid = '0';
+        list[i].award = '';
+        list[i].award_image = '';
+        if (think.isEmpty(list[i].quizid)) { list[i].quizid = 0; }
+        let quizInfo = await this.model('quiz').where({ id: list[i].quizid }).find();
+        if (!think.isEmpty(quizInfo)) {
+          list[i].open_gid = quizInfo.open_gid;
+          list[i].award = quizInfo.award;
+          list[i].award_image = quizInfo.award_image;
+          if (quizInfo.price > 0) {
+            list[i].award = '奖金￥' + list[i].game_gain;
+          }
+        }
+        list[i].format_time = this.formatDateTime(list[i].add_time);
+        list[i].str_time = this.getFullDateTime(list[i].add_time);
+        list[i].desc = '赢取 ' + list[i].award;
+      }
+    }
+    return this.json(list);
   }
 
   async getansweredAction() {
