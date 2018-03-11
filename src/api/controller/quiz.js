@@ -5,6 +5,7 @@ import Base from './base.js';
 var fs = require('fs');
 var path = require('path');
 var wxconst = require('./wxconst');
+var xwords = require('./xwords');
 
 export default class extends Base {
 
@@ -134,6 +135,25 @@ export default class extends Base {
       quiz_type = wxconst.QUIZ_TYPE_NORMAL;
     }
 
+    var swords = xwords.block(quiz_award);
+    console.log(swords);
+    if (swords != '') {
+      return this.fail({
+        result: 'AUDIT_ERROR',
+        audit: false,
+        sword: swords,
+        errorCode: 301
+      });
+    }
+    var note = '';
+    var filter = 0;
+    var filterwords = xwords.filter(quiz_award);
+    console.log(filterwords);
+    if (filterwords != '') {
+      filter = 1;
+      note = 'xwords:' + filterwords;
+    }
+
     //let list = await this.model('question').where({id: randId}).limit(quest_count).select();
     if (think.isEmpty(quest_list) || quest_list == '' || quest_list.length == 0) {
       var list = await this.model('question').getRandomList(quest_count, quiz_type, quiz_level, wxconst.USER_ID_ADMIN);
@@ -170,7 +190,8 @@ export default class extends Base {
         award: quiz_award,
         award_image: quiz_award_image,
         level: quiz_level,
-        category: quiz_category
+        category: quiz_category,
+        note: note
     });
 
     var interval = start_time - this.getCurrentTime() + 15 * quest_count;
