@@ -64,6 +64,8 @@ export default class extends Base {
       console.log(count);
       userInfo.question_count = count;
     }
+    let award_count = await this.model('quizuser').where({openid: userid, game_status: wxconst.GAME_STATUS_WIN}).count();
+      userInfo.award_count = award_count;
     //console.log(userInfo);
 
     let sessionData = { user_id: userInfo.id, openid: userInfo.openid };

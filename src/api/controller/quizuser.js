@@ -1,6 +1,7 @@
 'use strict';
 
 import Base from './base.js';
+
 var wxconst = require('./wxconst');
 const fs = require('fs');
 const _ = require('lodash');
@@ -94,7 +95,7 @@ export default class extends Base {
       });
     }*/
     let list = await this.model('quizuser').where({ openid: uid, game_status: game_status }).limit(30).order('quizid DESC').select();
-    await this.model('quizuser').setUserInfoWithUid(info, uid);
+    //await this.model('quizuser').setUserInfoWithUid(list, uid);
     if (!think.isEmpty(list)) {
       for (var i = 0; i < list.length; i++) {
         list[i].open_gid = '0';
@@ -107,7 +108,7 @@ export default class extends Base {
           list[i].award = quizInfo.award;
           list[i].award_image = quizInfo.award_image;
           if (quizInfo.price > 0) {
-            list[i].award = '奖金￥' + list[i].game_gain;
+            list[i].award = '奖金' + list[i].game_gain + '元';
           }
         }
         list[i].format_time = this.formatDateTime(list[i].add_time);
