@@ -148,6 +148,12 @@ export default class extends think.model.base {
       else {
         if (quiz.userdata.game_status == wxconst.GAME_STATUS_WIN) {
           quiz.result_text = '赢' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
+          if (quiz.price == 0) {
+            quiz.result_text = '赢得' + quiz.award;
+          }
+          else {
+            quiz.award = Math.floor(quiz.userdata.game_gain * 100) / 100 + '元红包';
+          }
         }
         else {
           quiz.result_text = '未胜出';
@@ -160,6 +166,12 @@ export default class extends think.model.base {
     else if (quiz.join_status == 2) {
       if (quiz.userdata.game_status == wxconst.GAME_STATUS_WIN) {
         quiz.result_text = '赢' + Math.floor(quiz.userdata.game_gain * 100) / 100 + '元';
+        if (quiz.price == 0) {
+          quiz.result_text = '赢得' + quiz.award;
+        }
+        else {
+          quiz.award = Math.floor(quiz.userdata.game_gain * 100) / 100 + '元红包';
+        }
       }
       else {
         quiz.result_text = '未胜出';
