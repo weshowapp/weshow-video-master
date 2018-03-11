@@ -36,6 +36,9 @@ export default class extends Base {
     let ThumbUrl = this.post('ThumbUrl');
     let ThumbMediaId = this.post('ThumbMediaId');
     let rawData = this.post();
+    if (MsgId == '') {
+      MsgId = 0;
+    }
 
     let addResult = await this.model('wxmsg').add({
       MsgId: MsgId,
