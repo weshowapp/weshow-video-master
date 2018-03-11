@@ -2,6 +2,7 @@
 
 import Base from './base.js';
 
+var path = require('path');
 var wxconst = require('./wxconst');
 
 export default class extends Base {
