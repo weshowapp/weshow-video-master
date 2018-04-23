@@ -57,6 +57,10 @@ p {padding:3px 0 3px 0;}
       </form><br><br>
 
       <h2>管理</h2>
+      <form class="p" action="../upload/index" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+        <input class="btn" type="submit" name="file_submit" value=" 内容管理 ">
+      </form><br><br>
       <form class="p" action="../question/index" enctype="multipart/form-data" method="post">
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         <input class="btn" type="submit" name="file_submit" value=" 题目管理 ">
