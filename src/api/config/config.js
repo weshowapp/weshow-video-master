@@ -9,6 +9,8 @@ export default {
   publicController: [
     //格式为controller
     //'user',
+    'article',
+    'upload',
     'auth',
     //'quiz',
     'question',
@@ -36,6 +38,8 @@ export default {
     'quiz/index',
     'quiz/getbyuser',
     'quizuser/getbyuid',
+    'quizuser/getbyquizid',
+    'quizuser/add',
     'wxcash/index',
     'wxpay/notify',
     'wxadmin/index',
