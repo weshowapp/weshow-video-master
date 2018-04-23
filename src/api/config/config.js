@@ -56,6 +56,14 @@ export default {
     'user/delete',
     'user/update',
 
+    'upload/webadd',
+    'upload/index',
+    'upload/delete',
+    'upload/update',
+    'upload/queryinput',
+    'upload/upload',
+    'upload/uploadurl',
+
     'question/webadd',
     'question/index',
     'question/delete',
