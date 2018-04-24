@@ -60,6 +60,8 @@ p {padding:3px 0 3px 0;}
           <th width="4%">标题</th>
           <th width="6%">摘要</th>
           <th width="10%">内容</th>
+          <th width="10%">原始文本</th>
+          <th width="10%">原始数据</th>
           <th width="3%">备注</th>
           <th width="3%">备注1</th>
           <th width="3%" colspan="2">操作</th>
@@ -89,6 +91,8 @@ p {padding:3px 0 3px 0;}
             <td><input class="bn" size="8" type="text" name ="title" value="<%= item.title %>"/></td>
             <td><input class="bn" size="8" type="text" name ="digest" value="<%= item.digest %>"/></td>
             <td><input class="bn" size="8" type="text" name ="content" value="<%= item.content %>"/></td>
+            <td><input class="bn" size="8" type="text" name ="rawtext" value="<%= item.rawtext %>"/></td>
+            <td><input class="bn" size="8" type="text" name ="rawdata" value="<%= item.rawdata %>"/></td>
             <td><input class="bn" size="8" type="text" name ="note" value="<%= item.note %>"/></td>
             <td><input class="bn" size="2" type="text" name ="more" value="<%= item.more %>"/>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
@@ -128,6 +132,8 @@ p {padding:3px 0 3px 0;}
             <td><input class="bn" size="4" type="text" name ="title"/></td>
             <td><input class="bn" size="4" type="text" name ="digest"/></td>
             <td><input class="bn" size="10" type="text" name ="content"/></td>
+            <td><input class="bn" size="10" type="text" name ="rawtext"/></td>
+            <td><input class="bn" size="10" type="text" name ="rawdata"/></td>
             <td><input class="bn" size="8" type="text" name ="note"</td>
             <td><input class="bn" size="2" type="text" name ="more"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
