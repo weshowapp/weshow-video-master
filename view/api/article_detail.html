@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>News</title>
+<style>
+body {font-family:arial, 'Microsoft Yahei', '微软雅黑'; font-size:12px;}
+*{padding: 0;margin: 0;font-size: 14px;line-height: 20px;font-family: arial;}
+a, a:visited{color:#337ab7;text-decoration: none;}
+header{padding: 10px 0 2px 0;background-color: #fff; width:100%;}
+h1{font-size: 24px;color:#333;font-weight: normal; font-family:arial, 'Microsoft Yahei', '微软雅黑';}
+code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+.wrap{width: 100%;margin: 10px;}
+.content{margin-top: 30px; padding:0 10px 0 10px; width: 100%;}
+.content1{margin-top: 30px; padding-left:10px; width: 100%; line-height:160%;}
+p {padding:3px 0 3px 0;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1><%= item.title %></h1>
+    </div>
+  </header>
+  <div class="content">
+    <div class="list">
+      <table class="dataintable">
+        
+        <tr>
+            <td><%= item.digest %></td>
+        </tr>
+        <tr>
+            <td><%= item.rawtext %></td>
+        </tr>
+        <tr>
+            <td><%= item.rawdata %></td>
+        </tr>
+        <tr>
+            <td colspan="23"><input size="4" type="submit" value=" 批量更新 " onclick="submitAll();"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+        </tr>
+      </table>
+      <br><br>
+
+    </div>
+  </div>
+</body>
+</html>

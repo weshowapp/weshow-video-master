@@ -17,29 +17,10 @@ export default class extends Base {
    * index action
    * @return {Promise} []
    */
-  async indexAction() {
-    let id = this.post('id');
-    let size = this.post('size');
-    let filter = this.post('filter');
-    let tm = this.post('tm');
-    if (!this.checkTimeStamp(tm)) {
-      return this.success({
-        result: 'OK',
-        errorCode: 0
-      });
-    }
-    if (id == '' || id == undefined || id == null || id == NaN) {
-      id = 0;
-    }
-    if (size == '' || size == undefined || size == null || size == NaN) {
-      size = 10;
-    }
-    if (filter == '' || filter == undefined || filter == null || filter == NaN) {
-      filter = 0;
-    }
-    let list = await this.model('article').where({id: [">=", id], filter: filter}).limit(size).select();
-    var tk = this.post('wxtoken');
-    this.assign({'quest_list': list, 'wxtoken': tk});
+  async detailAction() {
+    let id = this.get('id');
+    let data = await this.model('article').where({id: id}).find();
+    this.assign({'data': data});
     this.display();
   }
 
