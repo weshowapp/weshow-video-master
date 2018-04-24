@@ -57,7 +57,7 @@ export default class extends Base {
 
   async getbyuserAction() {
     let openid = this.get('openid');
-    let list = await this.model('article').find().limit(30);
+    let list = await this.model('article').limit(30).select();
     if (!think.isEmpty(list)) {
         //console.log(list);
     }
