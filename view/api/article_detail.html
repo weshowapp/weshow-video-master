@@ -37,7 +37,7 @@ p {padding:3px 0 3px 0;}
   </header>
   <div class="content">
     <div class="list">
-      <%= HTMLDecode(data.rawtext) %>
+      HTMLDecode(<%= data.rawtext %>)
       <table class="dataintable">
         
         <tr>
