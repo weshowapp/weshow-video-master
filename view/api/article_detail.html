@@ -28,16 +28,19 @@ p {padding:3px 0 3px 0;}
   </header>
   <div class="content">
     <div class="list">
+      <p><%= data.rawdata %></p>
       <table class="dataintable">
         
         <tr>
             <td><%= data.digest %></td>
         </tr>
         <tr>
+            <td><%= data.content %></td>
+        </tr>
+        <tr>
             <td><%= data.rawtext %></td>
         </tr>
         <tr>
-            <td><%= data.rawdata %></td>
         </tr>
       </table>
       <br><br>
