@@ -83,7 +83,7 @@ export default class extends Base {
     let questModel = this.model('article');
     await lineReader.on('line', function (line) {
       if(!line) return;
-      var arr = line.split(',');
+      var arr = line.split('\",\"');
 
       let addResult = questModel.add({
         type: 1,
@@ -97,9 +97,11 @@ export default class extends Base {
         creator_id: '1',
         author_name: arr[6],
         author_id: '1',
+        source_id: '1',
         source_name: arr[3],
         source_url: arr[8],
-        pub_time: arr[2],
+        pub_time_str: arr[2],
+        pub_time: 0,
         share_time: 0,
         add_time: add_tm,
         title: arr[0],
@@ -147,8 +149,10 @@ export default class extends Base {
     let creator_id = this.post('creator_id');
     let author_name = this.post('author_name');
     let author_id = this.post('author_id');
+    let source_id = this.post('source_id');
     let source_name = this.post('source_name');
     let source_url = this.post('source_url');
+    let pub_time_str = this.post('pub_time_str');
     let pub_time = this.post('pub_time');
     let share_time = this.post('share_time');
     //let create_time = this.post('create_time');
@@ -172,8 +176,10 @@ export default class extends Base {
         creator_id: creator_id,
         author_name: author_name,
         author_id: author_id,
+        source_id: source_id,
         source_name: source_name,
         source_url: source_url,
+        pub_time_str: pub_time_str,
         pub_time: pub_time,
         share_time: share_time,
         add_time: add_time,
@@ -202,8 +208,10 @@ export default class extends Base {
     let creator_id = this.post('creator_id');
     let author_name = this.post('author_name');
     let author_id = this.post('author_id');
+    let source_id = this.post('source_id');
     let source_name = this.post('source_name');
     let source_url = this.post('source_url');
+    let pub_time_str = this.post('pub_time_str');
     let pub_time = this.post('pub_time');
     let share_time = this.post('share_time');
     //let create_time = this.post('create_time');
@@ -227,8 +235,10 @@ export default class extends Base {
         creator_id: creator_id,
         author_name: author_name,
         author_id: author_id,
+        source_id: source_id,
         source_name: source_name,
         source_url: source_url,
+        pub_time_str: pub_time_str,
         pub_time: pub_time,
         share_time: share_time,
         add_time: add_time,
