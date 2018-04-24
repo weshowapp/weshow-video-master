@@ -20,6 +20,15 @@ code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;bo
 p {padding:3px 0 3px 0;}
 </style>
 </head>
+<script type="text/javascript">
+  function HTMLDecode(text) { 
+    var temp = document.createElement("div"); 
+    temp.innerHTML = text; 
+    var output = temp.innerText || temp.textContent; 
+    temp = null; 
+    return output; 
+  } 
+</script>
 <body>
   <header>
     <div class="wrap">
@@ -28,7 +37,7 @@ p {padding:3px 0 3px 0;}
   </header>
   <div class="content">
     <div class="list">
-      <%= data.rawtext %>
+      <%= HTMLDecode(data.rawtext) %>
       <table class="dataintable">
         
         <tr>
