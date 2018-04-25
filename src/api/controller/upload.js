@@ -86,7 +86,7 @@ export default class extends Base {
       var arr = line.split('\",\"');
 
       var rawdata = arr[10];
-      if (!rawdata) {
+      if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
       }
       let addResult = questModel.add({
