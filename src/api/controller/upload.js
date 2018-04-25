@@ -108,7 +108,7 @@ export default class extends Base {
         digest: arr[1],
         content: arr[4],
         rawtext: arr[9],
-        rawdata: arr[10],
+        rawdata: arr[10].substr(0, arr[10].length-1),
         note: arr[7],
         more: 'more'
       });
