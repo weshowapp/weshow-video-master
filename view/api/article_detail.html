@@ -37,6 +37,30 @@ p {padding:3px 0 3px 0;}
     var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'}; 
     return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];}); 
   }
+          /*3.用正则表达式实现html转码*/
+        function htmlEncodeByRegExp(str){
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&/g,"&amp;");
+             s = s.replace(/</g,"&lt;");
+             s = s.replace(/>/g,"&gt;");
+             s = s.replace(/ /g,"&nbsp;");
+             s = s.replace(/\'/g,"&#39;");
+             s = s.replace(/\"/g,"&quot;");
+             return s;  
+       }
+       /*4.用正则表达式实现html解码*/
+       function htmlDecodeByRegExp(str){  
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&amp;/g,"&");
+             s = s.replace(/&lt;/g,"<");
+             s = s.replace(/&gt;/g,">");
+             s = s.replace(/&nbsp;/g," ");
+             s = s.replace(/&#39;/g,"\'");
+             s = s.replace(/&quot;/g,"\"");
+             return s;  
+       }
 %>
 <body>
   <header>
@@ -46,7 +70,7 @@ p {padding:3px 0 3px 0;}
   </header>
   <div class="content">
     <div class="list">
-      <%= escape2Html(data.rawtext) %>
+      <%= htmlDecodeByRegExp(data.rawtext) %>
       <table class="dataintable">
         
         <tr>
