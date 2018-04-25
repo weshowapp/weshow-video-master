@@ -85,6 +85,10 @@ export default class extends Base {
       if(!line) return;
       var arr = line.split('\",\"');
 
+      var rawdata = arr[10];
+      if (!rawdata) {
+        rawdata = rawdata.substr(0, arr[10].length-1);
+      }
       let addResult = questModel.add({
         type: 1,
         level: 1,
@@ -108,7 +112,7 @@ export default class extends Base {
         digest: arr[1],
         content: arr[4],
         rawtext: arr[9],
-        rawdata: arr[10].substr(0, arr[10].length-1),
+        rawdata: rawdata,
         note: arr[7],
         more: 'more'
       });
