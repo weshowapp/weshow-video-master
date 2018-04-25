@@ -104,7 +104,7 @@ export default class extends Base {
         pub_time: 0,
         share_time: 0,
         add_time: add_tm,
-        title: arr[0],
+        title: arr[0].substring(1),
         digest: arr[1],
         content: arr[4],
         rawtext: arr[9],

@@ -20,48 +20,7 @@ code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;bo
 p {padding:3px 0 3px 0;}
 </style>
 </head>
-<script type="text/javascript">
-  function HTMLDecode(text) { 
-    var temp = document.createElement("div"); 
-    temp.innerHTML = text; 
-    var output = temp.innerText || temp.textContent; 
-    temp = null; 
-    return output; 
-  }
-</script>
-<%
-  function html2Escape(sHtml) {
-    return sHtml.replace(/[<>&"]/g, function(c){ return {'<':'<','>':'>','&':'&','"':'"'}[c]; });
-  }
-  function escape2Html(str) { 
-    var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'}; 
-    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];}); 
-  }
-          /*3.用正则表达式实现html转码*/
-        function htmlEncodeByRegExp(str){
-             var s = "";
-             if(str.length == 0) return "";
-             s = str.replace(/&/g,"&amp;");
-             s = s.replace(/</g,"&lt;");
-             s = s.replace(/>/g,"&gt;");
-             s = s.replace(/ /g,"&nbsp;");
-             s = s.replace(/\'/g,"&#39;");
-             s = s.replace(/\"/g,"&quot;");
-             return s;  
-       }
-       /*4.用正则表达式实现html解码*/
-       function htmlDecodeByRegExp(str){  
-             var s = "";
-             if(str.length == 0) return "";
-             s = str.replace(/&amp;/g,"&");
-             s = s.replace(/&lt;/g,"<");
-             s = s.replace(/&gt;/g,">");
-             s = s.replace(/&nbsp;/g," ");
-             s = s.replace(/&#39;/g,"\'");
-             s = s.replace(/&quot;/g,"\"");
-             return s;  
-       }
-%>
+
 <body>
   <header>
     <div class="wrap">
@@ -70,19 +29,20 @@ p {padding:3px 0 3px 0;}
   </header>
   <div class="content">
     <div class="list">
-      <%= htmlDecodeByRegExp(data.rawtext) %>
       <table class="dataintable">
-        
         <tr>
-            <td><%= data.digest %></td>
+          <td><%= data.source_name  data.author_name  data.pub_time_str %></td>
         </tr>
         <tr>
-            <td><%= data.content %></td>
+          <td><%= data.digest %></td>
+        </tr>
+        <tr>
+          <td><%- data.rawdata %></td>
+        </tr>
+        <tr>
+          <td><%= data.note %></td>
         </tr>
       </table>
-
-      <p><%= data.rawdata %></p>
-
       <br><br>
 
     </div>
