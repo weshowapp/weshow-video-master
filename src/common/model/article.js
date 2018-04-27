@@ -56,11 +56,18 @@ export default class extends think.model.base {
     return article;
   }
 
-  async setLikeList(article) {
+  async setLikeList(article, openid) {
     console.log('setLikeList');
     if (think.isEmpty(article)) {
       return article;
     }
+    article.hasLiked = false;
+    var hasLiked = await this.model('comment').where({artid: article.id, openid: openid, up: 1}).select();
+    if (!think.isEmpty(likes)) {
+      article.hasLiked = true;
+    }
+    var likeCount = await this.model('comment').where({artid: article.id, up: 1}).count();
+    article.likeCount = likeCount;
     var likes = await this.model('comment').where({artid: article.id, up: 1}).limit(3).select();
     if (!think.isEmpty(likes)) {
       for (var i = 0; i < likes.length; i++) {
