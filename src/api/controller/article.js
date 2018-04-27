@@ -43,7 +43,7 @@ export default class extends Base {
       //console.log(list);
       for (var i = 0; i < list.length; i++) {
         await this.model('article').setMagazine(list[i]);
-        await this.model('article').setLikeList(list[i]);
+        await this.model('article').setLikeList(list[i], openid);
       }
     }
     return this.success({
