@@ -51,6 +51,28 @@ export default class extends Base {
     });
   }
 
+  async getuserlikesAction() {
+    let openid = this.get('openid');
+    var likeList = await this.model('comment').field('artid').where({openid: openid, up: 1}).limit(30).select();
+    var aidList = [];
+    if (!think.isEmpty(likeList)) {
+        for (var i = 0; i < likeList.length; i++) {
+            aidList.push(likeList[i].artid);
+        }
+    }
+    let list = await this.model('article').where({'id': ["IN", aidList]}).select();
+    if (!think.isEmpty(list)) {
+      //console.log(list);
+      for (var i = 0; i < list.length; i++) {
+        await this.model('article').setMagazine(list[i]);
+        await this.model('article').setLikeList(list[i], openid);
+      }
+    }
+    return this.success({
+      newsList: list
+    });
+  }
+
   async getrandomAction() {
     let count = this.get('count');
     let onlyself = this.get('onlyself');
