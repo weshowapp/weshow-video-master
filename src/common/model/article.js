@@ -63,7 +63,7 @@ export default class extends think.model.base {
     }
     article.hasLiked = false;
     var hasLiked = await this.model('comment').where({artid: article.id, openid: openid, up: 1}).select();
-    if (!think.isEmpty(likes)) {
+    if (!think.isEmpty(hasLiked)) {
       article.hasLiked = true;
     }
     var likeCount = await this.model('comment').where({artid: article.id, up: 1}).count();
