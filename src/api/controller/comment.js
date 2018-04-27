@@ -101,6 +101,39 @@ export default class extends Base {
 
   }
 
+  async likeAction() {
+    let openid = this.post('openid');
+    let newsid = this.post('newsid');
+    let like = this.post('like');
+    var create_time = this.getCurrentTime();
+    console.log('likeAction');
+
+    let addResult = 0;
+    var existInfo = await this.model('comment').where({openid: openid, artid: newsid}).find();
+    if (!think.isEmpty(existInfo)) {
+      await this.model('comment').where({openid: openid, artid: newsid}).update({
+        openid: openid,
+        artid: newsid,
+        up: like,
+        create_time: create_time
+      });
+    }
+    else {
+      await this.model('comment').add({
+        openid: openid,
+        artid: newsid,
+        up: like,
+        create_time: create_time
+      });
+    }
+
+    return this.success({
+      result: 'OK',
+      add_id: addResult,
+      errorCode: 0
+    });
+  }
+
   async addAction() {
     let openid = this.post('openid');
     let artid = this.post('artid');
