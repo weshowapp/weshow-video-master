@@ -40,9 +40,11 @@ export default class extends Base {
     let openid = this.get('openid');
     let list = await this.model('article').limit(30).select();
     if (!think.isEmpty(list)) {
-        //console.log(list);
+      //console.log(list);
+      for (var i = 0; i < list.length; i++) {
+        gidList.push(groupList[i].open_gid);
+      }
     }
-
     return this.success({
       newsList: list
     });
