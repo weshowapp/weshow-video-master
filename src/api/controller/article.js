@@ -73,6 +73,22 @@ export default class extends Base {
     });
   }
 
+  async getbysourceAction() {
+    let openid = this.get('openid');
+    let srcname = this.get('sourcename');
+    let list = await this.model('article').where({'source_name': srcname}).limit(30).select();
+    if (!think.isEmpty(list)) {
+      //console.log(list);
+      for (var i = 0; i < list.length; i++) {
+        await this.model('article').setMagazine(list[i]);
+        await this.model('article').setLikeList(list[i], openid);
+      }
+    }
+    return this.success({
+      newsList: list
+    });
+  }
+
   async getrandomAction() {
     let count = this.get('count');
     let onlyself = this.get('onlyself');
