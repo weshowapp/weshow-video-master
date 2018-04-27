@@ -42,7 +42,8 @@ export default class extends Base {
     if (!think.isEmpty(list)) {
       //console.log(list);
       for (var i = 0; i < list.length; i++) {
-        gidList.push(groupList[i].open_gid);
+        await this.model('article').setMagazine(list[i]);
+        await this.model('article').setLikeList(list[i]);
       }
     }
     return this.success({
