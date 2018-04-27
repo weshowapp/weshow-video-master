@@ -24,7 +24,7 @@ export default class extends Base {
     }
 
     return this.success({
-      questList: list
+      magazine: list
     });
   }
 
