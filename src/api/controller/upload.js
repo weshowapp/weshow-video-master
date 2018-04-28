@@ -62,6 +62,12 @@ export default class extends Base {
     this.display();
   }
 
+  replaceAll(str, rep) {
+    if (str!=null)
+      str = str.replace(/word/g, rep)
+      return str;
+  }
+
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
@@ -88,6 +94,27 @@ export default class extends Base {
       var rawdata = arr[10];
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
+        rawdata = rawdata.replaceAll('\"\"', '');
+      }
+      var imageData0 = rawdata.match('/<img.*>'/i');
+      var image0 = imageData0;
+      if (imageData0 != null && imageData0.length > 0) {
+        image0 = imageData0.match('src=.* '/i');
+      }
+      var imageData1 = rawdata.match('/<img.*>'/i');
+      var image1 = imageData1;
+      if (imageData1 != null && imageData1.length > 0) {
+        image1 = imageData1.match('src=.* '/i');
+      }
+      var image2 = rawdata.match('/<img.*>'/i');
+      var image2 = imageData2;
+      if (imageData2 != null && imageData2.length > 0) {
+        image2 = imageData2.match('src=.* '/i');
+      }
+      var image3 = rawdata.match('/<img.*>'/i');
+      var image3 = imageData3;
+      if (imageData3 != null && imageData3.length > 0) {
+        image3 = imageData3.match('src=.* '/i');
       }
       let addResult = questModel.add({
         type: 1,
@@ -113,6 +140,10 @@ export default class extends Base {
         content: arr[4],
         rawtext: arr[9],
         rawdata: rawdata,
+        image0: image0,
+        image1: image1,
+        image2: image2,
+        image3: image3,
         note: arr[7],
         more: 'more'
       });

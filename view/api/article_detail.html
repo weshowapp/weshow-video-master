@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="format-detection" content="telephone=no">
-<title>News</title>
+<title>详情</title>
 <style>
 body {font-family:arial, 'Microsoft Yahei', '微软雅黑'; font-size:12px;}
 *{padding: 0;margin: 0;font-size: 14px;line-height: 20px;font-family: arial;}
@@ -29,16 +29,11 @@ p {padding:3px 0 3px 0;}
   </header>
   <div class="content">
     <div class="list">
+      <p><%= data.source_icon %></p>
+      <p><%= data.source_name %></p>
+      <p><%= data.author_name %></p>
+      <p><%= data.pub_time_str %></p>
       <table class="dataintable">
-        <tr>
-          <td><%= data.source_name %></td>
-        </tr>
-        <tr>
-          <td><%= data.author_name %></td>
-        </tr>
-        <tr>
-          <td><%= data.pub_time_str %></td>
-        </tr>
         <tr>
           <td><%= data.digest %></td>
         </tr>
