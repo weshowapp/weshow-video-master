@@ -68,6 +68,16 @@ export default class extends Base {
       return str;
   }
 
+  getUrl(imageData, len) {
+    if (imageData != null && imageData.length > len) {
+      var src = imageData[len - 1].match(/src=.*\" /i);
+      if (src != null && src.length > 0) {
+        return = src[0].replace(/\"\"/g, '').replace(/src=/i, '');
+      }
+    }
+    return '';
+  }
+
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
@@ -91,42 +101,19 @@ export default class extends Base {
       if(!line) return;
       var arr = line.split('\",\"');
 
+      var image0 = '';
+      var image1 = '';
+      var image2 = '';
+      var image3 = '';
       var rawdata = arr[10];
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
-        rawdata = rawdata.replace('\"\"/g', '');
-      }
-      var imageData0 = rawdata.match('/<img.*>/i');
-      var image0 = imageData0;
-      if (imageData0 != null && imageData0.length > 0) {
-        image0 = imageData0.match('src=.* /i');
-      }
-      if (image0 == null) {
-        image0 = '';
-      }
-      var imageData1 = rawdata.match('/<img.*>/i');
-      var image1 = imageData1;
-      if (imageData1 != null && imageData1.length > 0) {
-        image1 = imageData1.match('src=.* /i');
-      }
-      if (image1 == null) {
-        image1 = '';
-      }
-      var imageData2 = rawdata.match('/<img.*>/i');
-      var image2 = imageData2;
-      if (imageData2 != null && imageData2.length > 0) {
-        image2 = imageData2.match('src=.* /i');
-      }
-      if (image2 == null) {
-        image2 = '';
-      }
-      var imageData3 = rawdata.match('/<img.*>/i');
-      var image3 = imageData3;
-      if (imageData3 != null && imageData3.length > 0) {
-        image3 = imageData3.match('src=.* /i');
-      }
-      if (image3 == null) {
-        image3 = '';
+        var imageData = rawdata.match(/<img.*>/gi);
+        image0 = getUrl(imageData, 1);
+        image1 = getUrl(imageData, 2);
+        image2 = getUrl(imageData, 3);
+        image3 = getUrl(imageData, 4);
+        rawdata = rawdata.replace(/\"\"/g, '');
       }
       let addResult = questModel.add({
         type: 1,
