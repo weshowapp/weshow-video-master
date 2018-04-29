@@ -62,22 +62,6 @@ export default class extends Base {
     this.display();
   }
 
-  replaceAll(str, rep) {
-    if (str!=null)
-      str = str.replace(/word/g, rep)
-      return str;
-  }
-
-  getUrl(imageData, len) {
-    if (imageData != null && imageData.length > len) {
-      var src = imageData[len - 1].match(/src=.*\" /i);
-      if (src != null && src.length > 0) {
-        return src[0].replace(/\"\"/g, '').replace(/src=/i, '');
-      }
-    }
-    return '';
-  }
-
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
