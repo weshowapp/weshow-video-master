@@ -84,7 +84,7 @@ export default class extends Base {
     let uploadModel = this.model('upload');
     await lineReader.on('line', function (line) {
       if(!line) return;
-      var arr = line.split('\",\"');
+      var arr = line.split(',');
 
       var image0 = '';
       var image1 = '';
@@ -116,6 +116,10 @@ export default class extends Base {
           }
         }
       }
+      var title = arr[0];
+      if (title.substr(0, 1) == '\"') {
+        title = arr[0].substring(1);
+      }
       let addResult = artModel.add({
         type: 1,
         level: 1,
@@ -135,7 +139,7 @@ export default class extends Base {
         pub_time: pubTime,
         share_time: 0,
         add_time: add_tm,
-        title: arr[0].substring(1),
+        title: title,
         digest: arr[1],
         content: arr[4],
         rawtext: arr[9],
