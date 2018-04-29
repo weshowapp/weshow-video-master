@@ -12,6 +12,7 @@ export default {
     'article',
     'upload',
     'auth',
+    'magazine',
     //'quiz',
     'question',
     //'group',
