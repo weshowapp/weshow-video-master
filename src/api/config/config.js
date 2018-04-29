@@ -68,6 +68,8 @@ export default {
     'upload/upload',
     'upload/uploadurl',
 
+    'magazine/index',
+
     'question/webadd',
     'question/index',
     'question/delete',
