@@ -82,7 +82,7 @@ export default class extends Base {
       for (var i = 0; i < list.length; i++) {
         await this.model('article').setMagazine(list[i]);
         await this.model('article').setLikeList(list[i], openid);
-        list[i].pub_time_str = this.getCurTimeStamp(list[i].pub_time);
+        list[i].pub_time_str = this.model('article').getCurTimeStamp(list[i].pub_time);
       }
     }
     return this.success({
