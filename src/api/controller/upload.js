@@ -80,7 +80,8 @@ export default class extends Base {
 
     var add_tm = this.getCurrentTime();
     var count = 0;
-    let questModel = this.model('article');
+    let artModel = this.model('article');
+    let uploadModel = this.model('upload');
     await lineReader.on('line', function (line) {
       if(!line) return;
       var arr = line.split('\",\"');
@@ -93,13 +94,13 @@ export default class extends Base {
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
         var imageData = rawdata.match(/<img.*>/gi);
-        image0 = this.getUrl(imageData, 1);
-        image1 = this.getUrl(imageData, 2);
-        image2 = this.getUrl(imageData, 3);
-        image3 = this.getUrl(imageData, 4);
+        image0 = uploadModel.getUrl(imageData, 1);
+        image1 = uploadModel.getUrl(imageData, 2);
+        image2 = uploadModel.getUrl(imageData, 3);
+        image3 = uploadModel.getUrl(imageData, 4);
         rawdata = rawdata.replace(/\"\"/g, '');
       }
-      let addResult = questModel.add({
+      let addResult = artModel.add({
         type: 1,
         level: 1,
         filter: 0,
