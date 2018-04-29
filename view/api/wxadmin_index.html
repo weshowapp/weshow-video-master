@@ -61,6 +61,10 @@ p {padding:3px 0 3px 0;}
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         <input class="btn" type="submit" name="file_submit" value=" 内容管理 ">
       </form><br><br>
+      <form class="p" action="../magazine/index" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+        <input class="btn" type="submit" name="file_submit" value=" 媒体管理 ">
+      </form><br><br>
       <form class="p" action="../question/index" enctype="multipart/form-data" method="post">
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         <input class="btn" type="submit" name="file_submit" value=" 题目管理 ">
