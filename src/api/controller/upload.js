@@ -96,25 +96,25 @@ export default class extends Base {
         rawdata = rawdata.substr(0, arr[10].length-1);
         rawdata = rawdata.replaceAll('\"\"', '');
       }
-      var imageData0 = rawdata.match('/<img.*>'/i');
+      var imageData0 = rawdata.match('/<img.*>/i');
       var image0 = imageData0;
       if (imageData0 != null && imageData0.length > 0) {
-        image0 = imageData0.match('src=.* '/i');
+        image0 = imageData0.match('src=.* /i');
       }
-      var imageData1 = rawdata.match('/<img.*>'/i');
+      var imageData1 = rawdata.match('/<img.*>/i');
       var image1 = imageData1;
       if (imageData1 != null && imageData1.length > 0) {
-        image1 = imageData1.match('src=.* '/i');
+        image1 = imageData1.match('src=.* /i');
       }
-      var image2 = rawdata.match('/<img.*>'/i');
+      var image2 = rawdata.match('/<img.*>/i');
       var image2 = imageData2;
       if (imageData2 != null && imageData2.length > 0) {
-        image2 = imageData2.match('src=.* '/i');
+        image2 = imageData2.match('src=.* /i');
       }
-      var image3 = rawdata.match('/<img.*>'/i');
+      var image3 = rawdata.match('/<img.*>/i');
       var image3 = imageData3;
       if (imageData3 != null && imageData3.length > 0) {
-        image3 = imageData3.match('src=.* '/i');
+        image3 = imageData3.match('src=.* /i');
       }
       let addResult = questModel.add({
         type: 1,
