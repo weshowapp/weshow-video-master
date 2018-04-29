@@ -93,12 +93,28 @@ export default class extends Base {
       var rawdata = arr[10];
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
-        var imageData = rawdata.match(/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i);
+        var imageData = rawdata.match(/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))?.+>/i);
         if (imageData != null && imageData.length > 1) {
           image0 = imageData[1];
-          image0 = image0..replace(/\"/g, '');
+          image0 = image0.replace(/\"/g, '');
         }
         rawdata = rawdata.replace(/\"\"/g, '');
+      }
+      var pubTime = add_tm;
+      var pubStr = arr[2];
+      if (pubStr != null && pubStr.length > 0) {
+        var tm = pubStr.match(/(.)+(分钟|小时|天)前/i);
+        if (tm != null && tm.length > 2) {
+          if (tm[2].indexOf('分钟') != -1) {
+            pubTime = pubTime - parseInt(tm[1]) * 60;
+          }
+          else if (tm[2].indexOf('小时') != -1) {
+            pubTime = pubTime - parseInt(tm[1]) * 60 * 60;
+          }
+          else if (tm[2].indexOf('天') != -1) {
+            pubTime = pubTime - parseInt(tm[1]) * 60 * 60 * 24;
+          }
+        }
       }
       let addResult = artModel.add({
         type: 1,
@@ -116,7 +132,7 @@ export default class extends Base {
         source_name: arr[3],
         source_url: arr[8],
         pub_time_str: arr[2],
-        pub_time: 0,
+        pub_time: pubTime,
         share_time: 0,
         add_time: add_tm,
         title: arr[0].substring(1),

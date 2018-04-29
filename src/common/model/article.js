@@ -13,7 +13,7 @@ export default class extends think.model.base {
     return Math.floor((new Date()).getTime() / 1000);
   }
 
-  getHourMin(time) {
+  getCurTimeStamp(time) {
     var cur = new Date();
     var curTime = cur.getTime() / 1000;
     var date = new Date(time * 1000);
@@ -37,7 +37,13 @@ export default class extends think.model.base {
       }
       return (date.getMonth() + 1) + '/' + date.getDate() + ' ' + hour + ':' + min;
     }
-    return hour + ':' + min;
+    else if (parseInt(hour) < cur.getHours()) {
+      return (cur.getHours() - parseInt(hour)) + '小时前';
+    }
+    else if (parseInt(hour) < cur.getMinutes()) {
+      return (cur.getMinutes() - parseInt(hour)) + '分钟前';
+    }
+    return '刚刚';
   }
 
   /**
