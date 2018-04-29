@@ -72,7 +72,7 @@ export default class extends Base {
     if (imageData != null && imageData.length > len) {
       var src = imageData[len - 1].match(/src=.*\" /i);
       if (src != null && src.length > 0) {
-        return = src[0].replace(/\"\"/g, '').replace(/src=/i, '');
+        return src[0].replace(/\"\"/g, '').replace(/src=/i, '');
       }
     }
     return '';
@@ -109,10 +109,10 @@ export default class extends Base {
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
         var imageData = rawdata.match(/<img.*>/gi);
-        image0 = getUrl(imageData, 1);
-        image1 = getUrl(imageData, 2);
-        image2 = getUrl(imageData, 3);
-        image3 = getUrl(imageData, 4);
+        image0 = this.getUrl(imageData, 1);
+        image1 = this.getUrl(imageData, 2);
+        image2 = this.getUrl(imageData, 3);
+        image3 = this.getUrl(imageData, 4);
         rawdata = rawdata.replace(/\"\"/g, '');
       }
       let addResult = questModel.add({
