@@ -53,5 +53,68 @@ export default class extends Base {
     });
   }
 
+  async webaddAction() {
+    return await this.addAction();
+  }
 
+  async addAction() {
+    let name = this.post('name');
+    let cover_url = this.post('cover_url');
+    let description = this.post('description');
+    let address = this.post('address');
+    let impact = this.post('impact');
+    let read_value = this.post('read_value');
+    let read_count = this.post('read_count');
+    let add_time = this.getCurrentTime();
+    let note = this.post('note');
+
+    let addResult = await this.model('magazine').add({
+        name: name,
+        cover_url: cover_url,
+        description: description,
+        address: address,
+        impact: impact,
+        read_value: read_value,
+        read_count: read_count,
+        add_time: add_time,
+        note: note
+    });
+
+    return this.success({
+      result: 'OK',
+      id: addResult,
+      errorCode: 0
+    });
+  }
+
+  async updateAction() {
+    let id = this.post('id');
+    let name = this.post('name');
+    let cover_url = this.post('cover_url');
+    let description = this.post('description');
+    let address = this.post('address');
+    let impact = this.post('impact');
+    let read_value = this.post('read_value');
+    let read_count = this.post('read_count');
+    let add_time = this.getCurrentTime();
+    let note = this.post('note');
+
+    let addResult = await this.model('magazine').where({id: id}).update({
+        name: name,
+        cover_url: cover_url,
+        description: description,
+        address: address,
+        impact: impact,
+        read_value: read_value,
+        read_count: read_count,
+        add_time: add_time,
+        note: note
+    });
+
+    return this.success({
+      result: 'OK',
+      id: addResult,
+      errorCode: 0
+    });
+  }
 }
