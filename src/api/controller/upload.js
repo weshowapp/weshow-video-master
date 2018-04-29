@@ -93,11 +93,11 @@ export default class extends Base {
       var rawdata = arr[10];
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
-        var imageData = rawdata.match(/<img.*>/gi);
-        image0 = uploadModel.getUrl(imageData, 1);
-        image1 = uploadModel.getUrl(imageData, 2);
-        image2 = uploadModel.getUrl(imageData, 3);
-        image3 = uploadModel.getUrl(imageData, 4);
+        var imageData = rawdata.match(/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i);
+        if (imageData != null && imageData.length > 1) {
+          image0 = imageData[1];
+          image0 = image0..replace(/\"/g, '');
+        }
         rawdata = rawdata.replace(/\"\"/g, '');
       }
       let addResult = artModel.add({

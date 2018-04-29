@@ -120,13 +120,4 @@ export default class extends think.controller.base {
     return true;
   }
 
-  getUrl(imageData, len) {
-    if (imageData != null && imageData.length > len) {
-      var src = imageData[len - 1].match(/src=.*\" /i);
-      if (src != null && src.length > 0) {
-        return src[0].replace(/\"\"/g, '').replace(/src=/i, '');
-      }
-    }
-    return '';
-  }
 }
