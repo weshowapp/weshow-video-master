@@ -94,27 +94,39 @@ export default class extends Base {
       var rawdata = arr[10];
       if (rawdata != null && rawdata.length > 0) {
         rawdata = rawdata.substr(0, arr[10].length-1);
-        rawdata = rawdata.replaceAll('\"\"', '');
+        rawdata = rawdata.replace('\"\"/g', '');
       }
       var imageData0 = rawdata.match('/<img.*>/i');
       var image0 = imageData0;
       if (imageData0 != null && imageData0.length > 0) {
         image0 = imageData0.match('src=.* /i');
       }
+      if (image0 == null) {
+        image0 = '';
+      }
       var imageData1 = rawdata.match('/<img.*>/i');
       var image1 = imageData1;
       if (imageData1 != null && imageData1.length > 0) {
         image1 = imageData1.match('src=.* /i');
       }
-      var image2 = rawdata.match('/<img.*>/i');
+      if (image1 == null) {
+        image1 = '';
+      }
+      var imageData2 = rawdata.match('/<img.*>/i');
       var image2 = imageData2;
       if (imageData2 != null && imageData2.length > 0) {
         image2 = imageData2.match('src=.* /i');
       }
-      var image3 = rawdata.match('/<img.*>/i');
+      if (image2 == null) {
+        image2 = '';
+      }
+      var imageData3 = rawdata.match('/<img.*>/i');
       var image3 = imageData3;
       if (imageData3 != null && imageData3.length > 0) {
         image3 = imageData3.match('src=.* /i');
+      }
+      if (image3 == null) {
+        image3 = '';
       }
       let addResult = questModel.add({
         type: 1,
