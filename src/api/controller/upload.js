@@ -99,6 +99,7 @@ export default class extends Base {
           image0 = image0.replace(/\"/g, '');
         }
         rawdata = rawdata.replace(/\"\"/g, '');
+        rawdata = rawdata.replace(/<img/g, '<img width=100%');
       }
       var pubTime = add_tm;
       var pubStr = arr[2];

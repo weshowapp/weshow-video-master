@@ -28,7 +28,7 @@
     <div>
         <div class="title"><%= data.title %></div><!--标题-->
         <div class="source">
-            <div><img src="<%= data.magazine_url %>" width="60px" border="0" alt=""></div>
+            <div><img src="<%= data.magazine_url %>" width="40px" border="0" alt=""></div>
             <div style="padding:0 0 0 5px;"><span style="font-size:16px;"><%= data.source_name %></span><br/>
             <span class="time"><%= data.pub_time_str %></span></div>
         </div><!--来源-->
@@ -54,7 +54,7 @@
             <% var currentId = 0; %>
             <% var index = 0; %>
             <% data.likes.forEach(function(item) { %>
-                <li><IMG SRC="<%= item.photo_url %>" BORDER="0" ALT=""></li>
+                <li><IMG SRC="<%= item.user_photo %>" BORDER="0"></li>
             <% currentId = item.id %>
             <% index = index + 1 %>
             <% }) %>
@@ -79,10 +79,10 @@
         <div>
             <a href="">
                 <div class="cr">下一篇</div>
-                    <div class="cr1">
-                    <span style="color:#000000;">2018，公链的角斗场，你我赚钱的机会</span><br/>
-                2018年区块链行业发展，仍以底层公链为重心，各公链在性能、可扩展性和应用性上继续角力，各类解决方案（技术、商业）会解决公链的某些问题，加快公链的商用发展。
-                   </div>
+                <div class="cr1">
+                    <span style="color:#000000;"><%- data.next_title %></span><br/>
+                    <%- data.next_digest %>
+                </div>
             </a>
         </div><!--下一篇-->
 

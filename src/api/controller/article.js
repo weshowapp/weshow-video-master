@@ -20,10 +20,16 @@ export default class extends Base {
   async detailAction() {
     let id = this.get('id');
     let openid = this.get('openid');
+    let nextid = this.get('nextid');
     let data = await this.model('article').where({id: id}).find();
     if (!think.isEmpty(data)) {
         await this.model('article').setMagazine(data);
         await this.model('article').setLikeList(data, openid);
+        var nextdata = await this.model('article').where({id: id}).find();
+        if (!think.isEmpty(nextdata)) {
+          data.next_title = nextdata.title;
+          data.next_digest = nextdata.digest;
+        }
     }
     this.assign({'data': data});
     this.display();
