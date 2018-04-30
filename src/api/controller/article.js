@@ -19,7 +19,12 @@ export default class extends Base {
    */
   async detailAction() {
     let id = this.get('id');
+    let openid = this.get('openid');
     let data = await this.model('article').where({id: id}).find();
+    if (!think.isEmpty(data)) {
+        await this.model('article').setMagazine(data);
+        await this.model('article').setLikeList(data, openid);
+    }
     this.assign({'data': data});
     this.display();
   }
