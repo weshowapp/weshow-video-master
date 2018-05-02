@@ -41,16 +41,17 @@
         <div style="margin-bottom:50px;"></div><!--留白-->        
         <div class="img-content"><!--三个按钮-->
             <ul>
-                <li><IMG SRC="https://www.imcou.com/static/news/detail_value.png" BORDER="0" ALT="文章影响力"><br/><span>影响力&nbsp;&nbsp;890.2</span></li>
+                <li><IMG SRC="https://www.imcou.com/static/news/detail_value.png" BORDER="0" ALT="文章影响力"><br/><span>影响力&nbsp;&nbsp;<%= data.impact %></span></li>
                 <% if (data.hasLiked) { %>
-                <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_liked.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;80</span></li>
+                <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_liked.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;<%= data.likes.length %></span></li>
                 <% } else { %>
-                <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_like.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;80</span></li>
-                <% }%>
+                <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_like.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;<%= data.likes.length %></span></li>
+                <% } %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_share.png" BORDER="0" ALT=""></a><br/><span>分享</span></li>
             </ul>
         </div>
         <div style="margin-bottom:30px;"></div><!--留白--> 
+        <% if (data.likes.length > 0) { %>
         <div style="text-align:center;">赞过留名</div>
         <div style="margin-bottom:20px;"></div><!--留白--> 
         <div class="img-avatar">
@@ -58,13 +59,14 @@
             <% var currentId = 0; %>
             <% var index = 0; %>
             <% data.likes.forEach(function(item) { %>
-                <li><IMG SRC="<%= item.user_photo %>" BORDER="0"></li>
+                <li><IMG SRC="<%= item.user_photo %>" BORDER="0" border-radius="50%"></li>
             <% currentId = item.id %>
             <% index = index + 1 %>
             <% }) %>
             </ul>        
         </div><!--like 头像--> 
-        <div style="margin-bottom:35px;"></div><!--留白--> 
+        <div style="margin-bottom:35px;"></div><!--留白
+        <% } %>
         <div>
             <div class="cr">版权及免责声明</div>
             <div class="cr1">此文版权归属于原文作者，转载仅为传递更多信息，不代表今日块讯同意其观点。如有侵权，请联系我们删除。</div>
@@ -78,7 +80,7 @@
             </div>
         </div>
         <div style="margin-bottom:40px;"></div><!--留白-->
-        <div class="line"></div>
+        <!--div class="line"></div-->
         <div style="margin-bottom:30px;"></div><!--留白-->
         <!--div>
             <a href="">

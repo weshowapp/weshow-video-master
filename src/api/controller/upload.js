@@ -121,6 +121,11 @@ export default class extends Base {
       if (title.substr(0, 1) == '\"') {
         title = arr[0].substring(1);
       }
+      var author = arr[6];
+      if (author != null) {
+        author = author.replace('作者：', '');
+        author = author.replace('作者:', '');
+      }
       let addResult = artModel.add({
         type: 1,
         level: 1,
@@ -131,7 +136,7 @@ export default class extends Base {
         category3: 'category3',
         tags: 'tags',
         creator_id: '1',
-        author_name: arr[6],
+        author_name: author,
         author_id: '1',
         source_id: '1',
         source_name: arr[3],
