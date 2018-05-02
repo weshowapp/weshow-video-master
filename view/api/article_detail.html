@@ -42,7 +42,11 @@
         <div class="img-content"><!--三个按钮-->
             <ul>
                 <li><IMG SRC="https://www.imcou.com/static/news/detail_value.png" BORDER="0" ALT="文章影响力"><br/><span>影响力&nbsp;&nbsp;890.2</span></li>
+                <%= if (data.hasLiked) { %>
+                <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_liked.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;80</span></li>
+                <%= } else { %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_like.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;80</span></li>
+                <%= }%>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_share.png" BORDER="0" ALT=""></a><br/><span>分享</span></li>
             </ul>
         </div>
@@ -67,7 +71,7 @@
         </div>
         <div style="margin-bottom:20px;"></div><!--留白--> 
         <div>
-            <div class="cr">原文详情&nbsp;&nbsp;<span style="color:#333333; font-size:12px;">▼▲</span></div>
+            <div class="cr">原文详情&nbsp;&nbsp;<!--span style="color:#333333; font-size:12px;">▼▲</span--></div>
             <div class="cr1">
                 来源：<%= data.source_name %><br/>
                 作者：<%= data.author_name %><br/>
@@ -76,7 +80,7 @@
         <div style="margin-bottom:40px;"></div><!--留白-->
         <div class="line"></div>
         <div style="margin-bottom:30px;"></div><!--留白-->
-        <div>
+        <!--div>
             <a href="">
                 <div class="cr">下一篇</div>
                 <div class="cr1">
@@ -84,7 +88,7 @@
                     <%- data.next_digest %>
                 </div>
             </a>
-        </div><!--下一篇-->
+        </div--><!--下一篇-->
 
         <div style="margin-bottom:40px;"></div><!--留白-->
         <div></div>

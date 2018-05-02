@@ -25,7 +25,7 @@ export default class extends Base {
     if (!think.isEmpty(data)) {
         await this.model('article').setMagazine(data);
         await this.model('article').setLikeList(data, openid);
-        var nextdata = await this.model('article').where({id: id}).find();
+        var nextdata = await this.model('article').where({id: nextid}).find();
         if (!think.isEmpty(nextdata)) {
           data.next_title = nextdata.title;
           data.next_digest = nextdata.digest;
