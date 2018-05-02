@@ -35,7 +35,13 @@
         <div style="margin-bottom:20px;"></div><!--留白-->
         <div class="content1">
             <!--以下是抓取内容-->
-            <div class=content><p><%- data.rawdata %></p>
+            <% if (data.rawdata.length > 100) { %>
+              <div class=content><p><%- data.rawdata %></p>
+            <% else if (data.rawtext.length > 100) { %>
+              <div class=content><p><%- data.rawtext %></p>
+            <% } else { %>
+              <div class=content><p><%- data.content %></p>
+            <% } %>
             <!--抓取内容结束-->
         </div>
         <div style="margin-bottom:50px;"></div><!--留白-->        
