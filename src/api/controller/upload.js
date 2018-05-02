@@ -97,9 +97,16 @@ export default class extends Base {
         if (imageData != null && imageData.length > 1) {
           image0 = imageData[1];
           image0 = image0.replace(/\"/g, '');
+          var validUrl = image0.match(/(.)+\.(jpg|gif|bmp|bnp|png)+./i);
+          if (validUrl != null) {
+            image0 = '';
+          }
         }
         rawdata = rawdata.replace(/\"\"/g, '');
         rawdata = rawdata.replace(/<img/g, '<img width=100%');
+        if (rawdata.substr(0, 1) == '\"') {
+          rawdata = rawdata.substring(1);
+        }
       }
       var pubTime = add_tm;
       var pubStr = arr[2];
