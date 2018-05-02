@@ -37,7 +37,7 @@
             <!--以下是抓取内容-->
             <% if (data.rawdata.length > 100) { %>
               <div class=content><p><%- data.rawdata %></p>
-            <% else if (data.rawtext.length > 100) { %>
+            <% } else if (data.rawtext.length > 100) { %>
               <div class=content><p><%- data.rawtext %></p>
             <% } else { %>
               <div class=content><p><%- data.content %></p>
