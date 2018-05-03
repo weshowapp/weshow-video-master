@@ -74,6 +74,15 @@ export default class extends think.model.base {
     }
     var likeCount = await this.model('comment').where({artid: article.id, up: 1}).count();
     article.likeCount = likeCount;
+    if (likeCount == 0) {
+      article.impact = 0;
+    }
+    else if (likeCount <= 10) {
+      article.impact = wxconst.LIKE_SCORE[likeCount - 1];
+    }
+    else {
+      article.impact = 88;
+    }
     var likes = await this.model('comment').where({artid: article.id, up: 1}).limit(3).select();
     if (!think.isEmpty(likes)) {
       for (var i = 0; i < likes.length; i++) {

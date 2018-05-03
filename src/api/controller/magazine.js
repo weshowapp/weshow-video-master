@@ -41,7 +41,6 @@ export default class extends Base {
   async infoAction() {
     let name = this.get('magazine_name');
     let list = await this.model('magazine').where({name: name}).find();
-    var likeScore = [30, 50, 60, 67, 73, 78, 82, 85, 87, 88];
     if (!think.isEmpty(list)) {
         console.log('magazine info');
         //await this.model('magazine').setMagazineDetail(list);
@@ -57,7 +56,7 @@ export default class extends Base {
             if (cmCount == 0) {
             }
             else if (cmCount <= 10) {
-              impact += likeScore[cmCount - 1];
+              impact += wxconst.LIKE_SCORE[cmCount - 1];
             }
             else {
               impact += 88;
