@@ -93,6 +93,8 @@ export default class extends think.model.base {
       }
     }
     article.likes = likes;
+    var shareCount = await this.model('comment').where({artid: article.id, shared: 1}).count();
+    article.shareCount = shareCount;
     return article;
   }
 
