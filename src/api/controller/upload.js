@@ -128,6 +128,18 @@ export default class extends Base {
       if (title.substr(0, 1) == '\"') {
         title = arr[0].substring(1);
       }
+      var digest = arr[1];
+      if (digest.substr(0, 1) == '\"') {
+        digest = digest.substring(1);
+      }
+      var content = arr[4];
+      if (content.substr(0, 1) == '\"') {
+        content = content.substring(1);
+      }
+      var rawtext = arr[9];
+      if (rawtext.substr(0, 1) == '\"') {
+        rawtext = rawtext.substring(1);
+      }
       var author = arr[6];
       if (author != null) {
         author = author.replace('作者：', '');
@@ -153,9 +165,9 @@ export default class extends Base {
         share_time: 0,
         add_time: add_tm,
         title: title,
-        digest: arr[1],
-        content: arr[4],
-        rawtext: arr[9],
+        digest: digest,
+        content: content,
+        rawtext: rawtext,
         rawdata: rawdata,
         image0: image0,
         image1: image1,

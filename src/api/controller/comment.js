@@ -126,6 +126,7 @@ export default class extends Base {
         create_time: create_time
       });
     }
+    await this.model('comment').updatePowerOfUp(newsid, openid);
 
     return this.success({
       result: 'OK',

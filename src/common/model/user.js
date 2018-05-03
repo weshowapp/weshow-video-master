@@ -53,4 +53,35 @@ export default class extends think.model.base {
     }
     return result;
   }
+
+  async createPowerProcedure() {
+    console.log('createPowerProcedure');
+    var tableUser = 'weshow_user';
+    var sqlProc = ' '
+        + 'CREATE PROCEDURE CalPowerProc() '
+        + 'BEGIN '
+        + 'DECLARE var_power INTEGER DEFAULT 100; '
+        + 'UPDATE ' + tableUser + ' SET ' + tableUser + '.power_of_up=100; '
+        + 'END '
+        + ' ; '
+    await this.model('user').execute('DROP PROCEDURE IF EXISTS CalGainProc;');
+    await this.model('user').execute(sqlProc);
+  }
+
+  /*
+    CREATE EVENT user_power_reset_event 
+      ON SCHEDULE EVERY 1 DAY STARTS DATE_ADD(DATE_ADD(CURDATE(), INTERVAL 1 DAY), INTERVAL 0 HOUR) 
+      ON COMPLETION PRESERVE ENABLE 
+      DO 
+        UPDATE weshow_user SET weshow_user.power_of_up=100; 
+  */
+  async createPowerEvent() {
+    console.log('createPowerEvent ');
+    var sql = 'CREATE EVENT user_power_reset_event '
+        + ' ON SCHEDULE EVERY 1 DAY STARTS DATE_ADD(DATE_ADD(CURDATE(), INTERVAL 1 DAY), INTERVAL 0 HOUR) '
+        + ' ON COMPLETION PRESERVE ENABLE '
+        + ' DO '
+        + '   UPDATE weshow_user SET weshow_user.power_of_up=100; '
+    return await this.model('user').execute(sql);
+  }
 }
