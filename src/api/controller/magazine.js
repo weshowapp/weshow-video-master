@@ -49,21 +49,23 @@ export default class extends Base {
         var artList = await this.model('article').where({'source_name': name}).select();
         if (!think.isEmpty(artList)) {
           list.article_count = artList.length;
-          console.log('magazine artList ' + artList.length);
+          //console.log('magazine artList ' + artList.length);
           for (var i = 0; i < artList.length; i++) {
-            console.log('magazine artList[i] ' + artList[i].id);
+            //console.log('magazine artList[i] ' + artList[i].id);
             var cmCount = await this.model('comment').where({'artid': artList[i].id, up: 1}).count();
-            console.log('magazine cmCount ' + cmCount);
-            if (cmCount <= 10) {
+            //console.log('magazine cmCount ' + cmCount);
+            if (cmCount == 0) {
+            }
+            else if (cmCount <= 10) {
               impact += likeScore[cmCount - 1];
             }
             else {
               impact += 88;
             }
-            console.log('magazine impact ' + impact);
+            //console.log('magazine impact ' + impact);
           }
           list.impact = impact;
-          console.log('magazine list.impact ' + list.impact);
+          //console.log('magazine list.impact ' + list.impact);
         }
     }
 
