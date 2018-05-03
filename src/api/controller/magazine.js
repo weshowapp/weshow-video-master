@@ -41,11 +41,25 @@ export default class extends Base {
   async infoAction() {
     let name = this.get('magazine_name');
     let list = await this.model('magazine').where({name: name}).find();
+    var likeScore = [3, 5, 6, 6.7, 7.3, 7.8, 8.2, 8.5, 8.7, 8.8];
     if (!think.isEmpty(list)) {
         //console.log(list);
         //await this.model('magazine').setMagazineDetail(list);
-        var artCount = await this.model('article').where({'source_name': name}).count();
-        list.article_count = artCount;
+        var impact = 0;
+        var artList = await this.model('article').where({'source_name': name}).select();
+        if (!think.isEmpty(artList)) {
+          list.article_count = artList.length;
+          for (var i = 0; i < artList.length; i++) {
+            var cmCount = await this.model('comment').where({'artid': artList[i].id, up: 1}).count();
+            if (cmCount <= 10) {
+              impact += likeScore[cmCount - 1];
+            }
+            else {
+              impact += 8.8;
+            }
+          }
+          list.impact = impact;
+        }
     }
 
     return this.success({
