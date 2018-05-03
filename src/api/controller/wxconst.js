@@ -56,7 +56,7 @@ module.exports = {
     WXCASH_STATUS_BEGIN: 0,
     WXCASH_STATUS_SUCCESS: 1,
 
-    LIKE_SCORE = [30, 50, 60, 67, 73, 78, 82, 85, 87, 88],
+    LIKE_SCORE: [30, 50, 60, 67, 73, 78, 82, 85, 87, 88],
 
     QUIZ_GAME_RULES: ['欢迎来答题',
       '每道题有10秒作答时间',
