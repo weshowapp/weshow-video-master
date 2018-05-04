@@ -30,6 +30,7 @@ export default class extends Base {
           data.next_title = nextdata.title;
           data.next_digest = nextdata.digest;
         }
+        data.openid = openid;
     }
     this.assign({'data': data});
     this.display();
