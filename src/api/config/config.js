@@ -70,6 +70,7 @@ export default {
     'upload/uploadurl',
 
     'magazine/index',
+    'comment/like',
 
     'question/webadd',
     'question/index',
