@@ -32,7 +32,8 @@ export default class extends Base {
         }
         data.openid = openid;
     }
-    this.assign({'data': data});
+    var tk = this.post('wxtoken');
+    this.assign({'data': data, 'wxtoken': tk});
     this.display();
   }
 

@@ -56,14 +56,15 @@
                 <% if (data.hasLiked) { %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_liked.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;<%= data.likeCount %></span></li>
                 <% } else { %>
-                <form action="../comment/like" id="form_<%= data.id %>" enctype="multipart/form-data" method="post" target="hidden_frame_<%= data.id %>">
+                <li><form action="../comment/like" id="form_<%= data.id %>" enctype="multipart/form-data" method="post" target="hidden_frame_<%= data.id %>">
                   <input type="hidden" name="newsid" value="<%= data.id %>">
                   <input type="hidden" name="openid" value="<%= data.openid %>">
                   <input type="hidden" name="like" value="1">
-                  <li><a href="">
+                  <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+                  <a href="">
                     <IMG SRC="https://www.imcou.com/static/news/detail_like.png" BORDER="0" ALT="" onclick="likeClick();">
-                  </a><br/><span>赞&nbsp;&nbsp;<%= data.likeCount %></span></li>
-                </form>
+                  </a><br/><span>赞&nbsp;&nbsp;<%= data.likeCount %></span>
+                </form></li>
                 <% } %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_share.png" BORDER="0" ALT=""></a><br/><span>分享&nbsp;&nbsp;<%= data.shareCount %></span></li>
             </ul>
