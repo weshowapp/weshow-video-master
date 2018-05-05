@@ -7,9 +7,10 @@ import time
 import os  
 import codecs  
 import sys
-import MySQLdb
+#import MySQLdb
+import pymysql
 import datetime
-      
+
 #打开Firefox浏览器 设定等待加载时间      
 driver = webdriver.Firefox()  
 wait = ui.WebDriverWait(driver,10)      
@@ -45,7 +46,7 @@ def main():
   
         #数据库操作结合  
         try:  
-            conn=MySQLdb.connect(host='localhost', user='root',  
+            conn=pymysql.connect(host='localhost', user='root',  
                                  passwd='weshow', port=3306, db='weshow')  
             cur=conn.cursor() #数据库游标  
 
@@ -129,7 +130,8 @@ def main():
                 m = m + 1  
 
         #异常处理  
-        except MySQLdb.Error,e:  
+        #except MySQLdb.Error,e:
+        except pymysql.Error,e:
             print "Mysql Error %d: %s" % (e.args[0], e.args[1])  
         finally:  
             cur.close()
