@@ -31,8 +31,8 @@ def getPage():
 #主函数
 def main():
     print 'main'
-    beginIndex = sys.argv[1]
-    endIndex = sys.argv[2]
+    beginIndex = int(sys.argv[1])
+    endIndex = int(sys.argv[2])
     print beginIndex
     #获取txt文件总行数  
     count = len(open("Bishijie_info_detail_URL.txt",'rU').readlines())
@@ -158,4 +158,4 @@ def main():
         urlfile.close()  
         print 'Load Over'  
 
-#main()
+main()
