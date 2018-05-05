@@ -46,20 +46,18 @@ def main():
         url = url.strip("\n")  
         print url  
         #driver.get(url)  
-        urldata = urllib2.urlopen(url).read()
-        soup = BeautifulSoup(urldata,"html.parser")
 
         nowTime=datetime.datetime.now()
         #time.sleep(2)  
   
         #数据库操作结合  
-        try:  
-            conn=pymysql.connect(host='localhost', user='root',  
-                                 passwd='weshow', port=3306, db='weshow')  
-            cur=conn.cursor() #数据库游标  
+        conn=pymysql.connect(host='localhost', user='root',  
+                             passwd='weshow', port=3306, db='weshow')  
+        cur=conn.cursor() #数据库游标  
+        try:
 
             #报错:UnicodeEncodeError: 'latin-1' codec can't encode character  
-            conn.set_character_set('utf8mb4')  
+            #conn.set_character_set('utf8mb4')  
             cur.execute('SET NAMES utf8mb4;')  
             cur.execute('SET CHARACTER SET utf8mb4;')  
             cur.execute('SET character_set_connection=utf8mb4;')
@@ -69,7 +67,9 @@ def main():
             while m <= endIndex:  
                 ur = url + str(m)  
                 print ur  
-                driver.get(ur)  
+                #driver.get(ur)  
+                urldata = urllib2.urlopen(url).read()
+                soup = BeautifulSoup(urldata,"html.parser")
 
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
@@ -152,7 +152,7 @@ def main():
             conn.commit()
             conn.close()
 
-        n = n + 1  
+        n = n + 1
 
     else:  
         urlfile.close()  
