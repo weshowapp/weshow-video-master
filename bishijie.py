@@ -10,22 +10,27 @@ import sys
 #import MySQLdb
 import pymysql
 import datetime
+import urllib  
+import urllib2
 
-#打开Firefox浏览器 设定等待加载时间      
-driver = webdriver.Firefox()  
-wait = ui.WebDriverWait(driver,10)      
-  
+#打开Firefox浏览器 设定等待加载时间
+#driver = webdriver.Firefox()  
+#wait = ui.WebDriverWait(driver,10)
+
+content = urllib2.urlopen(url).read()
+soup = BeautifulSoup(content,"html.parser")
+
 #获取每个博主的博客页面低端总页码       
 def getPage():  
     print 'getPage'  
     number = 0        
-    texts = driver.find_element_by_xpath("//div[@id='papelist']").text        
+    #texts = driver.find_element_by_xpath("//div[@id='papelist']").text        
     print '页码', texts        
     m = re.findall(r'(\w*[0-9]+)\w*',texts) #正则表达式寻找数字        
     print '页数：' + str(m[1])        
     return int(m[1])     
-      
-#主函数      
+
+#主函数
 def main():
     beginIndex = sys.argv[1]
     endIndex = sys.argv[2]
@@ -54,53 +59,59 @@ def main():
             conn.set_character_set('utf8mb4')  
             cur.execute('SET NAMES utf8mb4;')  
             cur.execute('SET CHARACTER SET utf8mb4;')  
-            cur.execute('SET character_set_connection=utf8mb4;')  
-              
+            cur.execute('SET character_set_connection=utf8mb4;')
+
             #具体内容处理  
             m = beginIndex #第1页  
             while m <= endIndex:  
                 ur = url + str(m)  
                 print ur  
                 driver.get(ur)  
-                  
-                #标题  
-                article_title = driver.find_elements_by_xpath("//div[@class='title']")  
+
+                #标题
+                #article_title = driver.find_elements_by_xpath("//div[@class='title']")
+                article_title = soup.find_all(attrs={"class":"title"})
                 for title in article_title:  
                     #print url  
                     con = title.text  
                     con = con.strip("\n")  
                     #print con + '\n'  
-                  
+
                 #摘要  
-                article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")  
+                #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
+                article_digest = soup.find_all(attrs={"class":"abstract"})
                 for description in article_digest:  
                     con = description.text  
                     con = con.strip("\n")  
                     #print con + '\n'  
 
                 #Content
-                article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
+                #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
+                article_content = soup.find_all(attrs={"class":"contentContainer"})
                 for item in article_content:
                     con = item.text
                     con = con.strip("\n")
                     #print con + '\n'
 
                 #Author
-                article_author = driver.find_elements_by_xpath("//div[@class='author']")
+                #article_author = driver.find_elements_by_xpath("//div[@class='author']")
+                article_author = soup.find_all(attrs={"class":"author"})
                 for item in article_author:
                     con = item.text
                     con = con.strip("\n")
                     #print con + '\n'
 
                 #source
-                article_source = driver.find_elements_by_xpath("//div[@class='source']")
+                #article_source = driver.find_elements_by_xpath("//div[@class='source']")
+                article_source = soup.find_all(attrs={"class":"source"})
                 for item in article_source:
                     con = item.text
                     con = con.strip("\n")
                     #print con + '\n'
 
                 #time
-                article_time = driver.find_elements_by_xpath("//div[@class='time']")
+                #article_time = driver.find_elements_by_xpath("//div[@class='time']")
+                article_time = soup.find_all(attrs={"class":"time"})
                 for item in article_time:
                     con = item.text
                     con = con.strip("\n")
