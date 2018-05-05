@@ -12,6 +12,7 @@ import pymysql
 import datetime
 import urllib  
 import urllib2
+from bs4 import BeautifulSoup  
 
 #打开Firefox浏览器 设定等待加载时间
 #driver = webdriver.Firefox()  
