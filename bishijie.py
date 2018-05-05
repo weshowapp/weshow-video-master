@@ -48,7 +48,7 @@ def main():
         soup = BeautifulSoup(urldata,"html.parser")
 
         nowTime=datetime.datetime.now()
-        time.sleep(2)  
+        #time.sleep(2)  
   
         #数据库操作结合  
         try:  
@@ -156,4 +156,4 @@ def main():
         urlfile.close()  
         print 'Load Over'  
 
-main()
+#main()
