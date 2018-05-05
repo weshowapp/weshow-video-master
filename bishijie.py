@@ -18,22 +18,24 @@ from bs4 import BeautifulSoup
 #driver = webdriver.Firefox()  
 #wait = ui.WebDriverWait(driver,10)
 
-#获取每个博主的博客页面低端总页码       
+#获取
 def getPage():  
     print 'getPage'  
-    number = 0        
-    #texts = driver.find_element_by_xpath("//div[@id='papelist']").text        
-    print '页码', texts        
-    m = re.findall(r'(\w*[0-9]+)\w*',texts) #正则表达式寻找数字        
-    print '页数：' + str(m[1])        
+    number = 0
+    #texts = driver.find_element_by_xpath("//div[@id='papelist']").text
+    print '页码', texts
+    m = re.findall(r'(\w*[0-9]+)\w*',texts) #正则表达式寻找数字
+    print '页数：' + str(m[1])
     return int(m[1])     
 
 #主函数
 def main():
+    print 'main'
     beginIndex = sys.argv[1]
     endIndex = sys.argv[2]
+    print beginIndex
     #获取txt文件总行数  
-    count = len(open("Bishijie_info_detail_URL.txt",'rU').readlines())  
+    count = len(open("Bishijie_info_detail_URL.txt",'rU').readlines())
     print count  
     n = 0  
     urlfile = open("Bishijie_info_detail_URL.txt",'r')  

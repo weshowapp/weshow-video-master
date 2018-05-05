@@ -1,11 +1,11 @@
 ﻿# -*- coding: UTF-8 -*-  
 import urllib  
-import urllib.request  
+import urllib2
 from bs4 import BeautifulSoup  
   
 #下载数据  
 url = "http://www.weather.com.cn/weather/101260101.shtml"  
-content = urllib.request.urlopen(url).read()  
+content = urllib2.urlopen(url).read()  
 soup = BeautifulSoup(content,"html.parser")  
 #print(soup.title.get_text())  
   
