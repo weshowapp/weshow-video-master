@@ -17,9 +17,6 @@ import urllib2
 #driver = webdriver.Firefox()  
 #wait = ui.WebDriverWait(driver,10)
 
-content = urllib2.urlopen(url).read()
-soup = BeautifulSoup(content,"html.parser")
-
 #获取每个博主的博客页面低端总页码       
 def getPage():  
     print 'getPage'  
@@ -39,13 +36,16 @@ def main():
     print count  
     n = 0  
     urlfile = open("Bishijie_info_detail_URL.txt",'r')  
-  
+
     #循环获取文章   
     while n < count:
         url = urlfile.readline()  
         url = url.strip("\n")  
         print url  
-        driver.get(url)  
+        #driver.get(url)  
+        urldata = urllib2.urlopen(url).read()
+        soup = BeautifulSoup(urldata,"html.parser")
+
         nowTime=datetime.datetime.now()
         time.sleep(2)  
   
