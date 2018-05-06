@@ -33,11 +33,18 @@ if url:
         print tm.group(1)
         print nowTime
         if tm:
-            if (tm.group(1).index('分钟') != -1):
-                nowTime = nowTime - int(tm[1]) * 60
-            elif (tm.group(1).index('小时') != -1):
-                nowTime = nowTime - int(tm[1]) * 60 * 60
-            elif (tm.group(1).index('天') != -1):
-                nowTime = nowTime - int(tm[1]) * 60 * 60 * 24
+            try:
+                if (tm.group().index('分钟') != -1):
+                    nowTime = nowTime - int(tm.group(1)) * 60
+            except ValueError:
+                try:
+                    if (tm.group().index('小时') != -1):
+                        nowTime = nowTime - int(tm.group(1)) * 60 * 60
+                except ValueError:
+                    try:
+                        if (tm.group().index('天') != -1):
+                            nowTime = nowTime - int(tm.group(1)) * 60 * 60 * 24
+                    except ValueError:
+                        print nowTime
         print nowTime
 
