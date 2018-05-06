@@ -112,12 +112,12 @@ def main():
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
                 article_author = soup.find_all(class_="author")
-                if article_author：
+                if article_author:
                     for item in article_author:
                         con = item.text
                         con = con.strip("\n")
                     #print con + '\n'
-                else：
+                else:
                     article_author = soup.find_all(class_="editer")
 
                 #source
