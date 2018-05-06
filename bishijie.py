@@ -2,17 +2,17 @@
 from selenium import webdriver      
 from selenium.webdriver.common.keys import Keys
 import selenium.webdriver.support.ui as ui
-import re  
-import os  
-import codecs  
+import re
+import os
+import codecs
 import sys
 #import MySQLdb
 import pymysql
 import datetime
 import time
-import urllib  
+import urllib
 import urllib2
-from bs4 import BeautifulSoup  
+from bs4 import BeautifulSoup
 
 #打开Firefox浏览器 设定等待加载时间
 #driver = webdriver.Firefox()  
@@ -169,7 +169,7 @@ def main():
                     author = author.replace('作者：', '')
                     author = author.replace('作者:', '')
                     #tm = time.match(/(.)+(分钟|小时|天)前/i);
-                    tm = re.match(r'(.*)(分钟|小时|天)前', pubTime, re.M|re.I)
+                    tm = re.match(r'(.*)(分钟|小时|天)前', unicode(pubTime), re.M|re.I)
                     print 'nowTime'
                     print pubTime
                     print tm
