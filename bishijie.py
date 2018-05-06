@@ -184,8 +184,10 @@ def main():
                     tm = re.match(u'(.*)(分钟|小时|天)前', pubTime, re.M|re.I)
                     #print 'nowTime'
                     #print pubTime
-                    #print tm
-                    #print nowTime
+                    print tm
+                    print tm.group()
+                    print tm.group(1)
+                    print nowTime
                     if tm:
                         try:
                             if (tm.group().index('分钟') != -1):
