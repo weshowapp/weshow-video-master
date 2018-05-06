@@ -146,8 +146,8 @@ def main():
                 while num < 1:  
                     #插入数据 8个值  
                     sql = '''insert into weshow_article 
-                                (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,image0,content,rawtext,rawdata) 
-                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
+                                (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,image0,image1,image2,image3,content,rawtext,rawdata) 
+                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
                     title = article_title[num].text
                     digest = article_digest[num].text
                     content = article_content[num].text
@@ -158,11 +158,20 @@ def main():
                     #print digest
                     rawSoup = BeautifulSoup(rawdata)
                     image0 = ''
-                    imgObj = rawSoup.find('img')
+                    image1 = ''
+                    image2 = ''
+                    image3 = ''
+                    imgObj = rawSoup.find_all('img')
                     #print 'imgObj'
                     #print imgObj
                     if imgObj:
-                        image0 = imgObj.attrs['src']
+                        image0 = imgObj[0].attrs['src']
+                        if len(imgObj) > 1:
+                            image1 = imgObj[1].attrs['src']
+                        if len(imgObj) > 2:
+                            image2 = imgObj[2].attrs['src']
+                        if len(imgObj) > 3:
+                            image3 = imgObj[3].attrs['src']
                         #print 'image0'
                         #print image0
                     rawdata = rawdata.replace('<img', '<img width=100%')
@@ -190,7 +199,7 @@ def main():
                                     print nowTime
                     print nowTime
 
-                    cur.execute(sql, (author, source, ur, pubTime, nowTime, title, digest, image0, content, rawdata, rawdata))
+                    cur.execute(sql, (author, source, ur, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
                     print 'execute\n'
 
                     num = num + 1
