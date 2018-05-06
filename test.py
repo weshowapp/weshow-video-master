@@ -21,6 +21,7 @@ for u in name:
     content = content.replace("\n","")  
     print(content)
 
+if url:
     if 1:
         #nowTime=datetime.datetime.now().microsecond
         nowTime=time.time()
