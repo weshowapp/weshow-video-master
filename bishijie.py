@@ -68,13 +68,13 @@ def main():
                 ur = url + str(m)  
                 print ur  
                 #driver.get(ur)  
-                urldata = urllib2.urlopen(url).read()
+                urldata = urllib2.urlopen(ur).read()
                 soup = BeautifulSoup(urldata,"html.parser")
                 #print soup
 
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
-                article_title = soup.find_all("title")
+                article_title = soup.find_all(class_="title")
                 print 'article_title'  
                 print article_title  
                 for title in article_title:  
@@ -85,15 +85,15 @@ def main():
 
                 #摘要  
                 #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
-                article_digest = soup.find_all("abstract")
-                for digest in article_digest:  
+                article_digest = soup.find_all(attrs={'class':'abstract'})
+                for digest in article_digest:
                     con = digest.text  
                     con = con.strip("\n")  
                     print con + '\n'  
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
-                article_content = soup.find_all("contentContainer")
+                article_content = soup.find_all(class_="contentContainer")
                 for item in article_content:
                     con = item.text
                     con = con.strip("\n")
@@ -101,7 +101,7 @@ def main():
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
-                article_author = soup.find_all("author")
+                article_author = soup.find_all(class_="author")
                 for item in article_author:
                     con = item.text
                     con = con.strip("\n")
@@ -109,7 +109,7 @@ def main():
 
                 #source
                 #article_source = driver.find_elements_by_xpath("//div[@class='source']")
-                article_source = soup.find_all("source")
+                article_source = soup.find_all(class_="source")
                 for item in article_source:
                     con = item.text
                     con = con.strip("\n")
@@ -117,7 +117,7 @@ def main():
 
                 #time
                 #article_time = driver.find_elements_by_xpath("//div[@class='time']")
-                article_time = soup.find_all("time")
+                article_time = soup.find_all(class_="time")
                 for item in article_time:
                     con = item.text
                     con = con.strip("\n")
