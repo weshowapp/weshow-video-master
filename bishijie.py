@@ -54,7 +54,7 @@ def main():
         #time.sleep(2)  
   
         #数据库操作结合  
-        conn=pymysql.connect(host='localhost', user='root',  
+        conn=pymysql.connect(host='localhost', user='root',  use_unicode=true, charset="utf8mb4",
                              passwd='weshowapp1', port=3306, db='weshow')  
         cur=conn.cursor() #数据库游标  
         try:
