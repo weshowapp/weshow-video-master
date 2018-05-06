@@ -52,7 +52,7 @@ def main():
   
         #数据库操作结合  
         conn=pymysql.connect(host='localhost', user='root',  
-                             passwd='weshow', port=3306, db='weshow')  
+                             passwd='weshowapp1', port=3306, db='weshow')  
         cur=conn.cursor() #数据库游标  
         try:
 
@@ -70,7 +70,7 @@ def main():
                 #driver.get(ur)  
                 urldata = urllib2.urlopen(url).read()
                 soup = BeautifulSoup(urldata,"html.parser")
-                print soup
+                #print soup
 
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
@@ -95,7 +95,7 @@ def main():
                 for item in article_content:
                     con = item.text
                     con = con.strip("\n")
-                    print con + '\n'
+                    #print con + '\n'
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
@@ -103,7 +103,7 @@ def main():
                 for item in article_author:
                     con = item.text
                     con = con.strip("\n")
-                    print con + '\n'
+                    #print con + '\n'
 
                 #source
                 #article_source = driver.find_elements_by_xpath("//div[@class='source']")
@@ -111,7 +111,7 @@ def main():
                 for item in article_source:
                     con = item.text
                     con = con.strip("\n")
-                    print con + '\n'
+                    #print con + '\n'
 
                 #time
                 #article_time = driver.find_elements_by_xpath("//div[@class='time']")
@@ -134,10 +134,11 @@ def main():
                     author = article_author[num].text
                     source = article_source[num].text
                     time = article_time[num].text
-                    print Artitle
-                    print Digest
+                    print title
+                    print digest
 
                     cur.execute(sql, (url, author, source, ur, time, nowTime, title, digest, content, content, content))
+                    print 'execute\n'
 
                     num = num + 1
                 else:
