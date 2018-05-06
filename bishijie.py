@@ -101,13 +101,13 @@ def main():
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
                 article_content = soup.find_all('section', class_="contentContainer")
                 print 'article_content'  
-                print article_content.section  
+                #print article_content
                 for item in article_content:
                     con = item.text
                     con = con.strip("\n")
                     #print con + '\n'
                     print 'section '
-                    print item.section + '\n'
+                    print item
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
@@ -146,10 +146,11 @@ def main():
                     author = article_author[num].text
                     source = article_source[num].text
                     time = article_time[num].text
+                    rawdata = article_content[num]
                     print title
                     #print digest
 
-                    cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, content, content))
+                    cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, rawdata, rawdata))
                     print 'execute\n'
 
                     num = num + 1
