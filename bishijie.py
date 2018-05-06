@@ -99,11 +99,15 @@ def main():
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
-                article_content = soup.find_all(class_="contentContainer")
+                article_content = soup.find_all('section', class_="contentContainer")
+                print 'article_content'  
+                print article_content.section  
                 for item in article_content:
                     con = item.text
                     con = con.strip("\n")
                     #print con + '\n'
+                    print 'section '
+                    print item.section + '\n'
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
