@@ -146,7 +146,7 @@ def main():
                     author = article_author[num].text
                     source = article_source[num].text
                     time = article_time[num].text
-                    rawdata = article_content[num]
+                    rawdata = unicode(article_content[num])
                     print 'rawdata'
                     print rawdata
                     #print digest
