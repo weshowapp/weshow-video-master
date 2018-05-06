@@ -10,7 +10,7 @@ export default {
     //格式为controller
     //'user',
     'article',
-    'comment',
+    //'comment',
     'upload',
     'auth',
     'magazine',
@@ -72,7 +72,7 @@ export default {
     'upload/uploadurl',
 
     'magazine/index',
-    'comment/like',
+    'comment/weblike',
 
     'question/webadd',
     'question/index',

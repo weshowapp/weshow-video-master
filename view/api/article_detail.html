@@ -56,7 +56,7 @@
                 <% if (data.hasLiked) { %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_liked.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;<%= data.likeCount %></span></li>
                 <% } else { %>
-                <li><form action="../comment/like" id="form_<%= data.id %>" enctype="multipart/form-data" method="post" target="hidden_frame_<%= data.id %>">
+                <li><form action="../comment/weblike" id="form_<%= data.id %>" enctype="multipart/form-data" method="post" target="hidden_frame_<%= data.id %>">
                   <input type="hidden" name="newsid" value="<%= data.id %>">
                   <input type="hidden" name="openid" value="<%= data.openid %>">
                   <input type="hidden" name="like" value="1">

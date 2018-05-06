@@ -101,6 +101,10 @@ export default class extends Base {
 
   }
 
+  async weblikeAction() {
+    return await this.likeAction();
+  }
+
   async likeAction() {
     let openid = this.post('openid');
     let newsid = this.post('newsid');
