@@ -188,9 +188,13 @@ def main():
                     #print nowTime
                     if tm:
                         try:
+                            print pubTime
                             if (tm.group().index('分钟') != -1):
                                 nowTime = nowTime - int(tm.group(1)) * 60
+                            else
+                                print 'else'
                         except ValueError:
+                            print 'ValueError'
                             try:
                                 if (tm.group().index('小时') != -1):
                                     nowTime = nowTime - int(tm.group(1)) * 60 * 60
