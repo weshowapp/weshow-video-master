@@ -61,6 +61,9 @@ export default class extends Base {
     if (lasttm == '' || lasttm == undefined || lasttm == null || lasttm == NaN) {
       lasttm = 0;
     }
+    if (lasttm == 0) {
+      lasttm = this.getCurrentTime();
+    }
     let list = await this.model('article').where({pub_time: ["<=", lasttm]}).order('pub_time ASC').limit(15).select();
     if (!think.isEmpty(list)) {
       //console.log(list);
