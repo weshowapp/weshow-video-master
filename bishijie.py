@@ -159,17 +159,20 @@ def main():
                     rawSoup = BeautifulSoup(rawdata)
                     image0 = ''
                     imgObj = rawSoup.find('img')
-                    print 'imgObj'
-                    print imgObj
+                    #print 'imgObj'
+                    #print imgObj
                     if imgObj:
                         image0 = imgObj.attrs['src']
-                        print 'image0'
-                        print image0
+                        #print 'image0'
+                        #print image0
                     rawdata = rawdata.replace('<img', '<img width=100%')
                     author = author.replace('作者：', '')
                     author = author.replace('作者:', '')
                     #tm = time.match(/(.)+(分钟|小时|天)前/i);
                     tm = re.match( r'(.*)(分钟|小时|天)前', time, re.M|re.I)
+                    print 'nowTime'
+                    print tm
+                    print nowTime
                     if tm:
                         if (tm.group(1).indexOf('分钟') != -1):
                             nowTime = nowTime - int(tm[1]) * 60
@@ -177,6 +180,7 @@ def main():
                             nowTime = nowTime - int(tm[1]) * 60 * 60
                         elif (tm.group(1).indexOf('天') != -1):
                             nowTime = nowTime - int(tm[1]) * 60 * 60 * 24
+                    print nowTime
 
                     cur.execute(sql, (author, source, ur, time, nowTime, title, digest, image0, content, rawdata, rawdata))
                     print 'execute\n'
