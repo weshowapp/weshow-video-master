@@ -29,6 +29,8 @@ if url:
         tm = re.match(r'(.*)(分钟|小时|天)前', strTime, re.M|re.I)
         print 'nowTime'
         print tm
+        print tm.group()
+        print tm.group(1)
         print nowTime
         if tm:
             if (tm.group(1).index('分钟') != -1):
