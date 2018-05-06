@@ -184,10 +184,11 @@ def main():
                     tm = re.match(u'(.*)(分钟|小时|天)前', pubTime, re.M|re.I)
                     #print 'nowTime'
                     #print pubTime
-                    print tm
-                    print tm.group()
-                    print tm.group(1)
-                    print nowTime
+                    #print tm
+                    #print tm.group()
+                    #print tm.group(1)
+                    #print nowTime
+                    nowTime=time.time()
                     if tm:
                         try:
                             if (tm.group().index('分钟') != -1):
@@ -203,9 +204,9 @@ def main():
                                 except ValueError:
                                     print 'ValueError'
                     else:
-                        print 'else'
+                        #print 'else'
                         strTm = '2018-' + pubTime + ' 01'
-                        print strTm
+                        #print strTm
                         timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
                         nowTime = int(time.mktime(timeStruct))
                     print nowTime
