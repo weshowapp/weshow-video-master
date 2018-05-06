@@ -67,12 +67,17 @@ export default class extends Base {
     let endid = this.post('endid');
 
     var exec = require('child_process').exec;
-    exec('python ../../../bishijie.py '+ startid + ' ' + endid + ' ',
+    exec('python bishijie.py ' + startid + ' ' + endid + ' ',
             function(error, stdout, stderr) {
       console.info('stdout : ' + stdout);
       if(error) {
         console.info('stderr : ' + stderr);
       }
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
     });
   }
 
