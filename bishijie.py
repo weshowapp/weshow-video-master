@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 #wait = ui.WebDriverWait(driver,10)
 
 reload(sys)
-sys.setdefaultencoding('utf8mb4')
+sys.setdefaultencoding('utf-8')
 
 #获取
 def getPage():  
@@ -54,7 +54,7 @@ def main():
         #time.sleep(2)  
   
         #数据库操作结合  
-        conn=pymysql.connect(host='localhost', user='root',  use_unicode=true, charset="utf8mb4",
+        conn=pymysql.connect(host='localhost', user='root',  use_unicode='true', charset="utf8mb4",
                              passwd='weshowapp1', port=3306, db='weshow')  
         cur=conn.cursor() #数据库游标  
         try:
@@ -132,7 +132,7 @@ def main():
                     #插入数据 8个值  
                     sql = '''''insert into weshow_article 
                                 (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,content,rawtext,rawdata) 
-                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
+                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
                     title = article_title[num].text
                     digest = article_digest[num].text
                     content = article_content[num].text
