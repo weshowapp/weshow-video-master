@@ -75,6 +75,8 @@ def main():
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
                 article_title = soup.find_all(attrs={"class":"title"})
+                print 'article_title'  
+                print article_title  
                 for title in article_title:  
                     #print url  
                     con = title.text  
