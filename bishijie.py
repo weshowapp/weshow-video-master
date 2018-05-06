@@ -169,7 +169,7 @@ def main():
                     author = author.replace('作者：', '')
                     author = author.replace('作者:', '')
                     #tm = time.match(/(.)+(分钟|小时|天)前/i);
-                    tm = re.match(r'(.*)(分钟|小时|天)前', unicode(pubTime), re.M|re.I)
+                    tm = re.match(r'(.*)(分钟|小时|天)前', pubTime+'', re.M|re.I)
                     print 'nowTime'
                     print pubTime
                     print tm
