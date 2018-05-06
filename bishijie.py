@@ -128,10 +128,13 @@ def main():
                 #source
                 #article_source = driver.find_elements_by_xpath("//div[@class='source']")
                 article_source = soup.find_all(class_="source")
-                for item in article_source:
-                    con = item.text
-                    con = con.strip("\n")
+                if article_source:
+                    for item in article_source:
+                        con = item.text
+                        con = con.strip("\n")
                     #print con + '\n'
+                else:
+                    article_source = soup.find_all(class_="authorName")
 
                 #time
                 #article_time = driver.find_elements_by_xpath("//div[@class='time']")
