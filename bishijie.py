@@ -3,13 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import selenium.webdriver.support.ui as ui
 import re  
-import time  
 import os  
 import codecs  
 import sys
 #import MySQLdb
 import pymysql
 import datetime
+import time
 import urllib  
 import urllib2
 from bs4 import BeautifulSoup  
@@ -51,7 +51,7 @@ def main():
         #driver.get(url)  
 
         #nowTime=datetime.datetime.now()
-        nowTime = time.time()
+        nowTime=time.time()
         print 'nowTime'
         print nowTime
         #time.sleep(2)  
