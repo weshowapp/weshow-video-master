@@ -70,6 +70,7 @@ def main():
                 #driver.get(ur)  
                 urldata = urllib2.urlopen(url).read()
                 soup = BeautifulSoup(urldata,"html.parser")
+                print soup
 
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
@@ -78,15 +79,15 @@ def main():
                     #print url  
                     con = title.text  
                     con = con.strip("\n")  
-                    #print con + '\n'  
+                    print con + '\n'  
 
                 #摘要  
                 #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
                 article_digest = soup.find_all(attrs={"class":"abstract"})
-                for description in article_digest:  
-                    con = description.text  
+                for digest in article_digest:  
+                    con = digest.text  
                     con = con.strip("\n")  
-                    #print con + '\n'  
+                    print con + '\n'  
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
@@ -94,7 +95,7 @@ def main():
                 for item in article_content:
                     con = item.text
                     con = con.strip("\n")
-                    #print con + '\n'
+                    print con + '\n'
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
@@ -102,7 +103,7 @@ def main():
                 for item in article_author:
                     con = item.text
                     con = con.strip("\n")
-                    #print con + '\n'
+                    print con + '\n'
 
                 #source
                 #article_source = driver.find_elements_by_xpath("//div[@class='source']")
@@ -110,7 +111,7 @@ def main():
                 for item in article_source:
                     con = item.text
                     con = con.strip("\n")
-                    #print con + '\n'
+                    print con + '\n'
 
                 #time
                 #article_time = driver.find_elements_by_xpath("//div[@class='time']")
@@ -118,7 +119,7 @@ def main():
                 for item in article_time:
                     con = item.text
                     con = con.strip("\n")
-                    #print con + '\n'
+                    print con + '\n'
 
                 num = 0  
                 print u'长度', len(article_title)  
