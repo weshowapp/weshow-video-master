@@ -49,6 +49,7 @@
             <ul>
         <script type="text/javascript">
           function likeClick() {
+            <% data.hasLiked=true %>
             document.getElementById("form_" + <%= data.id %>).submit();
           }
         </script>
