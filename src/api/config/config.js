@@ -44,7 +44,7 @@ export default {
     'wxcash/index',
     'wxpay/notify',
     'wxadmin/index',
-    'comment/like'
+    'comment/like',
     'quizuser/open', //wss
     'quizuser/close', //wss
     'quizuser/join', //wss
