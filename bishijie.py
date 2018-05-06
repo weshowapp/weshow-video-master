@@ -122,7 +122,8 @@ def main():
                         con = con.strip("\n")
                     #print con + '\n'
                 else:
-                    article_author = soup.find_all(class_="editer")
+                    #article_author = soup.find_all(class_="editer")
+                    article_author = ['Unknown'];
 
                 #source
                 #article_source = driver.find_elements_by_xpath("//div[@class='source']")
