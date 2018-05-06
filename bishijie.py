@@ -199,7 +199,7 @@ def main():
                                     if (tm.group().index('天') != -1):
                                         nowTime = nowTime - int(tm.group(1)) * 60 * 60 * 24
                                 except ValueError:
-                                    strTime = '2018-' + pubTime + ' 01'
+                                    strTm = '2018-' + pubTime + ' 01'
                                     print strTm
                                     timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
                                     nowTime = int(time.mktime(timeStruct))
