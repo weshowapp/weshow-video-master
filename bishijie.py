@@ -87,7 +87,7 @@ def main():
                     #print url  
                     con = title.text  
                     con = con.strip("\n")  
-                    print con + '\n'  
+                    #print con + '\n'  
 
                 #摘要  
                 #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
@@ -106,16 +106,19 @@ def main():
                     con = item.text
                     con = con.strip("\n")
                     #print con + '\n'
-                    print 'section '
+                    #print 'section '
                     #print item
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
                 article_author = soup.find_all(class_="author")
-                for item in article_author:
-                    con = item.text
-                    con = con.strip("\n")
+                if article_author：
+                    for item in article_author:
+                        con = item.text
+                        con = con.strip("\n")
                     #print con + '\n'
+                else：
+                    article_author = soup.find_all(class_="editer")
 
                 #source
                 #article_source = driver.find_elements_by_xpath("//div[@class='source']")
