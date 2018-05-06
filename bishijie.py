@@ -1,7 +1,7 @@
 ﻿# -*- coding: UTF-8 -*-  
 from selenium import webdriver      
-from selenium.webdriver.common.keys import Keys      
-import selenium.webdriver.support.ui as ui           
+from selenium.webdriver.common.keys import Keys
+import selenium.webdriver.support.ui as ui
 import re  
 import time  
 import os  
@@ -17,6 +17,9 @@ from bs4 import BeautifulSoup
 #打开Firefox浏览器 设定等待加载时间
 #driver = webdriver.Firefox()  
 #wait = ui.WebDriverWait(driver,10)
+
+reload(sys)
+sys.setdefaultencoding('utf8mb4')
 
 #获取
 def getPage():  
@@ -35,10 +38,10 @@ def main():
     endIndex = int(sys.argv[2])
     print beginIndex
     #获取txt文件总行数  
-    count = len(open("Bishijie_info_detail_URL.txt",'rU',encoding='utf8mb4').readlines())
+    count = len(open("Bishijie_info_detail_URL.txt",'rU').readlines())
     print count  
     n = 0  
-    urlfile = open("Bishijie_info_detail_URL.txt",'r',encoding='utf8mb4')
+    urlfile = open("Bishijie_info_detail_URL.txt",'r')
 
     #循环获取文章   
     while n < count:
