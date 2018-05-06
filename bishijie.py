@@ -158,6 +158,21 @@ def main():
                     #print 'rawdata'
                     #print rawdata
                     #print digest
+                    rawdata = rawdata.replace('<img', '<img width=100%');
+                    author = author.replace('作者：', '');
+                    author = author.replace('作者:', '');
+                    tm = time.match(/(.)+(分钟|小时|天)前/i);
+                    if (tm):
+                        if (tm[2].indexOf('分钟') != -1) {
+                            nowTime = nowTime - int(tm[1]) * 60;
+                        }
+                        else if (tm[2].indexOf('小时') != -1) {
+                            nowTime = nowTime - int(tm[1]) * 60 * 60;
+                        }
+                        else if (tm[2].indexOf('天') != -1) {
+                            nowTime = nowTime - int(tm[1]) * 60 * 60 * 24;
+                        }
+                    }
 
                     cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, rawdata, rawdata))
                     print 'execute\n'
