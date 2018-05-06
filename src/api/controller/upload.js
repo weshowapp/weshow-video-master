@@ -62,6 +62,20 @@ export default class extends Base {
     this.display();
   }
 
+  async bishijieinfoAction() {
+    let startid = this.post('startid');
+    let endid = this.post('endid');
+
+    var exec = require('child_process').exec;
+    exec('python ../../../bishijie.py '+ startid + ' ' + endid + ' ',
+            function(error, stdout, stderr) {
+      console.info('stdout : ' + stdout);
+      if(error) {
+        console.info('stderr : ' + stderr);
+      }
+    });
+  }
+
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;

@@ -155,6 +155,14 @@ p {padding:3px 0 3px 0;}
           }
         </script>
         <tr>
+          <form action="bishijieinfo" enctype="multipart/form-data" method="post" target="hidden_frame">
+            <td colspan="23"><input size="4" type="submit" value=" 自动获取 "/></td>
+            <td colspan="3">起始ID：<input size="5" type="text" name ="startid" value="0"/></td>
+            <td colspan="3">终止ID：<input size="5" type="text" name ="endid" value="0"/></td>
+            <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+          </form>
+        </tr>
+        <tr>
             <td colspan="23"><input size="4" type="submit" value=" 批量更新 " onclick="submitAll();"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
         </tr>
