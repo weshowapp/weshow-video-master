@@ -146,8 +146,8 @@ def main():
                 while num < 1:  
                     #插入数据 8个值  
                     sql = '''insert into weshow_article 
-                                (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,content,rawtext,rawdata) 
-                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
+                                (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,image0,content,rawtext,rawdata) 
+                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
                     title = article_title[num].text
                     digest = article_digest[num].text
                     content = article_content[num].text
@@ -155,26 +155,32 @@ def main():
                     source = article_source[num].text
                     time = article_time[num].text
                     rawdata = unicode(article_content[num])
-                    #print 'rawdata'
-                    #print rawdata
                     #print digest
-                    rawdata = rawdata.replace('<img', '<img width=100%');
-                    author = author.replace('作者：', '');
-                    author = author.replace('作者:', '');
-                    tm = time.match(/(.)+(分钟|小时|天)前/i);
-                    if (tm):
-                        if (tm[2].indexOf('分钟') != -1) {
-                            nowTime = nowTime - int(tm[1]) * 60;
+                    rawSoup = BeautifulSoup(rawdata)
+                    image0 = ''
+                    imgObj = rawSoup.find('img')
+                    if imgObj:
+                        image0 = imgObj.text
+                    print 'imgObj'
+                    print imgObj
+                    rawdata = rawdata.replace('<img', '<img width=100%')
+                    author = author.replace('作者：', '')
+                    author = author.replace('作者:', '')
+                    #tm = time.match(/(.)+(分钟|小时|天)前/i);
+                    tm = re.match( r'(.*)(分钟|小时|天)前', time, re.M|re.I)
+                    if tm:
+                        if (tm.group(1).indexOf('分钟') != -1) {
+                            nowTime = nowTime - int(tm[1]) * 60
                         }
-                        else if (tm[2].indexOf('小时') != -1) {
-                            nowTime = nowTime - int(tm[1]) * 60 * 60;
+                        else if (tm.group(1).indexOf('小时') != -1) {
+                            nowTime = nowTime - int(tm[1]) * 60 * 60
                         }
-                        else if (tm[2].indexOf('天') != -1) {
-                            nowTime = nowTime - int(tm[1]) * 60 * 60 * 24;
+                        else if (tm.group(1).indexOf('天') != -1) {
+                            nowTime = nowTime - int(tm[1]) * 60 * 60 * 24
                         }
                     }
 
-                    cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, rawdata, rawdata))
+                    cur.execute(sql, (author, source, ur, time, nowTime, title, digest, image0, content, rawdata, rawdata))
                     print 'execute\n'
 
                     num = num + 1
