@@ -51,7 +51,17 @@ export default class extends Base {
 
   async getbyuserAction() {
     let openid = this.get('openid');
-    let list = await this.model('article').limit(30).select();
+    let page = this.get('page');
+    let type = this.get('type');
+    let lasttm = this.get('lasttm');
+    let size = this.get('size');
+    if (size == '' || size == undefined || size == null || size == NaN) {
+      size = 15;
+    }
+    if (lasttm == '' || lasttm == undefined || lasttm == null || lasttm == NaN) {
+      lasttm = 0;
+    }
+    let list = await this.model('article').where({pub_time: ["<=", lasttm]}).order('pub_time DESC').limit(15).select();
     if (!think.isEmpty(list)) {
       //console.log(list);
       for (var i = 0; i < list.length; i++) {
