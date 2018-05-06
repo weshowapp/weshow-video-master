@@ -81,13 +81,17 @@ def main():
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
                 article_title = soup.find_all(class_="title")
-                print 'article_title'  
-                print article_title  
-                for title in article_title:  
-                    #print url  
-                    con = title.text  
-                    con = con.strip("\n")  
-                    #print con + '\n'  
+                if article_title:
+                    print 'article_title'  
+                    print article_title  
+                    for title in article_title:  
+                        #print url  
+                        con = title.text  
+                        con = con.strip("\n")  
+                        #print con + '\n'  
+                else:
+                    m = m + 1
+                    continue
 
                 #摘要  
                 #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
@@ -100,7 +104,7 @@ def main():
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
                 article_content = soup.find_all('section', class_="contentContainer")
-                print 'article_content'  
+                #print 'article_content'  
                 #print article_content
                 for item in article_content:
                     con = item.text
@@ -150,8 +154,8 @@ def main():
                     source = article_source[num].text
                     time = article_time[num].text
                     rawdata = unicode(article_content[num])
-                    print 'rawdata'
-                    print rawdata
+                    #print 'rawdata'
+                    #print rawdata
                     #print digest
 
                     cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, rawdata, rawdata))
