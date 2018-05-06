@@ -188,13 +188,9 @@ def main():
                     #print nowTime
                     if tm:
                         try:
-                            print pubTime
                             if (tm.group().index('分钟') != -1):
                                 nowTime = nowTime - int(tm.group(1)) * 60
-                            else:
-                                print 'else'
                         except ValueError:
-                            print 'ValueError'
                             try:
                                 if (tm.group().index('小时') != -1):
                                     nowTime = nowTime - int(tm.group(1)) * 60 * 60
@@ -203,11 +199,13 @@ def main():
                                     if (tm.group().index('天') != -1):
                                         nowTime = nowTime - int(tm.group(1)) * 60 * 60 * 24
                                 except ValueError:
-                                    strTm = '2018-' + pubTime + ' 01'
-                                    print strTm
-                                    timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
-                                    nowTime = int(time.mktime(timeStruct))
-                                    print nowTime
+                                    print 'ValueError'
+                    else:
+                        print 'else'
+                        strTm = '2018-' + pubTime + ' 01'
+                        print strTm
+                        timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
+                        nowTime = int(time.mktime(timeStruct))
                     print nowTime
 
                     cur.execute(sql, (author, source, ur, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
