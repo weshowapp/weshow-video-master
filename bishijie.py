@@ -169,16 +169,12 @@ def main():
                     #tm = time.match(/(.)+(分钟|小时|天)前/i);
                     tm = re.match( r'(.*)(分钟|小时|天)前', time, re.M|re.I)
                     if tm:
-                        if (tm.group(1).indexOf('分钟') != -1) {
+                        if (tm.group(1).indexOf('分钟') != -1):
                             nowTime = nowTime - int(tm[1]) * 60
-                        }
-                        else if (tm.group(1).indexOf('小时') != -1) {
+                        else if (tm.group(1).indexOf('小时') != -1):
                             nowTime = nowTime - int(tm[1]) * 60 * 60
-                        }
-                        else if (tm.group(1).indexOf('天') != -1) {
+                        else if (tm.group(1).indexOf('天') != -1):
                             nowTime = nowTime - int(tm[1]) * 60 * 60 * 24
-                        }
-                    }
 
                     cur.execute(sql, (author, source, ur, time, nowTime, title, digest, image0, content, rawdata, rawdata))
                     print 'execute\n'
