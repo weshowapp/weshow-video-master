@@ -50,7 +50,8 @@ def main():
         print url  
         #driver.get(url)  
 
-        nowTime=datetime.datetime.now()
+        #nowTime=datetime.datetime.now()
+        nowTime = time.time()
         print 'nowTime'
         print nowTime
         #time.sleep(2)  
