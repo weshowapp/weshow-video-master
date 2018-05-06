@@ -171,9 +171,9 @@ def main():
                     if tm:
                         if (tm.group(1).indexOf('分钟') != -1):
                             nowTime = nowTime - int(tm[1]) * 60
-                        else if (tm.group(1).indexOf('小时') != -1):
+                        elif (tm.group(1).indexOf('小时') != -1):
                             nowTime = nowTime - int(tm[1]) * 60 * 60
-                        else if (tm.group(1).indexOf('天') != -1):
+                        elif (tm.group(1).indexOf('天') != -1):
                             nowTime = nowTime - int(tm[1]) * 60 * 60 * 24
 
                     cur.execute(sql, (author, source, ur, time, nowTime, title, digest, image0, content, rawdata, rawdata))
