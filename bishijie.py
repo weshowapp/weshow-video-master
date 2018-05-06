@@ -51,6 +51,8 @@ def main():
         #driver.get(url)  
 
         nowTime=datetime.datetime.now()
+        print 'nowTime'
+        print nowTime
         #time.sleep(2)  
   
         #数据库操作结合  
@@ -92,7 +94,7 @@ def main():
                 for digest in article_digest:
                     con = digest.text  
                     con = con.strip("\n")  
-                    print con + '\n'  
+                    #print con + '\n'  
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
@@ -130,9 +132,9 @@ def main():
                 print u'长度', len(article_title)  
                 while num < 1:  
                     #插入数据 8个值  
-                    sql = '''''insert into weshow_article 
+                    sql = '''insert into weshow_article 
                                 (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,content,rawtext,rawdata) 
-                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
+                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
                     title = article_title[num].text
                     digest = article_digest[num].text
                     content = article_content[num].text
@@ -140,9 +142,9 @@ def main():
                     source = article_source[num].text
                     time = article_time[num].text
                     print title
-                    print digest
+                    #print digest
 
-                    cur.execute(sql, (url, author, source, ur, time, nowTime, title, digest, content, content, content))
+                    cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, content, content))
                     print 'execute\n'
 
                     num = num + 1
