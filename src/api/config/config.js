@@ -10,6 +10,7 @@ export default {
     //格式为controller
     //'user',
     'article',
+    'comment',
     'upload',
     'auth',
     'magazine',
