@@ -160,7 +160,11 @@ def main():
                     image0 = ''
                     imgObj = rawSoup.find('img')
                     if imgObj:
-                        image0 = imgObj.text
+                        srcObj = BeautifulSoup(unicode(imgObj)).find('src')
+                        print 'srcObj'
+                        print srcObj
+                        if srcObj:
+                            image0 = srcObj.text
                     print 'imgObj'
                     print imgObj
                     rawdata = rawdata.replace('<img', '<img width=100%')
