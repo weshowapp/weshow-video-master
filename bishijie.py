@@ -107,7 +107,7 @@ def main():
                     con = con.strip("\n")
                     #print con + '\n'
                     print 'section '
-                    print item
+                    #print item
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
@@ -147,7 +147,8 @@ def main():
                     source = article_source[num].text
                     time = article_time[num].text
                     rawdata = article_content[num]
-                    print title
+                    print 'rawdata'
+                    print rawdata
                     #print digest
 
                     cur.execute(sql, (author, source, ur, time, nowTime, title, digest, content, rawdata, rawdata))
