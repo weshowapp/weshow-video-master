@@ -54,12 +54,14 @@ def main():
             #URL处理  
             urldata = urllib2.urlopen(url).read()
             soup0 = BeautifulSoup(urldata, "html.parser")
-            print soup0
+            #print soup0
 
             #Avatar
             avatar = '';
             profile_avatar = soup0.find(class_="radius_avatar profile_avatar")
+            print 'profile_avatar'
             if profile_avatar:
+                print profile_avatar
                 profiledata = unicode(profile_avatar)
                 profileSoup = BeautifulSoup(profiledata)
                 profileObj = profileSoup.find('img')
@@ -69,7 +71,9 @@ def main():
             #Desc
             desc = '';
             profile_desc = soup0.find(class_="profile_desc_value")
+            print 'profile_desc'
             if profile_desc:
+                print profile_desc
                 desc = profile_desc.text
 
             #link
