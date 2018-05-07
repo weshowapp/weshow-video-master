@@ -30,12 +30,12 @@ export default class extends think.model.base {
         return '明天' + ' ' + hour + ':' + min;
       }
       else if (cur.getDate() - date.getDate() == 1) {
-        return '昨天' + ' ' + hour + ':' + min;
+        return '昨天'/* + ' ' + hour + ':' + min*/;
       }
       else if (cur.getDate() > date.getDate() && cur.getDate() - date.getDate() < 3) {
-        return (cur.getDate() - date.getDate()) + '天前' + ' ' + hour + ':' + min;
+        return (cur.getDate() - date.getDate()) + '天前'/* + ' ' + hour + ':' + min*/;
       }
-      return (date.getMonth() + 1) + '/' + date.getDate() + ' ' + hour + ':' + min;
+      return (date.getMonth() + 1) + '/' + date.getDate()/* + ' ' + hour + ':' + min*/;
     }
     else if (parseInt(hour) < cur.getHours()) {
       return (cur.getHours() - parseInt(hour)) + '小时前';
