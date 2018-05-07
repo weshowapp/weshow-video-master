@@ -177,6 +177,8 @@ def main():
                             image3 = imgObj[3].attrs['src']
                         #print 'image0'
                         #print image0
+                    rawdata = rawdata.replace('width=', 'wd0=')
+                    rawdata = rawdata.replace('height=', 'hg0=')
                     rawdata = rawdata.replace('<img', '<img width=100%')
                     author = author.replace('作者：', '')
                     author = author.replace('作者:', '')
