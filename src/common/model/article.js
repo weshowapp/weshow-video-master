@@ -32,7 +32,7 @@ export default class extends think.model.base {
       else if (cur.getDate() - date.getDate() == 1) {
         return '昨天' + ' ' + hour + ':' + min;
       }
-      else if (cur.getDate() > date.getDate() && cur.getDate() - date.getDate() < 7) {
+      else if (cur.getDate() > date.getDate() && cur.getDate() - date.getDate() < 3) {
         return (cur.getDate() - date.getDate()) + '天前' + ' ' + hour + ':' + min;
       }
       return (date.getMonth() + 1) + '/' + date.getDate() + ' ' + hour + ':' + min;

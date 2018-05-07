@@ -147,10 +147,13 @@ def main():
                 num = 0  
                 print u'长度', len(article_title)  
                 while num < 1:  
-                    #插入数据 8个值  
+                    #插入数据
                     sql = '''insert into weshow_article 
                                 (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,image0,image1,image2,image3,content,rawtext,rawdata) 
-                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''  
+                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+                    sqlMagazine = '''insert into weshow_magazine 
+                                (name,add_time) 
+                            values(%s, %s)'''
                     title = article_title[num].text
                     digest = article_digest[num].text
                     content = article_content[num].text
@@ -215,6 +218,7 @@ def main():
                     print nowTime
 
                     cur.execute(sql, (author, source, ur, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
+                    cur.execute(sqlMagazine, (source, nowTime))
                     print 'execute\n'
 
                     num = num + 1
