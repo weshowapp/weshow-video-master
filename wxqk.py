@@ -76,10 +76,27 @@ def main():
                 print profile_desc
                 desc = profile_desc.text
 
+            #Nick
+            nick = '';
+            profile_nick = soup0.find(class_="profile_nickname")
+            print 'profile_nick'
+            if profile_nick:
+                print profile_nick
+                nick = profile_nick.text
+
+            sqlMagazine = '''insert into weshow_magazine 
+                        (name,cover_url,description,add_time) 
+                    values(%s, %s, %s, %s)'''
+            try:
+                nowTime = time.time()
+                cur.execute(sqlMagazine, (nick, avatar, desc, nowTime))
+            except pymysql.Error, err1:
+                print err1
+
             #link
             article_links = soup0.find_all(class_="weui_media_title")
+            print 'article_links'
             if article_links:
-                print 'article_links'
                 print article_links
                 for link in article_links:
                     #print link
@@ -120,9 +137,6 @@ def main():
                     sql = '''insert into weshow_article 
                                 (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,image0,image1,image2,image3,content,rawtext,rawdata) 
                             values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
-                    sqlMagazine = '''insert into weshow_magazine 
-                                (name,cover_url,description,add_time) 
-                            values(%s, %s, %s, %s)'''
                     title = article_title.text
                     content = article_content.text
                     digest = content[0, 100]
@@ -163,11 +177,6 @@ def main():
                         cur.execute(sql, (author, source, art_url, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
                     except pymysql.Error, err:
                         print err
-                    try:
-                        nowTime = time.time()
-                        cur.execute(sqlMagazine, (source, avatar, desc, nowTime))
-                    except pymysql.Error, err1:
-                        print err1
                     print 'execute\n'
 
                 #else:
