@@ -60,6 +60,7 @@ def main():
             avatar = '';
             profile_avatar = soup0.find(class_="radius_avatar profile_avatar")
             print 'profile_avatar'
+            print profile_avatar
             if profile_avatar:
                 print profile_avatar
                 profiledata = unicode(profile_avatar)
