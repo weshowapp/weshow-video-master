@@ -185,7 +185,7 @@ def main():
                     rawdata = rawdata.replace('<img', '<img width=100%')
                     author = author.replace('作者：', '')
                     author = author.replace('作者:', '')
-                    digest = digest.replace('\n', '')
+                    digest = digest.strip("\n")
                     #tm = time.match(/(.)+(分钟|小时|天)前/i);
                     tm = re.match(u'(.*)(分钟|小时|天)前', pubTime, re.M|re.I)
                     #print 'nowTime'
