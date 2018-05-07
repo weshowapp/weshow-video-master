@@ -218,7 +218,10 @@ def main():
                     print nowTime
 
                     cur.execute(sql, (author, source, ur, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
-                    cur.execute(sqlMagazine, (source, nowTime))
+                    try:
+                        cur.execute(sqlMagazine, (source, nowTime))
+                    except MySQLdb.Error, err:
+                        print err
                     print 'execute\n'
 
                     num = num + 1
