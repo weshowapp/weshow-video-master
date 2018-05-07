@@ -54,7 +54,7 @@ def main():
             #URL处理  
             urldata = urllib2.urlopen(url).read()
             soup0 = BeautifulSoup(urldata, "html.parser")
-            #print soup
+            print soup0
 
             #Avatar
             avatar = '';
