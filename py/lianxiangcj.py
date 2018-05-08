@@ -11,7 +11,7 @@ import pymysql
 import datetime
 import time
 import urllib
-#import urllib2
+import urllib2
 from bs4 import BeautifulSoup
 import requests
 import json
@@ -22,8 +22,8 @@ from requests.auth import HTTPBasicAuth
 #driver = webdriver.Firefox()  
 #wait = ui.WebDriverWait(driver,10)
 
-#reload(sys)
-#sys.setdefaultencoding('utf-8')
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 #主函数
 def main():
@@ -32,10 +32,10 @@ def main():
     endIndex = int(sys.argv[2])
     print (beginIndex)
     #获取txt文件总行数  
-    count = len(open("Lianxiang_info_detail.txt",'rU').readlines())
+    count = len(open("py/Lianxiang_info_detail.txt",'rU').readlines())
     print (count)
     n = 0  
-    urlfile = open("Lianxiang_info_detail.txt",'r')
+    urlfile = open("py/Lianxiang_info_detail.txt",'r')
 
     #循环获取文章   
     while n < count:
@@ -114,12 +114,12 @@ def main():
                 #print ('article_content')
                 #print (article_content)
                 if article_content:
-                    content = str(article_content.text)
+                    content = unicode(article_content.text)
                     content = content.strip("\n")
                     content = content.strip()
                     content = content.strip("\n")
                     digest = content[0:256]
-                    rawdata = str(article_content)
+                    rawdata = unicode(article_content)
                     image0 = ''
                     image1 = ''
                     image2 = ''
