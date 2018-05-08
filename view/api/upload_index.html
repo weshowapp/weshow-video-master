@@ -177,17 +177,11 @@ p {padding:3px 0 3px 0;}
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
       </form><br><br>
 
-      <h2>选择整理文件,批量添加</h2>
-      <form class="p" action="upload" enctype="multipart/form-data" method="post">
-        <p>请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/></p>
-        <p><input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/></p>
-        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
-      </form><br><br>
-
-      <h2>选择链接文件,批量添加</h2>
-      <form class="p" action="uploadurl" enctype="multipart/form-data" method="post">
-        <p>请选择文件(只支持以逗号为分隔符的csv或txt文件)：<br><input type="file" name ="file_input"/></p>
-        <p><input type="submit" name ="file_submit" value=" 　  - -  上 传  - -  　 "/></p>
+      <h2>链向财经自动获取</h2>
+      <form action="lianxiangcjinfo" enctype="multipart/form-data" method="post" target="hidden_frame">
+        <p><input size="4" type="submit" value=" 自动获取 "/></p>
+        <p>起始ID：<input size="5" type="text" name ="startid" value="0"/></p>
+        <p>终止ID：<input size="5" type="text" name ="endid" value="1"/></p>
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
       </form><br><br>
 

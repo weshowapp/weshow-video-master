@@ -185,10 +185,12 @@ def main():
                 #    print u'数据库插入成功'
                 m = m + 1  
 
-        #异常处理  
+        #异常处理
+        except urllib2.HTTPError,e:
+            print "URLLIB2 Error %d: %s" % (e.args[0], e.args[1])
         #except MySQLdb.Error,e:
         except pymysql.Error,e:
-            print "Mysql Error %d: %s" % (e.args[0], e.args[1])  
+            print "Mysql Error %d: %s" % (e.args[0], e.args[1])
         finally:  
             cur.close()
             conn.commit()

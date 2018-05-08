@@ -67,7 +67,26 @@ export default class extends Base {
     let endid = this.post('endid');
 
     var exec = require('child_process').exec;
-    exec('python bishijie.py ' + startid + ' ' + endid + ' ',
+    exec('python py/bishijie.py ' + startid + ' ' + endid + ' ',
+            function(error, stdout, stderr) {
+      console.info('stdout : ' + stdout);
+      if(error) {
+        console.info('stderr : ' + stderr);
+      }
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
+
+  async lianxiangcjnfoAction() {
+    let startid = this.post('startid');
+    let endid = this.post('endid');
+
+    var exec = require('child_process').exec;
+    exec('python py/lianxiangcj.py ' + startid + ' ' + endid + ' ',
             function(error, stdout, stderr) {
       console.info('stdout : ' + stdout);
       if(error) {
