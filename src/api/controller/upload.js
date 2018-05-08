@@ -245,6 +245,10 @@ export default class extends Base {
     let content = this.post('content');
     let rawtext = this.post('rawtext');
     let rawdata = this.post('rawdata');
+    let image0 = this.post('image0');
+    let image1 = this.post('image1');
+    let image2 = this.post('image2');
+    let image3 = this.post('image3');
     let note = this.post('note');
     let more = this.post('more');
     console.log('addAction');
@@ -273,6 +277,10 @@ export default class extends Base {
         content: content,
         rawtext: rawtext,
         rawdata: rawdata,
+        image0: image0,
+        image1: image1,
+        image2: image2,
+        image3: image3,
         note: note,
         more: more
     });
@@ -308,6 +316,10 @@ export default class extends Base {
     let content = this.post('content');
     let rawtext = this.post('rawtext');
     let rawdata = this.post('rawdata');
+    let image0 = this.post('image0');
+    let image1 = this.post('image1');
+    let image2 = this.post('image2');
+    let image3 = this.post('image3');
     let note = this.post('note');
     let more = this.post('more');
     console.log('updateAction');
@@ -336,6 +348,10 @@ export default class extends Base {
         content: content,
         rawtext: rawtext,
         rawdata: rawdata,
+        image0: image0,
+        image1: image1,
+        image2: image2,
+        image3: image3,
         note: note,
         more: more
     });

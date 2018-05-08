@@ -33,10 +33,10 @@
             <span class="time"><%= data.pub_time_str %></span></div>
         </div><!--来源-->
         <div style="margin-bottom:20px;"></div><!--留白-->
-        <div class="title"><%= data.digest %></div><!--标题-->
-        <div style="margin-bottom:20px;"></div><!--留白-->
+        <!--div class="content"><= data.digest ></div>
+        <div style="margin-bottom:20px;"></div--><!--留白-->
         <div class="content1">
-            <!--以下是抓取内容-->
+            <!--以下是内容-->
             <% if (data.rawdata.length > 100) { %>
               <div class=content><p><%- data.rawdata %></p>
             <% } else if (data.rawtext.length > 100) { %>
@@ -44,7 +44,7 @@
             <% } else { %>
               <div class=content><p><%- data.content %></p>
             <% } %>
-            <!--抓取内容结束-->
+            <!--内容结束-->
         </div>
         <div style="margin-bottom:50px;"></div><!--留白-->        
         <div class="img-content"><!--三个按钮-->
