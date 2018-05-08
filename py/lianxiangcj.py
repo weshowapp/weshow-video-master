@@ -11,50 +11,42 @@ import pymysql
 import datetime
 import time
 import urllib
-import urllib2
+#import urllib2
 from bs4 import BeautifulSoup
+import requests
+import json
+import ssl
+from requests.auth import HTTPBasicAuth
 
 #打开Firefox浏览器 设定等待加载时间
 #driver = webdriver.Firefox()  
 #wait = ui.WebDriverWait(driver,10)
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-#获取
-def getPage():  
-    print 'getPage'  
-    number = 0
-    #texts = driver.find_element_by_xpath("//div[@id='papelist']").text
-    print '页码', texts
-    m = re.findall(r'(\w*[0-9]+)\w*',texts) #正则表达式寻找数字
-    print '页数：' + str(m[1])
-    return int(m[1])     
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 #主函数
 def main():
-    print 'main'
+    #print （'main'）
     beginIndex = int(sys.argv[1])
     endIndex = int(sys.argv[2])
-    print beginIndex
+    print (beginIndex)
     #获取txt文件总行数  
-    count = len(open("py/Lianxiang_info_detail.txt",'rU').readlines())
-    print count  
+    count = len(open("Lianxiang_info_detail.txt",'rU').readlines())
+    print (count)
     n = 0  
-    urlfile = open("py/Lianxiang_info_detail.txt",'r')
+    urlfile = open("Lianxiang_info_detail.txt",'r')
 
     #循环获取文章   
     while n < count:
         url = urlfile.readline()  
         url = url.strip("\n")  
-        print url  
+        print (url)
         #driver.get(url)  
 
         #nowTime=datetime.datetime.now().microsecond
-        nowTime=time.time()
-        print 'nowTime'
-        print nowTime
-        #time.sleep(2)  
+        nowTime = time.time()
+        time.sleep(1)
   
         #数据库操作结合  
         conn=pymysql.connect(host='localhost', user='root',  use_unicode='true', charset="utf8mb4",
@@ -72,14 +64,18 @@ def main():
             m = beginIndex #第1页  
             while m <= endIndex:  
                 ur = url + str(m) + '.html'
-                print ur  
-                #driver.get(ur)
+                print (ur)
                 urldata = ''
                 try :
                     urldata = urllib2.urlopen(ur).read()
-                except urllib2.HTTPError,e0:
+                    #urldata = urllib.request.urlopen(ur).read()
+                except (urllib.error.HTTPError):
+                    print ("URLLIB Error ")
+                    m = m + 1
+                    continue
+                except (urllib2.HTTPError):
                     print ("URLLIB2 Error ")
-                    print (e0)
+                    #print (e0)
                     m = m + 1
                     continue
                 soup = BeautifulSoup(urldata,"html.parser")
@@ -102,9 +98,9 @@ def main():
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
                 article_title = soup.find("title")
                 if article_title:
-                    print 'article_title'
-                    print article_title
+                    print ('article_title')
                     title = article_title.text
+                    print (title)
                 else:
                     continue
 
@@ -115,8 +111,8 @@ def main():
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
                 article_content = soup.find('div', class_="m-i-bd")
-                #print 'article_content'  
-                #print article_content
+                #print ('article_content')
+                #print (article_content)
                 if article_content:
                     content = str(article_content.text)
                     content = content.strip("\n")
@@ -181,21 +177,44 @@ def main():
                     try:
                         cur.execute(sql, (author, source, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
                     except pymysql.Error, err:
-                        print err
+                        print (err)
                     #try:
                     #    cur.execute(sqlMagazine, (source, nowTime))
                     #except pymysql.Error, err1:
                     #    print err1
-                    print 'execute\n'
+                    print ('execute\n')
+
+                    addUrl = "https://www.imcou.com/api/upload/add"
+                    values = {}
+                    values['author_name'] = author
+                    values['source_name'] = source
+                    values['source_url'] = ur
+                    values['pub_time_str'] = pubtime
+                    values['pub_time'] = nowTime
+                    values['title'] = title
+                    values['digest'] = digest
+                    values['content'] = content
+                    values['rawtext'] = rawdata
+                    values['rawdata'] = rawdata
+                    values['image0'] = image0
+                    values['image1'] = image1
+                    values['image2'] = image2
+                    values['image3'] = image3
+                    #response = requests.post(addUrl, values)
+                    #print (response)
+                    print ('post\n')
 
                 #else:
                 #    print u'数据库插入成功'
+
                 m = m + 1
 
         #异常处理
         #except MySQLdb.Error,e:
-        except pymysql.Error,e:
-            print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+        except (pymysql.Error, e):
+        #except (pymysql.Error):
+            print ("Mysql Error")
+            #print ("Mysql Error %d: %s" % (e.args[0], e.args[1]))
         finally:  
             cur.close()
             conn.commit()
@@ -205,6 +224,6 @@ def main():
 
     else:  
         urlfile.close()
-        print 'Load Completed'
+        print ('Load Completed')
 
 main()
