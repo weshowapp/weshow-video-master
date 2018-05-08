@@ -81,7 +81,7 @@ export default class extends Base {
 
   async getuserlikesAction() {
     let openid = this.get('openid');
-    var likeList = await this.model('comment').field('artid').where({openid: openid, up: 1}).limit(15).select();
+    var likeList = await this.model('comment').field('artid').where({openid: openid, up: 1}).order('pub_time DESC').limit(15).select();
     var aidList = [];
     if (!think.isEmpty(likeList)) {
         for (var i = 0; i < likeList.length; i++) {
@@ -105,7 +105,7 @@ export default class extends Base {
   async getbysourceAction() {
     let openid = this.get('openid');
     let srcname = this.get('sourcename');
-    let list = await this.model('article').where({'source_name': srcname}).limit(15).select();
+    let list = await this.model('article').where({'source_name': srcname}).order('pub_time DESC').limit(15).select();
     if (!think.isEmpty(list)) {
       //console.log(list);
       for (var i = 0; i < list.length; i++) {

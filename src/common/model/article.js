@@ -27,7 +27,7 @@ export default class extends think.model.base {
     }
     if (cur.getDate() != date.getDate()) {
       if (cur.getDate() - date.getDate() == -1) {
-        return '明天' + ' ' + hour + ':' + min;
+        return '' + '' + hour + ':' + min;
       }
       else if (cur.getDate() - date.getDate() == 1) {
         return '昨天'/* + ' ' + hour + ':' + min*/;
@@ -35,7 +35,7 @@ export default class extends think.model.base {
       else if (cur.getDate() > date.getDate() && cur.getDate() - date.getDate() < 3) {
         return (cur.getDate() - date.getDate()) + '天前'/* + ' ' + hour + ':' + min*/;
       }
-      return (date.getMonth() + 1) + '/' + date.getDate()/* + ' ' + hour + ':' + min*/;
+      return (date.getMonth() + 1) + '月' + date.getDate() + '日'/* + hour + ':' + min*/;
     }
     else if (parseInt(hour) < cur.getHours()) {
       return (cur.getHours() - parseInt(hour)) + '小时前';
