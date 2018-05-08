@@ -73,8 +73,14 @@ def main():
             while m <= endIndex:  
                 ur = url + str(m) + '.html'
                 print ur  
-                #driver.get(ur)  
-                urldata = urllib2.urlopen(ur).read()
+                #driver.get(ur)
+                urldata = ''
+                try :
+                    urldata = urllib2.urlopen(ur).read()
+                except urllib2.HTTPError,e0:
+                    print ("URLLIB2 Error ")
+                    print (e0)
+                    continue
                 soup = BeautifulSoup(urldata,"html.parser")
                 #print soup
 
@@ -186,9 +192,6 @@ def main():
                 m = m + 1  
 
         #异常处理
-        except urllib2.HTTPError,e0:
-            print ("URLLIB2 Error ")
-            print (e0)
         #except MySQLdb.Error,e:
         except pymysql.Error,e:
             print "Mysql Error %d: %s" % (e.args[0], e.args[1])
