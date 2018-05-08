@@ -39,6 +39,9 @@ if url:
     #driver.get(url)
     if soup0:
         name = soup0.title.string
+        name = name.strip("\n")
+        name = name.strip()
+        name = name.strip("\n")
         avatar = '';
         profile_avatar = soup0.find(class_="radius_avatar profile_avatar")
         print ('profile_avatar')
