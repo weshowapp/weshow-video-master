@@ -17,12 +17,16 @@ from bs4 import BeautifulSoup
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+#打开Firefox浏览器 设定等待加载时间
+driver = webdriver.Firefox()  
+wait = ui.WebDriverWait(driver,10)
+
 #主函数
 def main():
-    print 'main'
+    print('main')
     #获取txt文件总行数  
     count = len(open("Weixin_pub_url.txt",'rU').readlines())
-    print count  
+    print(count)  
     n = 0  
     urlfile = open("Weixin_pub_url.txt",'r')
 
@@ -30,13 +34,13 @@ def main():
     while n < count:
         url = urlfile.readline()
         url = url.strip("\n")
-        print url  
-        #driver.get(url)  
+        print (url)  
+        driver.get(url)  
 
         #nowTime=datetime.datetime.now().microsecond
         nowTime=time.time()
-        print 'nowTime'
-        print nowTime
+        #print 'nowTime'
+        #print nowTime
         time.sleep(2)
 
         #数据库操作
@@ -59,10 +63,9 @@ def main():
             #Avatar
             avatar = '';
             profile_avatar = soup0.find(class_="radius_avatar profile_avatar")
-            print 'profile_avatar'
-            print profile_avatar
+            print ('profile_avatar')
+            print (profile_avatar)
             if profile_avatar:
-                print profile_avatar
                 profiledata = unicode(profile_avatar)
                 profileSoup = BeautifulSoup(profiledata)
                 profileObj = profileSoup.find('img')
@@ -72,37 +75,37 @@ def main():
             #Desc
             desc = '';
             profile_desc = soup0.find(class_="profile_desc_value")
-            print 'profile_desc'
+            #print 'profile_desc'
             if profile_desc:
-                print profile_desc
+                #print profile_desc
                 desc = profile_desc.text
 
             #Nick
             nick = '';
             profile_nick = soup0.find(class_="profile_nickname")
-            print 'profile_nick'
+            #print 'profile_nick'
             if profile_nick:
-                print profile_nick
+                #print profile_nick
                 nick = profile_nick.text
 
             sqlMagazine = '''insert into weshow_magazine 
                         (name,cover_url,description,add_time) 
                     values(%s, %s, %s, %s)'''
-            try:
-                nowTime = time.time()
-                cur.execute(sqlMagazine, (nick, avatar, desc, nowTime))
-            except pymysql.Error, err1:
-                print err1
+            #try:
+            nowTime = time.time()
+            cur.execute(sqlMagazine, (nick, avatar, desc, nowTime))
+            #except pymysql.Error, err1:
+             #   print(err1)
 
             #link
             article_links = soup0.find_all(class_="weui_media_title")
-            print 'article_links'
+            #print 'article_links'
             if article_links:
-                print article_links
+                #print article_links
                 for link in article_links:
                     #print link
                     art_url = 'https://mp.weixin.qq.com' + link.attrs['hrefs']
-                    print art_url
+                    print(art_url)
 
                     #URL处理  
                     contentdata = urllib2.urlopen(art_url).read()
@@ -112,27 +115,27 @@ def main():
                     #Title
                     article_title = soup.find("title")
                     if article_title:
-                        print 'article_title'
-                        print article_title
+                        #print 'article_title'
+                        print(article_title)
                         #print con + '\n'  
                     else:
                         continue
 
                     #Content
                     article_content = soup.find('div', class_="rich_media_content")
-                    print 'article_content'  
-                    print article_content
+                    #print 'article_content'  
+                    ##print article_content
 
                     #Author
                     article_author = soup.find(class_="rich_media_meta rich_media_meta_text rich_media_meta_nickname")
                     #article_author = 'Unknown';
-                    print 'article_author'  
-                    print article_author
+                    #print 'article_author'  
+                    #print article_author
 
                     #Time
                     article_time = soup.find(id="post-date")
-                    print 'article_time'  
-                    print article_time
+                    #print 'article_time'  
+                    #print article_time
 
                     #插入数据
                     sql = '''insert into weshow_article 
@@ -140,7 +143,7 @@ def main():
                             values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
                     title = article_title.text
                     content = article_content.text
-                    digest = content[0, 100]
+                    digest = content[0:100]
                     author = article_author.text
                     source = author
                     pubTime = article_time.text
@@ -169,24 +172,24 @@ def main():
                     rawdata = rawdata.replace('<img', '<img width=100%')
                     digest = digest.strip("\n")
                     nowTime = time.time()
-                    print nowTime
+                    #print nowTime
                     timeStruct = time.strptime(pubTime, "%Y-%m-%d")
                     nowTime = int(time.mktime(timeStruct))
-                    print nowTime
+                    #print nowTime
 
-                    try:
-                        cur.execute(sql, (author, source, art_url, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
-                    except pymysql.Error, err:
-                        print err
-                    print 'execute\n'
+                    #try:
+                    cur.execute(sql, (author, source, art_url, pubTime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
+                    #except pymysql.Error, err:
+                    #print(err)
+                    print ('execute\n')
 
                 #else:
                 #    print u'数据库插入成功'
 
         #异常处理  
         #except MySQLdb.Error,e:
-        except pymysql.Error,e:
-            print "Mysql Error %d: %s" % (e.args[0], e.args[1])  
+        #except pymysql.Error,e:
+         #   print ("Mysql Error %d: %s" % (e.args[0], e.args[1])  )
         finally:  
             cur.close()
             conn.commit()
@@ -196,6 +199,6 @@ def main():
 
     else:  
         urlfile.close()  
-        print 'Load Completed'  
+        print ('Load Completed')
 
 main()
