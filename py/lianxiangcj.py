@@ -38,10 +38,10 @@ def main():
     endIndex = int(sys.argv[2])
     print beginIndex
     #获取txt文件总行数  
-    count = len(open("Lianxiang_info_detail.txt",'rU').readlines())
+    count = len(open("py/Lianxiang_info_detail.txt",'rU').readlines())
     print count  
     n = 0  
-    urlfile = open("Lianxiang_info_detail.txt",'r')
+    urlfile = open("py/Lianxiang_info_detail.txt",'r')
 
     #循环获取文章   
     while n < count:
@@ -187,7 +187,7 @@ def main():
 
         #异常处理
         except urllib2.HTTPError,e0:
-            print "URLLIB2 Error %d: %s" % (e0)
+            print ("URLLIB2 Error " + (e0))
         #except MySQLdb.Error,e:
         except pymysql.Error,e:
             print "Mysql Error %d: %s" % (e.args[0], e.args[1])
