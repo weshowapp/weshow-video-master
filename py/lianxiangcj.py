@@ -69,10 +69,10 @@ def main():
                 try :
                     urldata = urllib2.urlopen(ur).read()
                     #urldata = urllib.request.urlopen(ur).read()
-                except (urllib.error.HTTPError):
-                    print ("URLLIB Error ")
-                    m = m + 1
-                    continue
+                #except (urllib.error.HTTPError):
+                #    print ("URLLIB Error ")
+                #    m = m + 1
+                #    continue
                 except (urllib2.HTTPError):
                     print ("URLLIB2 Error ")
                     #print (e0)
