@@ -137,4 +137,22 @@ export default class extends Base {
       errorCode: 0
     });
   }
+
+  async deleteAction() {
+    let id = this.post('id');
+    let str = this.post('delete');
+    console.log('delete ' + id + ',' + str);
+    if (id == '') {
+      var arr = str.split(':');
+      if (arr.length > 1) {
+        id = arr[1];
+      }
+    }
+    let result = await this.model('magazine').where({id: id}).delete();
+
+    return this.success({
+      result: result
+    });
+  }
+
 }
