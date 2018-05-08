@@ -243,6 +243,8 @@ export default class extends Base {
     let title = this.post('title');
     let digest = this.post('digest');
     let content = this.post('content');
+    let rawtext = this.post('rawtext');
+    let rawdata = this.post('rawdata');
     let note = this.post('note');
     let more = this.post('more');
     console.log('addAction');
@@ -269,6 +271,8 @@ export default class extends Base {
         title: title,
         digest: digest,
         content: content,
+        rawtext: rawtext,
+        rawdata: rawdata,
         note: note,
         more: more
     });
@@ -302,6 +306,8 @@ export default class extends Base {
     let title = this.post('title');
     let digest = this.post('digest');
     let content = this.post('content');
+    let rawtext = this.post('rawtext');
+    let rawdata = this.post('rawdata');
     let note = this.post('note');
     let more = this.post('more');
     console.log('updateAction');
@@ -328,6 +334,8 @@ export default class extends Base {
         title: title,
         digest: digest,
         content: content,
+        rawtext: rawtext,
+        rawdata: rawdata,
         note: note,
         more: more
     });
