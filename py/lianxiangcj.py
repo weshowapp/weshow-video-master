@@ -80,6 +80,7 @@ def main():
                 except urllib2.HTTPError,e0:
                     print ("URLLIB2 Error ")
                     print (e0)
+                    m = m + 1
                     continue
                 soup = BeautifulSoup(urldata,"html.parser")
                 #print soup
@@ -189,7 +190,7 @@ def main():
 
                 #else:
                 #    print u'数据库插入成功'
-                m = m + 1  
+                m = m + 1
 
         #异常处理
         #except MySQLdb.Error,e:
