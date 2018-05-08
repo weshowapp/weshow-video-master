@@ -81,7 +81,7 @@ export default class extends Base {
     });
   }
 
-  async lianxiangcjnfoAction() {
+  async lianxiangcjinfoAction() {
     let startid = this.post('startid');
     let endid = this.post('endid');
 
