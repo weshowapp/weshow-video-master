@@ -211,8 +211,8 @@ def main():
 
         #异常处理
         #except MySQLdb.Error,e:
-        except (pymysql.Error, e):
-        #except (pymysql.Error):
+        #except pymysql.Error,e:
+        except (pymysql.Error):
             print ("Mysql Error")
             #print ("Mysql Error %d: %s" % (e.args[0], e.args[1]))
         finally:  
