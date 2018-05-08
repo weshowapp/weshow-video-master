@@ -186,8 +186,8 @@ def main():
                 m = m + 1  
 
         #异常处理
-        except urllib2.HTTPError,e:
-            print "URLLIB2 Error %d: %s" % (e.args[0], e.args[1])
+        except urllib2.HTTPError,e0:
+            print "URLLIB2 Error %d: %s" % (e0)
         #except MySQLdb.Error,e:
         except pymysql.Error,e:
             print "Mysql Error %d: %s" % (e.args[0], e.args[1])
