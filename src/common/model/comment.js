@@ -23,6 +23,9 @@ async updatePowerOfUp(artid, openid) {
       if (user.power_of_up <= 0) {
         powerOfUp = 0;
       }
+      else {
+        popularity = popularity + 0.1;
+      }
     }
     await userModel.where({ openid: openid }).update({
       power_of_up: (powerOfUp - 10),
