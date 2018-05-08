@@ -15,15 +15,18 @@ async updatePowerOfUp(artid, openid) {
     //var commentModel = this.model('comment');
 
     var powerOfUp = 100;
+    var popularity = 0;
     let user = await userModel.where({ openid: openid }).find();
     if (!think.isEmpty(user)) {
       powerOfUp = user.power_of_up;
+      popularity = user.popularity;
       if (user.power_of_up <= 0) {
-        return;
+        powerOfUp = 0;
       }
     }
     await userModel.where({ openid: openid }).update({
-      power_of_up: (powerOfUp - 10)
+      power_of_up: (powerOfUp - 10),
+      popularity: popularity
     });
   }
 }
