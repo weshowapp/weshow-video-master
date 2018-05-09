@@ -167,8 +167,13 @@ def main():
                         pubtime = time.strftime('%Y-%m-%d ',time.localtime(time.time()))+ article_time.text
                     else:
                         pubtime = '2018-' + article_time.text
-                    timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M")
-                    nowTime = int(time.mktime(timeStruct))
+                    try:
+                        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M")
+                        nowTime = int(time.mktime(timeStruct))
+                    except ValueError, err1:
+                        print (err1)
+                        m = m + 1
+                        continue
 
                 if content:
                     #插入数据
