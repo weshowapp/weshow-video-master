@@ -38,10 +38,10 @@ def main():
     endIndex = int(sys.argv[2])
     print beginIndex
     #获取txt文件总行数  
-    count = len(open("Bishijie_info_detail_URL.txt",'rU').readlines())
+    count = len(open("py/Bishijie_info_detail_URL.txt",'rU').readlines())
     print count  
     n = 0  
-    urlfile = open("Bishijie_info_detail_URL.txt",'r')
+    urlfile = open("py/Bishijie_info_detail_URL.txt",'r')
 
     #循环获取文章   
     while n < count:
