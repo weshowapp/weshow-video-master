@@ -96,7 +96,8 @@ def main():
 
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
-                article_title = soup.find("title")
+                #article_title = soup.find("title")
+                article_title = soup.find('h1', class_="m-i-title")
                 if article_title:
                     print ('article_title')
                     title = article_title.text
