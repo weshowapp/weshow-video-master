@@ -164,7 +164,7 @@ def main():
                 if article_time:
                     pubtime = '2018-01-01 01：01'
                     if len(article_time.text) < 7:
-                        pubtime = time.strftime('%Y-%m-%d',time.localtime(time.time()))+ article_time.text
+                        pubtime = time.strftime('%Y-%m-%d ',time.localtime(time.time()))+ article_time.text
                     else:
                         pubtime = '2018-' + article_time.text
                     timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M")
