@@ -63,7 +63,7 @@ def main():
             #具体内容处理  
             m = beginIndex #第1页
             while m <= endIndex:
-                ur = url + datetime.datetime.now().year + datetime.datetime.now().mouth + '/' + str(m) + '.html'
+                ur = url + time.strftime('%Y%m/',time.localtime(time.time())) + str(m) + '.html'
                 print (ur)
                 urldata = ''
                 try :
@@ -186,7 +186,7 @@ def main():
                 print (article_time)
                 if article_time:
                     if len(article_time.text) < 7:
-                        pubtime = time.strftime('%Y年%m月%日 ',time.localtime(time.time()))+ article_time.text
+                        pubtime = time.strftime('%Y年%m月%日 ',time.localtime(time.time())) + article_time.text
                     else:
                         pubtime = article_time.text
                     try:
