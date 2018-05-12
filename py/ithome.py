@@ -138,13 +138,13 @@ def main():
                     imgObj = rawSoup.find_all('img')
                     #print(imgObj)
                     if imgObj:
-                        image0 = imgObj[0].attrs['src']
+                        image0 = imgObj[0].attrs['data-original']
                         if len(imgObj) > 1:
-                            image1 = imgObj[1].attrs['src']
+                            image1 = imgObj[1].attrs['data-original']
                         if len(imgObj) > 2:
-                            image2 = imgObj[2].attrs['src']
+                            image2 = imgObj[2].attrs['data-original']
                         if len(imgObj) > 3:
-                            image3 = imgObj[3].attrs['src']
+                            image3 = imgObj[3].attrs['data-original']
                         #print('image0')
                         #print(image0)
                     rawdata = rawdata.replace('width=', 'wd0=')
