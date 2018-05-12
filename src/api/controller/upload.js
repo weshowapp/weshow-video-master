@@ -100,6 +100,25 @@ export default class extends Base {
     });
   }
 
+  async wallstreetinfoAction() {
+    let startid = this.post('startid');
+    let endid = this.post('endid');
+
+    var exec = require('child_process').exec;
+    exec('python py/wallstreetinfo.py ' + startid + ' ' + endid + ' ',
+            function(error, stdout, stderr) {
+      console.info('stdout : ' + stdout);
+      if(error) {
+        console.info('stderr : ' + stderr);
+      }
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
+
   async uploadAction() {
     var file = think.extend({}, this.file('file_input'));
     var filepath = file.path;
