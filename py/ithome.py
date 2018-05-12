@@ -167,10 +167,10 @@ def main():
                     author = author.strip("\n")
                     print ('author')
                     print (author)
-                    author = author.replace('&nbsp;', '')
-                    author = author.replace(' ', '')
+                    #author = author.replace('&nbsp;', '')
+                    #author = author.replace(' ', '')
                     print (author)
-                    tm = re.match(u'(.*)  (.*)\((.*)\)', author, re.M|re.I)
+                    tm = re.match(u'(.*)   (.*)\((.*)\)', author, re.M|re.I)
                     if tm:
                         print (tm)
                         pubtime = tm.group(1)
@@ -196,8 +196,8 @@ def main():
                     try:
                         timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
                         nowTime = int(time.mktime(timeStruct))
-                    except ValueError, err1:
-                        print (err1)
+                    except (ValueError):
+                        #print (err1)
                         m = m + 1
                         continue
                 else:
@@ -215,8 +215,8 @@ def main():
 
                     try:
                         cur.execute(sql, (author, source, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
-                    except pymysql.Error, err:
-                        print (err)
+                    except (pymysql.Error):
+                        print ('err')
                     #try:
                     #    cur.execute(sqlMagazine, (source, nowTime))
                     #except pymysql.Error, err1:
