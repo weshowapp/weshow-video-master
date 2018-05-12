@@ -63,7 +63,7 @@ def main():
             #具体内容处理  
             m = beginIndex #第1页  
             while m <= endIndex:  
-                ur = url + str(m) + '.html'
+                ur = url + str(m)
                 print (ur)
                 urldata = ''
                 try :
