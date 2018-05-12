@@ -150,7 +150,7 @@ def main():
                     rawdata = rawdata.replace('width=', 'wd0=')
                     rawdata = rawdata.replace('height=', 'hg0=')
                     rawdata = rawdata.replace('<img', '<img width=100%')
-                    #rawdata = rawdata.replace('data-src', 'src')
+                    rawdata = rawdata.replace('data-original', 'src')
                 else:
                     m = m + 1
                     continue
@@ -167,16 +167,13 @@ def main():
                     author = author.strip("\n")
                     print ('author')
                     print (author)
-                    #author = author.replace('&nbsp;', '')
-                    #author = author.replace(' ', '')
-                    print (author)
                     tm = re.match(u'(.*)   (.*)\((.*)\)', author, re.M|re.I)
                     if tm:
-                        print (tm)
+                        #print (tm)
                         pubtime = tm.group(1)
                         source = tm.group(2)
                         author = tm.group(3)
-                    print (tm)
+                    #print (tm)
                 else:
                     m = m + 1
                     continue
