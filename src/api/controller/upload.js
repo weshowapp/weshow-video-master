@@ -100,6 +100,25 @@ export default class extends Base {
     });
   }
 
+  async ithomeAction() {
+    let startid = this.post('startid');
+    let endid = this.post('endid');
+
+    var exec = require('child_process').exec;
+    exec('python py/ithome.py ' + startid + ' ' + endid + ' ',
+            function(error, stdout, stderr) {
+      console.info('stdout : ' + stdout);
+      if(error) {
+        console.info('stderr : ' + stderr);
+      }
+    });
+
+    return this.success({
+      result: 'OK',
+      errorCode: 0
+    });
+  }
+
   async wallstreetinfoAction() {
     let startid = this.post('startid');
     let endid = this.post('endid');

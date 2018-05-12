@@ -185,6 +185,14 @@ p {padding:3px 0 3px 0;}
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
       </form><br><br>
 
+      <h2>ITHome自动获取</h2>
+      <form action="ithome" enctype="multipart/form-data" method="post" target="hidden_frame_wall">
+        <p><input size="4" type="submit" value=" 自动获取 "/></p>
+        <p>起始ID：<input size="5" type="text" name ="startid" value="0"/></p>
+        <p>终止ID：<input size="5" type="text" name ="endid" value="1"/></p>
+        <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
+      </form><br><br>
+
       <h2>华尔街见闻自动获取</h2>
       <form action="wallstreetinfo" enctype="multipart/form-data" method="post" target="hidden_frame_wall">
         <p><input size="4" type="submit" value=" 自动获取 "/></p>

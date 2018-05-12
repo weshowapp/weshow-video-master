@@ -155,6 +155,7 @@ def main():
                     m = m + 1
                     continue
 
+                pubtime = '2018-01-01 01：01:01'
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
                 article_author = soup.find(class_="pt_info pre1")
@@ -166,6 +167,7 @@ def main():
                     author = author.strip("\n")
                     tm = re.match(u'(.*)&nbsp;&nbsp;&nbsp;(.*)\((.*)\)', author, re.M|re.I)
                     if tm:
+                        pubtime = tm.group(1)
                         author = tm.group(3)
                         source = tm.group(2)
                     print (tm)
@@ -181,11 +183,10 @@ def main():
                 print ('article_time')
                 print (article_time)
                 if article_time:
-                    pubtime = '2018-01-01 01：01:01'
-                    if len(article_time.text) < 7:
-                        pubtime = time.strftime('%Y-%m-%d ',time.localtime(time.time()))+ article_time.text
-                    else:
-                        pubtime = article_time.text[0:19]
+                    #if len(article_time.text) < 7:
+                    #    pubtime = time.strftime('%Y-%m-%d ',time.localtime(time.time()))+ article_time.text
+                    #else:
+                    #    pubtime = article_time.text[0:19]
                     try:
                         timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
                         nowTime = int(time.mktime(timeStruct))
