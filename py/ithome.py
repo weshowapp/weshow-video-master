@@ -165,8 +165,10 @@ def main():
                     author = author.strip("\n")
                     author = author.strip()
                     author = author.strip("\n")
+                    author = author.replace('&nbsp;', '')
+                    author = author.replace(' ', '')
                     print (author)
-                    tm = re.match(u'(.*)&nbsp;&nbsp;&nbsp;(.*)\((.*)\)', author, re.M|re.I)
+                    tm = re.match(u'(.*)   (.*)\((.*)\)', author, re.M|re.I)
                     if tm:
                         pubtime = tm.group(1)
                         source = tm.group(2)
