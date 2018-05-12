@@ -104,6 +104,7 @@ export default class extends Base {
     let cmd = this.post('cmdinfo');
     let startid = this.post('startid');
     let endid = this.post('endid');
+    console.info(cmd);
 
     var exec = require('child_process').exec;
     exec('python py/' + cmd + ' ' + startid + ' ' + endid + ' ',
