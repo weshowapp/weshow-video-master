@@ -158,7 +158,7 @@ def main():
                 pubtime = '2018-04-01 01:01:01'
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
-                article_author = soup.find('em', class_="source")
+                article_author = soup.find('em', id="source")
                 if article_author:
                     #print con + '\n'
                     author = article_author.text
@@ -172,8 +172,10 @@ def main():
                         print (tm)
                         author = tm.group(1)
                         source = tm.group(2)
+                        print (source)
                     #print (tm)
                 else:
+                    print ('source empty')
                     m = m + 1
                     continue
 
