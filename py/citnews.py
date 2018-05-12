@@ -139,12 +139,21 @@ def main():
                     #print(imgObj)
                     if imgObj:
                         image0 = imgObj[0].attrs['src']
+                        if image0.find("http://") == -1:
+                            image0 = "http://www.citnews.com.cn" + image0
+                            rawdata = rawdata.replace('src=\"', 'src=\"http://www.citnews.com.cn')
                         if len(imgObj) > 1:
                             image1 = imgObj[1].attrs['src']
+                            if image1.find("http://") == -1:
+                                image1 = "http://www.citnews.com.cn" + image1
                         if len(imgObj) > 2:
                             image2 = imgObj[2].attrs['src']
+                            if image2.find("http://") == -1:
+                                image2 = "http://www.citnews.com.cn" + image2
                         if len(imgObj) > 3:
                             image3 = imgObj[3].attrs['src']
+                            if image3.find("http://") == -1:
+                                image3 = "http://www.citnews.com.cn" + image3
                         #print('image0')
                         #print(image0)
                     rawdata = rawdata.replace('width=', 'wd0=')
