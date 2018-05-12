@@ -32,10 +32,10 @@ def main():
     endIndex = int(sys.argv[2])
     print (beginIndex)
     #获取txt文件总行数  
-    count = len(open("py/Wallstreet_info_detail.txt",'rU').readlines())
+    count = len(open("py/ithome_info_url.txt",'rU').readlines())
     print (count)
     n = 0  
-    urlfile = open("py/Wallstreet_info_detail.txt",'r')
+    urlfile = open("py/ithome_info_url.txt",'r')
 
     #循环获取文章   
     while n < count:
@@ -61,9 +61,9 @@ def main():
             cur.execute('SET character_set_connection=utf8mb4;')
 
             #具体内容处理  
-            m = beginIndex #第1页  
-            while m <= endIndex:  
-                ur = url + str(m)
+            m = beginIndex #第1页
+            while m <= endIndex:
+                ur = url + str(m) + '.htm'
                 print (ur)
                 urldata = ''
                 try :
@@ -90,15 +90,15 @@ def main():
                 image2 = ''
                 image3 = ''
                 author = ''
-                source = '华尔街见闻'
+                source = 'IT之家'
                 pubtime = ''
                 nowTime = time.time()
 
                 print ('parse')
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
-                #article_title = soup.find("title")
-                article_title = soup.find(class_="article__heading__title")
+                article_title = soup.find("title")
+                #article_title = soup.find(class_="article__heading__title")
                 if article_title:
                     print ('article_title')
                     title = article_title.text
@@ -110,17 +110,17 @@ def main():
                 #摘要  
                 #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
                 #article_digest = soup.find_all(attrs={'class':'summary'})
-                article_digest = soup.find('div', class_="summary")
-                if article_digest:
-                    print ('article_digest')
-                    digest = article_digest.text
-                else:
-                    m = m + 1
-                    continue
+                #article_digest = soup.find('div', class_="summary")
+                #if article_digest:
+                #    print ('article_digest')
+                #    digest = article_digest.text
+                #else:
+                #    m = m + 1
+                #    continue
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
-                article_content = soup.find('div', class_="node-article-content")
+                article_content = soup.find('div', class_="post_content")
                 #print ('article_content')
                 #print (article_content)
                 if article_content:
@@ -128,7 +128,7 @@ def main():
                     content = content.strip("\n")
                     content = content.strip()
                     content = content.strip("\n")
-                    #digest = content[0:256]
+                    digest = content[0:156]
                     rawdata = unicode(article_content)
                     image0 = ''
                     image1 = ''
@@ -157,13 +157,18 @@ def main():
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
-                article_author = soup.find(class_="user-card__row__name")
+                article_author = soup.find(class_="pt_info pre1")
                 if article_author:
                     #print con + '\n'
                     author = article_author.text
                     author = author.strip("\n")
                     author = author.strip()
                     author = author.strip("\n")
+                    tm = re.match(u'(.*)&nbsp;&nbsp;&nbsp;(.*)\((.*)\)', author, re.M|re.I)
+                    if tm:
+                        author = tm.group(3)
+                        source = tm.group(2)
+                    print (tm)
                 else:
                     m = m + 1
                     continue
@@ -172,17 +177,17 @@ def main():
                 #article_source = soup.find(class_="m-i-type-source rt")
 
                 #time
-                article_time = soup.find(class_="meta-item__text")
+                article_time = soup.find(class_="pt_info pre1")
                 print ('article_time')
                 print (article_time)
                 if article_time:
-                    pubtime = '2018-01-01 01：01'
+                    pubtime = '2018-01-01 01：01:01'
                     if len(article_time.text) < 7:
                         pubtime = time.strftime('%Y-%m-%d ',time.localtime(time.time()))+ article_time.text
                     else:
-                        pubtime = article_time.text
+                        pubtime = article_time.text[0:19]
                     try:
-                        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M")
+                        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
                         nowTime = int(time.mktime(timeStruct))
                     except ValueError, err1:
                         print (err1)
