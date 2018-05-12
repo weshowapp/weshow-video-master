@@ -100,12 +100,13 @@ export default class extends Base {
     });
   }
 
-  async ithomeAction() {
+  async newsinfoAction() {
+    let cmd = this.post('cmdinfo');
     let startid = this.post('startid');
     let endid = this.post('endid');
 
     var exec = require('child_process').exec;
-    exec('python py/ithome.py ' + startid + ' ' + endid + ' ',
+    exec('python py/' + cmd + ' ' + startid + ' ' + endid + ' ',
             function(error, stdout, stderr) {
       console.info('stdout : ' + stdout);
       if(error) {
