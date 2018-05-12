@@ -191,11 +191,13 @@ def main():
                         pubtime = time.strftime('%Y年%m月%日 ',time.localtime(time.time())) + article_time.text
                     else:
                         pubtime = article_time.text
+                    print (pubtime)
                     try:
                         timeStruct = time.strptime(pubtime, "%Y年%m月%日 %H:%M:%S")
+                        print (timeStruct)
                         nowTime = int(time.mktime(timeStruct))
                     except (ValueError):
-                        #print (err1)
+                        print ('format error')
                         m = m + 1
                         continue
                 else:
