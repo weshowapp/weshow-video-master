@@ -105,7 +105,7 @@ export default class extends Base {
     let endid = this.post('endid');
 
     var exec = require('child_process').exec;
-    exec('python py/wallstreetinfo.py ' + startid + ' ' + endid + ' ',
+    exec('python py/wallstreet.py ' + startid + ' ' + endid + ' ',
             function(error, stdout, stderr) {
       console.info('stdout : ' + stdout);
       if(error) {
