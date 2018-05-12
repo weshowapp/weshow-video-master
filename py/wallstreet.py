@@ -78,6 +78,7 @@ def main():
                     #print (e0)
                     m = m + 1
                     continue
+                print ('next')
                 soup = BeautifulSoup(urldata, "html.parser")
                 #print soup
 
@@ -103,6 +104,7 @@ def main():
                     title = article_title.text
                     print (title)
                 else:
+                    m = m + 1
                     continue
 
                 #摘要  
@@ -112,6 +114,9 @@ def main():
                 if article_digest:
                     print ('article_digest')
                     digest = article_digest.text
+                else:
+                    m = m + 1
+                    continue
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
@@ -146,6 +151,9 @@ def main():
                     rawdata = rawdata.replace('height=', 'hg0=')
                     rawdata = rawdata.replace('<img', '<img width=100%')
                     #rawdata = rawdata.replace('data-src', 'src')
+                else:
+                    m = m + 1
+                    continue
 
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
@@ -156,6 +164,9 @@ def main():
                     author = author.strip("\n")
                     author = author.strip()
                     author = author.strip("\n")
+                else:
+                    m = m + 1
+                    continue
 
                 #source
                 #article_source = soup.find(class_="m-i-type-source rt")
@@ -177,6 +188,9 @@ def main():
                         print (err1)
                         m = m + 1
                         continue
+                else:
+                    m = m + 1
+                    continue
 
                 if content:
                     #插入数据
