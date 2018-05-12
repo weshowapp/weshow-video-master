@@ -188,12 +188,15 @@ def main():
                 print (article_time)
                 if article_time:
                     if len(article_time.text) < 7:
-                        pubtime = time.strftime('%Y年%m月%日 ',time.localtime(time.time())) + article_time.text
+                        pubtime = time.strftime('%Y年%m月%d日 ',time.localtime(time.time())) + article_time.text
                     else:
-                        pubtime = article_time.text
+                        pubtime = unicode(article_time.text)
+                        #pubtime = pubtime.replace('年', '-');
+                        #pubtime = pubtime.replace('月', '-');
+                        #pubtime = pubtime.replace('日', '');
                     print (pubtime)
                     try:
-                        timeStruct = time.strptime(pubtime, "%Y年%m月%日 %H:%M:%S")
+                        timeStruct = time.strptime(pubtime, u'%Y年%m月%d日 %H:%M:%S')
                         print (timeStruct)
                         nowTime = int(time.mktime(timeStruct))
                     except (ValueError):
