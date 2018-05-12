@@ -46,14 +46,15 @@
             <% } %>
             <!--内容结束-->
         </div>
-        <div style="margin-bottom:50px;"></div><!--留白-->        
-        <div class="img-content"><!--三个按钮-->
+        <div style="margin-bottom:50px;"></div><!--留白-->
+        <!--三个按钮-->
+        <!--div class="img-content">
             <ul>
-        <script type="text/javascript">
-          function likeClick() {
-            document.getElementById("form_" + <%= data.id %>).submit();
-          }
-        </script>
+            <script type="text/javascript">
+              function likeClick() {
+                document.getElementById("form_" + <%= data.id %>).submit();
+              }
+            </script>
                 <li><IMG SRC="https://www.imcou.com/static/news/detail_value.png" BORDER="0" ALT="文章影响力"><br/><span>影响力&nbsp;&nbsp;<%= data.impact/10 %></span></li>
                 <% if (data.hasLiked) { %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_liked.png" BORDER="0" ALT=""></a><br/><span>赞&nbsp;&nbsp;<%= data.likeCount %></span></li>
@@ -70,7 +71,7 @@
                 <% } %>
                 <li><a href=""><IMG SRC="https://www.imcou.com/static/news/detail_share.png" BORDER="0" ALT=""></a><br/><span>分享&nbsp;&nbsp;<%= data.shareCount %></span></li>
             </ul>
-        </div>
+        </div-->
         <div style="margin-bottom:30px;"></div><!--留白--> 
         <% if (data.likes.length > 0) { %>
         <div style="text-align:center;">赞过留名</div>
