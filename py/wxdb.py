@@ -19,11 +19,6 @@ sys.setdefaultencoding('utf-8')
 
 #主函数
 def wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata):
-if url:
-    #inputUrl = sys.argv[1]
-    #if inputUrl:
-    #    url = inputUrl
-
     if content:
         #插入数据
         sql = '''insert into weshow_article 
@@ -33,7 +28,7 @@ if url:
                     (name,add_time) 
                 values(%s, %s)'''
 
-        sqlFind = '''select * from weshow_magazine where name=%s '''
+        sqlFind = '''select id from weshow_magazine where name=%s '''
         try:
             effect_row = cur.execute(sqlFind, (source))
             print (effect_row)
@@ -41,7 +36,8 @@ if url:
                 print ('data exist')
                 row = cur.fetchone()
                 if row:
-                    source_id = row['id']
+                    print(cur.description)
+                    source_id = cur.description[0][0]
                     print (source_id)
             else:
                 try:
