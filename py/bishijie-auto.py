@@ -27,10 +27,7 @@ sys.setdefaultencoding('utf-8')
 
 #主函数
 def main():
-    #print （'main'）
-    beginIndex = int(sys.argv[1])
-    endIndex = int(sys.argv[2])
-    print (beginIndex)
+    #print ('main')
     #index
     data = '';
     try :
@@ -38,8 +35,6 @@ def main():
         #data = urllib.request.urlopen(ur).read()
     #except (urllib.error.HTTPError):
     #    print ("URLLIB Error ")
-    #    m = m + 1
-    #    continue
     except (urllib2.HTTPError):
         print ("URLLIB2 Error ")
         #print (e0)
@@ -66,9 +61,7 @@ def main():
             cur.execute('SET CHARACTER SET utf8mb4;')  
             cur.execute('SET character_set_connection=utf8mb4;')
 
-            #具体内容处理  
-            m = beginIndex #第1页
-            while m <= endIndex:
+            #具体内容处理
             for urlitem in url_list:
                 ur = urlitem.a['href']
                 ur = ur.strip("\n")
@@ -93,7 +86,6 @@ def main():
                 except (urllib2.HTTPError):
                     print ("URLLIB2 Error ")
                     #print (e0)
-                    m = m + 1
                     continue
                 soup = BeautifulSoup(urldata, "html.parser")
                 #print soup
@@ -165,7 +157,6 @@ def main():
                     rawdata = rawdata.replace('<img', '<img width=100%')
                     #rawdata = rawdata.replace('data-original', 'src')
                 else:
-                    m = m + 1
                     continue
 
                 #source
@@ -210,7 +201,8 @@ def main():
                     #else:
                     #    pubtime = unicode(article_time.text)
                     print (pubtime)
-                    tm = re.match(u'(.*)(分钟|小时|天)前', pubtime, re.M|re.I)nowTime=time.time()
+                    tm = re.match(u'(.*)(分钟|小时|天)前', pubtime, re.M|re.I)
+                    nowTime=time.time()
                     if tm:
                         try:
                             if (tm.group().index('分钟') != -1):
@@ -232,7 +224,6 @@ def main():
                         timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
                         nowTime = int(time.mktime(timeStruct))
                 else:
-                    m = m + 1
                     continue
 
                 if content:
@@ -278,8 +269,6 @@ def main():
                 #else:
                 #    print u'数据库插入成功'
 
-                m = m + 1
-
         #异常处理
         #except MySQLdb.Error,e:
         #except pymysql.Error,e:
@@ -290,8 +279,6 @@ def main():
             cur.close()
             conn.commit()
             conn.close()
-
-        n = n + 1
 
     else:  
         urlfile.close()
