@@ -90,7 +90,8 @@ export default class extends Base {
     var rule = new schedule.RecurrenceRule();
     var timers = [1, 6, 8, 10, 12, 14, 16, 18, 20, 23];
     rule.hour = timers;
-    rule.minute = 0;
+    var seed = (new Date()).getMilliseconds() % 10 + 1;
+    rule.minute = seed;
     schedule.scheduleJob(rule, function(){
       exec('python py/' + cmd,
             function(error, stdout, stderr) {
