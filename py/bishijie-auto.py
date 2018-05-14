@@ -42,7 +42,7 @@ def main():
 
     url_list = soupIndex.find_all('section', class_="zixunbox")
     if url_list:
-        print(url_list[0].a['href'])
+        print(len(url_list))
         #driver.get(url)
 
         #nowTime=datetime.datetime.now().microsecond
@@ -162,7 +162,7 @@ def main():
                 #source
                 article_source = soup.find(class_="authorName")
                 if article_source:
-                    source = article_author.text
+                    source = article_source.text
                     source = source.strip("\n")
                     source = source.strip()
                     source = source.strip("\n")
@@ -280,8 +280,7 @@ def main():
             conn.commit()
             conn.close()
 
-    else:  
-        urlfile.close()
+    else:
         print ('Load Completed')
 
 main()
