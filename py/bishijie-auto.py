@@ -125,6 +125,8 @@ def main():
                 if article_digest:
                     print ('article_digest')
                     digest = article_digest.text
+                    digest = digest.strip("\n")
+                    digest = digest.strip()
                 else:
                     continue
 
