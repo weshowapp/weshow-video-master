@@ -88,8 +88,9 @@ export default class extends Base {
 
     var exec = require('child_process').exec;
     var rule = new schedule.RecurrenceRule();
-    var timers = [1,6,11,16,21,26,31,36,41,46,51,56];
-    rule.minute  = timers;
+    var timers = [1, 6, 8, 10, 12, 14, 16, 18, 20, 23];
+    rule.hour = timers;
+    rule.minute = 0;
     schedule.scheduleJob(rule, function(){
       exec('python py/' + cmd,
             function(error, stdout, stderr) {
