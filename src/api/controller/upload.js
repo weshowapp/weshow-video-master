@@ -4,6 +4,7 @@ import Base from './base.js';
 
 var fs = require('fs');
 //var path = require('path');
+var schedule = require("node-schedule"); 
 
 var xwords = require('./xwords');
 var wxconst = require('./wxconst');
@@ -62,7 +63,7 @@ export default class extends Base {
     this.display();
   }
 
-  async bishijieinfoAction() {
+  /*async bishijieinfoAction() {
     let startid = this.post('startid');
     let endid = this.post('endid');
 
@@ -79,19 +80,24 @@ export default class extends Base {
       result: 'OK',
       errorCode: 0
     });
-  }
+  }*/
 
-  async lianxiangcjinfoAction() {
-    let startid = this.post('startid');
-    let endid = this.post('endid');
+  async starttaskAction() {
+    let cmd = this.post('cmdinfo');
+    console.info(cmd);
 
     var exec = require('child_process').exec;
-    exec('python py/lianxiangcj.py ' + startid + ' ' + endid + ' ',
+    var rule = new schedule.RecurrenceRule();
+    var timers = [1,6,11,16,21,26,31,36,41,46,51,56];
+    rule.minute  = timers;
+    schedule.scheduleJob(rule, function(){
+      exec('python py/' + cmd,
             function(error, stdout, stderr) {
-      console.info('stdout : ' + stdout);
-      if(error) {
-        console.info('stderr : ' + stderr);
-      }
+        console.info('stdout : ' + stdout);
+        if(error) {
+          console.info('stderr : ' + stderr);
+        }
+      });
     });
 
     return this.success({
@@ -107,26 +113,7 @@ export default class extends Base {
     console.info(cmd);
 
     var exec = require('child_process').exec;
-    exec('python py/' + cmd + ' ' + startid + ' ' + endid + ' ',
-            function(error, stdout, stderr) {
-      console.info('stdout : ' + stdout);
-      if(error) {
-        console.info('stderr : ' + stderr);
-      }
-    });
-
-    return this.success({
-      result: 'OK',
-      errorCode: 0
-    });
-  }
-
-  async wallstreetinfoAction() {
-    let startid = this.post('startid');
-    let endid = this.post('endid');
-
-    var exec = require('child_process').exec;
-    exec('python py/wallstreet.py ' + startid + ' ' + endid + ' ',
+    exec('python py/' + cmd + ' ',
             function(error, stdout, stderr) {
       console.info('stdout : ' + stdout);
       if(error) {
