@@ -36,8 +36,8 @@ def wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, dig
                 print ('data exist')
                 row = cur.fetchone()
                 if row:
-                    print(cur.description)
-                    source_id = cur.description[0][0]
+                    print(row)
+                    source_id = row[0]
                     print (source_id)
             else:
                 try:
@@ -76,3 +76,18 @@ def wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, dig
 
         #else:
         #    print u'数据库插入成功'
+
+def wxdb_exist(cur, url):
+    if cur:
+        if url:
+            sqlFind = '''select * from weshow_article where source_url=%s '''
+            try:
+                effect_row = cur.execute(sqlFind, (url))
+                print (effect_row)
+                if effect_row >= 1:
+                    print ('data exist')
+                    #continue #DATA EXIST
+                    return 1
+            except pymysql.Error, errFind:
+                print (errFind)
+    return 0

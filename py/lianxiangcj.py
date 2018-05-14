@@ -67,15 +67,9 @@ def main():
                 ur = url + str(m) + '.html'
                 print (ur)
 
-                sqlFind = '''select * from weshow_article where source_url=%s '''
-                try:
-                    effect_row = cur.execute(sqlFind, (ur))
-                    print (effect_row)
-                    if effect_row == 1:
-                        print ('data exist')
-                        continue #DATA EXIST
-                except pymysql.Error, errFind:
-                    print (errFind)
+                if wxdb.wxdb_exist(cur, ur) == 1:
+                    m = m + 1
+                    continue #DATA EXIST
 
                 urldata = ''
                 try :
