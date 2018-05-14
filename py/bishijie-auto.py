@@ -74,7 +74,9 @@ def main():
                 try:
                     effect_row = cur.execute(sqlFind, (ur))
                     print (effect_row)
-                    #continue #DATA EXIST
+                    if effect_row == 1:
+                        print ('data exist')
+                        continue #DATA EXIST
                 except pymysql.Error, errFind:
                     print (errFind)
 
