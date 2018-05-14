@@ -38,12 +38,14 @@ def main():
     except (urllib2.HTTPError):
         print ("URLLIB2 Error ")
         #print (e0)
-    soupIndex = BeautifulSoup(data, "html.parser")
 
-    url_list = soupIndex.find_all('section', class_="zixunbox")
+    soupBox = BeautifulSoup(data, "html.parser")
+    url_box = soupBox.find('section', class_="zixunbox")
+    soupIndex = BeautifulSoup(unicode(url_box), "html.parser")
+    url_list = soupIndex.find_all('a')
     if url_list:
         print(len(url_list))
-        #driver.get(url)
+        print(url_list[0]['href'])
 
         #nowTime=datetime.datetime.now().microsecond
         nowTime = time.time()
@@ -53,8 +55,8 @@ def main():
         conn=pymysql.connect(host='localhost', user='root',  use_unicode='true', charset="utf8mb4",
                              passwd='weshowapp1', port=3306, db='weshow')  
         cur=conn.cursor()
-        try:
 
+        try:
             #报错:UnicodeEncodeError: 'latin-1' codec can't encode character  
             #conn.set_character_set('utf8mb4')  
             cur.execute('SET NAMES utf8mb4;')  
@@ -63,15 +65,16 @@ def main():
 
             #具体内容处理
             for urlitem in url_list:
-                ur = urlitem.a['href']
+                ur = urlitem['href']
                 ur = ur.strip("\n")
                 ur = ur.strip()
                 print (ur)
 
                 sqlFind = '''select * from weshow_article where source_url=%s '''
                 try:
-                    cur.execute(sqlFind, (ur))
-                    continue #DATA EXIST
+                    effect_row = cur.execute(sqlFind, (ur))
+                    print (effect_row)
+                    #continue #DATA EXIST
                 except pymysql.Error, errFind:
                     print (errFind)
 
