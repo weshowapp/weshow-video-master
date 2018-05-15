@@ -17,6 +17,7 @@ import requests
 import json
 import ssl
 from requests.auth import HTTPBasicAuth
+import wxdb
 
 #打开Firefox浏览器 设定等待加载时间
 #driver = webdriver.Firefox()  
@@ -69,15 +70,9 @@ def main():
                 ur = 'https://www.chainfor.com/news/show/' + str(dataid) + '.html'
                 print (ur)
 
-                sqlFind = '''select * from weshow_article where source_url=%s '''
-                try:
-                    effect_row = cur.execute(sqlFind, (ur))
-                    print (effect_row)
-                    if effect_row == 1:
-                        print ('data exist')
-                        continue #DATA EXIST
-                except pymysql.Error, errFind:
-                    print (errFind)
+                if wxdb.wxdb_exist(cur, ur) == 1:
+                    m = m + 1
+                    continue #DATA EXIST
 
                 urldata = ''
                 try :
@@ -104,6 +99,7 @@ def main():
                 image3 = ''
                 author = ''
                 source = '链向财经'
+                source_id = 1
                 pubtime = ''
                 nowTime = time.time()
 
@@ -213,46 +209,7 @@ def main():
                     continue
 
                 if content:
-                    #插入数据
-                    sql = '''insert into weshow_article 
-                                (author_name,source_name,source_url,pub_time_str,pub_time,title,digest,image0,image1,image2,image3,content,rawtext,rawdata) 
-                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
-                    sqlMagazine = '''insert into weshow_magazine 
-                                (name,add_time) 
-                            values(%s, %s)'''
-
-                    try:
-                        cur.execute(sql, (author, source, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata, rawdata))
-                    except (pymysql.Error):
-                        print ('err')
-                    #try:
-                    #    cur.execute(sqlMagazine, (source, nowTime))
-                    #except pymysql.Error, err1:
-                    #    print (err1)
-                    print ('execute\n')
-
-                    addUrl = "https://www.imcou.com/api/upload/add"
-                    values = {}
-                    values['author_name'] = author
-                    values['source_name'] = source
-                    values['source_url'] = ur
-                    values['pub_time_str'] = pubtime
-                    values['pub_time'] = nowTime
-                    values['title'] = title
-                    values['digest'] = digest
-                    values['content'] = content
-                    values['rawtext'] = rawdata
-                    values['rawdata'] = rawdata
-                    values['image0'] = image0
-                    values['image1'] = image1
-                    values['image2'] = image2
-                    values['image3'] = image3
-                    #response = requests.post(addUrl, values)
-                    #print (response)
-                    print ('post\n')
-
-                #else:
-                #    print u'数据库插入成功'
+                    wxdb.wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
 
         #异常处理
         #except MySQLdb.Error,e:

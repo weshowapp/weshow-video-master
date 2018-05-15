@@ -32,7 +32,7 @@ def main():
     #index
     data = '';
     try :
-        data = urllib2.urlopen('http://www.bishijie.com/shendu').read()
+        data = urllib2.urlopen('https://www.chainnews.com').read()
         #data = urllib.request.urlopen(ur).read()
     #except (urllib.error.HTTPError):
     #    print ("URLLIB Error ")
@@ -41,12 +41,12 @@ def main():
         #print (e0)
 
     soupBox = BeautifulSoup(data, "html.parser")
-    url_box = soupBox.find('section', class_="zixunbox")
-    soupIndex = BeautifulSoup(unicode(url_box), "html.parser")
-    url_list = soupIndex.find_all('a')
+    #url_box = soupBox.find('ul', class_="newsBox")
+    #soupIndex = BeautifulSoup(unicode(url_box), "html.parser")
+    url_list = soupBox.find_all('div', class_="title")
     if url_list:
         print(len(url_list))
-        print(url_list[0]['href'])
+        #print(url_list[0])
 
         #nowTime=datetime.datetime.now().microsecond
         nowTime = time.time()
@@ -66,9 +66,11 @@ def main():
 
             #具体内容处理
             for urlitem in url_list:
-                ur = urlitem['href']
-                ur = ur.strip("\n")
-                ur = ur.strip()
+                ur = '';
+                if urlitem:
+                    ur = 'https://www.chainnews.com/' + urlitem.a['href']
+                    ur = ur.strip("\n")
+                    ur = ur.strip()
                 print (ur)
 
                 if wxdb.wxdb_exist(cur, ur) == 1:
@@ -99,16 +101,15 @@ def main():
                 image2 = ''
                 image3 = ''
                 author = ''
-                source = '币世界'
-                source_id = 2
+                source = '链闻'
+                source_id = 10
                 pubtime = ''
                 nowTime = time.time()
 
                 print ('parse')
                 #标题
                 #article_title = driver.find_elements_by_xpath("//div[@class='title']")
-                article_title = soup.find("title")
-                #article_title = soup.find(class_="article__heading__title")
+                article_title = soup.find('h1', class_="title")
                 if article_title:
                     print ('article_title')
                     title = article_title.text
@@ -117,18 +118,18 @@ def main():
                     continue
 
                 #摘要
-                article_digest = soup.find(attrs={'class':'abstract'})
-                if article_digest:
-                    print ('article_digest')
-                    digest = article_digest.text
-                    digest = digest.strip("\n")
-                    digest = digest.strip()
-                else:
-                    continue
+                #article_digest = soup.find(attrs={'class':'abstract'})
+                #if article_digest:
+                #    print ('article_digest')
+                #    digest = article_digest.text
+                #    digest = digest.strip("\n")
+                #    digest = digest.strip()
+                #else:
+                #    continue
 
                 #Content
                 #article_content = driver.find_elements_by_xpath("//div[@class='contentContainer']")
-                article_content = soup.find('section', class_="contentContainer")
+                article_content = soup.find('article', class_="gitbook-markdown-body")
                 #print ('article_content')
                 #print (article_content)
                 if article_content:
@@ -136,7 +137,7 @@ def main():
                     content = content.strip("\n")
                     content = content.strip()
                     content = content.strip("\n")
-                    #digest = content[0:156]
+                    digest = content[0:128]
                     rawdata = unicode(article_content)
                     image0 = ''
                     image1 = ''
@@ -163,69 +164,42 @@ def main():
                     continue
 
                 #source
-                article_source = soup.find(class_="authorName")
-                if article_source:
-                    source = article_source.text
-                    source = source.strip("\n")
-                    source = source.strip()
-                    source = source.strip("\n")
-                    author = source
-                    #print ('source')
-                    print (source)
-                else:
-                    print ('source empty')
-                    continue
+                #article_source = soup.find(class_="m-i-type-source rt")
+                #if article_source:
+                #    source = article_source.text
+                #    source = source.strip("\n")
+                #    source = source.strip()
+                #    source = source.strip("\n")
+                #    #print ('source')
+                #    print (source)
+                #else:
+                #    print ('source empty')
+                #    continue
 
-                pubtime = '2018-04-01 01:01:01'
                 #Author
                 #article_author = driver.find_elements_by_xpath("//div[@class='author']")
-                article_author = soup.find(class_="author")
+                article_author = soup.find('span', class_="author-name")
                 if article_author:
                     author = article_author.text
-                    author = author.replace('作者：', '')
-                    author = author.replace('作者:', '')
                     author = author.strip("\n")
                     author = author.strip()
                     author = author.strip("\n")
+                    source = author
                     #print ('author')
                     print (author)
                 else:
                     print ('author empty')
                     #continue
 
+                pubtime = '2018-04-01 01:01:01'
                 #time
-                article_time = soup.find(class_="time")
+                article_time = soup.find('span' class_="publish-time")
                 print ('article_time')
                 print (article_time)
                 if article_time:
-                    pubtime = unicode(article_time.text)
-                    #if len(article_time.text) < 7:
-                    #    pubtime = time.strftime('%Y年%m月%d日 ',time.localtime(time.time())) + article_time.text
-                    #else:
-                    #    pubtime = unicode(article_time.text)
-                    print (pubtime)
-                    tm = re.match(u'(.*)(分钟|小时|天)前', pubtime, re.M|re.I)
-                    nowTime=time.time()
-                    if tm:
-                        try:
-                            if (tm.group().index('分钟') != -1):
-                                nowTime = nowTime - int(tm.group(1)) * 60
-                        except ValueError:
-                            try:
-                                if (tm.group().index('小时') != -1):
-                                    nowTime = nowTime - int(tm.group(1)) * 60 * 60
-                            except ValueError:
-                                try:
-                                    if (tm.group().index('天') != -1):
-                                        nowTime = nowTime - int(tm.group(1)) * 60 * 60 * 24
-                                except ValueError:
-                                    print 'ValueError'
-                    else:
-                        #print 'else'
-                        strTm = '2018-' + pubtime + ' 01'
-                        #print strTm
-                        timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
-                        nowTime = int(time.mktime(timeStruct))
+                    pubtime = article_time.text + ' 06'
+                    timeStruct = time.strptime(pubtime, "%Y-%m-%d %H")
+                    nowTime = int(time.mktime(timeStruct)) + random.randint(1, 60000)
                 else:
                     continue
 
