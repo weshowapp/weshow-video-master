@@ -75,7 +75,6 @@ def main():
                 print (ur)
 
                 if wxdb.wxdb_exist(cur, ur) == 1:
-                    m = m + 1
                     continue #DATA EXIST
 
                 urldata = ''
