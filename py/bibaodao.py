@@ -69,7 +69,7 @@ def main():
             for urlitem in url_list:
                 ur = '';
                 if urlitem:
-                    ur = urlitem.a['href']
+                    ur = 'http://www.bibaodao.com' + urlitem.a['href']
                     ur = ur.strip("\n")
                     ur = ur.strip()
                 print (ur)
