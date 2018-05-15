@@ -65,9 +65,13 @@ export default class extends Base {
     if (lasttm == 0) {
       lasttm = this.getCurrentTime();
     }
-    let list = await this.model('article').where({pub_time: ["<", lasttm]}).order('pub_time DESC').limit(15).select();
+    let list = await this.model('article').where({source_id: [">", 1], pub_time: ["<", lasttm]}).order('pub_time DESC').limit(10).select();
+    let list1 = await this.model('article').where({source_id: 1, pub_time: ["<", lasttm-10800]}).order('pub_time DESC').limit(5).select();
     if (!think.isEmpty(list)) {
       //console.log(list);
+      list.splice(2  0, list1[0]);
+      list.splice(6  0, list1[1], list1[2]);
+      list.splice(10  0, list1[3], list1[4]);
       for (var i = 0; i < list.length; i++) {
         await this.model('article').setMagazine(list[i]);
         await this.model('article').setLikeList(list[i], openid);
