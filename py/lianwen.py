@@ -44,7 +44,7 @@ def main():
     soupBox = BeautifulSoup(data, "html.parser")
     #url_box = soupBox.find('ul', class_="newsBox")
     #soupIndex = BeautifulSoup(unicode(url_box), "html.parser")
-    url_list = soupBox.find_all('div', class_="title")
+    url_list = soupBox.find_all('div', class_="digest")
     if url_list:
         print(len(url_list))
         #print(url_list[0])
@@ -95,7 +95,7 @@ def main():
 
                 title = ''
                 content = ''
-                digest = ''
+                digest = urlitem.text
                 rawdata = ''
                 image0 = ''
                 image1 = ''
@@ -104,6 +104,7 @@ def main():
                 author = ''
                 source = '链闻'
                 source_id = 10
+                type = 10
                 pubtime = ''
                 nowTime = time.time()
 
@@ -138,7 +139,10 @@ def main():
                     content = content.strip("\n")
                     content = content.strip()
                     content = content.strip("\n")
-                    digest = content[0:128]
+                    #digest = content[0:128]
+                    digest = digest.strip("\n")
+                    digest = digest.strip()
+                    digest = digest.strip("\n")
                     rawdata = unicode(article_content)
                     image0 = ''
                     image1 = ''
@@ -205,7 +209,7 @@ def main():
                     continue
 
                 if content:
-                    wxdb.wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
+                    wxdb.wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
 
         #异常处理
         #except MySQLdb.Error,e:

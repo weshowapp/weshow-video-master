@@ -69,6 +69,7 @@ def main():
                 dataid = urlitem['data-id']
                 ur = 'https://www.chainfor.com/news/show/' + str(dataid) + '.html'
                 print (ur)
+                print (urlitem.p)
 
                 if wxdb.wxdb_exist(cur, ur) == 1:
                     m = m + 1
@@ -100,6 +101,7 @@ def main():
                 author = ''
                 source = '链向财经'
                 source_id = 1
+                type = 1
                 pubtime = ''
                 nowTime = time.time()
 
@@ -156,6 +158,7 @@ def main():
                     rawdata = rawdata.replace('width=', 'wd0=')
                     rawdata = rawdata.replace('height=', 'hg0=')
                     rawdata = rawdata.replace('<img', '<img width=100%')
+                    rawdata = rawdata.replace('并第一时间同步至链向财经', '')
                     #rawdata = rawdata.replace('data-original', 'src')
                 else:
                     continue
@@ -209,7 +212,7 @@ def main():
                     continue
 
                 if content:
-                    wxdb.wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
+                    wxdb.wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
 
         #异常处理
         #except MySQLdb.Error,e:

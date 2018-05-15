@@ -101,6 +101,7 @@ def main():
                 author = ''
                 source = '币世界'
                 source_id = 2
+                type = 2
                 pubtime = ''
                 nowTime = time.time()
 
@@ -230,7 +231,7 @@ def main():
                     continue
 
                 if content:
-                    wxdb.wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
+                    wxdb.wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata)
 
         #异常处理
         #except MySQLdb.Error,e:

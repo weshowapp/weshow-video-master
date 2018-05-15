@@ -18,12 +18,12 @@ sys.setdefaultencoding('utf-8')
 
 
 #主函数
-def wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata):
+def wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata):
     if content:
         #插入数据
         sql = '''insert into weshow_article 
-                    (author_name,source_name,source_id,source_url,pub_time_str,pub_time,title,digest,image0,image1,image2,image3,content,rawtext,rawdata) 
-                values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+                    (type, author_name,source_name,source_id,source_url,pub_time_str,pub_time,title,digest,image0,image1,image2,image3,content,rawtext,rawdata) 
+                values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
         sqlMagazine = '''insert into weshow_magazine 
                     (name,add_time) 
                 values(%s, %s)'''
@@ -48,13 +48,14 @@ def wxdb_insert(cur, author, source, source_id, ur, pubtime, nowTime, title, dig
             print (errFind)
 
         try:
-            cur.execute(sql, (author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, '', rawdata))
+            cur.execute(sql, (type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, '', rawdata))
         except pymysql.Error, err:
             print (err)
         print ('execute\n')
 
         addUrl = "https://www.imcou.com/api/upload/add"
         values = {}
+        values['type'] = type
         values['author_name'] = author
         values['source_name'] = source
         values['source_id'] = source_id
