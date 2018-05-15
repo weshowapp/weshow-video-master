@@ -10,6 +10,7 @@ import sys
 import pymysql
 import datetime
 import time
+import random
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
@@ -68,7 +69,7 @@ def main():
             for urlitem in url_list:
                 ur = '';
                 if urlitem:
-                    ur = 'https://www.chainnews.com/' + urlitem.a['href']
+                    ur = 'https://www.chainnews.com' + urlitem.a['href']
                     ur = ur.strip("\n")
                     ur = ur.strip()
                 print (ur)
@@ -193,7 +194,7 @@ def main():
 
                 pubtime = '2018-04-01 01:01:01'
                 #time
-                article_time = soup.find('span' class_="publish-time")
+                article_time = soup.find('span', class_="publish-time")
                 print ('article_time')
                 print (article_time)
                 if article_time:
