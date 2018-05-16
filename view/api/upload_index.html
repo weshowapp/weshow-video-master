@@ -61,7 +61,7 @@ p {padding:3px 0 3px 0;}
             <td><input class="bn" size="6" type="text" name ="source_url" value="<%= item.source_url %>"/></td>
             <td><input class="bn" size="3" type="text" name ="pub_time" value="<%= item.pub_time %>"/></td>
             <td><input class="bn" size="8" type="text" name ="title" value="<%= item.title %>"/></td>
-            <td><input class="bn" size="8" type="text" name ="digest" value="<%= item.digest %>"/></td>
+            <td><textarea class="bn" size="8" type="text" name ="digest" value="<%= item.digest %>"/></td>
             <td><input class="bn" size="8" type="text" name ="image0" value="<%= item.image0 %>"/></td>
             <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
             <td><input id="upd_btn_<%= index %>" size="2" type="submit" value="更新"/></td>
