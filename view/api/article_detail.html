@@ -8,7 +8,7 @@
     <style type="text/css">
      body {font-family:arial, 'Microsoft Yahei', '微软雅黑'; padding: 10px;}
      .title {color:#000000; font-size:24px;font-weight:normal; margin-bottom: 15px;}
-     .source *{color:#000000; font-size:14px; text-align:center; vertical-align:middle; display:inline-block;}
+     .source *{color:#000000; font-size:14px; text-align:left; vertical-align:middle; display:inline-block;}
      .time {color:#999999; padding-top:5px; text-align:left}
      .content1 {color:#333; font-size:16px; line-height:1.7;}
      .img-content ul{width:auto; margin:0 auto; padding:0; text-align:center; color:#666666; font-size:14px;}
@@ -22,7 +22,7 @@
      .line {background-color:#f1f1f1; height:8px; padding:0; margin:0 -20px;}
      a {text-decoration: none;}
      a.hover {text-decoration: none;}
-     .source_image {width:40px;border-radius:50%;}
+     .source_image {width:40px;height:40px;border-radius:50%;}
      </style>
 </head>
 <body>
@@ -30,7 +30,7 @@
         <div class="title"><%= data.title %></div><!--标题-->
         <div class="source">
             <div><img class="source_image" src="<%= data.magazine_url %>" width="40px" border="0" alt="" border-radius="50%"/></div>
-            <div style="padding:0 0 0 5px;"><span style="font-size:16px;"><%= data.source_name %></span><br/>
+            <div style="padding:0 0 0 5px;"><span style="font-size:16px;"><%= data.source_name %></span><br>
             <span class="time"><%= data.pub_time_str %></span></div>
         </div><!--来源-->
         <div style="margin-bottom:20px;"></div><!--留白-->
