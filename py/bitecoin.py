@@ -203,7 +203,7 @@ def main():
                 if article_time:
                     arr = article_time.text.split( )
                     if (len(arr) > 2):
-                        pubtime = arr[1]
+                        pubtime = arr[2]
                     nowTime = wxdb.wxdb_fm_date(pubtime)
                 else:
                     continue

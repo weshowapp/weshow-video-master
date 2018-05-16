@@ -128,6 +128,6 @@ def wxdb_fm_date(pubtime):
                 pubtime = '2018-' + pubtime + ' 06:00:00'
         timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
         nowTime = int(time.mktime(timeStruct)) + random.randint(1, 60000)
-        if (time.time() - nowTime < 86400):
+        if (time.time() - nowTime < 0):
             nowTime = time.time() - 100
     return nowTime
