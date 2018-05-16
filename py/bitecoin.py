@@ -140,7 +140,7 @@ def main():
                     content = content.strip("\n")
                     content = content.strip()
                     content = content.strip("\n")
-                    #digest = content[0:128]
+                    digest = content[0:128]
                     digest = digest.strip("\n")
                     digest = digest.strip()
                     digest = digest.strip("\n")
