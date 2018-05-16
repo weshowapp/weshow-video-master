@@ -52,7 +52,12 @@ def wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, titl
         except pymysql.Error, err:
             print (err)
         print ('execute\n')
+        #else:
+        #    print u'数据库插入成功'
 
+def wxdb_postdata(cur, type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata):
+    if content:
+        #POST数据
         addUrl = "https://www.imcou.com/api/upload/add"
         values = {}
         values['type'] = type
@@ -71,12 +76,9 @@ def wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, titl
         values['image1'] = image1
         values['image2'] = image2
         values['image3'] = image3
-        #response = requests.post(addUrl, values)
+        response = requests.post(addUrl, values)
         #print (response)
-        #print ('post\n')
-
-        #else:
-        #    print u'数据库插入成功'
+        print ('post\n')
 
 def wxdb_exist(cur, url):
     if cur:
@@ -92,3 +94,40 @@ def wxdb_exist(cur, url):
             except pymysql.Error, errFind:
                 print (errFind)
     return 0
+
+def wxdb_getimage(imgObj, index, label, site):
+    image1 = ''
+    if imgObj:
+        #image0 = imgObj[0].attrs[label]
+        #if image0.find("http://") == -1:
+        #    image0 = site + image0
+        if len(imgObj) > index:
+            image1 = imgObj[index].attrs[label]
+            if image1.find("http://") == -1:
+                image1 = site + image1
+                #print('image1')
+                print(image1)
+    return image1
+
+def wxdb_fm_datetime(pubtime):
+    nowTime = time.time()
+    if pubtime:
+        pubtime = pubtime.strip()
+        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
+        nowTime = int(time.mktime(timeStruct))
+    return nowTime
+
+def wxdb_fm_date(pubtime):
+    nowTime = time.time()
+    if pubtime:
+        pubtime = pubtime.strip()
+        if len(pubtime) == 10:
+            pubtime = pubtime + ' 06:00:00'
+        else:
+            if len(pubtime) == 5:
+                pubtime = '2018-' + pubtime + ' 06:00:00'
+        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
+        nowTime = int(time.mktime(timeStruct)) + random.randint(1, 60000)
+        if (time.time() - nowTime < 86400):
+            nowTime = time.time() - 100
+    return nowTime
