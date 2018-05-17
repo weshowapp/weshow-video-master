@@ -78,7 +78,6 @@ p {padding:3px 0 3px 0;}
         </tr>
         <% var currentId = 0; %>
         <% var index = 0; %>
-        <% data_list.forEach(function(item) { %>
         <form action="update" id="form_<%= index %>" enctype="multipart/form-data" method="post"target="hidden_frame_<%= index %>">
           <tr>
             <td><input class="bn" size="1" type="text" name ="id" value="<%= item.id %>"/></td>
@@ -133,9 +132,6 @@ p {padding:3px 0 3px 0;}
           <p>
             <p><textarea type="text" name ="rawdata" value="<%= item.rawdata %>"></textarea></p>
           </p>
-        <% currentId = item.id %>
-        <% index = index + 1 %>
-        <% }) %>
         <form action="webadd" enctype="multipart/form-data" method="post">
           <tr>
             <td><input size="2" type="submit" value="添加"/></td>

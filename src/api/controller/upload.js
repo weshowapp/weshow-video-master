@@ -61,7 +61,7 @@ export default class extends Base {
         data.openid = openid;
     }
     var tk = this.post('wxtoken');
-    this.assign({'data': data, 'wxtoken': tk});
+    this.assign({'item': data, 'wxtoken': tk});
     this.display();
   }
 
