@@ -45,9 +45,9 @@ export default class extends Base {
   }
 
   async articledetailAction() {
-    let id = this.get('id');
-    let openid = this.get('openid');
-    let nextid = this.get('nextid');
+    let id = this.post('id');
+    let openid = this.post('openid');
+    let nextid = this.post('nextid');
     let data = await this.model('article').where({id: id}).find();
     if (!think.isEmpty(data)) {
         await this.model('article').setMagazine(data);
