@@ -60,6 +60,7 @@ export default class extends think.model.base {
           name: source_name,
           add_time: add_time
         });
+      }
     }
     return magid;
   }
