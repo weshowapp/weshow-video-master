@@ -44,6 +44,27 @@ export default class extends Base {
     this.display();
   }
 
+  async articledetailAction() {
+    let id = this.get('id');
+    let openid = this.get('openid');
+    let nextid = this.get('nextid');
+    let data = await this.model('article').where({id: id}).find();
+    if (!think.isEmpty(data)) {
+        await this.model('article').setMagazine(data);
+        await this.model('article').setLikeList(data, openid);
+        data.pub_time_str = this.model('article').getCurTimeStamp(data.pub_time);
+        var nextdata = await this.model('article').where({id: nextid}).find();
+        if (!think.isEmpty(nextdata)) {
+          data.next_title = nextdata.title;
+          data.next_digest = nextdata.digest;
+        }
+        data.openid = openid;
+    }
+    var tk = this.post('wxtoken');
+    this.assign({'data': data, 'wxtoken': tk});
+    this.display();
+  }
+
   async queryinputAction() {
     let sql = this.post('quest_sql');
     let tm = this.post('tm');
