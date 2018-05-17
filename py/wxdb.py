@@ -55,7 +55,7 @@ def wxdb_insert(cur, type, author, source, source_id, ur, pubtime, nowTime, titl
         #else:
         #    print u'数据库插入成功'
 
-def wxdb_postdata(cur, type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata):
+def wxdb_postdata(type, author, source, source_id, ur, pubtime, nowTime, title, digest, image0, image1, image2, image3, content, rawdata):
     if content:
         #POST数据
         addUrl = "https://www.imcou.com/api/upload/add"

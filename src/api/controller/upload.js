@@ -322,6 +322,16 @@ export default class extends Base {
     let more = this.post('more');
     console.log('addAction');
 
+    let data = await this.model('article').where({title: title}).find();
+    if (!think.isEmpty(data)) {
+      return this.success({
+        result: 'OK',
+        errorCode: 1
+      });
+    }
+
+    source_id = await this.model('article').getMagazineId(source_name);
+
     let addResult = await this.model('article').add({
         type: type,
         level: level,

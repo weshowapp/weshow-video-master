@@ -46,6 +46,24 @@ export default class extends think.model.base {
     return '刚刚';
   }
 
+  async getMagazineId(source_name) {
+    var magid = 0;
+    if (!think.isEmpty(source_name)) {
+      console.log(source_name);
+      var magz = await this.model('magazine').where({name: source_name}).find();
+      if (!think.isEmpty(magz)) {
+        magid = magz.id;
+      }
+      else {
+        let add_time = this.getCurrentTime();
+        magid = await this.model('magazine').add({
+          name: source_name,
+          add_time: add_time
+        });
+    }
+    return magid;
+  }
+
   /**
    * Article的Detail
    * @param artid

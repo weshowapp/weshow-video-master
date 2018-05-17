@@ -38,6 +38,20 @@ export default class extends Base {
     this.display();
   }
 
+  async checktitleAction() {
+    let title = this.get('title');
+    var code = 0;
+    let data = await this.model('article').where({title: title}).find();
+    if (!think.isEmpty(data)) {
+        code = 1;
+    }
+
+    return this.success({
+      result: 'OK',
+      code: code
+    });
+  }
+
   async getbyidAction() {
     let art_id = this.get('art_id');
     let list = await this.model('article').where({id: art_id}).find();
