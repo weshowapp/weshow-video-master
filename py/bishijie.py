@@ -21,6 +21,8 @@ from bs4 import BeautifulSoup
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+site = 'http://www.bishijie.com'
+
 #获取
 def getPage():  
     print 'getPage'  

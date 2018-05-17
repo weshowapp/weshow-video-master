@@ -26,13 +26,15 @@ import wxdb
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+site = 'https://www.chainfor.com'
+
 #主函数
 def main():
     #print ('main')
     #index
     data = '';
     try :
-        data = urllib2.urlopen('https://www.chainfor.com/news').read()
+        data = urllib2.urlopen(site + '/news').read()
         #data = urllib.request.urlopen(ur).read()
     #except (urllib.error.HTTPError):
     #    print ("URLLIB Error ")
@@ -67,7 +69,7 @@ def main():
             #具体内容处理
             for urlitem in url_list:
                 dataid = urlitem['data-id']
-                ur = 'https://www.chainfor.com/news/show/' + str(dataid) + '.html'
+                ur = site + '/news/show/' + str(dataid) + '.html'
                 print (ur)
                 print (urlitem.p)
 

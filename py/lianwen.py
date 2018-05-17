@@ -27,13 +27,15 @@ import wxdb
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+site = 'https://www.chainnews.com'
+
 #主函数
 def main():
     #print ('main')
     #index
     data = '';
     try :
-        data = urllib2.urlopen('https://www.chainnews.com').read()
+        data = urllib2.urlopen(site).read()
         #data = urllib.request.urlopen(ur).read()
     #except (urllib.error.HTTPError):
     #    print ("URLLIB Error ")
@@ -69,7 +71,7 @@ def main():
             for urlitem in url_list:
                 ur = '';
                 if urlitem:
-                    ur = 'https://www.chainnews.com' + urlitem.a['href']
+                    ur = site + urlitem.a['href']
                     ur = ur.strip("\n")
                     ur = ur.strip()
                 print (ur)

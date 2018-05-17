@@ -26,13 +26,15 @@ import wxdb
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+site = 'http://www.bishijie.com'
+
 #主函数
 def main():
     #print ('main')
     #index
     data = '';
     try :
-        data = urllib2.urlopen('http://www.bishijie.com/shendu').read()
+        data = urllib2.urlopen(site + '/shendu').read()
         #data = urllib.request.urlopen(ur).read()
     #except (urllib.error.HTTPError):
     #    print ("URLLIB Error ")
