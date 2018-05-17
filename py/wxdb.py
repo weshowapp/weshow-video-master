@@ -103,7 +103,7 @@ def wxdb_getimage(imgObj, index, label, site):
         #    image0 = site + image0
         if len(imgObj) > index:
             image1 = imgObj[index].attrs[label]
-            if image1.find('https://') == -1 && image1.find('http://') == -1:
+            if image1.find('https://') == -1 and image1.find('http://') == -1:
                 image1 = site + image1
                 #print('image1')
                 print(image1)
