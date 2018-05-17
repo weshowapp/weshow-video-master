@@ -103,7 +103,7 @@ def wxdb_getimage(imgObj, index, label, site):
         #    image0 = site + image0
         if len(imgObj) > index:
             image1 = imgObj[index].attrs[label]
-            if image1.find(site) == -1:
+            if image1.find('https://') == -1 && image1.find('http://') == -1:
                 image1 = site + image1
                 #print('image1')
                 print(image1)
@@ -121,11 +121,11 @@ def wxdb_fm_image(rawdata):
                     print(full)
             #print(rawdata)
         #rawdata = rawdata.replace('width=', 'wd0=')
-        rawdata = rawdata.replace('height=', 'hg0=')
         #rawdata = rawdata.replace('width:', 'wd0:')
+        rawdata = rawdata.replace('<img', '<img width=100%')
+        rawdata = rawdata.replace('height=', 'hg0=')
         rawdata = rawdata.replace('height:', 'hg0:')
         #rawdata = rawdata.replace('style=', 'sy0=')
-        #rawdata = rawdata.replace('<img', '<img width=100%')
         #rawdata = rawdata.replace('data-src', 'src')
     return rawdata
 
