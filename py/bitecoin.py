@@ -156,11 +156,7 @@ def main():
                     image1 = wxdb.wxdb_getimage(imgObj, 1, 'src', site)
                     image2 = wxdb.wxdb_getimage(imgObj, 2, 'src', site)
                     image3 = wxdb.wxdb_getimage(imgObj, 3, 'src', site)
-                    #print('image0')
-                    #print(image0)
-                    rawdata = rawdata.replace('width=', 'wd0=')
-                    rawdata = rawdata.replace('height=', 'hg0=')
-                    rawdata = rawdata.replace('<img', '<img width=100%')
+                    rawdata = wxdb.wxdb_fm_image(rawdata)
                     #rawdata = rawdata.replace('data-original', 'src')
                 else:
                     continue

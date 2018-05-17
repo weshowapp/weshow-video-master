@@ -143,35 +143,13 @@ def main():
                     digest = digest.strip()
                     digest = digest.strip("\n")
                     rawdata = unicode(article_content)
-                    image0 = ''
-                    image1 = ''
-                    image2 = ''
-                    image3 = ''
                     rawSoup = BeautifulSoup(rawdata)
                     imgObj = rawSoup.find_all('img')
-                    #print(imgObj)
-                    if imgObj:
-                        image0 = imgObj[0].attrs['src']
-                        if image0.find("http://") == -1:
-                            image0 = "http://www.bibaodao.com" + image0
-                            rawdata = rawdata.replace('src=\"', 'src=\"http://www.bibaodao.com')
-                        if len(imgObj) > 1:
-                            image1 = imgObj[1].attrs['src']
-                            if image1.find("http://") == -1:
-                                image1 = "http://www.bibaodao.com" + image1
-                        if len(imgObj) > 2:
-                            image2 = imgObj[2].attrs['src']
-                            if image2.find("http://") == -1:
-                                image2 = "http://www.bibaodao.com" + image2
-                        if len(imgObj) > 3:
-                            image3 = imgObj[3].attrs['src']
-                            if image3.find("http://") == -1:
-                                image3 = "http://www.bibaodao.com" + image3
-                        #print('image0')
-                        #print(image0)
-                    rawdata = rawdata.replace('width=', 'wd0=')
-                    rawdata = rawdata.replace('height=', 'hg0=')
-                    rawdata = rawdata.replace('<img', '<img width=100%')
+                    image0 = wxdb.wxdb_getimage(imgObj, 0, 'src', site)
+                    image1 = wxdb.wxdb_getimage(imgObj, 1, 'src', site)
+                    image2 = wxdb.wxdb_getimage(imgObj, 2, 'src', site)
+                    image3 = wxdb.wxdb_getimage(imgObj, 3, 'src', site)
+                    rawdata = wxdb.wxdb_fm_image(rawdata)
                     #rawdata = rawdata.replace('data-original', 'src')
                 else:
                     continue

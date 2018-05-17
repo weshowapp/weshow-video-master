@@ -163,26 +163,12 @@ def main():
                     rawdata = unicode(article_content[num])
                     #print digest
                     rawSoup = BeautifulSoup(rawdata)
-                    image0 = ''
-                    image1 = ''
-                    image2 = ''
-                    image3 = ''
                     imgObj = rawSoup.find_all('img')
-                    #print 'imgObj'
-                    #print imgObj
-                    if imgObj:
-                        image0 = imgObj[0].attrs['src']
-                        if len(imgObj) > 1:
-                            image1 = imgObj[1].attrs['src']
-                        if len(imgObj) > 2:
-                            image2 = imgObj[2].attrs['src']
-                        if len(imgObj) > 3:
-                            image3 = imgObj[3].attrs['src']
-                        #print 'image0'
-                        #print image0
-                    rawdata = rawdata.replace('width=', 'wd0=')
-                    rawdata = rawdata.replace('height=', 'hg0=')
-                    rawdata = rawdata.replace('<img', '<img width=100%')
+                    image0 = wxdb.wxdb_getimage(imgObj, 0, 'src', site)
+                    image1 = wxdb.wxdb_getimage(imgObj, 1, 'src', site)
+                    image2 = wxdb.wxdb_getimage(imgObj, 2, 'src', site)
+                    image3 = wxdb.wxdb_getimage(imgObj, 3, 'src', site)
+                    rawdata = wxdb.wxdb_fm_image(rawdata)
                     author = author.replace('作者：', '')
                     author = author.replace('作者:', '')
                     author = author.strip("\n")

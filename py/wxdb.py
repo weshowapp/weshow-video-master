@@ -99,22 +99,45 @@ def wxdb_getimage(imgObj, index, label, site):
     image1 = ''
     if imgObj:
         #image0 = imgObj[0].attrs[label]
-        #if image0.find("http://") == -1:
+        #if image0.find(site) == -1:
         #    image0 = site + image0
         if len(imgObj) > index:
             image1 = imgObj[index].attrs[label]
-            if image1.find("http://") == -1:
+            if image1.find(site) == -1:
                 image1 = site + image1
                 #print('image1')
                 print(image1)
     return image1
 
+def wxdb_fm_image(rawdata):
+    if rawdata:
+        tm = re.findall(u'(width)(\s*)(:|=)(\s*)(\d{1,4})(.*)', rawdata, re.M|re.I)
+        if tm:
+            for item in tm:
+                if int(item[4]) > 100:
+                    full = item[0] + item[1] + item[2] + item[3] + item[4]
+                    #rawdata = rawdata.replace(full, 'wid0' + item[1] + item[2] + item[3] + item[4])
+                    rawdata = rawdata.replace(full, item[0] + item[1] + item[2] + item[3] + '100% ')
+                    print(full)
+            #print(rawdata)
+        #rawdata = rawdata.replace('width=', 'wd0=')
+        rawdata = rawdata.replace('height=', 'hg0=')
+        #rawdata = rawdata.replace('width:', 'wd0:')
+        rawdata = rawdata.replace('height:', 'hg0:')
+        #rawdata = rawdata.replace('style=', 'sy0=')
+        #rawdata = rawdata.replace('<img', '<img width=100%')
+        #rawdata = rawdata.replace('data-src', 'src')
+    return rawdata
+
 def wxdb_fm_datetime(pubtime):
     nowTime = time.time()
     if pubtime:
         pubtime = pubtime.strip()
-        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
-        nowTime = int(time.mktime(timeStruct))
+        try:
+            timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
+            nowTime = int(time.mktime(timeStruct))
+        except ValueError, err1:
+            print (err1)
     return nowTime
 
 def wxdb_fm_date(pubtime):
@@ -126,8 +149,11 @@ def wxdb_fm_date(pubtime):
         else:
             if len(pubtime) == 5:
                 pubtime = '2018-' + pubtime + ' 06:00:00'
-        timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
-        nowTime = int(time.mktime(timeStruct)) + random.randint(1, 60000)
+        try:
+            timeStruct = time.strptime(pubtime, "%Y-%m-%d %H:%M:%S")
+            nowTime = int(time.mktime(timeStruct)) + random.randint(1, 60000)
+        except ValueError, err1:
+            print (err1)
         if (time.time() - nowTime < 0):
             nowTime = time.time() - 100
     return nowTime
