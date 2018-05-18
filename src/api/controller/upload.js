@@ -109,7 +109,7 @@ export default class extends Base {
 
     var exec = require('child_process').exec;
     var rule = new schedule.RecurrenceRule();
-    var timers = [1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23];
+    var timers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     rule.hour = timers;
     var seed = (new Date()).getMilliseconds() % 10 + 1;
     rule.minute = seed;
