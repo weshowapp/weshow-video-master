@@ -404,7 +404,7 @@ export default class extends Base {
     let more = this.post('more');
     console.log('updateAction');
 
-    let dataResult = await this.model('question').where({id: id}).update({
+    let dataResult = await this.model('article').where({id: id}).update({
         type: type,
         level: level,
         filter: 0,
