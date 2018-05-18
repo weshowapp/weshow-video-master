@@ -80,7 +80,7 @@ p {padding:3px 0 3px 0;}
 
       <h2>SQL语句执行</h2>
       <form class="p" action="queryinput" enctype="multipart/form-data" method="post">
-        <p>SQL语句：<input size="80" height="300" type="text" name ="quest_sql" value="select * from weshow_question where id=1"/></p>
+        <p>SQL语句：<input size="80" height="300" type="text" name ="quest_sql" value="select * from weshow_magazine where name like 'OK%'"/></p>
         <p><input type="submit" name ="question_submit" value=" 　  - -  查 询  - -  　 "/></p>
         <input type="hidden" name="wxtoken" value="<%= wxtoken %>">
       </form>
