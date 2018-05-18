@@ -372,6 +372,7 @@ export default class extends Base {
   }
 
   async updateAction() {
+    let id = this.post('id');
     let type = this.post('type');
     let level = this.post('level');
     let category0 = this.post('category0');
