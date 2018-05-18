@@ -191,14 +191,20 @@ p {padding:3px 0 3px 0;}
         </tr>
         <tr>
           <td rowspan="3">操作</td>
-          <td height="40px"><input id="upd_btn_<%= index %>" size="6" type="submit" value=" 更 新 " style="width:100px; height:35px"/>
-          <input size="6" type="submit" name="delete" value=" 删 除 " style="width:100px; height:35px"/></td>
-          <td height="40px"><input size="6" type="submit" value=" 添 加 " style="width:100px; height:35px"/></td>
+          <td height="40px">
+            <input id="upd_btn_<%= index %>" size="6" type="submit" value=" 更 新 " style="width:100px; height:35px"/>
+            <input size="6" type="submit" name="delete" value=" 删 除 " style="width:100px; height:35px"/>
+          </td>
+          <td height="40px">
+            <input size="6" type="submit" value=" 添 加 " style="width:100px; height:35px"/>
+          </td>
         </tr>
         <tr>
           <td>原始数据</td>
+        </tr>
+        <tr>
           <td><textarea class="bn" rows="30" cols="20" type="text" name ="rawdata0"><%= item.rawdata %></textarea></td>
-          <td><textarea class="bn" rows="30" cols="20" type="text" name ="rawdata"></textarea></td>
+            <td><textarea class="bn" rows="30" type="text" name ="rawdata"></textarea></td>
         </tr>
 <!--
         <tr>
