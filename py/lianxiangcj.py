@@ -26,6 +26,8 @@ import wxdb
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+site = 'https://www.chainfor.com'
+
 #主函数
 def main():
     #print （'main'）
