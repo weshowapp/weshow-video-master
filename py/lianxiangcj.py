@@ -113,9 +113,11 @@ def main():
                     title = article_title.text
                     print (title)
                 else:
+                    m = m + 1
                     continue
 
                 if wxdb.wxdb_checktitle_exist(title) == 1:
+                    m = m + 1
                     continue
 
                 #摘要  
