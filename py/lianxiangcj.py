@@ -115,6 +115,9 @@ def main():
                 else:
                     continue
 
+                if wxdb.wxdb_checktitle_exist(title) == 1:
+                    continue
+
                 #摘要  
                 #article_digest = driver.find_elements_by_xpath("//div[@class='abstract']")
                 #article_digest = soup.find_all(attrs={'class':'abstract'})

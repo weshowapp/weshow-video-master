@@ -117,6 +117,9 @@ def main():
                 else:
                     continue
 
+                if wxdb.wxdb_checktitle_exist(title) == 1:
+                    continue
+
                 #摘要
                 #article_digest = soup.find(attrs={'class':'abstract'})
                 #if article_digest:

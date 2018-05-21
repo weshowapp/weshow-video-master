@@ -12,6 +12,7 @@ import random
 import urllib
 import requests
 import json
+from bs4 import BeautifulSoup
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -109,17 +110,38 @@ def wxdb_getimage(imgObj, index, label, site):
                 print(image1)
     return image1
 
+def wxdb_checktitle_exist(title):
+    if title:
+        url = "https://www.imcou.com/api/article/checktitle"
+        values = {}
+        values['title'] = title
+        response = requests.get(url, values)
+        jsonObj = json.loads(response.text)
+        print (jsonObj)
+        return int(jsonObj['data']['code'])
+
 def wxdb_fm_image(rawdata, site):
     if rawdata:
-        tm = re.findall(u'(width)(\s*)(:|=)(\s*)(\d{1,4})(.*)', rawdata, re.M|re.I)
-        if tm:
-            for item in tm:
-                if int(item[4]) > 100:
-                    full = item[0] + item[1] + item[2] + item[3] + item[4]
-                    #rawdata = rawdata.replace(full, 'wid0' + item[1] + item[2] + item[3] + item[4])
-                    rawdata = rawdata.replace(full, item[0] + item[1] + item[2] + item[3] + '100% ')
-                    print(full)
-            #print(rawdata)
+        rawSoup = BeautifulSoup(rawdata)
+        imgs = rawSoup.find_all('img')
+        #imgs = re.findall(u'<img(.*)(/>|\">|\" >|\'>|\' >)', rawdata, re.M|re.I)
+        for imgitem in imgs:
+            #print('IMGITEM')
+            #print (imgitem)
+            tm = re.findall(u'(width)(\s*)(:|=)(\s*)(\d{1,4})(.*)', str(imgitem), re.M|re.I)
+            print (tm)
+            #print (tm[0][0])
+            if tm:
+                for item in tm:
+                    if int(item[4]) > 100:
+                        full = item[0] + item[1] + item[2] + item[3] + item[4]
+                        #rawdata = rawdata.replace(full, 'wid' + item[1] + item[2] + item[3] + item[4])
+                        rawdata = rawdata.replace(full, item[0] + item[1] + item[2] + item[3] + '100% ')
+                        #print(full)
+            else:
+                #print('IMGITEM[0]')
+                #print(imgitem)
+                rawdata = rawdata.replace(str(imgitem), ' width=100% ' + str(imgitem))
         #rawdata = rawdata.replace('width=', 'wd0=')
         #rawdata = rawdata.replace('width:', 'wd0:')
         rawdata = rawdata.replace('<img', '<img width=100%')
@@ -158,3 +180,42 @@ def wxdb_fm_date(pubtime):
         if (time.time() - nowTime < 0):
             nowTime = time.time() - 100
     return nowTime
+
+def wxdb_parse_date(str_tm):
+    nowTime = time.time()
+    if str_tm:
+        str_tm = str_tm.strip()
+        print (str_tm)
+        if '昨天' == str_tm:
+            nowTime = nowTime - 60 * 60 * 24 - random.randint(1, 1000)
+        elif '前天' == str_tm:
+            nowTime = nowTime - 60 * 60 * 24 * 2 - random.randint(1, 1000)
+        else:
+            tm = re.match(u'(.*)(分钟|小时|天|周)前', str_tm, re.M|re.I)
+            if tm:
+                try:
+                    if (tm.group().index('分钟') != -1):
+                        nowTime = nowTime - int(tm.group(1)) * 60
+                except ValueError:
+                    try:
+                        if (tm.group().index('小时') != -1):
+                            nowTime = nowTime - int(tm.group(1)) * 60 * 60
+                    except ValueError:
+                        try:
+                            if (tm.group().index('天') != -1):
+                                nowTime = nowTime - int(tm.group(1)) * 60 * 60 * 24
+                        except ValueError:
+                            try:
+                                if (tm.group().index('周') != -1):
+                                    nowTime = nowTime - int(tm.group(1)) * 60 * 60 * 24 * 7
+                            except ValueError:
+                                print ('ValueError')
+            else:
+                #print 'else'
+                strTm = '2018-' + str_tm + ' 06'
+                try:
+                    timeStruct = time.strptime(strTm, "%Y-%m.%d %H")
+                    nowTime = int(time.mktime(timeStruct)) + random.randint(1, 60000)
+                except ValueError:
+                    print ('ValueError')
+    print (nowTime)
