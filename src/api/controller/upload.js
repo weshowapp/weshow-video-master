@@ -38,7 +38,7 @@ export default class extends Base {
     if (filter == '' || filter == undefined || filter == null || filter == NaN) {
       filter = 0;
     }
-    let list = await this.model('article').where({id: [">=", id], filter: filter}).limit(size).select();
+    let list = await this.model('article').where({id: [">=", id], filter: filter}).order('pub_time DESC').limit(size).select();
     var tk = this.post('wxtoken');
     this.assign({'data_list': list, 'wxtoken': tk});
     this.display();
