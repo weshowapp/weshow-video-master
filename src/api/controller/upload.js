@@ -30,7 +30,7 @@ export default class extends Base {
       });
     }
     if (id == '' || id == undefined || id == null || id == NaN) {
-      id = 0;
+      id = 1000000;
     }
     if (size == '' || size == undefined || size == null || size == NaN) {
       size = 10;
