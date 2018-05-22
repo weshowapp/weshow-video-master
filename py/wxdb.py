@@ -141,7 +141,7 @@ def wxdb_fm_image(rawdata, site):
             else:
                 #print('IMGITEM[0]')
                 #print(imgitem)
-                rawdata = rawdata.replace(str(imgitem), ' width=100% ' + str(imgitem))
+                rawdata = rawdata.replace(str(imgitem), '<img width=100% ' + str(imgitem)[5:])
         #rawdata = rawdata.replace('width=', 'wd0=')
         #rawdata = rawdata.replace('width:', 'wd0:')
         rawdata = rawdata.replace('<img', '<img width=100%')
